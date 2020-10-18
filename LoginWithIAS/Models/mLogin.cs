@@ -7,7 +7,13 @@ namespace LoginWithIAS.Models
 {
     public class mLogin
     {
-       public string user { get; set; }
-       public string pass { get; set; }
+        private string user;
+        private string pass;
+
+        public string User { get => user; set => user = value; }
+
+        public string Pass { get => pass; set => pass = value; }
+
+
     }
 }
