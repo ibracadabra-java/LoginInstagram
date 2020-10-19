@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using InstagramApiSharp.Classes;
 using InstagramApiSharp.API.Builder;
 using InstagramApiSharp.Logger;
+using InstagramApiSharp.API.Processors;
 using System.IO;
 using System.Diagnostics;
 using InstagramApiSharp.API;
@@ -91,6 +92,61 @@ namespace LoginWithIAS.Controllers
             return msgSalida;
 
         }
+
+        [HttpPost]
+        public async Task<string> LikeManyPost(mLikeManyPost mlikemanypost) {
+
+
+            int cantlike = mlikemanypost.cantLike;
+            int flag = 0;
+            int count = 0;
+            var userSession = new UserSessionData
+            {
+                UserName = mlikemanypost.user,
+                Password = mlikemanypost.pass
+            };
+
+            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+            LoadSession(insta);
+
+            var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
+
+            while (cantlike > 0 && media.Value[flag] !=null ) {
+
+                var liked = await insta.MediaProcessor.LikeMediaAsync(media.Value[flag].InstaIdentifier);
+                if (liked.Succeeded)
+                {
+                    cantlike--;
+                    flag++;
+                    count++; 
+                }
+                else
+                    flag++;
+
+            }
+            return "Se le dio like a "+ count + " post del usuario " + mlikemanypost.userlike;
+        
+        }
+
+        [HttpPost]
+        public async Task<string> DeleteFollower(mDeleteFollower deletefollower) 
+        {
+            var userSession = new UserSessionData
+            {
+                UserName = deletefollower.user,
+                Password = deletefollower.pass
+            };
+                
+            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+            LoadSession(insta);
+
+            var user = await insta.UserProcessor.GetUserAsync(deletefollower.userdel);
+            var resuldel = await insta.UserProcessor.RemoveFollowerAsync(user.Value.Pk);
+
+            return resuldel.Info.Message;
+        }
+
+
         public void LoadSession(IInstaApi IstanciaApi)
         {
             try
@@ -119,8 +175,7 @@ namespace LoginWithIAS.Controllers
                 state.Seek(0, SeekOrigin.Begin);
                 state.CopyTo(fileStream);
             }
-        }
-
+        }     
 
 
     }

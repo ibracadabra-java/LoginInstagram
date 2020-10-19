@@ -175,6 +175,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\enResponseToken.cs" />
+    <Compile Include="Models\mDeleteFollower.cs" />
+    <Compile Include="Models\mLikeManyPost.cs" />
     <Compile Include="Models\mLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
