@@ -71,41 +71,24 @@ namespace LoginWithIAS.Models
         /// </summary>
         /// <param name="IstanciaApi">Instancia del objeto IInstaApi</param>
         /// <returns>Retorna un objeto enResponseToken con el token y un mensaje descriptivo</returns>
-        public async Task<enResponseToken> GenerarToken(IInstaApi IstanciaApi)
+        public string GenerarToken()
         {
-            enResponseToken token = new enResponseToken();
+            string token = string.Empty;
             Random obj = new Random();
             string sCadena = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
             string sNuevacadena = string.Empty;
             char cletra;
 
-            if (!IstanciaApi.IsUserAuthenticated)
-            {
-                var logInResult = await IstanciaApi.LoginAsync();
-                if (logInResult.Succeeded)
-                {
-                    for (int i = 0; i < 20; i++)
-                    {
-                        cletra = sCadena[obj.Next(sCadena.Length)];
-                        sNuevacadena += cletra.ToString();
-                    }
-                    token.AuthToken = sNuevacadena;
-                    token.Message = logInResult.Info.Message;
-                    SaveSession(IstanciaApi);
-                    return token;
 
-                }
-                else
-                {
-                    token.Message = logInResult.Info.Message;
-                    return token;
-                }
-            }
-            else
+            for (int i = 0; i < 20; i++)
             {
-                token.Message = "Ya se encuentra conectado";
-                return token;
+                cletra = sCadena[obj.Next(sCadena.Length)];
+                sNuevacadena += cletra.ToString();
             }
-        }
+            token = sNuevacadena;
+
+            return token;
+
+        } 
     }
 }

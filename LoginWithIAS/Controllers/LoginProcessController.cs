@@ -45,9 +45,9 @@ namespace LoginWithIAS.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        public  enResponseToken LoginUser (mLogin credencial) 
+        public async Task<enResponseToken> LoginUser (mLogin credencial) 
         {
-                        
+            enResponseToken token = new enResponseToken();
             var userSession = new UserSessionData
             {
                 UserName = credencial.User,
@@ -55,8 +55,29 @@ namespace LoginWithIAS.Controllers
             };
             var _apiinst = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger (LogLevel.All)).Build();
             session.LoadSession(_apiinst);
-
-            return session.GenerarToken(_apiinst).Result;
+            if (!_apiinst.IsUserAuthenticated)
+            {
+                var logInResult = await _apiinst.LoginAsync();
+                if (logInResult.Succeeded)
+                {
+                    token.AuthToken = session.GenerarToken();
+                    token.Message = logInResult.Info.Message;
+                    session.SaveSession(_apiinst);
+                    return token;
+                    
+                }
+                else
+                {
+                    token.Message = logInResult.Info.Message;
+                    return token;
+                }
+            }
+            
+             else
+            {
+                token.Message = "Ya se encuentra conectado";
+                return token;
+            }            
             
         }
         /// <summary>
