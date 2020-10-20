@@ -16,6 +16,9 @@ using LoginWithIAS.Areas.HelpPage.Models;
 
 namespace LoginWithIAS.Areas.HelpPage
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class HelpPageConfigurationExtensions
     {
         private const string ApiModelPrefix = "MS_HelpPageApiModel_";

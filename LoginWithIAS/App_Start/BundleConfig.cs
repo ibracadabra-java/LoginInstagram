@@ -3,8 +3,15 @@ using System.Web.Optimization;
 
 namespace LoginWithIAS
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BundleConfig
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bundles"></param>
         // Para obtener más información sobre las uniones, visite https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
