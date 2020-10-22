@@ -945,69 +945,188 @@
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="T:LoginWithIAS.Controllers.ChatProcessController">
+        <member name="T:LoginWithIAS.Controllers.MessageProcessController">
             <summary>
             
             </summary>
         </member>
-        <member name="M:LoginWithIAS.Controllers.ChatProcessController.#ctor">
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="M:LoginWithIAS.Controllers.ChatProcessController.SendDirectMessage(LoginWithIAS.Models.mchat)">
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendDirectMessage(LoginWithIAS.Models.mchat)">
             <summary>
             Metodo para dejar de seguir un usuario
             </summary>
             <param name="chat"></param>
             <returns></returns>
         </member>
-        <member name="T:LoginWithIAS.Controllers.FollowProcessController">
+        <member name="T:LoginWithIAS.Controllers.UssersProcessController">
             <summary>
             Controlador para eliminar
             </summary>
         </member>
-        <member name="M:LoginWithIAS.Controllers.FollowProcessController.#ctor">
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.#ctor">
             <summary>
             constructor de la clase
             </summary>
         </member>
-        <member name="M:LoginWithIAS.Controllers.FollowProcessController.DeleteFollower(LoginWithIAS.Models.mFollower)">
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.DeleteFollower(LoginWithIAS.Models.mFollower)">
             <summary>
             Método para eliminar seguidor
             </summary>
             <param name="deletefollower"></param>
             <returns></returns>
         </member>
-        <member name="M:LoginWithIAS.Controllers.FollowProcessController.BlokUser(LoginWithIAS.Models.mFollower)">
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.BlokUser(LoginWithIAS.Models.mFollower)">
             <summary>
             Metodo para bloquear usuario
             </summary>
             <param name="blokUsser"></param>
             <returns></returns>
         </member>
-        <member name="M:LoginWithIAS.Controllers.FollowProcessController.UnFollowUser(LoginWithIAS.Models.mFollower)">
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.UnFollowUser(LoginWithIAS.Models.mFollower)">
             <summary>
             Metodo para dejar de seguir un usuario
             </summary>
             <param name="unfollowkUsser"></param>
             <returns></returns>
         </member>
-        <member name="T:LoginWithIAS.Controllers.LikeProcessController">
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.FollowUser(LoginWithIAS.Models.mFollower)">
+            <summary>
+            Seguir un usuario
+            </summary>
+            <param name="followkUsser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.ListPostUser(LoginWithIAS.Models.mFollower)">
+            <summary>
+            Lista de posts
+            </summary>
+            <param name="postUsser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.BiografiaUsser(LoginWithIAS.Models.mFollower)">
+            <summary>
+            Obtener Biografia
+            </summary>
+            <param name="biografiaUsser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.cantFollowinsUsser(LoginWithIAS.Models.mFollower)">
+            <summary>
+            Cantidad de Seguidores
+            </summary>
+            <param name="followin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.cantFollowersUsser(LoginWithIAS.Models.mFollower)">
+            <summary>
+            Cantidad de seguidos
+            </summary>
+            <param name="followers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.ListaUsserActive(LoginWithIAS.Models.mFollower)">
+            <summary>
+            Lista de Usuarios Activos.
+            </summary>
+            <param name="followers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.ListaFollowersUsers(LoginWithIAS.Models.mFollower)">
+            <summary>
+            Devolver LIsta de seguidores
+            </summary>
+            <param name="followers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.ListaFollowinsUsers(LoginWithIAS.Models.mFollower)">
+            <summary>
+            Devolver Lista de seguidos
+            </summary>
+            <param name="followers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.Getusername(LoginWithIAS.Models.mFollower)">
+            <summary>
+            Obtener nombre de usuario a traves de un id
+            </summary>
+            <param name="users"></param>
+            <returns></returns>
+        </member>
+        <member name="T:LoginWithIAS.Controllers.PostProcessController">
             <summary>
             Controlador para dar likes
             </summary>
         </member>
-        <member name="M:LoginWithIAS.Controllers.LikeProcessController.#ctor">
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.#ctor">
             <summary>
             constructor de la clase
             </summary>
         </member>
-        <member name="M:LoginWithIAS.Controllers.LikeProcessController.LikeManyPost(LoginWithIAS.Models.mLikeManyPost)">
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.LikeManyPost(LoginWithIAS.Models.mLikeManyPost)">
             <summary>
             Método para dar x cantidad de likes a un Usuario y
             </summary>
             <param name="mlikemanypost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.SimulationLikeManyPost(LoginWithIAS.Models.mLikeManyPost)">
+            <summary>
+            
+            </summary>
+            <param name="mlikemanypost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.Subcadena(System.String)">
+            <summary>
+            Obtener una subcadena
+            </summary>
+            <param name="cadena"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.extraerPost(LoginWithIAS.Models.mPost)">
+            <summary>
+            Obtener un post
+            </summary>
+            <param name="userpost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.deletePost(LoginWithIAS.Models.mPost)">
+            <summary>
+            Eliminar un post
+            </summary>
+            <param name="userpost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.ExtraerCaption(LoginWithIAS.Models.mPost)">
+            <summary>
+            Extraer un Caption
+            </summary>
+            <param name="post"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.EditarCaption(LoginWithIAS.Models.mcaption)">
+            <summary>
+            
+            </summary>
+            <param name="caption"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.ListaLikers(LoginWithIAS.Models.mPost)">
+            <summary>
+            Devuelbe la lista de Likers
+            </summary>
+            <param name="media"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.LikeaPostFeed(LoginWithIAS.Models.mPost)">
+            <summary>
+            Like aun post x del feed
+            </summary>
+            <param name="media"></param>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.Controllers.LoginProcessController">
@@ -1064,19 +1183,24 @@
             Mensaje descriptivo al loguarse
             </summary>
         </member>
+        <member name="T:LoginWithIAS.Models.mcaption">
+            <summary>
+            Clase Caption
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mcaption.Idmedia">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mcaption.texto">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.mchat">
             <summary>
             Clase para enviar un mensaje de texto desde un usuario autenticado hacia otro
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mchat.userauthenticated">
-            <summary>
-            Usuario autenticado
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mchat.passworduserauthenticated">
-            <summary>
-            Password del usuario eutenticado
             </summary>
         </member>
         <member name="P:LoginWithIAS.Models.mchat.otheruser">
@@ -1094,34 +1218,19 @@
             
             </summary>
         </member>
-        <member name="P:LoginWithIAS.Models.mFollower.user">
-            <summary>
-            Usuario que desea eliminar seguidor
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mFollower.pass">
-            <summary>
-            Password del usuario que desea eliminar seguidor
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mFollower.userdel">
+        <member name="P:LoginWithIAS.Models.mFollower.otheruser">
             <summary>
             Ususario que se desea eliminar 
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mFollower.pk_otheruser">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mLikeManyPost">
             <summary>
             
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mLikeManyPost.user">
-            <summary>
-            Usuario quede desea dar like
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mLikeManyPost.pass">
-            <summary>
-            Password del usuario que desea dar like
             </summary>
         </member>
         <member name="P:LoginWithIAS.Models.mLikeManyPost.userlike">
@@ -1132,6 +1241,16 @@
         <member name="P:LoginWithIAS.Models.mLikeManyPost.cantLike">
             <summary>
             Cantidad de like a dar
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mLikeManyPost.time">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mLikeManyPost.userfollow">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mLogin">
@@ -1147,6 +1266,21 @@
         <member name="P:LoginWithIAS.Models.mLogin.Pass">
             <summary>
             Password del usuario que desea loguearse
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mPost">
+            <summary>
+            Media Post
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mPost.idpost">
+            <summary>
+            id del post
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mPost.tipo_media">
+            <summary>
+            Tipo de post
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.Session">
@@ -1174,9 +1308,169 @@
         <member name="M:LoginWithIAS.Models.Session.GenerarToken">
             <summary>
             Metodo para generar Token de salida al loguarse
-            </summary>
-            <param name="IstanciaApi">Instancia del objeto IInstaApi</param>
+            </summary>   
             <returns>Retorna un objeto enResponseToken con el token y un mensaje descriptivo</returns>
+        </member>
+        <member name="T:LoginWithIAS.Models.WebBrowserHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Models.WebBrowserHelper.DeleteUrlCacheEntry(System.IntPtr)">
+            <summary>
+            
+            </summary>
+            <param name="lpszUrlName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Models.WebBrowserHelper.DeleteUrlCacheGroup(System.Int64,System.Int32,System.IntPtr)">
+            <summary>
+            
+            </summary>
+            <param name="GroupId"></param>
+            <param name="dwFlags"></param>
+            <param name="lpReserved"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Models.WebBrowserHelper.FindFirstUrlCacheEntry(System.String,System.IntPtr,System.Int32@)">
+            <summary>
+            
+            </summary>
+            <param name="lpszUrlSearchPattern"></param>
+            <param name="lpFirstCacheEntryInfo"></param>
+            <param name="lpdwFirstCacheEntryInfoBufferSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Models.WebBrowserHelper.FindFirstUrlCacheGroup(System.Int32,System.Int32,System.IntPtr,System.Int32,System.Int64@,System.IntPtr)">
+            <summary>
+            
+            </summary>
+            <param name="dwFlags"></param>
+            <param name="dwFilter"></param>
+            <param name="lpSearchCondition"></param>
+            <param name="dwSearchCondition"></param>
+            <param name="lpGroupId"></param>
+            <param name="lpReserved"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Models.WebBrowserHelper.FindNextUrlCacheEntry(System.IntPtr,System.IntPtr,System.Int32@)">
+            <summary>
+            
+            </summary>
+            <param name="hFind"></param>
+            <param name="lpNextCacheEntryInfo"></param>
+            <param name="lpdwNextCacheEntryInfoBufferSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Models.WebBrowserHelper.FindNextUrlCacheGroup(System.IntPtr,System.Int64@,System.IntPtr)">
+            <summary>
+            
+            </summary>
+            <param name="hFind"></param>
+            <param name="lpGroupId"></param>
+            <param name="lpReserved"></param>
+            <returns></returns>
+        </member>
+        <member name="T:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwStructSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.lpszSourceUrlName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.lpszLocalFileName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.CacheEntryType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwUseCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwHitRate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwSizeLow">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwSizeHigh">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.LastModifiedTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.ExpireTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.LastAccessTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.LastSyncTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.lpHeaderInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwHeaderInfoSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.lpszFileExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwReserved">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwExemptDelta">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Models.WebBrowserHelper.ClearCache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Models.WebBrowserHelper.ClearForSpecificUrl(System.String)">
+            <summary>
+            For specific url
+            </summary>
+            <param name="url"></param>
         </member>
     </members>
 </doc>

@@ -68,8 +68,7 @@ namespace LoginWithIAS.Models
 
         /// <summary>
         /// Metodo para generar Token de salida al loguarse
-        /// </summary>
-        /// <param name="IstanciaApi">Instancia del objeto IInstaApi</param>
+        /// </summary>   
         /// <returns>Retorna un objeto enResponseToken con el token y un mensaje descriptivo</returns>
         public string GenerarToken()
         {

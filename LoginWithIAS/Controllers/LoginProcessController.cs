@@ -16,6 +16,8 @@ using InstagramApiSharp.API.Processors;
 using System.IO;
 using System.Diagnostics;
 using InstagramApiSharp.API;
+using InstagramApiSharp.Classes.Models;
+using InstagramApiSharp.Helpers;
 
 namespace LoginWithIAS.Controllers
 {
@@ -105,6 +107,32 @@ namespace LoginWithIAS.Controllers
 
             return msgSalida;
 
-        }   
+        }
+
+        
+        /*[HttpPost]
+        public async Task<string> LoginExternal(mLogin credencial)
+        {
+            await Task.Delay(1500);
+            WebBrowserHelper.ClearForSpecificUrl(InstaFbHelper.FacebookAddressWithWWWAddress.ToString());
+            WebBrowserHelper.ClearForSpecificUrl(InstaFbHelper.FacebookAddress.ToString());
+            WebBrowserHelper.ClearForSpecificUrl(InstaFbHelper.FacebookMobileAddress.ToString());
+
+            // wait 3.5 second
+            System.Threading.Thread.Sleep(3500);
+
+            var facebookLoginUri = InstaFbHelper.GetFacebookLoginUri();
+            var userAgent = InstaFbHelper.GetFacebookUserAgent();
+
+            FacebookWebBrowser.Navigate(facebookLoginUri, null, null, string.Format("\r\nUser-Agent: {0}\r\n", userAgent));
+
+            do
+            {
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(1);
+            }
+            while (FacebookWebBrowser.ReadyState != WebBrowserReadyState.Complete);
+        }*/
+
     }
 }

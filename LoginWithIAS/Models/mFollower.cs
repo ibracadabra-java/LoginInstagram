@@ -8,19 +8,16 @@ namespace LoginWithIAS.Models
     /// <summary>
     /// 
     /// </summary>
-    public class mFollower
+    public class mFollower:mLogin
     {
-        /// <summary>
-        /// Usuario que desea eliminar seguidor
-        /// </summary>
-        public string user { get; set; }
-        /// <summary>
-        /// Password del usuario que desea eliminar seguidor
-        /// </summary>
-        public string pass { get; set; }
         /// <summary>
         /// Ususario que se desea eliminar 
         /// </summary>
-        public string userdel { get; set; }
+        public string otheruser { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public long pk_otheruser { get; set; }
     }
 }
