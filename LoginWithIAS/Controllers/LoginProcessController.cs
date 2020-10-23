@@ -54,6 +54,21 @@ namespace LoginWithIAS.Controllers
         public async Task<enResponseToken> LoginUser(mLogin credencial)
         {
             enResponseToken token = new enResponseToken();
+            var proxy = new WebProxy()
+            {
+                Address = new Uri(credencial.AddressProxy),
+                BypassProxyOnLocal = false,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(
+                    userName:credencial.UsernameProxy,
+                    password:credencial.PassProxy
+                    )
+
+            };
+            var httpClientHandler = new HttpClientHandler()
+            {
+                Proxy = proxy,                
+            };           
          /*   var device = new AndroidDevice
             {
 
@@ -79,7 +94,8 @@ namespace LoginWithIAS.Controllers
                 UserName = credencial.User,
                 Password = credencial.Pass
             };
-            var InstaApi = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+            var InstaApi = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).UseHttpClientHandler(httpClientHandler).Build();
+            
             //InstaApi.SetDevice(device);
             session.LoadSession(InstaApi);
             
@@ -92,7 +108,7 @@ namespace LoginWithIAS.Controllers
                 {
                     token.AuthToken = session.GenerarToken();
                     token.Message = logInResult.Info.Message;
-                   // session.SaveSession(InstaApi);
+                    session.SaveSession(InstaApi);
                     return token;
 
                 }
@@ -272,7 +288,7 @@ namespace LoginWithIAS.Controllers
         {
             string msgSalida = string.Empty;
 
-            var device = new AndroidDevice
+           /* var device = new AndroidDevice
             {
 
                 AdId = credencial.AdId,
@@ -291,7 +307,7 @@ namespace LoginWithIAS.Controllers
                 FirmwareTags = credencial.FirmwareTags,
                 FirmwareType = credencial.FirmwareType
 
-            };
+            };*/
 
             var userSession = new UserSessionData
             {
@@ -300,8 +316,7 @@ namespace LoginWithIAS.Controllers
             };
 
             var InstaApi = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-            InstaApi.SetDevice(device);
-            session.LoadSession(InstaApi);
+           // InstaApi.SetDevice(device);
 
             session.LoadSession(InstaApi);
 

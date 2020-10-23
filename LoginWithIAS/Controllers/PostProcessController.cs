@@ -112,39 +112,55 @@ namespace LoginWithIAS.Controllers
             int cantlike = mlikemanypost.cantLike;
             int count = 0;
 
-            var device = new AndroidDevice
+           /* var proxy = new WebProxy()
             {
-
-                AdId = mlikemanypost.AdId,
-                AndroidBoardName = mlikemanypost.AndroidBoardName,
-                AndroidBootloader = mlikemanypost.AndroidBootloader,
-                AndroidVer = mlikemanypost.AndroidVer,
-                DeviceBrand = mlikemanypost.DeviceBrand,
-                DeviceGuid = new Guid(mlikemanypost.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(mlikemanypost.DeviceId.ToString())),
-                DeviceModel = mlikemanypost.DeviceModel,
-                DeviceModelBoot = mlikemanypost.DeviceModelBoot,
-                DeviceModelIdentifier = mlikemanypost.DeviceModelIdentifier,
-                Dpi = mlikemanypost.Dpi,
-                Resolution = mlikemanypost.Resolution,
-                FirmwareFingerprint = mlikemanypost.FirmwareFingerprint,
-                FirmwareTags = mlikemanypost.FirmwareTags,
-                FirmwareType = mlikemanypost.FirmwareType
+                Address = new Uri($"" + mlikemanypost.AddressProxy + ""),
+                BypassProxyOnLocal = false,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(
+                    userName: mlikemanypost.UsernameProxy,
+                    password: mlikemanypost.PassProxy
+                    )
 
             };
+            var httpClientHandler = new HttpClientHandler()
+            {
+                Proxy = proxy,
+            };*/
+
+            /*  var device = new AndroidDevice
+              {
+
+                  AdId = mlikemanypost.AdId,
+                  AndroidBoardName = mlikemanypost.AndroidBoardName,
+                  AndroidBootloader = mlikemanypost.AndroidBootloader,
+                  AndroidVer = mlikemanypost.AndroidVer,
+                  DeviceBrand = mlikemanypost.DeviceBrand,
+                  DeviceGuid = new Guid(mlikemanypost.DeviceGuid.ToString()),
+                  DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(mlikemanypost.DeviceId.ToString())),
+                  DeviceModel = mlikemanypost.DeviceModel,
+                  DeviceModelBoot = mlikemanypost.DeviceModelBoot,
+                  DeviceModelIdentifier = mlikemanypost.DeviceModelIdentifier,
+                  Dpi = mlikemanypost.Dpi,
+                  Resolution = mlikemanypost.Resolution,
+                  FirmwareFingerprint = mlikemanypost.FirmwareFingerprint,
+                  FirmwareTags = mlikemanypost.FirmwareTags,
+                  FirmwareType = mlikemanypost.FirmwareType
+
+              };*/
 
             var userSession = new UserSessionData
             {
                 UserName = mlikemanypost.User,
                 Password = mlikemanypost.Pass
             };
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All))/*.UseHttpClientHandler(httpClientHandler)*/.Build();
 
-            insta.SetDevice(device);
+          //  insta.SetDevice(device);
 
             session.LoadSession(insta);
 
-            if (mlikemanypost.userfollow == "")
+            if (mlikemanypost.userfollow == null)
             {
                 var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(Subcadena(mlikemanypost.userlike));
 

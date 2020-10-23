@@ -19,12 +19,12 @@ namespace LoginWithIAS.Models
         /// </summary>
         public int cantLike { get; set; }
         /// <summary>
-        /// 
+        /// Tiempo de espera entre like en segundos
         /// </summary>
         public int time { get; set; }
 
         /// <summary>
-        /// 
+        /// Usuario seguido por userlike
         /// </summary>
         public string userfollow { get; set; }
     }

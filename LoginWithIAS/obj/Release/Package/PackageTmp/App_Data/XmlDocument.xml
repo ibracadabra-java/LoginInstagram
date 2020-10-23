@@ -1268,12 +1268,12 @@
         </member>
         <member name="P:LoginWithIAS.Models.mLikeManyPost.time">
             <summary>
-            
+            Tiempo de espera entre like en segundos
             </summary>
         </member>
         <member name="P:LoginWithIAS.Models.mLikeManyPost.userfollow">
             <summary>
-            
+            Usuario seguido por userlike
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mLogin">
@@ -1294,6 +1294,21 @@
         <member name="P:LoginWithIAS.Models.mLogin.Pass_thow_factor">
             <summary>
             Propiedad para autenticacion en dos pasos
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mLogin.AddressProxy">
+            <summary>
+            Proxy que usará el cliente
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mLogin.UsernameProxy">
+            <summary>
+            Usuario del Proxy
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mLogin.PassProxy">
+            <summary>
+            Password del proxy
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mPost">
