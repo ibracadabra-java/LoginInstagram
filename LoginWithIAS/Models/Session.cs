@@ -15,22 +15,18 @@ namespace LoginWithIAS.Models
     public class Session
     {
         /// <summary>
-        /// 
-        /// </summary>
-        public const string StateFile = "state.bin";
-
-        /// <summary>
         /// Método para cargar session
         /// </summary>
         /// <param name="IstanciaApi">Instancia del objeto IInstaApi</param>
-       public void LoadSession(IInstaApi IstanciaApi)
+        public void LoadSession(IInstaApi IstanciaApi)
         {
+            var path = Path.Combine(Helper.AccountPathDirectory, $"{IstanciaApi.GetLoggedUser().UserName}{Helper.SessionExtension}");
             try
             {
-                if (File.Exists(StateFile))
+                if (File.Exists(path))
                 {
 
-                    using (var fs = File.OpenRead(StateFile))
+                    using (var fs = File.OpenRead(path))
                     {
                         IstanciaApi.LoadStateDataFromStream(fs);
                     }
@@ -41,6 +37,7 @@ namespace LoginWithIAS.Models
                 throw new Exception(ex.Message);
             }
         }
+        
 
         /// <summary>
         /// Método para guardar la session
@@ -48,12 +45,14 @@ namespace LoginWithIAS.Models
         /// <param name="IstanciaApi">Instancia del objeto IInstaApi</param>
         public void SaveSession(IInstaApi IstanciaApi)
         {
+            Helper.CreateAccountDirectory();
             try
             {
                 if (IstanciaApi == null)
                     return;
                 var state = IstanciaApi.GetStateDataAsStream();
-                using (var fileStream = File.Create(StateFile))
+                var path = Path.Combine(Helper.AccountPathDirectory, $"{IstanciaApi.GetLoggedUser().UserName}{Helper.SessionExtension}");
+                using (var fileStream = File.Create(path))
                 {
                     state.Seek(0, SeekOrigin.Begin);
                     state.CopyTo(fileStream);

@@ -179,6 +179,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\enResponseToken.cs" />
+    <Compile Include="Models\Helper.cs" />
+    <Compile Include="Models\InstaApiList.cs" />
     <Compile Include="Models\mcaption.cs" />
     <Compile Include="Models\mchat.cs" />
     <Compile Include="Models\mFollower.cs" />
@@ -186,7 +188,6 @@
     <Compile Include="Models\mLogin.cs" />
     <Compile Include="Models\mPost.cs" />
     <Compile Include="Models\Session.cs" />
-    <Compile Include="Models\WebBrowserHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

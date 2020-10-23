@@ -1,5 +1,6 @@
 ﻿using InstagramApiSharp.API.Builder;
 using InstagramApiSharp.Classes;
+using InstagramApiSharp.Classes.Android.DeviceInfo;
 using InstagramApiSharp.Logger;
 using LoginWithIAS.Models;
 using System;
@@ -35,6 +36,27 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<string> SendDirectMessage(mchat chat)
         {
+            var device = new AndroidDevice
+            {
+
+                AdId = chat.AdId,
+                AndroidBoardName = chat.AndroidBoardName,
+                AndroidBootloader = chat.AndroidBootloader,
+                AndroidVer = chat.AndroidVer,
+                DeviceBrand = chat.DeviceBrand,
+                DeviceGuid = new Guid(chat.DeviceGuid.ToString()),
+                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(chat.DeviceId.ToString())),
+                DeviceModel = chat.DeviceModel,
+                DeviceModelBoot = chat.DeviceModelBoot,
+                DeviceModelIdentifier = chat.DeviceModelIdentifier,
+                Dpi = chat.Dpi,
+                Resolution = chat.Resolution,
+                FirmwareFingerprint = chat.FirmwareFingerprint,
+                FirmwareTags = chat.FirmwareTags,
+                FirmwareType = chat.FirmwareType
+
+            };
+
             var userSession = new UserSessionData
             {
                 UserName = chat.User,
@@ -42,6 +64,7 @@ namespace LoginWithIAS.Controllers
             };
 
             var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+            insta.SetDevice(device);
             session.LoadSession(insta);
 
             var user = await insta.UserProcessor.GetUserAsync(chat.otheruser);

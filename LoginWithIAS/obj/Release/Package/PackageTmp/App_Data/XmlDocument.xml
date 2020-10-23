@@ -1183,6 +1183,29 @@
             Mensaje descriptivo al loguarse
             </summary>
         </member>
+        <member name="T:LoginWithIAS.Models.InstaApiList">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Models.InstaApiList.SaveSessions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Models.InstaApiList.LoadSessions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Models.InstaApiList.BuildApi(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="username"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Models.mcaption">
             <summary>
             Clase Caption
@@ -1268,6 +1291,11 @@
             Password del usuario que desea loguearse
             </summary>
         </member>
+        <member name="P:LoginWithIAS.Models.mLogin.Pass_thow_factor">
+            <summary>
+            Propiedad para autenticacion en dos pasos
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.mPost">
             <summary>
             Media Post
@@ -1284,11 +1312,6 @@
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.Session">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.Session.StateFile">
             <summary>
             
             </summary>
@@ -1310,167 +1333,6 @@
             Metodo para generar Token de salida al loguarse
             </summary>   
             <returns>Retorna un objeto enResponseToken con el token y un mensaje descriptivo</returns>
-        </member>
-        <member name="T:LoginWithIAS.Models.WebBrowserHelper">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:LoginWithIAS.Models.WebBrowserHelper.DeleteUrlCacheEntry(System.IntPtr)">
-            <summary>
-            
-            </summary>
-            <param name="lpszUrlName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LoginWithIAS.Models.WebBrowserHelper.DeleteUrlCacheGroup(System.Int64,System.Int32,System.IntPtr)">
-            <summary>
-            
-            </summary>
-            <param name="GroupId"></param>
-            <param name="dwFlags"></param>
-            <param name="lpReserved"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LoginWithIAS.Models.WebBrowserHelper.FindFirstUrlCacheEntry(System.String,System.IntPtr,System.Int32@)">
-            <summary>
-            
-            </summary>
-            <param name="lpszUrlSearchPattern"></param>
-            <param name="lpFirstCacheEntryInfo"></param>
-            <param name="lpdwFirstCacheEntryInfoBufferSize"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LoginWithIAS.Models.WebBrowserHelper.FindFirstUrlCacheGroup(System.Int32,System.Int32,System.IntPtr,System.Int32,System.Int64@,System.IntPtr)">
-            <summary>
-            
-            </summary>
-            <param name="dwFlags"></param>
-            <param name="dwFilter"></param>
-            <param name="lpSearchCondition"></param>
-            <param name="dwSearchCondition"></param>
-            <param name="lpGroupId"></param>
-            <param name="lpReserved"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LoginWithIAS.Models.WebBrowserHelper.FindNextUrlCacheEntry(System.IntPtr,System.IntPtr,System.Int32@)">
-            <summary>
-            
-            </summary>
-            <param name="hFind"></param>
-            <param name="lpNextCacheEntryInfo"></param>
-            <param name="lpdwNextCacheEntryInfoBufferSize"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LoginWithIAS.Models.WebBrowserHelper.FindNextUrlCacheGroup(System.IntPtr,System.Int64@,System.IntPtr)">
-            <summary>
-            
-            </summary>
-            <param name="hFind"></param>
-            <param name="lpGroupId"></param>
-            <param name="lpReserved"></param>
-            <returns></returns>
-        </member>
-        <member name="T:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwStructSize">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.lpszSourceUrlName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.lpszLocalFileName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.CacheEntryType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwUseCount">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwHitRate">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwSizeLow">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwSizeHigh">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.LastModifiedTime">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.ExpireTime">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.LastAccessTime">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.LastSyncTime">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.lpHeaderInfo">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwHeaderInfoSize">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.lpszFileExtension">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwReserved">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.Models.WebBrowserHelper.INTERNET_CACHE_ENTRY_INFOA.dwExemptDelta">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:LoginWithIAS.Models.WebBrowserHelper.ClearCache">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:LoginWithIAS.Models.WebBrowserHelper.ClearForSpecificUrl(System.String)">
-            <summary>
-            For specific url
-            </summary>
-            <param name="url"></param>
         </member>
     </members>
 </doc>

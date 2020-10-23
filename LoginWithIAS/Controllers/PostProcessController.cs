@@ -1,6 +1,7 @@
 ﻿using InstagramApiSharp;
 using InstagramApiSharp.API.Builder;
 using InstagramApiSharp.Classes;
+using InstagramApiSharp.Classes.Android.DeviceInfo;
 using InstagramApiSharp.Classes.Models;
 using InstagramApiSharp.Logger;
 using LoginWithIAS.Models;
@@ -40,6 +41,27 @@ namespace LoginWithIAS.Controllers
         {
             int cantlike = mlikemanypost.cantLike;
             int count = 0;
+
+            var device = new AndroidDevice
+            {
+
+                AdId = mlikemanypost.AdId,
+                AndroidBoardName = mlikemanypost.AndroidBoardName,
+                AndroidBootloader = mlikemanypost.AndroidBootloader,
+                AndroidVer = mlikemanypost.AndroidVer,
+                DeviceBrand = mlikemanypost.DeviceBrand,
+                DeviceGuid = new Guid(mlikemanypost.DeviceGuid.ToString()),
+                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(mlikemanypost.DeviceId.ToString())),
+                DeviceModel = mlikemanypost.DeviceModel,
+                DeviceModelBoot = mlikemanypost.DeviceModelBoot,
+                DeviceModelIdentifier = mlikemanypost.DeviceModelIdentifier,
+                Dpi = mlikemanypost.Dpi,
+                Resolution = mlikemanypost.Resolution,
+                FirmwareFingerprint = mlikemanypost.FirmwareFingerprint,
+                FirmwareTags = mlikemanypost.FirmwareTags,
+                FirmwareType = mlikemanypost.FirmwareType
+
+            };
             var userSession = new UserSessionData
             {
                 UserName = mlikemanypost.User,
@@ -47,6 +69,9 @@ namespace LoginWithIAS.Controllers
             };
 
             var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            insta.SetDevice(device);
+
             session.LoadSession(insta);
 
             var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
@@ -86,12 +111,37 @@ namespace LoginWithIAS.Controllers
 
             int cantlike = mlikemanypost.cantLike;
             int count = 0;
+
+            var device = new AndroidDevice
+            {
+
+                AdId = mlikemanypost.AdId,
+                AndroidBoardName = mlikemanypost.AndroidBoardName,
+                AndroidBootloader = mlikemanypost.AndroidBootloader,
+                AndroidVer = mlikemanypost.AndroidVer,
+                DeviceBrand = mlikemanypost.DeviceBrand,
+                DeviceGuid = new Guid(mlikemanypost.DeviceGuid.ToString()),
+                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(mlikemanypost.DeviceId.ToString())),
+                DeviceModel = mlikemanypost.DeviceModel,
+                DeviceModelBoot = mlikemanypost.DeviceModelBoot,
+                DeviceModelIdentifier = mlikemanypost.DeviceModelIdentifier,
+                Dpi = mlikemanypost.Dpi,
+                Resolution = mlikemanypost.Resolution,
+                FirmwareFingerprint = mlikemanypost.FirmwareFingerprint,
+                FirmwareTags = mlikemanypost.FirmwareTags,
+                FirmwareType = mlikemanypost.FirmwareType
+
+            };
+
             var userSession = new UserSessionData
             {
                 UserName = mlikemanypost.User,
                 Password = mlikemanypost.Pass
             };
             var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            insta.SetDevice(device);
+
             session.LoadSession(insta);
 
             if (mlikemanypost.userfollow == "")
@@ -213,12 +263,36 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<InstaMedia> extraerPost(mPost userpost)
         {
+            var device = new AndroidDevice
+            {
+
+                AdId = userpost.AdId,
+                AndroidBoardName = userpost.AndroidBoardName,
+                AndroidBootloader = userpost.AndroidBootloader,
+                AndroidVer = userpost.AndroidVer,
+                DeviceBrand = userpost.DeviceBrand,
+                DeviceGuid = new Guid(userpost.DeviceGuid.ToString()),
+                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(userpost.DeviceId.ToString())),
+                DeviceModel = userpost.DeviceModel,
+                DeviceModelBoot = userpost.DeviceModelBoot,
+                DeviceModelIdentifier = userpost.DeviceModelIdentifier,
+                Dpi = userpost.Dpi,
+                Resolution = userpost.Resolution,
+                FirmwareFingerprint = userpost.FirmwareFingerprint,
+                FirmwareTags = userpost.FirmwareTags,
+                FirmwareType = userpost.FirmwareType
+
+            };
+
             var userSession = new UserSessionData
             {
                 UserName = userpost.User,
                 Password = userpost.Pass
             };
             var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            insta.SetDevice(device);
+
             session.LoadSession(insta);
 
             var post = await insta.MediaProcessor.GetMediaByIdAsync(userpost.idpost);
@@ -239,12 +313,36 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<string> deletePost(mPost userpost)
         {
+            var device = new AndroidDevice
+            {
+
+                AdId = userpost.AdId,
+                AndroidBoardName = userpost.AndroidBoardName,
+                AndroidBootloader = userpost.AndroidBootloader,
+                AndroidVer = userpost.AndroidVer,
+                DeviceBrand = userpost.DeviceBrand,
+                DeviceGuid = new Guid(userpost.DeviceGuid.ToString()),
+                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(userpost.DeviceId.ToString())),
+                DeviceModel = userpost.DeviceModel,
+                DeviceModelBoot = userpost.DeviceModelBoot,
+                DeviceModelIdentifier = userpost.DeviceModelIdentifier,
+                Dpi = userpost.Dpi,
+                Resolution = userpost.Resolution,
+                FirmwareFingerprint = userpost.FirmwareFingerprint,
+                FirmwareTags = userpost.FirmwareTags,
+                FirmwareType = userpost.FirmwareType
+
+            };
+
             var userSession = new UserSessionData
             {
                 UserName = userpost.User,
                 Password = userpost.Pass
             };
             var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            insta.SetDevice(device);
+
             session.LoadSession(insta);
             bool eliminarpost=false;            
             if (userpost.tipo_media == 1)
@@ -281,12 +379,37 @@ namespace LoginWithIAS.Controllers
         public async Task<InstaCaption> ExtraerCaption(mPost post) 
         {
             InstaCaption caption = new InstaCaption();
+
+            var device = new AndroidDevice
+            {
+
+                AdId = post.AdId,
+                AndroidBoardName = post.AndroidBoardName,
+                AndroidBootloader = post.AndroidBootloader,
+                AndroidVer = post.AndroidVer,
+                DeviceBrand = post.DeviceBrand,
+                DeviceGuid = new Guid(post.DeviceGuid.ToString()),
+                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(post.DeviceId.ToString())),
+                DeviceModel = post.DeviceModel,
+                DeviceModelBoot = post.DeviceModelBoot,
+                DeviceModelIdentifier = post.DeviceModelIdentifier,
+                Dpi = post.Dpi,
+                Resolution = post.Resolution,
+                FirmwareFingerprint = post.FirmwareFingerprint,
+                FirmwareTags = post.FirmwareTags,
+                FirmwareType = post.FirmwareType
+
+            };
+
             var userSession = new UserSessionData
             {
                 UserName = post.User,
                 Password = post.Pass
             };
             var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            insta.SetDevice(device);
+
             session.LoadSession(insta);
 
             var media = await insta.MediaProcessor.GetMediaByIdAsync(post.idpost);
@@ -306,12 +429,37 @@ namespace LoginWithIAS.Controllers
         public async Task<InstaCaption> EditarCaption(mcaption caption)
         {
             InstaCaption instacaption = new InstaCaption();
+
+            var device = new AndroidDevice
+            {
+
+                AdId = caption.AdId,
+                AndroidBoardName = caption.AndroidBoardName,
+                AndroidBootloader = caption.AndroidBootloader,
+                AndroidVer = caption.AndroidVer,
+                DeviceBrand = caption.DeviceBrand,
+                DeviceGuid = new Guid(caption.DeviceGuid.ToString()),
+                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(caption.DeviceId.ToString())),
+                DeviceModel = caption.DeviceModel,
+                DeviceModelBoot = caption.DeviceModelBoot,
+                DeviceModelIdentifier = caption.DeviceModelIdentifier,
+                Dpi = caption.Dpi,
+                Resolution = caption.Resolution,
+                FirmwareFingerprint = caption.FirmwareFingerprint,
+                FirmwareTags = caption.FirmwareTags,
+                FirmwareType = caption.FirmwareType
+
+            };
+
             var userSession = new UserSessionData
             {
                 UserName = caption.User,
                 Password = caption.Pass
             };
             var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            insta.SetDevice(device);
+
             session.LoadSession(insta);
 
             var media = await insta.MediaProcessor.GetMediaByIdAsync(caption.Idmedia);
@@ -332,12 +480,37 @@ namespace LoginWithIAS.Controllers
         public async Task<List<InstaUserShort>> ListaLikers(mPost media)
         {
             List<InstaUserShort> finallikers = new List<InstaUserShort>();
+
+            var device = new AndroidDevice
+            {
+
+                AdId = media.AdId,
+                AndroidBoardName = media.AndroidBoardName,
+                AndroidBootloader = media.AndroidBootloader,
+                AndroidVer = media.AndroidVer,
+                DeviceBrand = media.DeviceBrand,
+                DeviceGuid = new Guid(media.DeviceGuid.ToString()),
+                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(media.DeviceId.ToString())),
+                DeviceModel = media.DeviceModel,
+                DeviceModelBoot = media.DeviceModelBoot,
+                DeviceModelIdentifier = media.DeviceModelIdentifier,
+                Dpi = media.Dpi,
+                Resolution = media.Resolution,
+                FirmwareFingerprint = media.FirmwareFingerprint,
+                FirmwareTags = media.FirmwareTags,
+                FirmwareType = media.FirmwareType
+
+            };
+
             var userSession = new UserSessionData
             {
                 UserName = media.User,
                 Password = media.Pass
             };
             var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            insta.SetDevice(device);
+
             session.LoadSession(insta);
 
             var objmedia = await insta.MediaProcessor.GetMediaByIdAsync(media.idpost);
@@ -356,12 +529,36 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<string> LikeaPostFeed(mPost media) 
         {
+            var device = new AndroidDevice
+            {
+
+                AdId = media.AdId,
+                AndroidBoardName = media.AndroidBoardName,
+                AndroidBootloader = media.AndroidBootloader,
+                AndroidVer = media.AndroidVer,
+                DeviceBrand = media.DeviceBrand,
+                DeviceGuid = new Guid(media.DeviceGuid.ToString()),
+                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(media.DeviceId.ToString())),
+                DeviceModel = media.DeviceModel,
+                DeviceModelBoot = media.DeviceModelBoot,
+                DeviceModelIdentifier = media.DeviceModelIdentifier,
+                Dpi = media.Dpi,
+                Resolution = media.Resolution,
+                FirmwareFingerprint = media.FirmwareFingerprint,
+                FirmwareTags = media.FirmwareTags,
+                FirmwareType = media.FirmwareType
+
+            };
+
             var userSession = new UserSessionData
             {
                 UserName = media.User,
                 Password = media.Pass
             };
             var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            insta.SetDevice(device);
+
             session.LoadSession(insta);
 
             var feed =await insta.FeedProcessor.GetExploreFeedAsync(PaginationParameters.MaxPagesToLoad(1));
