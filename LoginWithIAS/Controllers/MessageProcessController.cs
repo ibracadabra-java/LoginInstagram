@@ -428,8 +428,13 @@ namespace LoginWithIAS.Controllers
                         if (!string.IsNullOrEmpty(chat.Url))
                         {
                             string[] recipient = new string[1];
-                            string[] thread = new string[1];
+                            string[] thread = new string[inboxThreads.Value.Inbox.Threads.Count];
                             recipient[0] = user.Value.Pk.ToString();
+
+                            for (int i = 0; i < inboxThreads.Value.Inbox.Threads.Count; i++)
+                            {
+                                thread[i] = inboxThreads.Value.Inbox.Threads[i].ThreadId;
+                            }
 
                             var resul = await insta.MessagingProcessor.SendDirectLinkAsync(chat.text,chat.Url,thread,recipient);
                             if (resul.Succeeded)
@@ -556,6 +561,101 @@ namespace LoginWithIAS.Controllers
                 throw new Exception(s.Message);
             }
         }
+
+        /// <summary>
+        /// Enviar un hashtag
+        /// </summary>
+        /// <returns></returns>
+        public async Task<enResponseToken> AgregarHashtag(mchat media)
+        {
+            try
+            {
+                enResponseToken token = new enResponseToken();
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(media.User) || string.IsNullOrEmpty(media.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = media.User,
+                        Password = media.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message= "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(media.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+
+                }
+
+                if (!string.IsNullOrEmpty(media.hashtag) && !string.IsNullOrEmpty(media.text) && !string.IsNullOrEmpty(media.otheruser))
+                {
+                    var user = await insta.UserProcessor.GetUserAsync(media.otheruser);
+                    if (user.Succeeded)
+                    {
+                        var inboxThreads = await insta.MessagingProcessor.GetDirectInboxAsync(InstagramApiSharp.PaginationParameters.MaxPagesToLoad(1));
+                        if (!inboxThreads.Succeeded)
+                        {
+
+                            string[] recipient = new string[1];
+                            recipient[0] = user.Value.Pk.ToString();
+
+                            string[] threads = new string[inboxThreads.Value.Inbox.Threads.Count];
+                            for (int i = 0; i < inboxThreads.Value.Inbox.Threads.Count; i++)
+                            {
+                                threads[i] = inboxThreads.Value.Inbox.Threads[i].ThreadId;
+
+                            }
+
+                            var resul = await insta.MessagingProcessor.SendDirectHashtagAsync(media.text, media.hashtag,threads, recipient);
+                            if (resul.Succeeded)
+                            {
+                                token.Message = resul.Info.Message;
+                                token.AuthToken = session.GenerarToken();
+                                return token;
+                            }
+                            else
+                            {
+                                token.Message = resul.Info.Message;
+                                return token;
+                            }
+                        }
+                        else
+                        {
+                            token.Message = inboxThreads.Info.Message;
+                            return token;
+                        }
+                    }
+                    else
+                    {
+                        token.Message = user.Info.Message;
+                        return token;
+                    }
+                }
+                else
+                {
+                    token.Message = "Tiene que introducir el texto, el hashtag y el usuario al que le desea enviar el hashtag";
+                    return token;
+                }
+                
+            }
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
+            }
+        }
+
+
 
     }
 }

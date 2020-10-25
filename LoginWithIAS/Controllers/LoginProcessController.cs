@@ -327,5 +327,63 @@ namespace LoginWithIAS.Controllers
 
         }
 
+        /// <summary>
+        /// Obtener sesiones de login activas
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<List<InstaLoginSession>> GetLoginSessionActive(mLogin login)
+        {
+            try
+            {
+                List<InstaLoginSession> lista = new List<InstaLoginSession>();
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(login.User) || string.IsNullOrEmpty(login.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = login.User,
+                        Password = login.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return null;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(login.Pass))
+                {
+                    return null;
+                }
+
+                var user = await insta.AccountProcessor.GetLoginSessionsAsync();
+
+                if (user.Succeeded)
+                {
+                    for (int i = 0; i < user.Value.Sessions.Count; i++)
+                    {
+                        lista.Add(user.Value.Sessions[i]);
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+
+                return lista;
+            }
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
+            }
+        }
+
+
     }
 }

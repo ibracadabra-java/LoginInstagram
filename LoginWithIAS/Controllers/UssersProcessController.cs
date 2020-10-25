@@ -706,7 +706,6 @@ namespace LoginWithIAS.Controllers
                                 devolver.Add(userlist.Value[i].UserName);
                             }
                         }
-
                     }
                     else
                         return null;
@@ -834,7 +833,5 @@ namespace LoginWithIAS.Controllers
                 throw new Exception(s.Message);
             }
         }
-
-
     }
 }

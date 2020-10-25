@@ -42,7 +42,8 @@ namespace LoginWithIAS.Models
         /// <summary>
         /// Password del proxy
         /// </summary>
-        public string PassProxy { get => passProxy; set => passProxy = value; }
+        public string PassProxy { get => passProxy; set => passProxy = value; } 
+
 
 
     }

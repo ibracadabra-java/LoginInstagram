@@ -20,6 +20,6 @@ namespace LoginWithIAS.Models
         /// Tipo de post
         /// </summary>
         public int tipo_media { get; set; }
-
+        
     }
 }

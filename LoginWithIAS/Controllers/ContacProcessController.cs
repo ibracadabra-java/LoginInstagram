@@ -31,7 +31,7 @@ namespace LoginWithIAS.Controllers
             this.session = new Session();
         }
 
-       /* /// <summary>
+        /*/// <summary>
         /// Metodo para extraer el contacto de un usuario
         /// </summary>
         /// <returns></returns>
@@ -39,66 +39,36 @@ namespace LoginWithIAS.Controllers
         {
             List<string> listado_contactos = new List<string>();
 
-            if (!string.IsNullOrEmpty(credencial.AddressProxy))
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            if (!(string.IsNullOrEmpty(credencial.User) || string.IsNullOrEmpty(credencial.Pass)))
             {
-                var proxy = new WebProxy()
+                var userSession = new UserSessionData
                 {
-                    Address = new Uri(credencial.AddressProxy),
-                    BypassProxyOnLocal = false,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(
-                       userName: credencial.UsernameProxy,
-                       password: credencial.PassProxy
-                       )
-
+                    UserName = credencial.User,
+                    Password = credencial.Pass
                 };
+                insta.SetUser(userSession);
             }
             else
             {
-                
+                return null;
             }
-            var httpClientHandler = new HttpClientHandler()
+
+            session.LoadSession(insta);
+
+            if (!insta.GetLoggedUser().Password.Equals(credencial.Pass))
             {
-                Proxy = proxy,
-            };
+                return null;
+            }
 
-            var device = new AndroidDevice
+            if (insta.IsUserAuthenticated)
             {
-
-                AdId = credencial.AdId,
-                AndroidBoardName = credencial.AndroidBoardName,
-                AndroidBootloader = credencial.AndroidBootloader,
-                AndroidVer = credencial.AndroidVer,
-                DeviceBrand = credencial.DeviceBrand,
-                DeviceGuid = new Guid(credencial.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(credencial.DeviceId.ToString())),
-                DeviceModel = credencial.DeviceModel,
-                DeviceModelBoot = credencial.DeviceModelBoot,
-                DeviceModelIdentifier = credencial.DeviceModelIdentifier,
-                Dpi = credencial.Dpi,
-                Resolution = credencial.Resolution,
-                FirmwareFingerprint = credencial.FirmwareFingerprint,
-                FirmwareTags = credencial.FirmwareTags,
-                FirmwareType = credencial.FirmwareType
-
-            }; 
-             var userSession = new UserSessionData
-             {
-                 UserName = credencial.User,
-                 Password = credencial.Pass
-             };
-            var InstaApi = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).UseHttpClientHandler(httpClientHandler).Build();
-
-            //InstaApi.SetDevice(device);
-            session.LoadSession(InstaApi);
-
-            if (InstaApi.IsUserAuthenticated)
-            {
-
+                
             }
             else
             {
-                
+                return null; 
             }
 
             return listado_contactos;

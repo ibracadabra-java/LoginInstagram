@@ -388,3 +388,4 @@ D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\obj\Debug\ApiInstaPr
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\obj\Debug\ApiInstaProcess.csproj.CopyComplete
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\obj\Debug\LoginWithIAS.dll
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\obj\Debug\LoginWithIAS.pdb
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\obj\Debug\ApiInstaProcess.csprojAssemblyReference.cache

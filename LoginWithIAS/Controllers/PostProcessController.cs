@@ -679,7 +679,6 @@ namespace LoginWithIAS.Controllers
 
                 throw new Exception(s.Message);
             }        
-        }
-
+        }    
     }
 }

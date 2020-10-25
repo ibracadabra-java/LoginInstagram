@@ -960,6 +960,23 @@
             Constructor de la clase
             </summary>
         </member>
+        <member name="T:LoginWithIAS.Controllers.DeviceProcessController">
+            <summary>
+            Controlador de Dispositivos
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.DeviceProcessController.#ctor">
+            <summary>
+            Constructor del controlador
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.DeviceProcessController.DeleteDevice(LoginWithIAS.Models.mdevice)">
+            <summary>
+            Eliminar Dispositivos
+            </summary>
+            <param name="deletedevices"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.MessageProcessController">
             <summary>
             
@@ -1010,6 +1027,12 @@
             Metodo para enviar Objetos animados a un usuario
             </summary>
             <param name="chat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.AgregarHashtag(LoginWithIAS.Models.mchat)">
+            <summary>
+            Enviar un hashtag
+            </summary>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.Controllers.UssersProcessController">
@@ -1160,7 +1183,7 @@
         </member>
         <member name="M:LoginWithIAS.Controllers.PostProcessController.EditarCaption(LoginWithIAS.Models.mcaption)">
             <summary>
-            
+            Editar Caption
             </summary>
             <param name="caption"></param>
             <returns></returns>
@@ -1206,6 +1229,13 @@
             Método para desloguearse de la plataforma
             </summary>
             <param name="credencial">Clase del modelo que captura las credenciales del usuario autenticado</param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.GetLoginSessionActive(LoginWithIAS.Models.mLogin)">
+            <summary>
+            Obtener sesiones de login activas
+            </summary>
+            <param name="login"></param>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.WebApiApplication">
@@ -1311,6 +1341,11 @@
             Emoticon a enviar
             </summary>
         </member>
+        <member name="P:LoginWithIAS.Models.mchat.hashtag">
+            <summary>
+            Enviar un Hashtag
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.mContacts">
             <summary>
             Clase Contactos
@@ -1319,6 +1354,21 @@
         <member name="P:LoginWithIAS.Models.mContacts.otheruser">
             <summary>
             Usuario del que se obtendra su lista de contactos
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mdevice">
+            <summary>
+            Clase Dispositivo
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mdevice.User">
+            <summary>
+            Usuario que desea loguearse
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mdevice.Pass">
+            <summary>
+            Password del usuario que desea loguearse
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mFollower">

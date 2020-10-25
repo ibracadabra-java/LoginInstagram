@@ -45,5 +45,12 @@ namespace LoginWithIAS.Models
         /// Emoticon a enviar
         /// </summary>
         public string Giphyid { get; set; }
+
+
+        /// <summary>
+        /// Enviar un Hashtag
+        /// </summary>
+        public string hashtag { get; set; }
+
     }
 }
