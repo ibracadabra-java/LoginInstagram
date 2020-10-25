@@ -35,44 +35,73 @@ namespace LoginWithIAS.Controllers
         /// <param name="deletefollower"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> DeleteFollower(mFollower deletefollower)
+        public async Task<enResponseToken> DeleteFollower(mFollower deletefollower)
         {
-            var device = new AndroidDevice
+            try
+            {
+                enResponseToken token = new enResponseToken();
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(deletefollower.User) || string.IsNullOrEmpty(deletefollower.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = deletefollower.User,
+                        Password = deletefollower.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(deletefollower.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+
+                if (!string.IsNullOrEmpty(deletefollower.otheruser))
+                {
+                    var user = await insta.UserProcessor.GetUserAsync(deletefollower.otheruser);
+
+                    if (user.Succeeded)
+                    {
+                        var resuldel = await insta.UserProcessor.RemoveFollowerAsync(user.Value.Pk);
+                        if (resuldel.Succeeded)
+                        {
+                            token.Message = resuldel.Info.Message;
+                            token.AuthToken = session.GenerarToken();
+                            return token;
+                        }
+                        else
+                        {
+                            token.Message = resuldel.Info.Message;
+                            return token;
+                        }
+                    }
+                    else
+                    {
+                        token.Message = user.Info.Message;
+                        return token;
+                    }
+                }
+                else
+                {
+                    token.Message = "Debe Introducir el nombre del usuario a eliminar";
+                    return token;
+                }
+                
+            }
+            catch (Exception s)
             {
 
-                AdId = deletefollower.AdId,
-                AndroidBoardName = deletefollower.AndroidBoardName,
-                AndroidBootloader = deletefollower.AndroidBootloader,
-                AndroidVer = deletefollower.AndroidVer,
-                DeviceBrand = deletefollower.DeviceBrand,
-                DeviceGuid = new Guid(deletefollower.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(deletefollower.DeviceId.ToString())),
-                DeviceModel = deletefollower.DeviceModel,
-                DeviceModelBoot = deletefollower.DeviceModelBoot,
-                DeviceModelIdentifier = deletefollower.DeviceModelIdentifier,
-                Dpi = deletefollower.Dpi,
-                Resolution = deletefollower.Resolution,
-                FirmwareFingerprint = deletefollower.FirmwareFingerprint,
-                FirmwareTags = deletefollower.FirmwareTags,
-                FirmwareType = deletefollower.FirmwareType
-
-            };
-
-            var userSession = new UserSessionData
-            {
-                UserName = deletefollower.User,
-                Password = deletefollower.Pass
-            };
-
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-            insta.SetDevice(device);
-            session.LoadSession(insta);
-
-            var user = await insta.UserProcessor.GetUserAsync(deletefollower.otheruser);
-            var resuldel = await insta.UserProcessor.RemoveFollowerAsync(user.Value.Pk);
-
-            return resuldel.Info.Message;
+                throw new Exception(s.Message);
+            }
         }
 
         /// <summary>
@@ -81,44 +110,73 @@ namespace LoginWithIAS.Controllers
         /// <param name="blokUsser"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> BlokUser(mFollower blokUsser)
+        public async Task<enResponseToken> BlokUser(mFollower blokUsser)
         {
-            var device = new AndroidDevice
+            try
+            {
+                enResponseToken token = new enResponseToken();
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(blokUsser.User) || string.IsNullOrEmpty(blokUsser.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = blokUsser.User,
+                        Password = blokUsser.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(blokUsser.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+
+                if (!string.IsNullOrEmpty(blokUsser.otheruser))
+                {
+                    var user = await insta.UserProcessor.GetUserAsync(blokUsser.otheruser);
+
+                    if (user.Succeeded)
+                    {
+                        var resul = await insta.UserProcessor.BlockUserAsync(user.Value.Pk);
+                        if (resul.Succeeded)
+                        {
+                            token.Message = resul.Info.Message;
+                            token.AuthToken = session.GenerarToken();
+                            return token;
+                        }
+                        else
+                        {
+                            token.Message = resul.Info.Message;
+                            return token;
+                        }
+                    }
+                    else
+                    {
+                        token.Message = user.Info.Message;
+                        return token;
+                    }
+                }
+                else
+                {
+                    token.Message = "Debe introducir el usuario a bloquear";
+                    return token;
+                }
+                
+            }
+            catch (Exception s)
             {
 
-                AdId = blokUsser.AdId,
-                AndroidBoardName = blokUsser.AndroidBoardName,
-                AndroidBootloader = blokUsser.AndroidBootloader,
-                AndroidVer = blokUsser.AndroidVer,
-                DeviceBrand = blokUsser.DeviceBrand,
-                DeviceGuid = new Guid(blokUsser.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(blokUsser.DeviceId.ToString())),
-                DeviceModel = blokUsser.DeviceModel,
-                DeviceModelBoot = blokUsser.DeviceModelBoot,
-                DeviceModelIdentifier = blokUsser.DeviceModelIdentifier,
-                Dpi = blokUsser.Dpi,
-                Resolution = blokUsser.Resolution,
-                FirmwareFingerprint = blokUsser.FirmwareFingerprint,
-                FirmwareTags = blokUsser.FirmwareTags,
-                FirmwareType = blokUsser.FirmwareType
-
-            };
-
-            var userSession = new UserSessionData
-            {
-                UserName = blokUsser.User,
-                Password = blokUsser.Pass
-            };
-
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-            insta.SetDevice(device);
-            session.LoadSession(insta);
-
-            var user = await insta.UserProcessor.GetUserAsync(blokUsser.otheruser);
-            var resul = await insta.UserProcessor.BlockUserAsync(user.Value.Pk);
-
-            return resul.Info.Message;
+                throw new Exception(s.Message);
+            }
         }
 
         /// <summary>
@@ -127,45 +185,74 @@ namespace LoginWithIAS.Controllers
         /// <param name="unfollowkUsser"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> UnFollowUser(mFollower unfollowkUsser)
+        public async Task<enResponseToken> UnFollowUser(mFollower unfollowkUsser)
         {
-            var device = new AndroidDevice
+            try
+            {
+                enResponseToken token = new enResponseToken();
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(unfollowkUsser.User) || string.IsNullOrEmpty(unfollowkUsser.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = unfollowkUsser.User,
+                        Password = unfollowkUsser.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(unfollowkUsser.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+
+                if (!string.IsNullOrEmpty(unfollowkUsser.otheruser))
+                {
+                    var user = await insta.UserProcessor.GetUserAsync(unfollowkUsser.otheruser);
+                    if (user.Succeeded)
+                    {
+                        var resul = await insta.UserProcessor.UnFollowUserAsync(user.Value.Pk);
+                        if (resul.Succeeded)
+                        {
+                            token.Message = resul.Info.Message;
+                            token.AuthToken = session.GenerarToken();
+                            return token;
+                        }
+                        else
+                        {
+                            token.Message = resul.Info.Message;
+                            return token;
+                        }
+                    }
+                    else
+                    {
+                        token.Message = user.Info.Message;
+                        return token;
+                    }
+
+                }
+                else
+                {
+                    token.Message = "Debe Introducir el Otro Usuario";
+                    return token;
+                }
+            }
+            catch (Exception s)
             {
 
-                AdId = unfollowkUsser.AdId,
-                AndroidBoardName = unfollowkUsser.AndroidBoardName,
-                AndroidBootloader = unfollowkUsser.AndroidBootloader,
-                AndroidVer = unfollowkUsser.AndroidVer,
-                DeviceBrand = unfollowkUsser.DeviceBrand,
-                DeviceGuid = new Guid(unfollowkUsser.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(unfollowkUsser.DeviceId.ToString())),
-                DeviceModel = unfollowkUsser.DeviceModel,
-                DeviceModelBoot = unfollowkUsser.DeviceModelBoot,
-                DeviceModelIdentifier = unfollowkUsser.DeviceModelIdentifier,
-                Dpi = unfollowkUsser.Dpi,
-                Resolution = unfollowkUsser.Resolution,
-                FirmwareFingerprint = unfollowkUsser.FirmwareFingerprint,
-                FirmwareTags = unfollowkUsser.FirmwareTags,
-                FirmwareType = unfollowkUsser.FirmwareType
-
-            };
-
-            var userSession = new UserSessionData
-            {
-                UserName = unfollowkUsser.User,
-                Password = unfollowkUsser.Pass
-            };
-
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-            insta.SetDevice(device);
-
-            session.LoadSession(insta);
-
-            var user = await insta.UserProcessor.GetUserAsync(unfollowkUsser.otheruser);
-            var resul = await insta.UserProcessor.UnFollowUserAsync(user.Value.Pk);
-
-            return resul.Info.Message;
+                throw new Exception(s.Message);
+            }        
+            
         }
 
         /// <summary>
@@ -174,98 +261,134 @@ namespace LoginWithIAS.Controllers
         /// <param name="followkUsser"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> FollowUser(mFollower followkUsser)
+        public async Task<enResponseToken> FollowUser(mFollower followkUsser)
         {
-            var device = new AndroidDevice
+            try
+            {
+                enResponseToken token = new enResponseToken();
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(followkUsser.User) || string.IsNullOrEmpty(followkUsser.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = followkUsser.User,
+                        Password = followkUsser.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(followkUsser.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+
+                if (!string.IsNullOrEmpty(followkUsser.otheruser))
+                {
+                    var user = await insta.UserProcessor.GetUserAsync(followkUsser.otheruser);
+                    if (user.Succeeded)
+                    {
+                        var resul = await insta.UserProcessor.FollowUserAsync(user.Value.Pk);
+                        if (resul.Succeeded)
+                        {
+                            token.Message = resul.Info.Message;
+                            token.AuthToken = session.GenerarToken();
+                            return token;
+                        }
+                        else
+                        {
+                            token.Message = resul.Info.Message;
+                            return token;
+                        }
+                    }
+                    else
+                    {
+                        token.Message = user.Info.Message;
+                        return token;
+                    }
+                }
+                else
+                {
+                    token.Message = "Debe introducir el usuario a seguir";
+                    return token;
+                }
+            }
+            catch (Exception s)
             {
 
-                AdId = followkUsser.AdId,
-                AndroidBoardName = followkUsser.AndroidBoardName,
-                AndroidBootloader = followkUsser.AndroidBootloader,
-                AndroidVer = followkUsser.AndroidVer,
-                DeviceBrand = followkUsser.DeviceBrand,
-                DeviceGuid = new Guid(followkUsser.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(followkUsser.DeviceId.ToString())),
-                DeviceModel = followkUsser.DeviceModel,
-                DeviceModelBoot = followkUsser.DeviceModelBoot,
-                DeviceModelIdentifier = followkUsser.DeviceModelIdentifier,
-                Dpi = followkUsser.Dpi,
-                Resolution = followkUsser.Resolution,
-                FirmwareFingerprint = followkUsser.FirmwareFingerprint,
-                FirmwareTags = followkUsser.FirmwareTags,
-                FirmwareType = followkUsser.FirmwareType
-
-            };
-
-            var userSession = new UserSessionData
-            {
-                UserName = followkUsser.User,
-                Password = followkUsser.Pass
-            };
-
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-            insta.SetDevice(device);
-            session.LoadSession(insta);
-
-            var user = await insta.UserProcessor.GetUserAsync(followkUsser.otheruser);
-            var resul = await insta.UserProcessor.FollowUserAsync(user.Value.Pk);
-
-            return resul.Info.Message;
+                throw new Exception(s.Message);
+            }
+            
         }
 
         /// <summary>
-        /// Lista de posts
+        /// Lista de posts de un usuario
         /// </summary>
         /// <param name="postUsser"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<InstaMediaList> ListPostUser(mFollower postUsser)
         {
-            var device = new AndroidDevice
+            try
             {
+                InstaMediaList listamedia = new InstaMediaList();
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-                AdId = postUsser.AdId,
-                AndroidBoardName = postUsser.AndroidBoardName,
-                AndroidBootloader = postUsser.AndroidBootloader,
-                AndroidVer = postUsser.AndroidVer,
-                DeviceBrand = postUsser.DeviceBrand,
-                DeviceGuid = new Guid(postUsser.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(postUsser.DeviceId.ToString())),
-                DeviceModel = postUsser.DeviceModel,
-                DeviceModelBoot = postUsser.DeviceModelBoot,
-                DeviceModelIdentifier = postUsser.DeviceModelIdentifier,
-                Dpi = postUsser.Dpi,
-                Resolution = postUsser.Resolution,
-                FirmwareFingerprint = postUsser.FirmwareFingerprint,
-                FirmwareTags = postUsser.FirmwareTags,
-                FirmwareType = postUsser.FirmwareType
-
-            };
-
-            var userSession = new UserSessionData
-            {
-                UserName = postUsser.User,
-                Password = postUsser.Pass
-            };
-
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-            insta.SetDevice(device);
-            session.LoadSession(insta);
-
-            var user = await insta.UserProcessor.GetUserMediaAsync(postUsser.otheruser, PaginationParameters.MaxPagesToLoad(1));
-
-            InstaMediaList listamedia = new InstaMediaList();
-            if (user.Succeeded)
-            {
-                for (int i = 0; i < user.Value.Count; i++)
+                if (!(string.IsNullOrEmpty(postUsser.User) || string.IsNullOrEmpty(postUsser.Pass)))
                 {
-                    listamedia.Add(user.Value[i]);
-                }              
-                
+                    var userSession = new UserSessionData
+                    {
+                        UserName = postUsser.User,
+                        Password = postUsser.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return null;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(postUsser.Pass))
+                {
+                    return null;
+                }
+
+                if (!string.IsNullOrEmpty(postUsser.otheruser))
+                {
+                    var user = await insta.UserProcessor.GetUserMediaAsync(postUsser.otheruser, PaginationParameters.MaxPagesToLoad(1));
+                    if (user.Succeeded)
+                    {
+                        for (int i = 0; i < user.Value.Count; i++)
+                        {
+                            listamedia.Add(user.Value[i]);
+                        }
+                    }
+                    else
+                        return null;
+                }
+                else
+                {
+                    return null;
+                }
+
+                return listamedia;
             }
-            return listamedia;
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
+            }
         }
 
         /// <summary>
@@ -274,46 +397,68 @@ namespace LoginWithIAS.Controllers
         /// <param name="biografiaUsser"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> BiografiaUsser(mFollower biografiaUsser)
+        public async Task<InstaUserInfo> BiografiaUsser(mFollower biografiaUsser)
         {
-            var device = new AndroidDevice
+
+            try
+            {
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(biografiaUsser.User) || string.IsNullOrEmpty(biografiaUsser.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = biografiaUsser.User,
+                        Password = biografiaUsser.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return null;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(biografiaUsser.Pass))
+                {
+                    return null;
+                }
+
+                if (!string.IsNullOrEmpty(biografiaUsser.otheruser))
+                {
+                    var user = await insta.UserProcessor.GetUserAsync(biografiaUsser.otheruser);
+                    if (user.Succeeded)
+                    {
+                        var biografia = await insta.UserProcessor.GetUserInfoByIdAsync(user.Value.Pk);
+
+                        if (biografia.Succeeded)
+                        {
+                            return biografia.Value;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+
+
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception s)
             {
 
-                AdId = biografiaUsser.AdId,
-                AndroidBoardName = biografiaUsser.AndroidBoardName,
-                AndroidBootloader = biografiaUsser.AndroidBootloader,
-                AndroidVer = biografiaUsser.AndroidVer,
-                DeviceBrand = biografiaUsser.DeviceBrand,
-                DeviceGuid = new Guid(biografiaUsser.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(biografiaUsser.DeviceId.ToString())),
-                DeviceModel = biografiaUsser.DeviceModel,
-                DeviceModelBoot = biografiaUsser.DeviceModelBoot,
-                DeviceModelIdentifier = biografiaUsser.DeviceModelIdentifier,
-                Dpi = biografiaUsser.Dpi,
-                Resolution = biografiaUsser.Resolution,
-                FirmwareFingerprint = biografiaUsser.FirmwareFingerprint,
-                FirmwareTags = biografiaUsser.FirmwareTags,
-                FirmwareType = biografiaUsser.FirmwareType
-
-            };
-
-            var userSession = new UserSessionData
-            {
-                UserName = biografiaUsser.User,
-                Password = biografiaUsser.Pass
-            };
-
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-            insta.SetDevice(device);
-            session.LoadSession(insta);
-
-            InstaUserInfo info = new InstaUserInfo();
-
-            var user = await insta.UserProcessor.GetUserAsync(biografiaUsser.otheruser);
-            var biografia = await insta.UserProcessor.GetUserInfoByIdAsync(user.Value.Pk);
-
-            return info.Biography;            
+                throw new Exception(s.Message);
+            }               
         }
 
         /// <summary>
@@ -324,46 +469,64 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<int> cantFollowinsUsser(mFollower followin)
         {
+            try
+            {
+                int cantidad = 0;
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-            var device = new AndroidDevice
+                if (!(string.IsNullOrEmpty(followin.User) || string.IsNullOrEmpty(followin.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = followin.User,
+                        Password = followin.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return cantidad;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(followin.Pass))
+                {
+                    return cantidad;
+                }
+
+                if (!string.IsNullOrEmpty(followin.User))
+                {
+                    var user = await insta.UserProcessor.GetUserAsync(followin.User);
+
+                    if (user.Succeeded)
+                    {
+                        var seguidores = await insta.UserProcessor.GetUserFollowingByIdAsync(user.Value.Pk, PaginationParameters.MaxPagesToLoad(1));
+
+                        if (seguidores.Succeeded)
+                        {
+                            return seguidores.Value.Count;
+                        }
+                        else
+                        {
+                            return cantidad;
+                        }
+                    }
+                    else
+                    {
+                        return cantidad;
+                    }
+                }
+                else
+                {
+                    return cantidad;
+                }
+            }
+            catch (Exception s)
             {
 
-                AdId = followin.AdId,
-                AndroidBoardName = followin.AndroidBoardName,
-                AndroidBootloader = followin.AndroidBootloader,
-                AndroidVer = followin.AndroidVer,
-                DeviceBrand = followin.DeviceBrand,
-                DeviceGuid = new Guid(followin.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(followin.DeviceId.ToString())),
-                DeviceModel = followin.DeviceModel,
-                DeviceModelBoot = followin.DeviceModelBoot,
-                DeviceModelIdentifier = followin.DeviceModelIdentifier,
-                Dpi = followin.Dpi,
-                Resolution = followin.Resolution,
-                FirmwareFingerprint = followin.FirmwareFingerprint,
-                FirmwareTags = followin.FirmwareTags,
-                FirmwareType = followin.FirmwareType
-
-            };
-
-            var userSession = new UserSessionData
-            {
-                UserName = followin.User,
-                Password = followin.Pass
-            };
-
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-            insta.SetDevice(device);
-            session.LoadSession(insta);
-
-           
-            var user = await insta.UserProcessor.GetUserAsync(followin.User);
-            
-            var seguidores = await insta.UserProcessor.GetUserFollowingByIdAsync(user.Value.Pk,PaginationParameters.MaxPagesToLoad(1));
-
-            return seguidores.Value.Count;
-            
+                throw new Exception(s.Message);
+            }
         }
 
         /// <summary>
@@ -374,43 +537,54 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<int> cantFollowersUsser(mFollower followers)
         {
+            try
+            {
+                int cantidad = 0;
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-            var device = new AndroidDevice
+                if (!(string.IsNullOrEmpty(followers.User) || string.IsNullOrEmpty(followers.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = followers.User,
+                        Password = followers.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return cantidad;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(followers.Pass))
+                {
+                    return cantidad;
+                }
+
+                if (!string.IsNullOrEmpty(followers.User))
+                {
+                    var user = await insta.UserProcessor.GetUserAsync(followers.User);
+                    if (user.Succeeded)
+                    {
+                        return user.Value.FollowersCount;
+                    }
+                    else
+                    {
+                        return cantidad;
+                    }
+                }
+                else
+                {
+                    return cantidad;
+                }
+            }
+            catch (Exception s)
             {
 
-                AdId = followers.AdId,
-                AndroidBoardName = followers.AndroidBoardName,
-                AndroidBootloader = followers.AndroidBootloader,
-                AndroidVer = followers.AndroidVer,
-                DeviceBrand = followers.DeviceBrand,
-                DeviceGuid = new Guid(followers.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(followers.DeviceId.ToString())),
-                DeviceModel = followers.DeviceModel,
-                DeviceModelBoot = followers.DeviceModelBoot,
-                DeviceModelIdentifier = followers.DeviceModelIdentifier,
-                Dpi = followers.Dpi,
-                Resolution = followers.Resolution,
-                FirmwareFingerprint = followers.FirmwareFingerprint,
-                FirmwareTags = followers.FirmwareTags,
-                FirmwareType = followers.FirmwareType
-
-            };
-            var userSession = new UserSessionData
-            {
-                UserName = followers.User,
-                Password = followers.Pass
-            };
-
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-            insta.SetDevice(device);
-            session.LoadSession(insta);
-
-
-            var user = await insta.UserProcessor.GetUserAsync(followers.User);
-
-            return user.Value.FollowersCount;
-
+                throw new Exception(s.Message);
+            }
         }
 
         /// <summary>
@@ -421,60 +595,69 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<List<string>> ListaUsserActive(mFollower followers)
         {
-
-            var device = new AndroidDevice
+            try
             {
+                List<string> devolver = new List<string>();
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-                AdId = followers.AdId,
-                AndroidBoardName = followers.AndroidBoardName,
-                AndroidBootloader = followers.AndroidBootloader,
-                AndroidVer = followers.AndroidVer,
-                DeviceBrand = followers.DeviceBrand,
-                DeviceGuid = new Guid(followers.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(followers.DeviceId.ToString())),
-                DeviceModel = followers.DeviceModel,
-                DeviceModelBoot = followers.DeviceModelBoot,
-                DeviceModelIdentifier = followers.DeviceModelIdentifier,
-                Dpi = followers.Dpi,
-                Resolution = followers.Resolution,
-                FirmwareFingerprint = followers.FirmwareFingerprint,
-                FirmwareTags = followers.FirmwareTags,
-                FirmwareType = followers.FirmwareType
-
-            };
-            var userSession = new UserSessionData
-            {
-                UserName = followers.User,
-                Password = followers.Pass
-            };
-
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-            insta.SetDevice(device);
-            session.LoadSession(insta);
-
-
-            var user = await insta.UserProcessor.GetUserAsync(followers.User);
-
-            var useractives = await insta.MessagingProcessor.GetUsersPresenceAsync();
-
-            List<string> devolver = new List<string>();
-            if (useractives.Succeeded)
-            {
-                for (int i = 0; i < useractives.Value.Count; i++)
+                if (!(string.IsNullOrEmpty(followers.User) || string.IsNullOrEmpty(followers.Pass)))
                 {
-                    if (useractives.Value[i].IsActive)
+                    var userSession = new UserSessionData
                     {
-                        var userinfo = await insta.UserProcessor.GetFullUserInfoAsync(useractives.Value[i].Pk);
-                        string username = userinfo.Value.UserDetail.Username;
-                        devolver.Add(username);
+                        UserName = followers.User,
+                        Password = followers.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return null;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(followers.Pass))
+                {
+                    return null;
+                }
+
+                if (!string.IsNullOrEmpty(followers.User))
+                {
+                    var user = await insta.UserProcessor.GetUserAsync(followers.User);
+
+                    if (user.Succeeded)
+                    {
+                        var useractives = await insta.MessagingProcessor.GetUsersPresenceAsync();
+                        if (useractives.Succeeded)
+                        {
+                            for (int i = 0; i < useractives.Value.Count; i++)
+                            {
+                                if (useractives.Value[i].IsActive)
+                                {
+                                    var userinfo = await insta.UserProcessor.GetFullUserInfoAsync(useractives.Value[i].Pk);
+                                    string username = userinfo.Value.UserDetail.UserName;
+                                    devolver.Add(username);
+                                }
+                            }
+                        }
+                        else
+                            return null;
+                    }
+                    else
+                    {
+                        return null;
                     }
                 }
+                else
+                    return null;
+
+                return devolver;
             }
+            catch (Exception s)
+            {
 
-
-            return devolver;
-
+                throw new Exception(s.Message);
+            }
         }
 
         /// <summary>
@@ -485,108 +668,117 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<List<string>> ListaFollowersUsers(mFollower followers)
         {
-
-            var device = new AndroidDevice
+            try
             {
+                List<string> devolver = new List<string>();
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-                AdId = followers.AdId,
-                AndroidBoardName = followers.AndroidBoardName,
-                AndroidBootloader = followers.AndroidBootloader,
-                AndroidVer = followers.AndroidVer,
-                DeviceBrand = followers.DeviceBrand,
-                DeviceGuid = new Guid(followers.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(followers.DeviceId.ToString())),
-                DeviceModel = followers.DeviceModel,
-                DeviceModelBoot = followers.DeviceModelBoot,
-                DeviceModelIdentifier = followers.DeviceModelIdentifier,
-                Dpi = followers.Dpi,
-                Resolution = followers.Resolution,
-                FirmwareFingerprint = followers.FirmwareFingerprint,
-                FirmwareTags = followers.FirmwareTags,
-                FirmwareType = followers.FirmwareType
-
-            };
-
-            var userSession = new UserSessionData
-            {
-                UserName = followers.User,
-                Password = followers.Pass
-            };
-
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-            insta.SetDevice(device);
-            session.LoadSession(insta);
-
-
-            var userlist = await insta.UserProcessor.GetUserFollowersAsync(followers.User,PaginationParameters.MaxPagesToLoad(1));
-            List<string> devolver = new List<string>();
-
-            if (userlist.Succeeded)
-            {
-                for (int i = 0; i < userlist.Value.Count; i++)
+                if (!(string.IsNullOrEmpty(followers.User) || string.IsNullOrEmpty(followers.Pass)))
                 {
-                    devolver.Add(userlist.Value[i].UserName);
+                    var userSession = new UserSessionData
+                    {
+                        UserName = followers.User,
+                        Password = followers.Pass
+                    };
+                    insta.SetUser(userSession);
                 }
+                else
+                {
+                    return null;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(followers.Pass))
+                {
+                    return null;
+                }
+
+                if (!string.IsNullOrEmpty(followers.User))
+                {
+                    var userlist = await insta.UserProcessor.GetUserFollowersAsync(followers.User, PaginationParameters.MaxPagesToLoad(1));
+                    if (userlist.Succeeded)
+                    {
+                        if (userlist.Succeeded)
+                        {
+                            for (int i = 0; i < userlist.Value.Count; i++)
+                            {
+                                devolver.Add(userlist.Value[i].UserName);
+                            }
+                        }
+
+                    }
+                    else
+                        return null;
+                }
+                else
+                    return null;
+                return devolver;
             }
+            catch (Exception s)
+            {
 
-            return devolver;
-
+                throw new Exception(s.Message);
+            }
         }
 
         /// <summary>
         /// Devolver Lista de seguidos
         /// </summary>
-        /// <param name="followers"></param>
+        /// <param name="followins"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<List<string>> ListaFollowinsUsers(mFollower followers)
+        public async Task<List<string>> ListaFollowinsUsers(mFollower followins)
         {
-
-            var device = new AndroidDevice
+            try
             {
+                List<string> devolver = new List<string>();
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-                AdId = followers.AdId,
-                AndroidBoardName = followers.AndroidBoardName,
-                AndroidBootloader = followers.AndroidBootloader,
-                AndroidVer = followers.AndroidVer,
-                DeviceBrand = followers.DeviceBrand,
-                DeviceGuid = new Guid(followers.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(followers.DeviceId.ToString())),
-                DeviceModel = followers.DeviceModel,
-                DeviceModelBoot = followers.DeviceModelBoot,
-                DeviceModelIdentifier = followers.DeviceModelIdentifier,
-                Dpi = followers.Dpi,
-                Resolution = followers.Resolution,
-                FirmwareFingerprint = followers.FirmwareFingerprint,
-                FirmwareTags = followers.FirmwareTags,
-                FirmwareType = followers.FirmwareType
-
-            };
-            var userSession = new UserSessionData
-            {
-                UserName = followers.User,
-                Password = followers.Pass
-            };
-
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-            insta.SetDevice(device);
-            session.LoadSession(insta);
-
-
-            var userlist = await insta.UserProcessor.GetUserFollowingAsync(followers.User, PaginationParameters.MaxPagesToLoad(1));
-            List<string> devolver = new List<string>();
-
-            if (userlist.Succeeded)
-            {
-                for (int i = 0; i < userlist.Value.Count; i++)
+                if (!(string.IsNullOrEmpty(followins.User) || string.IsNullOrEmpty(followins.Pass)))
                 {
-                    devolver.Add(userlist.Value[i].UserName);
+                    var userSession = new UserSessionData
+                    {
+                        UserName = followins.User,
+                        Password = followins.Pass
+                    };
+                    insta.SetUser(userSession);
                 }
+                else
+                {
+                    return null;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(followins.Pass))
+                {
+                    return null;
+                }
+
+                if (!string.IsNullOrEmpty(followins.User))
+                {
+                    var userlist = await insta.UserProcessor.GetUserFollowingAsync(followins.User, PaginationParameters.MaxPagesToLoad(1));
+
+                    if (userlist.Succeeded)
+                    {
+                        for (int i = 0; i < userlist.Value.Count; i++)
+                        {
+                            devolver.Add(userlist.Value[i].UserName);
+                        }
+                    }
+                    else
+                        return null;
+                }
+                else
+                    return null;
+                return devolver;
             }
+            catch (Exception s)
+            {
 
-            return devolver;
-
+                throw new Exception(s.Message);
+            }
         }
 
         /// <summary>
@@ -597,44 +789,50 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<string> Getusername(mFollower users)
         {
-            var device = new AndroidDevice
+            try
+            {
+                string resultado = "";
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(users.User) || string.IsNullOrEmpty(users.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = users.User,
+                        Password = users.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return "Debe introducir usuario y contraseñ";
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(users.Pass))
+                {
+                    return "Contraseña incorrecta";
+                }
+
+                if (users.pk_otheruser > 0)
+                {
+                    var usuario = await insta.UserProcessor.GetUserInfoByIdAsync(users.pk_otheruser);
+                    if (usuario.Succeeded)
+                    {
+                        if (usuario.Succeeded)
+                            resultado = usuario.Value.UserName;
+                    }
+                    else
+                        return "El identificador de usuario que introdujo no existe";
+                }
+                return resultado;
+            }
+            catch (Exception s)
             {
 
-                AdId = users.AdId,
-                AndroidBoardName = users.AndroidBoardName,
-                AndroidBootloader = users.AndroidBootloader,
-                AndroidVer = users.AndroidVer,
-                DeviceBrand = users.DeviceBrand,
-                DeviceGuid = new Guid(users.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(users.DeviceId.ToString())),
-                DeviceModel = users.DeviceModel,
-                DeviceModelBoot = users.DeviceModelBoot,
-                DeviceModelIdentifier = users.DeviceModelIdentifier,
-                Dpi = users.Dpi,
-                Resolution = users.Resolution,
-                FirmwareFingerprint = users.FirmwareFingerprint,
-                FirmwareTags = users.FirmwareTags,
-                FirmwareType = users.FirmwareType
-
-            };
-
-            var userSession = new UserSessionData
-            {
-                UserName = users.User,
-                Password = users.Pass
-            };
-
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-            insta.SetDevice(device);
-            session.LoadSession(insta);
-
-            var usuario = await insta.UserProcessor.GetUserInfoByIdAsync(users.pk_otheruser);
-            string resultado = "";
-            if (usuario.Succeeded)
-                resultado = usuario.Value.Username;
-
-            return resultado;
+                throw new Exception(s.Message);
+            }
         }
 
 

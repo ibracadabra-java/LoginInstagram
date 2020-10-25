@@ -52,7 +52,7 @@
     </Reference>
     <Reference Include="InstagramApiSharp, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\InstagramApiSharp.1.5.0.1\lib\net452\InstagramApiSharp.dll</HintPath>
+      <HintPath>..\..\InstagramApiSharpMine-master\src\InstagramApiSharp\bin\Debug\netstandard2.0\InstagramApiSharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -171,6 +171,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\ContacProcessController.cs" />
     <Compile Include="Controllers\MessageProcessController.cs" />
     <Compile Include="Controllers\UssersProcessController.cs" />
     <Compile Include="Controllers\PostProcessController.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Models\InstaApiList.cs" />
     <Compile Include="Models\mcaption.cs" />
     <Compile Include="Models\mchat.cs" />
+    <Compile Include="Models\mContacts.cs" />
     <Compile Include="Models\mFollower.cs" />
     <Compile Include="Models\mLikeManyPost.cs" />
     <Compile Include="Models\mLogin.cs" />

@@ -1,8 +1,10 @@
 ﻿using InstagramApiSharp.API.Builder;
 using InstagramApiSharp.Classes;
 using InstagramApiSharp.Classes.Android.DeviceInfo;
+using InstagramApiSharp.Classes.Models;
 using InstagramApiSharp.Logger;
 using LoginWithIAS.Models;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,61 +31,531 @@ namespace LoginWithIAS.Controllers
         }
 
         /// <summary>
-        /// Metodo para dejar de seguir un usuario
+        /// Metodo para enviar un mensaje de texto a un usuario
         /// </summary>
         /// <param name="chat"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> SendDirectMessage(mchat chat)
+        public async Task<enResponseToken> SendDirectMessage(mchat chat)
         {
-            var device = new AndroidDevice
+
+            try
             {
+                enResponseToken token = new enResponseToken();
 
-                AdId = chat.AdId,
-                AndroidBoardName = chat.AndroidBoardName,
-                AndroidBootloader = chat.AndroidBootloader,
-                AndroidVer = chat.AndroidVer,
-                DeviceBrand = chat.DeviceBrand,
-                DeviceGuid = new Guid(chat.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(chat.DeviceId.ToString())),
-                DeviceModel = chat.DeviceModel,
-                DeviceModelBoot = chat.DeviceModelBoot,
-                DeviceModelIdentifier = chat.DeviceModelIdentifier,
-                Dpi = chat.Dpi,
-                Resolution = chat.Resolution,
-                FirmwareFingerprint = chat.FirmwareFingerprint,
-                FirmwareTags = chat.FirmwareTags,
-                FirmwareType = chat.FirmwareType
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-            };
+                if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = chat.User,
+                        Password = chat.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
 
-            var userSession = new UserSessionData
-            {
-                UserName = chat.User,
-                Password = chat.Pass
-            };
+                session.LoadSession(insta);
 
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-            insta.SetDevice(device);
-            session.LoadSession(insta);
+                if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
 
-            var user = await insta.UserProcessor.GetUserAsync(chat.otheruser);
-
-            var inboxThreads = await insta.MessagingProcessor.GetDirectInboxAsync(InstagramApiSharp.PaginationParameters.MaxPagesToLoad(1));
-            if (!inboxThreads.Succeeded)
-            {
-                return inboxThreads.Info.Message;
+                var user = await insta.UserProcessor.GetUserAsync(chat.otheruser);
+                if (user.Succeeded)
+                {
+                    var inboxThreads = await insta.MessagingProcessor.GetDirectInboxAsync(InstagramApiSharp.PaginationParameters.MaxPagesToLoad(1));
+                    if (!inboxThreads.Succeeded)
+                    {
+                        if (!string.IsNullOrEmpty(chat.text))
+                        {
+                            var resul = await insta.MessagingProcessor.SendDirectTextAsync(user.Value.Pk.ToString(), String.Empty, chat.text);
+                            if (resul.Succeeded)
+                            {
+                                token.Message = resul.Info.Message;
+                                token.AuthToken = session.GenerarToken();
+                                return token;
+                            }
+                            else
+                            {
+                                token.Message = resul.Info.Message;
+                                return token;
+                            }
+                        }
+                        else
+                        {
+                           token.Message = "Introdusca el texto a enviar";
+                            return token;
+                        }
+                       
+                    }
+                    else
+                    {
+                        token.Message = inboxThreads.Info.Message;
+                        return token;
+                    }
+                }
+                else
+                {
+                    token.Message = user.Info.Message;
+                    return token;
+                }
+                              
             }
-            var resul = await insta.MessagingProcessor.SendDirectTextAsync(user.Value.Pk.ToString(),String.Empty,chat.text);
-
-            return resul.Info.Message;            
+            catch (Exception s)
+            {
+                throw new Exception(s.Message);
+            }  
         }
 
-        /*[HttpPost]
-        public async Task<string> SendDirectMessageFromSearch(mchat chat) 
+        /// <summary>
+        /// Metodo para enviar foto a un usuario
+        /// </summary>
+        /// <param name="chat"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<enResponseToken> SendPhoto(mchat chat)
         {
-            return "";
-        }*/
+
+            try
+            {
+                enResponseToken token = new enResponseToken();
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = chat.User,
+                        Password = chat.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+
+                var user = await insta.UserProcessor.GetUserAsync(chat.otheruser);
+                if (user.Succeeded)
+                {
+                    var inboxThreads = await insta.MessagingProcessor.GetDirectInboxAsync(InstagramApiSharp.PaginationParameters.MaxPagesToLoad(1));
+                    if (!inboxThreads.Succeeded)
+                    {
+                        if (chat.foto != null)
+                        {
+                            string[] recipient = new string[1];
+                            recipient[0] = user.Value.Pk.ToString();
+
+                            var resul = await insta.MessagingProcessor.SendDirectPhotoToRecipientsAsync(chat.foto,recipient);
+                            if (resul.Succeeded)
+                            {
+                                token.Message = resul.Info.Message;
+                                token.AuthToken = session.GenerarToken();
+                                return token;
+                            }
+                            else
+                            {
+                                token.Message = resul.Info.Message;
+                                return token;
+                            }
+                        }
+                        else
+                        {
+                            token.Message = "Debe introducir la foto a enviar";
+                            return token;
+                        }                       
+                    }
+                    else
+                    {
+                        token.Message = inboxThreads.Info.Message;
+                        return token;
+                    }
+                }
+                else
+                {
+                    token.Message = user.Info.Message;
+                    return token;
+                }
+
+            }
+            catch (Exception s)
+            {
+                throw new Exception(s.Message);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para enviar video a un usuario
+        /// </summary>
+        /// <param name="chat"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<enResponseToken> SendVideo(mchat chat)
+        {
+
+            try
+            {
+                enResponseToken token = new enResponseToken();
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = chat.User,
+                        Password = chat.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+
+                var user = await insta.UserProcessor.GetUserAsync(chat.otheruser);
+                if (user.Succeeded)
+                {
+                    var inboxThreads = await insta.MessagingProcessor.GetDirectInboxAsync(InstagramApiSharp.PaginationParameters.MaxPagesToLoad(1));
+                    if (!inboxThreads.Succeeded)
+                    {
+                        if (chat.video != null)
+                        {
+                            var videoupload = new InstaVideoUpload
+                            {
+                                Video = chat.video
+                            };
+
+                            string[] recipient = new string[1];
+                            recipient[0] = user.Value.Pk.ToString();
+
+                            var resul = await insta.MessagingProcessor.SendDirectVideoToRecipientsAsync(videoupload, recipient);
+                            if (resul.Succeeded)
+                            {
+                                token.Message = resul.Info.Message;
+                                token.AuthToken = session.GenerarToken();
+                                return token;
+                            }
+                            else
+                            {
+                                token.Message = resul.Info.Message;
+                                return token;
+                            }
+                        }
+                        else
+                        {
+                            token.Message = "Debe introducir el video a enviar";
+                            return token;
+                        }
+                    }
+                    else
+                    {
+                        token.Message = inboxThreads.Info.Message;
+                        return token;
+                    }
+                }
+                else
+                {
+                    token.Message = user.Info.Message;
+                    return token;
+                }
+
+            }
+            catch (Exception s)
+            {
+                throw new Exception(s.Message);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para enviar audio a un usuario
+        /// </summary>
+        /// <param name="chat"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<enResponseToken> SendAudio(mchat chat)
+        {
+
+            try
+            {
+                enResponseToken token = new enResponseToken();
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = chat.User,
+                        Password = chat.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+
+                var user = await insta.UserProcessor.GetUserAsync(chat.otheruser);
+                if (user.Succeeded)
+                {
+                    var inboxThreads = await insta.MessagingProcessor.GetDirectInboxAsync(InstagramApiSharp.PaginationParameters.MaxPagesToLoad(1));
+                    if (!inboxThreads.Succeeded)
+                    {
+                        if (chat.audio != null)
+                        {
+                            string[] recipient = new string[1];
+                            recipient[0] = user.Value.Pk.ToString();
+
+                            var resul = await insta.MessagingProcessor.SendDirectVoiceToRecipientsAsync(chat.audio, recipient);
+                            if (resul.Succeeded)
+                            {
+                                token.Message = resul.Info.Message;
+                                token.AuthToken = session.GenerarToken();
+                                return token;
+                            }
+                            else
+                            {
+                                token.Message = resul.Info.Message;
+                                return token;
+                            }
+                        }
+                        else
+                        {
+                            token.Message = "Debe introducir el audio a enviar";
+                            return token;
+                        }
+                    }
+                    else
+                    {
+                        token.Message = inboxThreads.Info.Message;
+                        return token;
+                    }
+                }
+                else
+                {
+                    token.Message = user.Info.Message;
+                    return token;
+                }
+
+            }
+            catch (Exception s)
+            {
+                throw new Exception(s.Message);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para enviar Url a un usuario
+        /// </summary>
+        /// <param name="chat"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<enResponseToken> SendUrl(mchat chat)
+        {
+
+            try
+            {
+                enResponseToken token = new enResponseToken();
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = chat.User,
+                        Password = chat.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+
+                var user = await insta.UserProcessor.GetUserAsync(chat.otheruser);
+                if (user.Succeeded)
+                {
+                    var inboxThreads = await insta.MessagingProcessor.GetDirectInboxAsync(InstagramApiSharp.PaginationParameters.MaxPagesToLoad(1));
+                    if (!inboxThreads.Succeeded)
+                    {
+                        if (!string.IsNullOrEmpty(chat.Url))
+                        {
+                            string[] recipient = new string[1];
+                            string[] thread = new string[1];
+                            recipient[0] = user.Value.Pk.ToString();
+
+                            var resul = await insta.MessagingProcessor.SendDirectLinkAsync(chat.text,chat.Url,thread,recipient);
+                            if (resul.Succeeded)
+                            {
+                                token.Message = resul.Info.Message;
+                                token.AuthToken = session.GenerarToken();
+                                return token;
+                            }
+                            else
+                            {
+                                token.Message = resul.Info.Message;
+                                return token;
+                            }
+                        }
+                        else
+                        {
+                            token.Message = "Debe introducir el video a enviar";
+                            return token;
+                        }
+                    }
+                    else
+                    {
+                        token.Message = inboxThreads.Info.Message;
+                        return token;
+                    }
+                }
+                else
+                {
+                    token.Message = user.Info.Message;
+                    return token;
+                }
+
+            }
+            catch (Exception s)
+            {
+                throw new Exception(s.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// Metodo para enviar Objetos animados a un usuario
+        /// </summary>
+        /// <param name="chat"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<enResponseToken> SendEmoji(mchat chat)
+        {
+
+            try
+            {
+                enResponseToken token = new enResponseToken();
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = chat.User,
+                        Password = chat.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+
+                var user = await insta.UserProcessor.GetUserAsync(chat.otheruser);
+                if (user.Succeeded)
+                {
+                    var inboxThreads = await insta.MessagingProcessor.GetDirectInboxAsync(InstagramApiSharp.PaginationParameters.MaxPagesToLoad(1));
+                    if (!inboxThreads.Succeeded)
+                    {
+                        if (!string.IsNullOrEmpty(chat.Giphyid))
+                        {
+                            
+                            string[] thread = new string[1];
+
+                            var resul = await insta.MessagingProcessor.SendDirectAnimatedMediaAsync(chat.Giphyid,thread);
+                            if (resul.Succeeded)
+                            {
+                                token.Message = resul.Info.Message;
+                                token.AuthToken = session.GenerarToken();
+                                return token;
+                            }
+                            else
+                            {
+                                token.Message = resul.Info.Message;
+                                return token;
+                            }
+                        }
+                        else
+                        {
+                            token.Message = "Debe introducir el id del Emoticon a enviar a enviar";
+                            return token;
+                        }
+                    }
+                    else
+                    {
+                        token.Message = inboxThreads.Info.Message;
+                        return token;
+                    }
+                }
+                else
+                {
+                    token.Message = user.Info.Message;
+                    return token;
+                }
+
+            }
+            catch (Exception s)
+            {
+                throw new Exception(s.Message);
+            }
+        }
 
     }
 }

@@ -945,6 +945,21 @@
             <param name="type"></param>
             <returns></returns>
         </member>
+        <member name="T:LoginWithIAS.Controllers.ContacProcessController">
+            <summary>
+            Controlador de Contactos
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Controllers.ContacProcessController.session">
+            <summary>
+            Objeto seccion para salvar y calgar los datos
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.ContacProcessController.#ctor">
+            <summary>
+            Constructor de la clase
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Controllers.MessageProcessController">
             <summary>
             
@@ -957,7 +972,42 @@
         </member>
         <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendDirectMessage(LoginWithIAS.Models.mchat)">
             <summary>
-            Metodo para dejar de seguir un usuario
+            Metodo para enviar un mensaje de texto a un usuario
+            </summary>
+            <param name="chat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendPhoto(LoginWithIAS.Models.mchat)">
+            <summary>
+            Metodo para enviar foto a un usuario
+            </summary>
+            <param name="chat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendVideo(LoginWithIAS.Models.mchat)">
+            <summary>
+            Metodo para enviar video a un usuario
+            </summary>
+            <param name="chat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendAudio(LoginWithIAS.Models.mchat)">
+            <summary>
+            Metodo para enviar audio a un usuario
+            </summary>
+            <param name="chat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendUrl(LoginWithIAS.Models.mchat)">
+            <summary>
+            Metodo para enviar Url a un usuario
+            </summary>
+            <param name="chat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendEmoji(LoginWithIAS.Models.mchat)">
+            <summary>
+            Metodo para enviar Objetos animados a un usuario
             </summary>
             <param name="chat"></param>
             <returns></returns>
@@ -1002,7 +1052,7 @@
         </member>
         <member name="M:LoginWithIAS.Controllers.UssersProcessController.ListPostUser(LoginWithIAS.Models.mFollower)">
             <summary>
-            Lista de posts
+            Lista de posts de un usuario
             </summary>
             <param name="postUsser"></param>
             <returns></returns>
@@ -1046,7 +1096,7 @@
             <summary>
             Devolver Lista de seguidos
             </summary>
-            <param name="followers"></param>
+            <param name="followins"></param>
             <returns></returns>
         </member>
         <member name="M:LoginWithIAS.Controllers.UssersProcessController.Getusername(LoginWithIAS.Models.mFollower)">
@@ -1234,6 +1284,41 @@
         <member name="P:LoginWithIAS.Models.mchat.text">
             <summary>
             Texto a enviar
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mchat.foto">
+            <summary>
+            Foto a enviar
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mchat.video">
+            <summary>
+            Video a enviar
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mchat.audio">
+            <summary>
+            Audio a enviar
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mchat.Url">
+            <summary>
+            Url a enviar
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mchat.Giphyid">
+            <summary>
+            Emoticon a enviar
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mContacts">
+            <summary>
+            Clase Contactos
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mContacts.otheruser">
+            <summary>
+            Usuario del que se obtendra su lista de contactos
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mFollower">

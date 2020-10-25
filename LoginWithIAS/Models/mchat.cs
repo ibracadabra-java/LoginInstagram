@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InstagramApiSharp.Classes.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,5 +20,30 @@ namespace LoginWithIAS.Models
         /// Texto a enviar
         /// </summary>
         public string text { get; set; }
+
+        /// <summary>
+        /// Foto a enviar
+        /// </summary>
+        public InstaImage foto { get; set; }
+
+        /// <summary>
+        /// Video a enviar
+        /// </summary>
+        public InstaVideo video { get; set; }
+
+        /// <summary>
+        /// Audio a enviar
+        /// </summary>
+        public InstaAudioUpload audio { get; set; }
+
+        /// <summary>
+        /// Url a enviar
+        /// </summary>
+        public string Url { get; set; }
+
+        /// <summary>
+        /// Emoticon a enviar
+        /// </summary>
+        public string Giphyid { get; set; }
     }
 }

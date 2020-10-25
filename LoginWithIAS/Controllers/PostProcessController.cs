@@ -162,7 +162,7 @@ namespace LoginWithIAS.Controllers
 
             if (mlikemanypost.userfollow == null)
             {
-                var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(Subcadena(mlikemanypost.userlike));
+                var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(Subcadena(mlikemanypost.userlike),PaginationParameters.MaxPagesToLoad(1));
 
                 var getusuario = await insta.UserProcessor.GetUserAsync(mlikemanypost.userlike);
 
@@ -206,7 +206,7 @@ namespace LoginWithIAS.Controllers
             }
             else
             {
-                var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(Subcadena(mlikemanypost.userfollow));
+                var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(Subcadena(mlikemanypost.userfollow),PaginationParameters.MaxPagesToLoad(1));
 
                 var getusuariofollowing = await insta.UserProcessor.GetUserAsync(mlikemanypost.userfollow);
 
@@ -536,12 +536,12 @@ namespace LoginWithIAS.Controllers
             }
             return finallikers;
         }
+
         /// <summary>
         /// Like aun post x del feed
         /// </summary>
         /// <param name="media"></param>
         /// <returns></returns>
-
         [HttpPost]
         public async Task<string> LikeaPostFeed(mPost media) 
         {
