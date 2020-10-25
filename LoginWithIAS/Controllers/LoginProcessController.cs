@@ -56,8 +56,6 @@ namespace LoginWithIAS.Controllers
             enResponseToken token = new enResponseToken();
             try
             {                
-                
-
                 var InstaApi = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
                 if (!(string.IsNullOrEmpty(credencial.User) || string.IsNullOrEmpty(credencial.Pass)))
                 {
@@ -302,41 +300,27 @@ namespace LoginWithIAS.Controllers
         {
             string msgSalida = string.Empty;
 
-           /* var device = new AndroidDevice
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            if (!(string.IsNullOrEmpty(credencial.User) || string.IsNullOrEmpty(credencial.Pass)))
             {
-
-                AdId = credencial.AdId,
-                AndroidBoardName = credencial.AndroidBoardName,
-                AndroidBootloader = credencial.AndroidBootloader,
-                AndroidVer = credencial.AndroidVer,
-                DeviceBrand = credencial.DeviceBrand,
-                DeviceGuid = new Guid(credencial.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(credencial.DeviceId.ToString())),
-                DeviceModel = credencial.DeviceModel,
-                DeviceModelBoot = credencial.DeviceModelBoot,
-                DeviceModelIdentifier = credencial.DeviceModelIdentifier,
-                Dpi = credencial.Dpi,
-                Resolution = credencial.Resolution,
-                FirmwareFingerprint = credencial.FirmwareFingerprint,
-                FirmwareTags = credencial.FirmwareTags,
-                FirmwareType = credencial.FirmwareType
-
-            };*/
-
-            var userSession = new UserSessionData
+                var userSession = new UserSessionData
+                {
+                    UserName = credencial.User,
+                    Password = credencial.Pass
+                };
+                insta.SetUser(userSession);
+            }
+            else
             {
-                UserName = credencial.User,
-                Password = credencial.Pass
-            };
+                return "Deben introducir Usuario y Contraseña";                
+            }
 
-            var InstaApi = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-           // InstaApi.SetDevice(device);
+            session.LoadSession(insta);
 
-            session.LoadSession(InstaApi);
-
-            var logoutResult = await InstaApi.LogoutAsync();
+            var logoutResult = await insta.LogoutAsync();
             if (logoutResult.Succeeded)
-                session.SaveSession(InstaApi);
+                session.SaveSession(insta);
             msgSalida = logoutResult.Info.Message;
 
             return msgSalida;

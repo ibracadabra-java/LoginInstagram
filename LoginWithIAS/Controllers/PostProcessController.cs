@@ -37,67 +37,82 @@ namespace LoginWithIAS.Controllers
         /// <param name="mlikemanypost"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> LikeManyPost(mLikeManyPost mlikemanypost)
+        public async Task<enResponseToken> LikeManyPost(mLikeManyPost mlikemanypost)
         {
-            int cantlike = mlikemanypost.cantLike;
-            int count = 0;
-
-            var device = new AndroidDevice
+            try
             {
+                int cantlike = mlikemanypost.cantLike;
+                int count = 0;
+                enResponseToken token = new enResponseToken();
 
-                AdId = mlikemanypost.AdId,
-                AndroidBoardName = mlikemanypost.AndroidBoardName,
-                AndroidBootloader = mlikemanypost.AndroidBootloader,
-                AndroidVer = mlikemanypost.AndroidVer,
-                DeviceBrand = mlikemanypost.DeviceBrand,
-                DeviceGuid = new Guid(mlikemanypost.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(mlikemanypost.DeviceId.ToString())),
-                DeviceModel = mlikemanypost.DeviceModel,
-                DeviceModelBoot = mlikemanypost.DeviceModelBoot,
-                DeviceModelIdentifier = mlikemanypost.DeviceModelIdentifier,
-                Dpi = mlikemanypost.Dpi,
-                Resolution = mlikemanypost.Resolution,
-                FirmwareFingerprint = mlikemanypost.FirmwareFingerprint,
-                FirmwareTags = mlikemanypost.FirmwareTags,
-                FirmwareType = mlikemanypost.FirmwareType
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-            };
-            var userSession = new UserSessionData
-            {
-                UserName = mlikemanypost.User,
-                Password = mlikemanypost.Pass
-            };
-
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-            insta.SetDevice(device);
-
-            session.LoadSession(insta);
-
-            var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
-
-            if (media.Succeeded)
-            {
-                for (int i = 0; i < media.Value.Count; i++)
+                if (!(string.IsNullOrEmpty(mlikemanypost.User) || string.IsNullOrEmpty(mlikemanypost.Pass)))
                 {
-                    if (cantlike > 0)
+                    var userSession = new UserSessionData
                     {
-                        var liked = await insta.MediaProcessor.LikeMediaAsync(media.Value[i].InstaIdentifier);
-
-                        if (liked.Succeeded)
-                        {
-                            cantlike--;
-                            count++;
-                        }
-
-                    }
-                    else break;
-
+                        UserName = mlikemanypost.User,
+                        Password = mlikemanypost.Pass
+                    };
+                    insta.SetUser(userSession);
                 }
-                return "Se le dio like a " + count + " post del usuario " + mlikemanypost.userlike;
-            }
-            return media.Info.Message;
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
 
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(mlikemanypost.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+
+                if (!string.IsNullOrEmpty(mlikemanypost.userlike))
+                {
+                    var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
+
+                    if (media.Succeeded)
+                    {
+                        for (int i = 0; i < media.Value.Count; i++)
+                        {
+                            if (cantlike > 0)
+                            {
+                                var liked = await insta.MediaProcessor.LikeMediaAsync(media.Value[i].InstaIdentifier);
+
+                                if (liked.Succeeded)
+                                {
+                                    cantlike--;
+                                    count++;
+                                }
+
+                            }
+                            else break;
+
+                        }
+                        token.Message = "Se le dio like a " + count + " post del usuario " + mlikemanypost.userlike;
+                        token.AuthToken = session.GenerarToken();
+                        return token;
+                    }
+                    else
+                    {
+                        token.Message = media.Info.Message;
+                        return token;
+                    }
+                }
+                else
+                {
+                    token.Message = "Debe introducir el usuario al que se le quiere dar like";
+                    return token;
+                }
+            }
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
+            }
         }
 
         /// <summary>
@@ -106,155 +121,190 @@ namespace LoginWithIAS.Controllers
         /// <param name="mlikemanypost"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> SimulationLikeManyPost(mLikeManyPost mlikemanypost)
+        public async Task<enResponseToken> SimulationLikeManyPost(mLikeManyPost mlikemanypost)
         {
 
             int cantlike = mlikemanypost.cantLike;
             int count = 0;
 
-           /* var proxy = new WebProxy()
+            enResponseToken token = new enResponseToken();
+
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            if (!(string.IsNullOrEmpty(mlikemanypost.User) || string.IsNullOrEmpty(mlikemanypost.Pass)))
             {
-                Address = new Uri($"" + mlikemanypost.AddressProxy + ""),
-                BypassProxyOnLocal = false,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(
-                    userName: mlikemanypost.UsernameProxy,
-                    password: mlikemanypost.PassProxy
-                    )
-
-            };
-            var httpClientHandler = new HttpClientHandler()
+                var userSession = new UserSessionData
+                {
+                    UserName = mlikemanypost.User,
+                    Password = mlikemanypost.Pass
+                };
+                insta.SetUser(userSession);
+            }
+            else
             {
-                Proxy = proxy,
-            };*/
-
-            /*  var device = new AndroidDevice
-              {
-
-                  AdId = mlikemanypost.AdId,
-                  AndroidBoardName = mlikemanypost.AndroidBoardName,
-                  AndroidBootloader = mlikemanypost.AndroidBootloader,
-                  AndroidVer = mlikemanypost.AndroidVer,
-                  DeviceBrand = mlikemanypost.DeviceBrand,
-                  DeviceGuid = new Guid(mlikemanypost.DeviceGuid.ToString()),
-                  DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(mlikemanypost.DeviceId.ToString())),
-                  DeviceModel = mlikemanypost.DeviceModel,
-                  DeviceModelBoot = mlikemanypost.DeviceModelBoot,
-                  DeviceModelIdentifier = mlikemanypost.DeviceModelIdentifier,
-                  Dpi = mlikemanypost.Dpi,
-                  Resolution = mlikemanypost.Resolution,
-                  FirmwareFingerprint = mlikemanypost.FirmwareFingerprint,
-                  FirmwareTags = mlikemanypost.FirmwareTags,
-                  FirmwareType = mlikemanypost.FirmwareType
-
-              };*/
-
-            var userSession = new UserSessionData
-            {
-                UserName = mlikemanypost.User,
-                Password = mlikemanypost.Pass
-            };
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All))/*.UseHttpClientHandler(httpClientHandler)*/.Build();
-
-          //  insta.SetDevice(device);
+                token.Message = "Deben introducir Usuario y Contraseña";
+                return token;
+            }
 
             session.LoadSession(insta);
 
-            if (mlikemanypost.userfollow == null)
+            if (!insta.GetLoggedUser().Password.Equals(mlikemanypost.Pass))
+            {
+                token.Message = "Contraseña incorrecta";
+                return token;
+            }
+
+            if (string.IsNullOrEmpty(mlikemanypost.userfollow))
             {
                 var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(Subcadena(mlikemanypost.userlike),PaginationParameters.MaxPagesToLoad(1));
-
-                var getusuario = await insta.UserProcessor.GetUserAsync(mlikemanypost.userlike);
-
-                var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
-
-                if (media.Succeeded)
+                if (instauser.Succeeded)
                 {
-                    List<InstaMedia> milista = new List<InstaMedia>();
-                    Random valorandon = new Random();
-                    for (int i = 0; i < media.Value.Count; i += valorandon.Next(1, 3))
-                    {
-                        if (!media.Value[i].HasLiked)
-                        {
-                            if (milista.Count <= 6)
-                            {
-                                milista.Add(media.Value[i]);
-                            }
-                            else
-                                break;
-                        }
-                    }
+                    var getusuario = await insta.UserProcessor.GetUserAsync(mlikemanypost.userlike);
 
-                    for (int i = 0; i < milista.Count; i++)
+                    if (getusuario.Succeeded)
                     {
-                        if (cantlike > 0)
-                        {
-                            var liked = await insta.MediaProcessor.LikeMediaAsync(milista[i].InstaIdentifier);
-                            Thread.Sleep(mlikemanypost.time * 1000);
+                        var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
 
-                            if (liked.Succeeded)
+                        if (media.Succeeded)
+                        {
+                            List<InstaMedia> milista = new List<InstaMedia>();
+                            Random valorandon = new Random();
+                            for (int i = 0; i < media.Value.Count; i += valorandon.Next(1, 3))
                             {
-                                cantlike--;
-                                count++;
+                                if (!media.Value[i].HasLiked)
+                                {
+                                    if (milista.Count <= 6)
+                                    {
+                                        milista.Add(media.Value[i]);
+                                    }
+                                    else
+                                        break;
+                                }
                             }
 
-                        }
-                        else break;
+                            for (int i = 0; i < milista.Count; i++)
+                            {
+                                if (cantlike > 0)
+                                {
+                                    var liked = await insta.MediaProcessor.LikeMediaAsync(milista[i].InstaIdentifier);
+                                    Thread.Sleep(mlikemanypost.time * 1000);
 
+                                    if (liked.Succeeded)
+                                    {
+                                        cantlike--;
+                                        count++;
+                                    }
+
+                                }
+                                else break;
+                            }
+                        }
+                        else
+                        {
+                            token.Message = media.Info.Message;
+                            return token;
+                        }
                     }
+                    else
+                    {
+                        token.Message = getusuario.Info.Message;
+                        return token;
+                    }
+                }
+                else
+                {
+                    token.Message = instauser.Info.Message;
+                    return token;
                 }
             }
             else
             {
                 var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(Subcadena(mlikemanypost.userfollow),PaginationParameters.MaxPagesToLoad(1));
 
-                var getusuariofollowing = await insta.UserProcessor.GetUserAsync(mlikemanypost.userfollow);
-
-                var seguidores = await insta.UserProcessor.GetUserFollowersAsync(mlikemanypost.userfollow, PaginationParameters.MaxPagesToLoad(1));
-
-                var getuserlike = await insta.UserProcessor.GetUserAsync(mlikemanypost.userlike);
-
-                var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
-
-
-                if (media.Succeeded)
+                if (instauser.Succeeded)
                 {
-                    List<InstaMedia> milista = new List<InstaMedia>();
-                    Random valorandon = new Random();
-                    for (int i = 0; i < media.Value.Count; i+= valorandon.Next(1,3))
+                    var getusuariofollowing = await insta.UserProcessor.GetUserAsync(mlikemanypost.userfollow);
+
+                    if (getusuariofollowing.Succeeded)
                     {
-                        if (!media.Value[i].HasLiked)
+                        var seguidores = await insta.UserProcessor.GetUserFollowersAsync(mlikemanypost.userfollow, PaginationParameters.MaxPagesToLoad(1));
+                        if (seguidores.Succeeded)
                         {
-                            if (milista.Count <= 6)
+                            var getuserlike = await insta.UserProcessor.GetUserAsync(mlikemanypost.userlike);
+
+                            if (getuserlike.Succeeded)
                             {
-                                milista.Add(media.Value[i]);
+                                var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
+
+                                if (media.Succeeded)
+                                {
+                                    List<InstaMedia> milista = new List<InstaMedia>();
+                                    Random valorandon = new Random();
+                                    for (int i = 0; i < media.Value.Count; i += valorandon.Next(1, 3))
+                                    {
+                                        if (!media.Value[i].HasLiked)
+                                        {
+                                            if (milista.Count <= 6)
+                                            {
+                                                milista.Add(media.Value[i]);
+                                            }
+                                            else
+                                                break;
+                                        }
+                                    }
+
+                                    for (int i = 0; i < milista.Count; i++)
+                                    {
+                                        if (cantlike > 0)
+                                        {
+                                            var liked = await insta.MediaProcessor.LikeMediaAsync(milista[i].InstaIdentifier);
+                                            Thread.Sleep(mlikemanypost.time * 1000);
+
+                                            if (liked.Succeeded)
+                                            {
+                                                cantlike--;
+                                                count++;
+                                            }
+
+                                        }
+                                        else break;
+
+                                    }
+                                }
+                                else
+                                {
+                                    token.Message = media.Info.Message;
+                                    return token;
+                                }
                             }
                             else
-                                break;
+                            {
+                                token.Message = getuserlike.Info.Message;
+                                return token;
+                            }
+                        }
+                        else
+                        {
+                            token.Message = seguidores.Info.Message;
+                            return token;
                         }
                     }
-
-                    for (int i = 0; i < milista.Count; i++)
+                    else
                     {
-                        if (cantlike > 0)
-                        {
-                            var liked = await insta.MediaProcessor.LikeMediaAsync(milista[i].InstaIdentifier);
-                            Thread.Sleep(mlikemanypost.time * 1000);
-
-                            if (liked.Succeeded)
-                            {
-                                cantlike--;
-                                count++;
-                            }
-
-                        }
-                        else break;
-
+                        token.Message = getusuariofollowing.Info.Message;
+                        return token;
                     }
                 }
+                else
+                {
+                    token.Message = instauser.Info.Message;
+                    return token;
+                }                
             }
 
-            return "Se le dio like a " + count + " post del usuario " + mlikemanypost.userlike;
+            token.Message = "Se le dio like a " + count + " post del usuario " + mlikemanypost.userlike;
+            token.AuthToken = session.GenerarToken();
+            return token;
 
         }
 
@@ -265,10 +315,14 @@ namespace LoginWithIAS.Controllers
         /// <returns></returns>
         private string Subcadena(string cadena)
         {
-            if (cadena.Length < 2)
-                return cadena;
-            else
-                return cadena.Substring(0, cadena.Length - 2);
+            if (!string.IsNullOrEmpty(cadena))
+            {
+                if (cadena.Length < 2)
+                    return cadena;
+                else
+                    return cadena.Substring(0, cadena.Length - 2);
+            }
+            return "";
         }
 
         /// <summary>
@@ -279,46 +333,50 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<InstaMedia> extraerPost(mPost userpost)
         {
-            var device = new AndroidDevice
+            try
+            {
+                InstaMedia obj = new InstaMedia();
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(userpost.User) || string.IsNullOrEmpty(userpost.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = userpost.User,
+                        Password = userpost.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return null;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(userpost.Pass))
+                {
+                    return null;
+                }
+
+                if (!string.IsNullOrEmpty(userpost.idpost))
+                {
+                    var post = await insta.MediaProcessor.GetMediaByIdAsync(userpost.idpost);
+
+                    if (post.Succeeded)
+                    {
+                        obj = post.Value;
+                        return obj;
+                    }
+                }
+                return null;
+                
+            }
+            catch (Exception s)
             {
 
-                AdId = userpost.AdId,
-                AndroidBoardName = userpost.AndroidBoardName,
-                AndroidBootloader = userpost.AndroidBootloader,
-                AndroidVer = userpost.AndroidVer,
-                DeviceBrand = userpost.DeviceBrand,
-                DeviceGuid = new Guid(userpost.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(userpost.DeviceId.ToString())),
-                DeviceModel = userpost.DeviceModel,
-                DeviceModelBoot = userpost.DeviceModelBoot,
-                DeviceModelIdentifier = userpost.DeviceModelIdentifier,
-                Dpi = userpost.Dpi,
-                Resolution = userpost.Resolution,
-                FirmwareFingerprint = userpost.FirmwareFingerprint,
-                FirmwareTags = userpost.FirmwareTags,
-                FirmwareType = userpost.FirmwareType
-
-            };
-
-            var userSession = new UserSessionData
-            {
-                UserName = userpost.User,
-                Password = userpost.Pass
-            };
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-            insta.SetDevice(device);
-
-            session.LoadSession(insta);
-
-            var post = await insta.MediaProcessor.GetMediaByIdAsync(userpost.idpost);
-
-            InstaMedia obj = new InstaMedia();
-            if (post.Succeeded)
-                obj = post.Value;
-
-            return obj;
-
+                throw new Exception(s.Message);
+            }
         }
 
         /// <summary>
@@ -329,61 +387,63 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<string> deletePost(mPost userpost)
         {
-            var device = new AndroidDevice
+            try
             {
+                bool eliminarpost = false;
 
-                AdId = userpost.AdId,
-                AndroidBoardName = userpost.AndroidBoardName,
-                AndroidBootloader = userpost.AndroidBootloader,
-                AndroidVer = userpost.AndroidVer,
-                DeviceBrand = userpost.DeviceBrand,
-                DeviceGuid = new Guid(userpost.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(userpost.DeviceId.ToString())),
-                DeviceModel = userpost.DeviceModel,
-                DeviceModelBoot = userpost.DeviceModelBoot,
-                DeviceModelIdentifier = userpost.DeviceModelIdentifier,
-                Dpi = userpost.Dpi,
-                Resolution = userpost.Resolution,
-                FirmwareFingerprint = userpost.FirmwareFingerprint,
-                FirmwareTags = userpost.FirmwareTags,
-                FirmwareType = userpost.FirmwareType
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-            };
+                if (!(string.IsNullOrEmpty(userpost.User) || string.IsNullOrEmpty(userpost.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = userpost.User,
+                        Password = userpost.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return "Deben introducir Usuario y Contraseña";
 
-            var userSession = new UserSessionData
-            {
-                UserName = userpost.User,
-                Password = userpost.Pass
-            };
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+                }
 
-            insta.SetDevice(device);
+                session.LoadSession(insta);
 
-            session.LoadSession(insta);
-            bool eliminarpost=false;            
-            if (userpost.tipo_media == 1)
-            {
-                var post = await insta.MediaProcessor.DeleteMediaAsync(userpost.idpost, InstaMediaType.Image);
-                if (post.Succeeded)
-                    eliminarpost = post.Value;
+                if (!insta.GetLoggedUser().Password.Equals(userpost.Pass))
+                {
+                    return "Contraseña incorrecta";
 
+                }
+
+                if (userpost.tipo_media == 1)
+                {
+                    var post = await insta.MediaProcessor.DeleteMediaAsync(userpost.idpost, InstaMediaType.Image);
+                    if (post.Succeeded)
+                        eliminarpost = post.Value;
+
+                }
+                else if (userpost.tipo_media == 2)
+                {
+                    var post = await insta.MediaProcessor.DeleteMediaAsync(userpost.idpost, InstaMediaType.Video);
+                    if (post.Succeeded)
+                        eliminarpost = post.Value;
+                }
+                else if (userpost.tipo_media == 8)
+                {
+                    var post = await insta.MediaProcessor.DeleteMediaAsync(userpost.idpost, InstaMediaType.Carousel);
+                    if (post.Succeeded)
+                        eliminarpost = post.Value;
+                }
+                if (!eliminarpost)
+                    return "No se pudo encontrar el post, corrija el id del post o el tipo de post";
+                return "Post eliminado con éxito.";
             }
-            else if (userpost.tipo_media == 2)
+            catch (Exception s)
             {
-                var post = await insta.MediaProcessor.DeleteMediaAsync(userpost.idpost, InstaMediaType.Video);
-                if (post.Succeeded)
-                    eliminarpost = post.Value;
-            }
-            else if (userpost.tipo_media == 8)
-            {
-                var post = await insta.MediaProcessor.DeleteMediaAsync(userpost.idpost, InstaMediaType.Carousel);
-                if (post.Succeeded)
-                    eliminarpost = post.Value;
-            }           
-            if (!eliminarpost)
-                return "No se pudo encontrar el post, corrija el id del post o el tipo de post";            
-           return "Post eliminado con éxito.";
 
+                throw new Exception(s.Message);
+            }
         }
 
         /// <summary>
@@ -394,97 +454,108 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<InstaCaption> ExtraerCaption(mPost post) 
         {
-            InstaCaption caption = new InstaCaption();
-
-            var device = new AndroidDevice
+            try
             {
+                InstaCaption caption = new InstaCaption();
 
-                AdId = post.AdId,
-                AndroidBoardName = post.AndroidBoardName,
-                AndroidBootloader = post.AndroidBootloader,
-                AndroidVer = post.AndroidVer,
-                DeviceBrand = post.DeviceBrand,
-                DeviceGuid = new Guid(post.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(post.DeviceId.ToString())),
-                DeviceModel = post.DeviceModel,
-                DeviceModelBoot = post.DeviceModelBoot,
-                DeviceModelIdentifier = post.DeviceModelIdentifier,
-                Dpi = post.Dpi,
-                Resolution = post.Resolution,
-                FirmwareFingerprint = post.FirmwareFingerprint,
-                FirmwareTags = post.FirmwareTags,
-                FirmwareType = post.FirmwareType
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-            };
+                if (!(string.IsNullOrEmpty(post.User) || string.IsNullOrEmpty(post.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = post.User,
+                        Password = post.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return null;
 
-            var userSession = new UserSessionData
-            {
-                UserName = post.User,
-                Password = post.Pass
-            };
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+                }
 
-            insta.SetDevice(device);
+                session.LoadSession(insta);
 
-            session.LoadSession(insta);
+                if (!insta.GetLoggedUser().Password.Equals(post.Pass))
+                {
+                    return null;
 
-            var media = await insta.MediaProcessor.GetMediaByIdAsync(post.idpost);
-            if (media.Succeeded)
-            {
-                 caption = media.Value.Caption;
+                }
+
+                if (!string.IsNullOrEmpty(post.idpost))
+                {
+                    var media = await insta.MediaProcessor.GetMediaByIdAsync(post.idpost);
+                    if (media.Succeeded)
+                    {
+                        caption = media.Value.Caption;
+                    }
+                    return caption;
+                }
+                else
+                    return null;
             }
-            return caption;
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
+            }        
         }
 
         /// <summary>
-        /// 
+        /// Editar Caption
         /// </summary>
         /// <param name="caption"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<InstaCaption> EditarCaption(mcaption caption)
         {
-            InstaCaption instacaption = new InstaCaption();
-
-            var device = new AndroidDevice
+            try
             {
+                InstaCaption instacaption = new InstaCaption();
 
-                AdId = caption.AdId,
-                AndroidBoardName = caption.AndroidBoardName,
-                AndroidBootloader = caption.AndroidBootloader,
-                AndroidVer = caption.AndroidVer,
-                DeviceBrand = caption.DeviceBrand,
-                DeviceGuid = new Guid(caption.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(caption.DeviceId.ToString())),
-                DeviceModel = caption.DeviceModel,
-                DeviceModelBoot = caption.DeviceModelBoot,
-                DeviceModelIdentifier = caption.DeviceModelIdentifier,
-                Dpi = caption.Dpi,
-                Resolution = caption.Resolution,
-                FirmwareFingerprint = caption.FirmwareFingerprint,
-                FirmwareTags = caption.FirmwareTags,
-                FirmwareType = caption.FirmwareType
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-            };
+                if (!(string.IsNullOrEmpty(caption.User) || string.IsNullOrEmpty(caption.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = caption.User,
+                        Password = caption.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return null;
+                }
 
-            var userSession = new UserSessionData
-            {
-                UserName = caption.User,
-                Password = caption.Pass
-            };
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+                session.LoadSession(insta);
 
-            insta.SetDevice(device);
+                if (!insta.GetLoggedUser().Password.Equals(caption.Pass))
+                {
+                    return null;
+                }
 
-            session.LoadSession(insta);
-
-            var media = await insta.MediaProcessor.GetMediaByIdAsync(caption.Idmedia);
-            if (media.Succeeded)
-            {
-                instacaption = media.Value.Caption;
-                instacaption.Text = caption.texto;
+                if (!string.IsNullOrEmpty(caption.Idmedia))
+                {
+                    var media = await insta.MediaProcessor.GetMediaByIdAsync(caption.Idmedia);
+                    if (media.Succeeded)
+                    {
+                        instacaption = media.Value.Caption;
+                        instacaption.Text = caption.texto;
+                    }
+                    return instacaption;
+                }
+                else
+                    return null;
             }
-            return instacaption;
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
+            }
+           
         }
 
         /// <summary>
@@ -495,46 +566,50 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<List<InstaUserShort>> ListaLikers(mPost media)
         {
-            List<InstaUserShort> finallikers = new List<InstaUserShort>();
-
-            var device = new AndroidDevice
+            try
             {
+                List<InstaUserShort> finallikers = new List<InstaUserShort>();
 
-                AdId = media.AdId,
-                AndroidBoardName = media.AndroidBoardName,
-                AndroidBootloader = media.AndroidBootloader,
-                AndroidVer = media.AndroidVer,
-                DeviceBrand = media.DeviceBrand,
-                DeviceGuid = new Guid(media.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(media.DeviceId.ToString())),
-                DeviceModel = media.DeviceModel,
-                DeviceModelBoot = media.DeviceModelBoot,
-                DeviceModelIdentifier = media.DeviceModelIdentifier,
-                Dpi = media.Dpi,
-                Resolution = media.Resolution,
-                FirmwareFingerprint = media.FirmwareFingerprint,
-                FirmwareTags = media.FirmwareTags,
-                FirmwareType = media.FirmwareType
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-            };
+                if (!(string.IsNullOrEmpty(media.User) || string.IsNullOrEmpty(media.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = media.User,
+                        Password = media.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return null;
+                }
 
-            var userSession = new UserSessionData
-            {
-                UserName = media.User,
-                Password = media.Pass
-            };
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+                session.LoadSession(insta);
 
-            insta.SetDevice(device);
+                if (!insta.GetLoggedUser().Password.Equals(media.Pass))
+                {
+                    return null;
+                }
 
-            session.LoadSession(insta);
-
-            var objmedia = await insta.MediaProcessor.GetMediaByIdAsync(media.idpost);
-            if (objmedia.Succeeded)
-            {
-                finallikers = objmedia.Value.Likers;
+                if (!string.IsNullOrEmpty(media.idpost))
+                {
+                    var objmedia = await insta.MediaProcessor.GetMediaByIdAsync(media.idpost);
+                    if (objmedia.Succeeded)
+                    {
+                        finallikers = objmedia.Value.Likers;
+                    }
+                    return finallikers;
+                }
+                else
+                    return null;
             }
-            return finallikers;
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
+            }         
         }
 
         /// <summary>
@@ -543,58 +618,67 @@ namespace LoginWithIAS.Controllers
         /// <param name="media"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> LikeaPostFeed(mPost media) 
+        public async Task<enResponseToken> LikeaPostFeed(mPost media) 
         {
-            var device = new AndroidDevice
+            try
             {
+                enResponseToken token = new enResponseToken();
 
-                AdId = media.AdId,
-                AndroidBoardName = media.AndroidBoardName,
-                AndroidBootloader = media.AndroidBootloader,
-                AndroidVer = media.AndroidVer,
-                DeviceBrand = media.DeviceBrand,
-                DeviceGuid = new Guid(media.DeviceGuid.ToString()),
-                DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(media.DeviceId.ToString())),
-                DeviceModel = media.DeviceModel,
-                DeviceModelBoot = media.DeviceModelBoot,
-                DeviceModelIdentifier = media.DeviceModelIdentifier,
-                Dpi = media.Dpi,
-                Resolution = media.Resolution,
-                FirmwareFingerprint = media.FirmwareFingerprint,
-                FirmwareTags = media.FirmwareTags,
-                FirmwareType = media.FirmwareType
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-            };
-
-            var userSession = new UserSessionData
-            {
-                UserName = media.User,
-                Password = media.Pass
-            };
-            var insta = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-            insta.SetDevice(device);
-
-            session.LoadSession(insta);
-
-            var feed =await insta.FeedProcessor.GetExploreFeedAsync(PaginationParameters.MaxPagesToLoad(1));
-
-            if (feed.Succeeded) 
-            {
-                var medias = feed.Value.Medias;
-                for (int i = 0; i < medias.Count; i++)
+                if (!(string.IsNullOrEmpty(media.User) || string.IsNullOrEmpty(media.Pass)))
                 {
-                    if (medias[i].Pk == media.idpost && !medias[i].HasLiked)
+                    var userSession = new UserSessionData
                     {
-                        var like = await insta.MediaProcessor.LikeMediaAsync(medias[i].Pk);
-                        if (like.Succeeded)
-                            return "Se le ha dado like al post: "+medias[i].InstaIdentifier;
-                    }
+                        UserName = media.User,
+                        Password = media.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
                 }
 
-            }
+                session.LoadSession(insta);
 
-            return "No se encontró el post, rectifique el id.";
+                if (!insta.GetLoggedUser().Password.Equals(media.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+
+                var feed = await insta.FeedProcessor.GetExploreFeedAsync(PaginationParameters.MaxPagesToLoad(1));
+
+                if (feed.Succeeded)
+                {
+                    var medias = feed.Value.Medias;
+                    for (int i = 0; i < medias.Count; i++)
+                    {
+                        if (medias[i].Pk == media.idpost && !medias[i].HasLiked)
+                        {
+                            var like = await insta.MediaProcessor.LikeMediaAsync(medias[i].Pk);
+                            if (like.Succeeded)
+                            {
+                                token.Message = "Se le ha dado like al post: " + medias[i].InstaIdentifier;
+                                token.AuthToken = session.GenerarToken();
+                                return token;
+                            }
+
+                        }
+                    }
+
+                }
+
+                token.Message = "No se encontró el post, rectifique el id.";
+                return token;
+            }
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
+            }        
         }
 
     }
