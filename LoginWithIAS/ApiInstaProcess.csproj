@@ -173,6 +173,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ContacProcessController.cs" />
     <Compile Include="Controllers\DeviceProcessController.cs" />
+    <Compile Include="Controllers\StoryProcessController.cs" />
     <Compile Include="Controllers\MessageProcessController.cs" />
     <Compile Include="Controllers\UssersProcessController.cs" />
     <Compile Include="Controllers\PostProcessController.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Models\mLikeManyPost.cs" />
     <Compile Include="Models\mLogin.cs" />
     <Compile Include="Models\mPost.cs" />
+    <Compile Include="Models\mStory.cs" />
     <Compile Include="Models\Session.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

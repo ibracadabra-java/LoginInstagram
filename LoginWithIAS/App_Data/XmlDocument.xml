@@ -977,6 +977,23 @@
             <param name="deletedevices"></param>
             <returns></returns>
         </member>
+        <member name="T:LoginWithIAS.Controllers.StoryProcessController">
+            <summary>
+            History Controler
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.StoryProcessController.#ctor">
+            <summary>
+            Constructor del Controlador History
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.StoryProcessController.ShareStory(LoginWithIAS.Models.mStory)">
+            <summary>
+            Compartir una Historia
+            </summary>
+            <param name="credenciales"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.MessageProcessController">
             <summary>
             
@@ -1341,7 +1358,7 @@
             Emoticon a enviar
             </summary>
         </member>
-        <member name="P:LoginWithIAS.Models.mchat.hashtag">
+        <member name="P:LoginWithIAS.Models.mchat.Hashtag">
             <summary>
             Enviar un Hashtag
             </summary>
@@ -1459,6 +1476,26 @@
         <member name="P:LoginWithIAS.Models.mPost.tipo_media">
             <summary>
             Tipo de post
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mStory">
+            <summary>
+            Clase Story
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mStory.Other_user">
+            <summary>
+            Username del usuario del que queremos obtener sus historias
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mStory.Text_share">
+            <summary>
+            Texto a compartir
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mStory.cantidad">
+            <summary>
+            Cantidad de historias a compartir
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.Session">

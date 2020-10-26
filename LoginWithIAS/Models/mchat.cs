@@ -50,7 +50,7 @@ namespace LoginWithIAS.Models
         /// <summary>
         /// Enviar un Hashtag
         /// </summary>
-        public string hashtag { get; set; }
+        public string Hashtag { get; set; }
 
     }
 }

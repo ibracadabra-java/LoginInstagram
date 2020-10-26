@@ -597,7 +597,7 @@ namespace LoginWithIAS.Controllers
 
                 }
 
-                if (!string.IsNullOrEmpty(media.hashtag) && !string.IsNullOrEmpty(media.text) && !string.IsNullOrEmpty(media.otheruser))
+                if (!string.IsNullOrEmpty(media.Hashtag) && !string.IsNullOrEmpty(media.text) && !string.IsNullOrEmpty(media.otheruser))
                 {
                     var user = await insta.UserProcessor.GetUserAsync(media.otheruser);
                     if (user.Succeeded)
@@ -616,7 +616,7 @@ namespace LoginWithIAS.Controllers
 
                             }
 
-                            var resul = await insta.MessagingProcessor.SendDirectHashtagAsync(media.text, media.hashtag,threads, recipient);
+                            var resul = await insta.MessagingProcessor.SendDirectHashtagAsync(media.text, media.Hashtag,threads, recipient);
                             if (resul.Succeeded)
                             {
                                 token.Message = resul.Info.Message;
