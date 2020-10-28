@@ -13,15 +13,18 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
+using LoginWithIAS.Utiles;
 
 namespace LoginWithIAS.Controllers
 {
+    
     /// <summary>
     /// Controlador para dar likes
     /// </summary>
     public class PostProcessController : ApiController
     {
         Session session;
+        Util util;
 
         /// <summary>
         /// constructor de la clase
@@ -29,6 +32,7 @@ namespace LoginWithIAS.Controllers
         public PostProcessController()
         {
             session = new Session();
+            util = new Util();
         }
 
         /// <summary>
@@ -116,7 +120,7 @@ namespace LoginWithIAS.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Simular dar like a través del buscador o de la lista de seguidores
         /// </summary>
         /// <param name="mlikemanypost"></param>
         /// <returns></returns>
@@ -156,7 +160,7 @@ namespace LoginWithIAS.Controllers
 
             if (string.IsNullOrEmpty(mlikemanypost.userfollow))
             {
-                var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(Subcadena(mlikemanypost.userlike),PaginationParameters.MaxPagesToLoad(1));
+                var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(util.Subcadena(mlikemanypost.userlike),PaginationParameters.MaxPagesToLoad(1));
                 if (instauser.Succeeded)
                 {
                     var getusuario = await insta.UserProcessor.GetUserAsync(mlikemanypost.userlike);
@@ -219,7 +223,7 @@ namespace LoginWithIAS.Controllers
             }
             else
             {
-                var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(Subcadena(mlikemanypost.userfollow),PaginationParameters.MaxPagesToLoad(1));
+                var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(util.Subcadena(mlikemanypost.userfollow),PaginationParameters.MaxPagesToLoad(1));
 
                 if (instauser.Succeeded)
                 {
@@ -306,24 +310,7 @@ namespace LoginWithIAS.Controllers
             token.AuthToken = session.GenerarToken();
             return token;
 
-        }
-
-        /// <summary>
-        /// Obtener una subcadena
-        /// </summary>
-        /// <param name="cadena"></param>
-        /// <returns></returns>
-        private string Subcadena(string cadena)
-        {
-            if (!string.IsNullOrEmpty(cadena))
-            {
-                if (cadena.Length < 2)
-                    return cadena;
-                else
-                    return cadena.Substring(0, cadena.Length - 2);
-            }
-            return "";
-        }
+        }       
 
         /// <summary>
         /// Obtener un post
@@ -620,6 +607,7 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<enResponseToken> LikeaPostFeed(mPost media) 
         {
+            Random objram = new Random();
             try
             {
                 enResponseToken token = new enResponseToken();
@@ -654,20 +642,24 @@ namespace LoginWithIAS.Controllers
                 if (feed.Succeeded)
                 {
                     var medias = feed.Value.Medias;
+                    
                     for (int i = 0; i < medias.Count; i++)
                     {
-                        if (medias[i].Pk == media.idpost && !medias[i].HasLiked)
+                        int post = objram.Next(1, medias.Count);
+                        if (!medias[post].HasLiked)
                         {
-                            var like = await insta.MediaProcessor.LikeMediaAsync(medias[i].Pk);
+                            var like = await insta.MediaProcessor.LikeMediaAsync(medias[post - 1].Pk);
                             if (like.Succeeded)
                             {
-                                token.Message = "Se le ha dado like al post: " + medias[i].InstaIdentifier;
+                                token.Message = "Se le ha dado like al post: " + medias[post - 1].InstaIdentifier;
                                 token.AuthToken = session.GenerarToken();
                                 return token;
                             }
 
                         }
-                    }
+
+                    }                    
+                    
 
                 }
 

@@ -74,5 +74,44 @@ namespace LoginWithIAS.Controllers
             return listado_contactos;
 
         }*/
+        /// <summary>
+        /// Sincronizar lista de contactos
+        /// </summary>
+        /// <param name="contacts"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<string> UpContactList(mContacts contacts)
+        {
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            if (!(string.IsNullOrEmpty(contacts.User) || string.IsNullOrEmpty(contacts.Pass)))
+            {
+                var userSession = new UserSessionData
+                {
+                    UserName = contacts.User,
+                    Password = contacts.Pass
+                };
+                insta.SetUser(userSession);
+            }
+            else
+            {
+                return null;
+            }
+
+            session.LoadSession(insta);
+
+            if (!insta.GetLoggedUser().Password.Equals(contacts.Pass))
+            {
+                return "Usuario y contraseña incorrecta";
+            }
+            var result = await insta.DiscoverProcessor.SyncContactsAsync(contacts.ListContact);
+
+            if (result.Succeeded)
+            {
+                return result.Info.Message;
+            }
+            else
+                return result.Info.Message;
+        }
     }
 }

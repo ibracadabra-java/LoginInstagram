@@ -960,6 +960,13 @@
             Constructor de la clase
             </summary>
         </member>
+        <member name="M:LoginWithIAS.Controllers.ContacProcessController.UpContactList(LoginWithIAS.Models.mContacts)">
+            <summary>
+            Sincronizar lista de contactos
+            </summary>
+            <param name="contacts"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.DeviceProcessController">
             <summary>
             Controlador de Dispositivos
@@ -990,6 +997,13 @@
         <member name="M:LoginWithIAS.Controllers.StoryProcessController.ShareStory(LoginWithIAS.Models.mStory)">
             <summary>
             Compartir una Historia
+            </summary>
+            <param name="credenciales"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.StoryProcessController.VerStory(LoginWithIAS.Models.mStory)">
+            <summary>
+            Ver historias de un seguidor
             </summary>
             <param name="credenciales"></param>
             <returns></returns>
@@ -1050,6 +1064,13 @@
             <summary>
             Enviar un hashtag
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendMessageFromSearch(LoginWithIAS.Models.mchat)">
+            <summary>
+            Enviar mensaje directo desde el search
+            </summary>
+            <param name="chat"></param>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.Controllers.UssersProcessController">
@@ -1146,6 +1167,13 @@
             <param name="users"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.UltimosFollowers(LoginWithIAS.Models.mFollower)">
+            <summary>
+            Devolver LIsta de seguidores menores de 24 horas, los que me siguen en menos de 1 dia
+            </summary>
+            <param name="followers"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.PostProcessController">
             <summary>
             Controlador para dar likes
@@ -1165,16 +1193,9 @@
         </member>
         <member name="M:LoginWithIAS.Controllers.PostProcessController.SimulationLikeManyPost(LoginWithIAS.Models.mLikeManyPost)">
             <summary>
-            
+            Simular dar like a través del buscador o de la lista de seguidores
             </summary>
             <param name="mlikemanypost"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LoginWithIAS.Controllers.PostProcessController.Subcadena(System.String)">
-            <summary>
-            Obtener una subcadena
-            </summary>
-            <param name="cadena"></param>
             <returns></returns>
         </member>
         <member name="M:LoginWithIAS.Controllers.PostProcessController.extraerPost(LoginWithIAS.Models.mPost)">
@@ -1373,6 +1394,11 @@
             Usuario del que se obtendra su lista de contactos
             </summary>
         </member>
+        <member name="P:LoginWithIAS.Models.mContacts.ListContact">
+            <summary>
+            Lista de contactos
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.mdevice">
             <summary>
             Clase Dispositivo
@@ -1520,6 +1546,18 @@
             Metodo para generar Token de salida al loguarse
             </summary>   
             <returns>Retorna un objeto enResponseToken con el token y un mensaje descriptivo</returns>
+        </member>
+        <member name="T:LoginWithIAS.Utiles.Util">
+            <summary>
+            Métodos útilis para la realizacion de controladores.
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Utiles.Util.Subcadena(System.String)">
+            <summary>
+            Obtener una subcadena
+            </summary>
+            <param name="cadena"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

@@ -184,7 +184,6 @@ namespace LoginWithIAS.Controllers
                     {
                         return null;
                     }
-                    return null;
                 }
                 else
                 {

@@ -833,5 +833,66 @@ namespace LoginWithIAS.Controllers
                 throw new Exception(s.Message);
             }
         }
+
+        /// <summary>
+        /// Devolver LIsta de seguidores menores de 24 horas, los que me siguen en menos de 1 dia
+        /// </summary>
+        /// <param name="followers"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<List<string>> UltimosFollowers(mFollower followers)
+        {
+            try
+            {
+                List<string> devolver = new List<string>();
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(followers.User) || string.IsNullOrEmpty(followers.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = followers.User,
+                        Password = followers.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return null;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(followers.Pass))
+                {
+                    return null;
+                }
+
+                if (!string.IsNullOrEmpty(followers.User))
+                {
+                    var userlist = await insta.UserProcessor.GetRecentFollowersAsync();
+                    if (userlist.Succeeded)
+                    {
+                        if (userlist.Succeeded)
+                        {
+                            for (int i = 0; i < userlist.Value.Users.Count; i++)
+                            {
+                                devolver.Add(userlist.Value.Users[i].UserName);
+                            }
+                        }
+                    }
+                    else
+                        return null;
+                }
+                else
+                    return null;
+                return devolver;
+            }
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
+            }
+        }
     }
 }

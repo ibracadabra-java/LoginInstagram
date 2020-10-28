@@ -1,4 +1,5 @@
-﻿using InstagramApiSharp.API.Builder;
+﻿using InstagramApiSharp;
+using InstagramApiSharp.API.Builder;
 using InstagramApiSharp.Classes;
 using InstagramApiSharp.Classes.Android.DeviceInfo;
 using InstagramApiSharp.Classes.Models;
@@ -6,6 +7,7 @@ using InstagramApiSharp.Logger;
 using LoginWithIAS.Models;
 using Microsoft.Ajax.Utilities;
 using System;
+using LoginWithIAS.Utiles;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -21,6 +23,7 @@ namespace LoginWithIAS.Controllers
     public class MessageProcessController : ApiController
     {
         Session session;
+        Util util;
 
         /// <summary>
         /// 
@@ -28,6 +31,7 @@ namespace LoginWithIAS.Controllers
         public MessageProcessController()
         {
             session = new Session();
+            util = new Util();
         }
 
         /// <summary>
@@ -653,6 +657,71 @@ namespace LoginWithIAS.Controllers
 
                 throw new Exception(s.Message);
             }
+        }
+        /// <summary>
+        /// Enviar mensaje directo desde el search
+        /// </summary>
+        /// <param name="chat"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<string> SendMessageFromSearch(mchat chat) 
+        {
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
+            {
+                var userSession = new UserSessionData
+                {
+                    UserName = chat.User,
+                    Password = chat.Pass
+                };
+                insta.SetUser(userSession);
+            }
+            else
+            {
+                return "Deben introducir Usuario y Contraseña";
+                
+            }
+
+            session.LoadSession(insta);
+
+            if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
+            {
+                return "Contraseña incorrecta";
+                
+            }
+
+            var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(util.Subcadena(chat.otheruser), PaginationParameters.MaxPagesToLoad(1));
+
+            if(instauser.Succeeded)
+            {
+                var getusuario = await insta.UserProcessor.GetUserAsync(chat.otheruser);
+                if (getusuario.Succeeded) 
+                {
+                    if (!string.IsNullOrEmpty(chat.text))
+                    {
+                        var resul = await insta.MessagingProcessor.SendDirectTextAsync(getusuario.Value.Pk.ToString(), String.Empty, chat.text);
+                        if (resul.Succeeded)
+                        {                            
+                          
+                            return resul.Info.Message;
+                        }
+                        else
+                        {                            
+                            return resul.Info.Message;
+                        }
+                    }
+                    else
+                    {
+
+                        return "Introdusca el texto a enviar";
+                        
+                    }
+
+                }
+            }
+
+            return "";
         }
 
 

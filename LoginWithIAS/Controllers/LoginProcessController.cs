@@ -299,8 +299,8 @@ namespace LoginWithIAS.Controllers
         public async Task<string> LogoutUser(mLogin credencial)
         {
             string msgSalida = string.Empty;
-
             var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+           
 
             if (!(string.IsNullOrEmpty(credencial.User) || string.IsNullOrEmpty(credencial.Pass)))
             {
@@ -315,12 +315,12 @@ namespace LoginWithIAS.Controllers
             {
                 return "Deben introducir Usuario y Contraseña";                
             }
-
+            var path = Path.Combine(Helper.AccountPathDirectory, $"{insta.GetLoggedUser().UserName}{Helper.SessionExtension}");
             session.LoadSession(insta);
 
             var logoutResult = await insta.LogoutAsync();
             if (logoutResult.Succeeded)
-                session.SaveSession(insta);
+                File.Delete(path);
             msgSalida = logoutResult.Info.Message;
 
             return msgSalida;

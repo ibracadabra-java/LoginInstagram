@@ -72,24 +72,24 @@ namespace LoginWithIAS.Controllers
                     {
                         if (user.Value.Sessions[i].Device.Equals(deletedevices.DeviceId))
                         {
-                            var device = insta.AccountProcessor.RemoveTrustedDeviceAsync(deletedevices.DeviceId);
-                            token.Message = "Dispositivo Eliminado correctamente";
-                            token.AuthToken = session.GenerarToken();
-                            return token;
-                        }
-                        else
-                        {
-                            token.Message = "Identificador del Dispositivo incorrecto";
-                            return token;
+                            var device = await insta.AccountProcessor.RemoveTrustedDeviceAsync(deletedevices.DeviceId);
+                            if (device.Succeeded)
+                            {
+                                token.Message = "Dispositivo Eliminado correctamente";
+                                token.AuthToken = session.GenerarToken();
+                                return token;
+                            }
                         }
                     }
+                    token.Message = "No se encontró ninguna Sessión con el dispositivo";
+                    return token;
                 }
                 else
                 {
                     token.Message = "No tiene sesiones de Login Activas";
                     return token;
                 }
-                return token;
+                
             }
             catch (Exception s)
             {
