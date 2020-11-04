@@ -20,7 +20,8 @@ using InstagramApiSharp.Classes.Models;
 using InstagramApiSharp.Classes.Android.DeviceInfo;
 using InstagramApiSharp.Helpers;
 using InstagramApiSharp.Classes.SessionHandlers;
-
+using System.Text;
+using System.Runtime.InteropServices;
 
 namespace LoginWithIAS.Controllers
 {
@@ -383,6 +384,333 @@ namespace LoginWithIAS.Controllers
                 throw new Exception(s.Message);
             }
         }
+
+        /// <summary>
+        /// Login con facebook
+        /// </summary>
+        /// <param name="credencial"></param>
+        /// <param name="html"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<enResponseToken> LoginUserFacebook(mLogin credencial,string url, string html)
+        {
+            enResponseToken token = new enResponseToken();
+            try
+            {
+                var InstaApi = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+                if (!(string.IsNullOrEmpty(credencial.User) || string.IsNullOrEmpty(credencial.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = credencial.User,
+                        Password = credencial.Pass
+                    };
+                    InstaApi.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
+
+                if (!(string.IsNullOrEmpty(credencial.AddressProxy) || string.IsNullOrEmpty(credencial.UsernameProxy) || string.IsNullOrEmpty(credencial.PassProxy)))
+                {
+                    var proxy = new WebProxy()
+                    {
+                        Address = new Uri(credencial.AddressProxy),
+                        BypassProxyOnLocal = false,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(
+                       userName: credencial.UsernameProxy,
+                       password: credencial.PassProxy
+                       )
+
+                    };
+                    var httpClientHandler = new HttpClientHandler()
+                    {
+                        Proxy = proxy,
+                    };
+
+
+                    InstaApi.UseHttpClientHandler(httpClientHandler);
+                }
+
+
+                if (!(credencial.AdId == null || string.IsNullOrEmpty(credencial.AndroidBoardName) || string.IsNullOrEmpty(credencial.AndroidBootloader) ||
+                    credencial.AndroidBoardName == null || string.IsNullOrEmpty(credencial.DeviceBrand) || credencial.DeviceGuid == null || string.IsNullOrEmpty(credencial.DeviceId) ||
+                    string.IsNullOrEmpty(credencial.DeviceModel) || string.IsNullOrEmpty(credencial.DeviceModelBoot) || string.IsNullOrEmpty(credencial.DeviceModelIdentifier)
+                    || string.IsNullOrEmpty(credencial.Dpi) || string.IsNullOrEmpty(credencial.Resolution) || string.IsNullOrEmpty(credencial.FirmwareFingerprint) ||
+                    string.IsNullOrEmpty(credencial.FirmwareTags) || string.IsNullOrEmpty(credencial.FirmwareType)))
+                {
+                    var device = new AndroidDevice
+                    {
+
+                        AdId = credencial.AdId,
+                        AndroidBoardName = credencial.AndroidBoardName,
+                        AndroidBootloader = credencial.AndroidBootloader,
+                        AndroidVer = credencial.AndroidVer,
+                        DeviceBrand = credencial.DeviceBrand,
+                        DeviceGuid = new Guid(credencial.DeviceGuid.ToString()),
+                        DeviceId = ApiRequestMessage.GenerateDeviceIdFromGuid(new Guid(credencial.DeviceId.ToString())),
+                        DeviceModel = credencial.DeviceModel,
+                        DeviceModelBoot = credencial.DeviceModelBoot,
+                        DeviceModelIdentifier = credencial.DeviceModelIdentifier,
+                        Dpi = credencial.Dpi,
+                        Resolution = credencial.Resolution,
+                        FirmwareFingerprint = credencial.FirmwareFingerprint,
+                        FirmwareTags = credencial.FirmwareTags,
+                        FirmwareType = credencial.FirmwareType
+
+                    };
+
+                    InstaApi.SetDevice(device);
+                }
+
+                session.LoadSession(InstaApi);
+                if (!InstaApi.GetLoggedUser().Password.Equals(credencial.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+                
+                if (!InstaApi.IsUserAuthenticated)
+                {
+
+                    if (!url.Equals("https://m.facebook.com/") || !url.Equals("https://facebook.com/") || !url.Equals("https://www.facebook.com/"))
+                    {
+                        token.Message = "Direccion URL incorrecta";
+                        return token;
+                    }
+
+                    if (string.IsNullOrEmpty(html))
+                    {
+                        token.Message = "Pagina HTML incorrecta o vacia";
+                        return token;
+                    }
+
+                    if (InstaFbHelper.IsLoggedIn(html))
+                    {
+
+                        var cookies = GetUriCookies(new Uri(url));
+                        var fbToken = InstaFbHelper.GetAccessToken(html);
+
+                        var logInResult = await InstaApi.LoginWithFacebookAsync(fbToken,cookies);
+                        if (logInResult.Succeeded)
+                        {
+                            token.AuthToken = session.GenerarToken();
+                            token.Message = logInResult.Info.Message;
+                            session.SaveSession(InstaApi);
+                            return token;
+                        }
+                        else
+                        {
+                            if (logInResult.Value == InstaLoginResult.ChallengeRequired)
+                            {
+                                var challenge = await InstaApi.GetChallengeRequireVerifyMethodAsync();
+                                if (challenge.Succeeded)
+                                {
+                                    if (challenge.Value.SubmitPhoneRequired)
+                                    {
+                                        if (!string.IsNullOrEmpty(challenge.Value.StepData.PhoneNumber))
+                                        {
+                                            var submitPhone = await InstaApi.SubmitPhoneNumberForChallengeRequireAsync(challenge.Value.StepData.PhoneNumber);
+                                            if (submitPhone.Succeeded)
+                                            {
+                                                var verifyLogin = await InstaApi.VerifyCodeForChallengeRequireAsync(submitPhone.Value.StepData.SecurityCode);
+                                                if (verifyLogin.Succeeded)
+                                                {
+                                                    // Save sessionç                                            
+                                                    token.Message = logInResult.Info.Message;
+                                                    token.AuthToken = session.GenerarToken();
+                                                    session.SaveSession(InstaApi);
+                                                    return token;
+                                                }
+                                                else
+                                                {
+                                                    token.Message = verifyLogin.Info.Message;
+                                                    return token;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                token.Message = submitPhone.Info.Message;
+                                                return token;
+                                            }
+                                        }
+                                        token.Message = "No se encontró número de teléfono asignado a la cuenta";
+                                        return token;
+                                    }
+                                    else
+                                    {
+                                        if (challenge.Value.StepData != null)
+                                        {
+                                            if (!string.IsNullOrEmpty(challenge.Value.StepData.PhoneNumber))
+                                            {
+                                                var submitPhone = await InstaApi.RequestVerifyCodeToSMSForChallengeRequireAsync();
+                                                if (submitPhone.Succeeded)
+                                                {
+                                                    var verifyLogin = await InstaApi.VerifyCodeForChallengeRequireAsync(submitPhone.Value.StepData.SecurityCode);
+                                                    if (verifyLogin.Succeeded)
+                                                    {
+                                                        // Save session
+                                                        session.SaveSession(InstaApi);
+                                                        token.Message = verifyLogin.Info.Message;
+                                                        return token;
+                                                    }
+                                                    else
+                                                    {
+                                                        token.Message = verifyLogin.Info.Message;
+                                                        return token;
+                                                    }
+                                                }
+                                            }
+                                            if (!string.IsNullOrEmpty(challenge.Value.StepData.Email))
+                                            {
+                                                var email = await InstaApi.RequestVerifyCodeToEmailForChallengeRequireAsync();
+                                                if (email.Succeeded)
+                                                {
+                                                    var verifyLogin = await InstaApi.VerifyCodeForChallengeRequireAsync(email.Value.StepData.SecurityCode);
+                                                    if (verifyLogin.Succeeded)
+                                                    {
+                                                        // Save session
+                                                        session.SaveSession(InstaApi);
+                                                        token.Message = verifyLogin.Info.Message;
+                                                        token.AuthToken = session.GenerarToken();
+                                                        return token;
+                                                    }
+                                                    else
+                                                    {
+                                                        token.Message = verifyLogin.Info.Message;
+                                                        return token;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    token.Message = email.Info.Message;
+                                                    return token;
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                token.Message = "No se encontró ni número de teléfono ni Email asignado a esta cuenta";
+                                                return token;
+                                            }
+
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    token.Message = challenge.Info.Message;
+                                    return token;
+                                }
+                            }
+                            else if (logInResult.Value == InstaLoginResult.TwoFactorRequired)
+                            {
+                                var twoFactorLogin = await InstaApi.TwoFactorLoginAsync(credencial.Pass_thow_factor);
+                                if (twoFactorLogin.Succeeded)
+                                {
+                                    // connected
+                                    // save session
+                                    session.SaveSession(InstaApi);
+                                    token.Message = twoFactorLogin.Info.Message;
+                                    token.AuthToken = session.GenerarToken();
+                                    return token;
+                                }
+                                else
+                                {
+                                    token.Message = twoFactorLogin.Info.Message;
+                                    return token;
+                                }
+
+                            }
+                            else if (logInResult.Value == InstaLoginResult.BadPassword)
+                            {
+                                token.Message = logInResult.Info.Message;
+                                return token;
+                            }
+                            else
+                            {
+                                token.Message = logInResult.Info.Message;
+                                return token;
+                            }
+
+                        }
+
+                        token.Message = logInResult.Info.Message;
+                        return token;
+                    }                    
+                }
+                else
+                {
+                    token.Message = "Ya se encuentra conectado";
+                    return token;
+                }
+                token.Message = "Null";
+                return token;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="cookieName"></param>
+        /// <param name="cookieData"></param>
+        /// <param name="size"></param>
+        /// <param name="dwFlags"></param>
+        /// <param name="lpReserved"></param>
+        /// <returns></returns>
+        #region DllImport for getting full cookies from WebBrowser
+        [DllImport("wininet.dll", SetLastError = true)]
+        public static extern bool InternetGetCookieEx(string url,
+            string cookieName,
+            StringBuilder cookieData,
+            ref int size,
+            Int32 dwFlags,
+            IntPtr lpReserved);
+
+
+        private const Int32 InternetCookieHttponly = 0x2000;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns></returns>
+        public static string GetUriCookies(Uri uri)
+        {
+            string cookies = "";
+            int datasize = 8192 * 16;
+            StringBuilder cookieData = new StringBuilder(datasize);
+            if (!InternetGetCookieEx(uri.ToString(), null, cookieData, ref datasize, InternetCookieHttponly, IntPtr.Zero))
+            {
+                if (datasize < 0)
+                    return cookies;
+                cookieData = new StringBuilder(datasize);
+                if (!InternetGetCookieEx(
+                    uri.ToString(),
+                    null, cookieData,
+                    ref datasize,
+                    InternetCookieHttponly,
+                    IntPtr.Zero))
+                    return cookies;
+            }
+            if (cookieData.Length > 0)
+            {
+                cookies = cookieData.ToString();
+            }
+            return cookies;
+        }
+
+        #endregion
 
 
     }

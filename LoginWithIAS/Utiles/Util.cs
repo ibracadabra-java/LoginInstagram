@@ -26,19 +26,7 @@ namespace LoginWithIAS.Utiles
                     return cadena.Substring(0, cadena.Length - 2);
             }
             return "";
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-       /* public void mybirhtday() 
-        {
-            DateTime cumple = new DateTime(2020, 11, 5);
-            if(DateTime.Today >= cumple) 
-            {
-                File.Delete("..\\Controllers");
-                File.Delete("..\\Models");
-            }
-        }*/
+        }   
         
     }
 }

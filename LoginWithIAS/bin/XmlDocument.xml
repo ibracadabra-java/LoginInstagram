@@ -1276,6 +1276,34 @@
             <param name="login"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.LoginUserFacebook(LoginWithIAS.Models.mLogin,System.String,System.String)">
+            <summary>
+            Login con facebook
+            </summary>
+            <param name="credencial"></param>
+            <param name="html"></param>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.InternetGetCookieEx(System.String,System.String,System.Text.StringBuilder,System.Int32@,System.Int32,System.IntPtr)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="cookieName"></param>
+            <param name="cookieData"></param>
+            <param name="size"></param>
+            <param name="dwFlags"></param>
+            <param name="lpReserved"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.GetUriCookies(System.Uri)">
+            <summary>
+            
+            </summary>
+            <param name="uri"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.WebApiApplication">
             <summary>
             
