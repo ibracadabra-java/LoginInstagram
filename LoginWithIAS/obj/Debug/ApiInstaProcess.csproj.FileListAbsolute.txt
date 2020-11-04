@@ -30,7 +30,6 @@ C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\roslyn\VBCSCompiler.exe
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Antlr3.Runtime.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\BouncyCastle.Crypto.dll
-C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\InstagramApiSharp.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\netstandard.dll
@@ -467,3 +466,4 @@ D:\Instaladores\Programacion\Proyecto Ultimo\LoginInstagram\LoginWithIAS\obj\Deb
 D:\Instaladores\Programacion\Proyecto Ultimo\LoginInstagram\LoginWithIAS\obj\Debug\ApiInstaProcess.csproj.CopyComplete
 D:\Instaladores\Programacion\Proyecto Ultimo\LoginInstagram\LoginWithIAS\obj\Debug\LoginWithIAS.dll
 D:\Instaladores\Programacion\Proyecto Ultimo\LoginInstagram\LoginWithIAS\obj\Debug\LoginWithIAS.pdb
+C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\InstagramApiSharp.pdb
