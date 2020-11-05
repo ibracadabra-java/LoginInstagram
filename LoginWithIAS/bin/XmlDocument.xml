@@ -1174,6 +1174,13 @@
             <param name="followers"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.Estadistica(LoginWithIAS.Models.mFollower)">
+            <summary>
+            Insight
+            </summary>
+            <param name="cliente"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.PostProcessController">
             <summary>
             Controlador para dar likes
