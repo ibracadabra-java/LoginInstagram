@@ -945,6 +945,69 @@
             <param name="type"></param>
             <returns></returns>
         </member>
+        <member name="T:LoginWithIAS.Controllers.ContacProcessController">
+            <summary>
+            Controlador de Contactos
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.Controllers.ContacProcessController.session">
+            <summary>
+            Objeto seccion para salvar y calgar los datos
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.ContacProcessController.#ctor">
+            <summary>
+            Constructor de la clase
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.ContacProcessController.UpContactList(LoginWithIAS.Models.mContacts)">
+            <summary>
+            Sincronizar lista de contactos
+            </summary>
+            <param name="contacts"></param>
+            <returns></returns>
+        </member>
+        <member name="T:LoginWithIAS.Controllers.DeviceProcessController">
+            <summary>
+            Controlador de Dispositivos
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.DeviceProcessController.#ctor">
+            <summary>
+            Constructor del controlador
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.DeviceProcessController.DeleteDevice(LoginWithIAS.Models.mdevice)">
+            <summary>
+            Eliminar Dispositivos
+            </summary>
+            <param name="deletedevices"></param>
+            <returns></returns>
+        </member>
+        <member name="T:LoginWithIAS.Controllers.StoryProcessController">
+            <summary>
+            History Controler
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.StoryProcessController.#ctor">
+            <summary>
+            Constructor del Controlador History
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.StoryProcessController.ShareStory(LoginWithIAS.Models.mStory)">
+            <summary>
+            Compartir una Historia
+            </summary>
+            <param name="credenciales"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.StoryProcessController.VerStory(LoginWithIAS.Models.mStory)">
+            <summary>
+            Ver historias de un seguidor
+            </summary>
+            <param name="credenciales"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.MessageProcessController">
             <summary>
             
@@ -957,7 +1020,55 @@
         </member>
         <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendDirectMessage(LoginWithIAS.Models.mchat)">
             <summary>
-            Metodo para dejar de seguir un usuario
+            Metodo para enviar un mensaje de texto a un usuario
+            </summary>
+            <param name="chat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendPhoto(LoginWithIAS.Models.mchat)">
+            <summary>
+            Metodo para enviar foto a un usuario
+            </summary>
+            <param name="chat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendVideo(LoginWithIAS.Models.mchat)">
+            <summary>
+            Metodo para enviar video a un usuario
+            </summary>
+            <param name="chat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendAudio(LoginWithIAS.Models.mchat)">
+            <summary>
+            Metodo para enviar audio a un usuario
+            </summary>
+            <param name="chat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendUrl(LoginWithIAS.Models.mchat)">
+            <summary>
+            Metodo para enviar Url a un usuario
+            </summary>
+            <param name="chat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendEmoji(LoginWithIAS.Models.mchat)">
+            <summary>
+            Metodo para enviar Objetos animados a un usuario
+            </summary>
+            <param name="chat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.AgregarHashtag(LoginWithIAS.Models.mchat)">
+            <summary>
+            Enviar un hashtag
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.SendMessageFromSearch(LoginWithIAS.Models.mchat)">
+            <summary>
+            Enviar mensaje directo desde el search
             </summary>
             <param name="chat"></param>
             <returns></returns>
@@ -1002,7 +1113,14 @@
         </member>
         <member name="M:LoginWithIAS.Controllers.UssersProcessController.ListPostUser(LoginWithIAS.Models.mFollower)">
             <summary>
-            Lista de posts
+            Lista de posts de un usuario
+            </summary>
+            <param name="postUsser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.cantPostUser(LoginWithIAS.Models.mFollower)">
+            <summary>
+            devuelve la cantidad de post de un usuario
             </summary>
             <param name="postUsser"></param>
             <returns></returns>
@@ -1046,7 +1164,7 @@
             <summary>
             Devolver Lista de seguidos
             </summary>
-            <param name="followers"></param>
+            <param name="followins"></param>
             <returns></returns>
         </member>
         <member name="M:LoginWithIAS.Controllers.UssersProcessController.Getusername(LoginWithIAS.Models.mFollower)">
@@ -1054,6 +1172,13 @@
             Obtener nombre de usuario a traves de un id
             </summary>
             <param name="users"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.UltimosFollowers(LoginWithIAS.Models.mFollower)">
+            <summary>
+            Devolver LIsta de seguidores menores de 24 horas, los que me siguen en menos de 1 dia
+            </summary>
+            <param name="followers"></param>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.Controllers.PostProcessController">
@@ -1075,16 +1200,9 @@
         </member>
         <member name="M:LoginWithIAS.Controllers.PostProcessController.SimulationLikeManyPost(LoginWithIAS.Models.mLikeManyPost)">
             <summary>
-            
+            Simular dar like a través del buscador o de la lista de seguidores
             </summary>
             <param name="mlikemanypost"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LoginWithIAS.Controllers.PostProcessController.Subcadena(System.String)">
-            <summary>
-            Obtener una subcadena
-            </summary>
-            <param name="cadena"></param>
             <returns></returns>
         </member>
         <member name="M:LoginWithIAS.Controllers.PostProcessController.extraerPost(LoginWithIAS.Models.mPost)">
@@ -1110,7 +1228,7 @@
         </member>
         <member name="M:LoginWithIAS.Controllers.PostProcessController.EditarCaption(LoginWithIAS.Models.mcaption)">
             <summary>
-            
+            Editar Caption
             </summary>
             <param name="caption"></param>
             <returns></returns>
@@ -1156,6 +1274,41 @@
             Método para desloguearse de la plataforma
             </summary>
             <param name="credencial">Clase del modelo que captura las credenciales del usuario autenticado</param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.GetLoginSessionActive(LoginWithIAS.Models.mLogin)">
+            <summary>
+            Obtener sesiones de login activas
+            </summary>
+            <param name="login"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.LoginUserFacebook(LoginWithIAS.Models.mLogin,System.String,System.String)">
+            <summary>
+            Login con facebook
+            </summary>
+            <param name="credencial"></param>
+            <param name="html"></param>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.InternetGetCookieEx(System.String,System.String,System.Text.StringBuilder,System.Int32@,System.Int32,System.IntPtr)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="cookieName"></param>
+            <param name="cookieData"></param>
+            <param name="size"></param>
+            <param name="dwFlags"></param>
+            <param name="lpReserved"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.GetUriCookies(System.Uri)">
+            <summary>
+            
+            </summary>
+            <param name="uri"></param>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.WebApiApplication">
@@ -1234,6 +1387,66 @@
         <member name="P:LoginWithIAS.Models.mchat.text">
             <summary>
             Texto a enviar
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mchat.foto">
+            <summary>
+            Foto a enviar
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mchat.video">
+            <summary>
+            Video a enviar
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mchat.audio">
+            <summary>
+            Audio a enviar
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mchat.Url">
+            <summary>
+            Url a enviar
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mchat.Giphyid">
+            <summary>
+            Emoticon a enviar
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mchat.Hashtag">
+            <summary>
+            Enviar un Hashtag
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mContacts">
+            <summary>
+            Clase Contactos
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mContacts.otheruser">
+            <summary>
+            Usuario del que se obtendra su lista de contactos
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mContacts.ListContact">
+            <summary>
+            Lista de contactos
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mdevice">
+            <summary>
+            Clase Dispositivo
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mdevice.User">
+            <summary>
+            Usuario que desea loguearse
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mdevice.Pass">
+            <summary>
+            Password del usuario que desea loguearse
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mFollower">
@@ -1326,6 +1539,26 @@
             Tipo de post
             </summary>
         </member>
+        <member name="T:LoginWithIAS.Models.mStory">
+            <summary>
+            Clase Story
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mStory.Other_user">
+            <summary>
+            Username del usuario del que queremos obtener sus historias
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mStory.Text_share">
+            <summary>
+            Texto a compartir
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mStory.cantidad">
+            <summary>
+            Cantidad de historias a compartir
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.Session">
             <summary>
             
@@ -1348,6 +1581,18 @@
             Metodo para generar Token de salida al loguarse
             </summary>   
             <returns>Retorna un objeto enResponseToken con el token y un mensaje descriptivo</returns>
+        </member>
+        <member name="T:LoginWithIAS.Utiles.Util">
+            <summary>
+            Métodos útilis para la realizacion de controladores.
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Utiles.Util.Subcadena(System.String)">
+            <summary>
+            Obtener una subcadena
+            </summary>
+            <param name="cadena"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

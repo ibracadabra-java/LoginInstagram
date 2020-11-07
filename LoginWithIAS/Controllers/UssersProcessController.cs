@@ -390,6 +390,73 @@ namespace LoginWithIAS.Controllers
                 throw new Exception(s.Message);
             }
         }
+        /// <summary>
+        /// devuelve la cantidad de post de un usuario
+        /// </summary>
+        /// <param name="postUsser"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<long> cantPostUser(mFollower postUsser)
+        {
+            try
+            {
+                InstaMediaList listamedia = new InstaMediaList();
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(postUsser.User) || string.IsNullOrEmpty(postUsser.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = postUsser.User,
+                        Password = postUsser.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return -1;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(postUsser.Pass))
+                {
+                    return -1;
+                }
+
+                if (!string.IsNullOrEmpty(postUsser.otheruser))
+                {
+                    var user = await insta.UserProcessor.GetUserAsync(postUsser.otheruser);
+                    
+                    if (user.Succeeded)
+                    {
+                        var userinfo = await insta.UserProcessor.GetFullUserInfoAsync(user.Value.Pk);
+                        if (userinfo.Succeeded) 
+                        {
+                            var cantPost = userinfo.Value.UserDetail.MediaCount;
+                            return cantPost;
+                        }
+                        else 
+                        {
+                            return -1;
+                        }
+                    }
+                    else
+                        return -1;
+                }
+                else
+                {
+                    return -1;
+                }
+               
+            }
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
+            }
+        }
+
 
         /// <summary>
         /// Obtener Biografia
@@ -467,12 +534,11 @@ namespace LoginWithIAS.Controllers
         /// <param name="followin"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<int> cantFollowinsUsser(mFollower followin)
+        public async Task<long> cantFollowinsUsser(mFollower followin)
         {
             try
             {
-                int cantidad = 0;
-                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+                 var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
                 if (!(string.IsNullOrEmpty(followin.User) || string.IsNullOrEmpty(followin.Pass)))
                 {
@@ -485,41 +551,42 @@ namespace LoginWithIAS.Controllers
                 }
                 else
                 {
-                    return cantidad;
+                    return -1;
                 }
 
                 session.LoadSession(insta);
 
                 if (!insta.GetLoggedUser().Password.Equals(followin.Pass))
                 {
-                    return cantidad;
+                    return -1;
                 }
 
                 if (!string.IsNullOrEmpty(followin.User))
                 {
-                    var user = await insta.UserProcessor.GetUserAsync(followin.User);
-
+                    var user = await insta.UserProcessor.GetUserAsync(followin.otheruser);
                     if (user.Succeeded)
                     {
-                        var seguidores = await insta.UserProcessor.GetUserFollowingByIdAsync(user.Value.Pk, PaginationParameters.MaxPagesToLoad(1));
+                        var userinfo = await insta.UserProcessor.GetFullUserInfoAsync(user.Value.Pk);
 
-                        if (seguidores.Succeeded)
+                        if (userinfo.Succeeded)
                         {
-                            return seguidores.Value.Count;
+                            var seguidores = userinfo.Value.UserDetail.FollowingCount;
+
+                            return seguidores;
                         }
                         else
                         {
-                            return cantidad;
+                            return -1;
                         }
                     }
-                    else
+                    else 
                     {
-                        return cantidad;
+                        return -1;
                     }
                 }
                 else
                 {
-                    return cantidad;
+                    return -1;
                 }
             }
             catch (Exception s)
@@ -535,11 +602,11 @@ namespace LoginWithIAS.Controllers
         /// <param name="followers"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<int> cantFollowersUsser(mFollower followers)
+        public async Task<long> cantFollowersUsser(mFollower followers)
         {
             try
             {
-                int cantidad = 0;
+                
                 var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
                 if (!(string.IsNullOrEmpty(followers.User) || string.IsNullOrEmpty(followers.Pass)))
@@ -553,31 +620,41 @@ namespace LoginWithIAS.Controllers
                 }
                 else
                 {
-                    return cantidad;
+                    return -1;
                 }
 
                 session.LoadSession(insta);
 
                 if (!insta.GetLoggedUser().Password.Equals(followers.Pass))
                 {
-                    return cantidad;
+                    return -1;
                 }
 
                 if (!string.IsNullOrEmpty(followers.User))
                 {
-                    var user = await insta.UserProcessor.GetUserAsync(followers.User);
+                    var user = await insta.UserProcessor.GetUserAsync(followers.otheruser);
                     if (user.Succeeded)
                     {
-                        return user.Value.FollowersCount;
+                        var userinfo = await insta.UserProcessor.GetFullUserInfoAsync(user.Value.Pk);
+                        if (userinfo.Succeeded) 
+                        {
+                            var seguidos = userinfo.Value.UserDetail.FollowerCount;
+                            return seguidos;
+                        }
+                        else 
+                        {
+                            return -1;
+                        }
+                       
                     }
                     else
                     {
-                        return cantidad;
+                        return -1;
                     }
                 }
                 else
                 {
-                    return cantidad;
+                    return -1;
                 }
             }
             catch (Exception s)

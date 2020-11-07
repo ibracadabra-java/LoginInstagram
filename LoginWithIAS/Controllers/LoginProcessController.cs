@@ -56,45 +56,46 @@ namespace LoginWithIAS.Controllers
         {
             enResponseToken token = new enResponseToken();
             try
-            {                
-                var InstaApi = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
-                if (!(string.IsNullOrEmpty(credencial.User) || string.IsNullOrEmpty(credencial.Pass)))
-                {
-                    var userSession = new UserSessionData
-                    {
-                        UserName = credencial.User,
-                        Password = credencial.Pass
-                    };
-                    InstaApi.SetUser(userSession);
-                }
-                else
+            {               
+               
+                if (string.IsNullOrEmpty(credencial.User) || string.IsNullOrEmpty(credencial.Pass))
                 {
                     token.Message = "Deben introducir Usuario y Contraseña";
                     return token;
                 }
-
-                if (!(string.IsNullOrEmpty(credencial.AddressProxy)|| string.IsNullOrEmpty(credencial.UsernameProxy) || string.IsNullOrEmpty(credencial.PassProxy)))
+               
+                var userSession = new UserSessionData
                 {
-                    var proxy = new WebProxy()
-                    {
-                        Address = new Uri(credencial.AddressProxy),
-                        BypassProxyOnLocal = false,
-                        UseDefaultCredentials = false,
-                        Credentials = new NetworkCredential(
-                       userName: credencial.UsernameProxy,
-                       password: credencial.PassProxy
-                       )
+                    UserName = credencial.User,
+                    Password = credencial.Pass
+                };
 
-                    };
-                    var httpClientHandler = new HttpClientHandler()
-                    {
-                        Proxy = proxy,
-                    };
+                if (string.IsNullOrEmpty(credencial.AddressProxy)|| string.IsNullOrEmpty(credencial.UsernameProxy) || string.IsNullOrEmpty(credencial.PassProxy))
+                {
 
-                    
-                    InstaApi.UseHttpClientHandler(httpClientHandler);
+
+                    token.Message = "Deben introducir el Proxy completo";
+                    return token;
+
+
                 }
+                var proxy = new WebProxy()
+                {
+                    Address = new Uri(credencial.AddressProxy),
+                    BypassProxyOnLocal = false,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(
+                     userName: credencial.UsernameProxy,
+                     password: credencial.PassProxy
+                     )
 
+                };
+                var httpClientHandler = new HttpClientHandler()
+                {
+                    Proxy = proxy,
+                };
+
+                var InstaApi = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All))/*.UseHttpClientHandler(httpClientHandler)*/.Build();
 
                 if (!(credencial.AdId ==null || string.IsNullOrEmpty(credencial.AndroidBoardName) || string.IsNullOrEmpty(credencial.AndroidBootloader)||
                     credencial.AndroidBoardName == null || string.IsNullOrEmpty(credencial.DeviceBrand) || credencial.DeviceGuid == null ||string.IsNullOrEmpty(credencial.DeviceId) ||

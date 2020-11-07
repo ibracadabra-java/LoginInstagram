@@ -14,6 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using LoginWithIAS.Utiles;
+using Microsoft.SqlServer.Server;
 
 namespace LoginWithIAS.Controllers
 {
@@ -45,6 +46,8 @@ namespace LoginWithIAS.Controllers
         {
             try
             {
+                List<string> Error = new List<string>();
+                string LogError = "No hubo errores";
                 int cantlike = mlikemanypost.cantLike;
                 int count = 0;
                 enResponseToken token = new enResponseToken();
@@ -91,13 +94,17 @@ namespace LoginWithIAS.Controllers
                                     cantlike--;
                                     count++;
                                 }
+                                else
+                                    Error.Add(liked.Info.Message);
 
                             }
                             else break;
 
                         }
-                        token.Message = "Se le dio like a " + count + " post del usuario " + mlikemanypost.userlike;
-                        token.AuthToken = session.GenerarToken();
+                        if (count > 0) {
+                            foreach (string error in Error)
+                                LogError += " " + error;
+                            token.Message = "Se le dio like a " + count + " post del usuario " + mlikemanypost.userlike + " y se encontraron los siguientes errores " + LogError ; }                    
                         return token;
                     }
                     else
@@ -127,10 +134,10 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<enResponseToken> SimulationLikeManyPost(mLikeManyPost mlikemanypost)
         {
-
+            List<string> Error = new List<string>();
             int cantlike = mlikemanypost.cantLike;
             int count = 0;
-
+            string LogError = "No hubo errores";
             enResponseToken token = new enResponseToken();
 
             var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
@@ -198,6 +205,8 @@ namespace LoginWithIAS.Controllers
                                         cantlike--;
                                         count++;
                                     }
+                                    else
+                                        Error.Add(liked.Info.Message);
 
                                 }
                                 else break;
@@ -269,6 +278,8 @@ namespace LoginWithIAS.Controllers
                                                 cantlike--;
                                                 count++;
                                             }
+                                            else
+                                                Error.Add(liked.Info.Message);
 
                                         }
                                         else break;
@@ -305,9 +316,10 @@ namespace LoginWithIAS.Controllers
                     return token;
                 }                
             }
-
-            token.Message = "Se le dio like a " + count + " post del usuario " + mlikemanypost.userlike;
-            token.AuthToken = session.GenerarToken();
+           
+                foreach (string error in Error)
+                    LogError += " " + error;
+                token.Message = "Se le dio like a " + count + " post del usuario " + mlikemanypost.userlike + " y se encontraron los siguientes errores " + LogError; 
             return token;
 
         }       
