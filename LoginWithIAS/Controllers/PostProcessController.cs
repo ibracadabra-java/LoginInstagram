@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using LoginWithIAS.Utiles;
 using Microsoft.SqlServer.Server;
+using System.Web;
 
 namespace LoginWithIAS.Controllers
 {
@@ -26,14 +27,17 @@ namespace LoginWithIAS.Controllers
     {
         Session session;
         Util util;
-
+        Log log;
+        string path = HttpContext.Current.Request.MapPath("~/Logs");
         /// <summary>
         /// constructor de la clase
         /// </summary>
         public PostProcessController()
         {
+            
             session = new Session();
             util = new Util();
+            log = new Log(path);
         }
 
         /// <summary>
@@ -80,7 +84,7 @@ namespace LoginWithIAS.Controllers
                 if (!string.IsNullOrEmpty(mlikemanypost.userlike))
                 {
                     var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
-
+                    log.Add("Get post from "+ mlikemanypost.userlike+" -"+media.Info.Message);
                     if (media.Succeeded)
                     {
                         for (int i = 0; i < media.Value.Count; i++)
@@ -88,6 +92,7 @@ namespace LoginWithIAS.Controllers
                             if (cantlike > 0)
                             {
                                 var liked = await insta.MediaProcessor.LikeMediaAsync(media.Value[i].InstaIdentifier);
+                                log.Add("like to "+ mlikemanypost.userlike +"-" +liked.Info.Message);
 
                                 if (liked.Succeeded)
                                 {
@@ -168,6 +173,7 @@ namespace LoginWithIAS.Controllers
             if (string.IsNullOrEmpty(mlikemanypost.userfollow))
             {
                 var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(util.Subcadena(mlikemanypost.userlike),PaginationParameters.MaxPagesToLoad(1));
+                log.Add("Search user to like "+ mlikemanypost.userlike+"-"+ instauser.Info.Message);
                 if (instauser.Succeeded)
                 {
                     var getusuario = await insta.UserProcessor.GetUserAsync(mlikemanypost.userlike);
@@ -175,7 +181,7 @@ namespace LoginWithIAS.Controllers
                     if (getusuario.Succeeded)
                     {
                         var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
-
+                        log.Add(media.Info.Message);
                         if (media.Succeeded)
                         {
                             List<InstaMedia> milista = new List<InstaMedia>();
@@ -198,6 +204,7 @@ namespace LoginWithIAS.Controllers
                                 if (cantlike > 0)
                                 {
                                     var liked = await insta.MediaProcessor.LikeMediaAsync(milista[i].InstaIdentifier);
+                                    log.Add("Like to "+mlikemanypost.userlike+"-"+liked.Info.Message);
                                     Thread.Sleep(mlikemanypost.time * 1000);
 
                                     if (liked.Succeeded)
@@ -233,22 +240,23 @@ namespace LoginWithIAS.Controllers
             else
             {
                 var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(util.Subcadena(mlikemanypost.userfollow),PaginationParameters.MaxPagesToLoad(1));
-
+                log.Add("Search userfollow to like "+ mlikemanypost.userfollow + "-"+ instauser.Info.Message);
                 if (instauser.Succeeded)
                 {
                     var getusuariofollowing = await insta.UserProcessor.GetUserAsync(mlikemanypost.userfollow);
-
+                    log.Add("Get user follow to like "+ mlikemanypost.userfollow+"-"+ getusuariofollowing.Info.Message);
                     if (getusuariofollowing.Succeeded)
                     {
                         var seguidores = await insta.UserProcessor.GetUserFollowersAsync(mlikemanypost.userfollow, PaginationParameters.MaxPagesToLoad(1));
+                        log.Add("Get follower of "+ mlikemanypost.userfollow + "-" +  seguidores.Info.Message);
                         if (seguidores.Succeeded)
                         {
                             var getuserlike = await insta.UserProcessor.GetUserAsync(mlikemanypost.userlike);
-
+                            log.Add("Get user to like "+ mlikemanypost.userlike+"-"+getuserlike.Info.Message);
                             if (getuserlike.Succeeded)
                             {
                                 var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
-
+                                log.Add("Get post to like "+ media.Info.Message);
                                 if (media.Succeeded)
                                 {
                                     List<InstaMedia> milista = new List<InstaMedia>();
@@ -271,6 +279,7 @@ namespace LoginWithIAS.Controllers
                                         if (cantlike > 0)
                                         {
                                             var liked = await insta.MediaProcessor.LikeMediaAsync(milista[i].InstaIdentifier);
+                                            log.Add("Like to "+ milista[i].InstaIdentifier+"-"+liked.Info.Message);
                                             Thread.Sleep(mlikemanypost.time * 1000);
 
                                             if (liked.Succeeded)
