@@ -3,6 +3,8 @@ using InstagramApiSharp.API.Builder;
 using InstagramApiSharp.Classes;
 using InstagramApiSharp.Classes.Android.DeviceInfo;
 using InstagramApiSharp.Classes.Models;
+using InstagramApiSharp.Classes.Models.Business;
+using InstagramApiSharp.Enums;
 using InstagramApiSharp.Logger;
 using LoginWithIAS.Models;
 using System;
@@ -963,6 +965,74 @@ namespace LoginWithIAS.Controllers
                 }
                 else
                     return null;
+                return devolver;
+            }
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
+            }
+        }
+
+        /// <summary>
+        /// Extraer estadisticas del Cliente(Cuenta de Negocios)
+        /// </summary>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<List<IResult<InstaFullMediaInsights>>> Estadistica(mFollower cliente)
+        {
+            try
+            {
+                List<IResult<InstaFullMediaInsights>> devolver = new List<IResult<InstaFullMediaInsights>>();
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(cliente.User) || string.IsNullOrEmpty(cliente.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = cliente.User,
+                        Password = cliente.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return null;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(cliente.Pass))
+                {
+                    return null;
+                }
+
+                if (!string.IsNullOrEmpty(cliente.otheruser))
+                {
+                    var user = await insta.UserProcessor.GetUserInfoByUsernameAsync(cliente.otheruser);
+
+                    if (user.Succeeded)
+                    {
+                        if (user.Value.IsBusiness && user.Value.AccountType == InstaAccountType.Business)
+                        {
+                            var media = await insta.UserProcessor.GetUserMediaAsync(user.Value.UserName,PaginationParameters.MaxPagesToLoad(1));
+
+                            if (media.Succeeded)
+                            {
+                                for (int i = 0; i < media.Value.Count; i++)
+                                {
+                                    var insight = await insta.BusinessProcessor.GetFullMediaInsightsAsync(media.Value[i].InstaIdentifier);
+                                    if (insight.Succeeded)
+                                    {
+                                        devolver.Add(insight);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 return devolver;
             }
             catch (Exception s)
