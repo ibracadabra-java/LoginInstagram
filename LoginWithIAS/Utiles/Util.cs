@@ -27,6 +27,25 @@ namespace LoginWithIAS.Utiles
             }
             return "";
         }   
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cadena"></param>
+        /// <returns></returns>
+        public string Accion(string cadena)
+        {
+            Random objram = new Random();
+            List<string> acciones = new List<string>();
+            for (int i = 0; i < cadena.Length; i++)
+            {
+                for (int j = i+1; j < cadena.Length; j++)
+                {
+                    acciones.Add(cadena[i].ToString() + cadena[j].ToString());
+                }
+
+            }
+            return acciones[objram.Next(0,acciones.Count)];
+        }
         
     }
 }

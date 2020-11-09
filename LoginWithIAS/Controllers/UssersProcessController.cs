@@ -747,6 +747,8 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<List<string>> ListaFollowersUsers(mFollower followers)
         {
+            
+
             try
             {
                 List<string> devolver = new List<string>();
@@ -775,7 +777,17 @@ namespace LoginWithIAS.Controllers
 
                 if (!string.IsNullOrEmpty(followers.User))
                 {
-                    var userlist = await insta.UserProcessor.GetUserFollowersAsync(followers.User, PaginationParameters.MaxPagesToLoad(1));
+                   
+                    var user = await insta.UserProcessor.GetUserAsync(followers.otheruser);
+                    var userInfo = await insta.UserProcessor.GetFullUserInfoAsync(user.Value.Pk);
+                    var cantFoller = userInfo.Value.UserDetail.FollowerCount;
+                    if (cantFoller > 4500) 
+                    {                       
+                        cantFoller = 4500;
+                    }                       
+                    var pag = (cantFoller / 100) + 1;
+                    
+                    var userlist = await insta.UserProcessor.GetUserFollowersAsync(followers.otheruser,PaginationParameters.MaxPagesToLoad(1),"",false,"2");
                     if (userlist.Succeeded)
                     {
                         if (userlist.Succeeded)
@@ -1040,6 +1052,6 @@ namespace LoginWithIAS.Controllers
 
                 throw new Exception(s.Message);
             }
-        }
+        }       
     }
 }

@@ -1212,6 +1212,13 @@
             <param name="mlikemanypost"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.SimulationHumanLikeManyPost(LoginWithIAS.Models.mLikeManyPost)">
+            <summary>
+            
+            </summary>
+            <param name="mlikemanypost"></param>
+            <returns></returns>
+        </member>
         <member name="M:LoginWithIAS.Controllers.PostProcessController.extraerPost(LoginWithIAS.Models.mPost)">
             <summary>
             Obtener un post
@@ -1531,6 +1538,35 @@
             Password del proxy
             </summary>
         </member>
+        <member name="T:LoginWithIAS.Models.mMethodLike">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mMethodLike.ListUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mMethodLike.vel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Models.mMethodLike.tiempo(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="vel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Models.mMethodLike.cant(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="vel"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Models.mPost">
             <summary>
             Media Post
@@ -1564,6 +1600,21 @@
         <member name="P:LoginWithIAS.Models.mStory.cantidad">
             <summary>
             Cantidad de historias a compartir
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mUserMetodo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mUserMetodo.cantExt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mUserMetodo.timeWait">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.Session">

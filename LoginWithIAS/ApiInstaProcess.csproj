@@ -191,8 +191,10 @@
     <Compile Include="Models\mFollower.cs" />
     <Compile Include="Models\mLikeManyPost.cs" />
     <Compile Include="Models\mLogin.cs" />
+    <Compile Include="Models\mMethodLike.cs" />
     <Compile Include="Models\mPost.cs" />
     <Compile Include="Models\mStory.cs" />
+    <Compile Include="Models\mUserMetodo.cs" />
     <Compile Include="Models\Session.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utiles\Log.cs" />

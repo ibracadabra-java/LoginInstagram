@@ -67,8 +67,7 @@ namespace LoginWithIAS.Controllers
 
                 if (!string.IsNullOrEmpty(credenciales.Other_user))
                 {
-                    var user = await insta.UserProcessor.GetUserAsync(credenciales.Other_user);
-                    //var user_autenticated = await insta.UserProcessor.GetUserAsync(credenciales.User);
+                    var user = await insta.UserProcessor.GetUserAsync(credenciales.Other_user);                    
                     if (user.Succeeded)
                     {
                         long[] recipient = new long[1];
