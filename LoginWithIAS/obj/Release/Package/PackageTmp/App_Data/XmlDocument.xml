@@ -1188,6 +1188,12 @@
             <param name="cliente"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.VisitPerfil(LoginWithIAS.Models.mFollower)">
+            <summary>
+            
+            </summary>
+            <param name="mFollow"></param>
+        </member>
         <member name="T:LoginWithIAS.Controllers.PostProcessController">
             <summary>
             Controlador para dar likes
@@ -1208,6 +1214,13 @@
         <member name="M:LoginWithIAS.Controllers.PostProcessController.SimulationLikeManyPost(LoginWithIAS.Models.mLikeManyPost)">
             <summary>
             Simular dar like a través del buscador o de la lista de seguidores
+            </summary>
+            <param name="mlikemanypost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.SimulationHumanLikeManyPost(LoginWithIAS.Models.mMethodLike)">
+            <summary>
+            
             </summary>
             <param name="mlikemanypost"></param>
             <returns></returns>
@@ -1531,6 +1544,49 @@
             Password del proxy
             </summary>
         </member>
+        <member name="T:LoginWithIAS.Models.mMethodLike">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mMethodLike.ListUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mMethodLike.vel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Models.mMethodLike.tiempo(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="vel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Models.mMethodLike.cant(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="vel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Models.mMethodLike.cantInter(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="vel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Models.mMethodLike.tiempoInter(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="vel"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Models.mPost">
             <summary>
             Media Post
@@ -1566,6 +1622,21 @@
             Cantidad de historias a compartir
             </summary>
         </member>
+        <member name="T:LoginWithIAS.Models.mUserMetodo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mUserMetodo.cantExt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mUserMetodo.timeWait">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.Session">
             <summary>
             
@@ -1597,6 +1668,13 @@
         <member name="M:LoginWithIAS.Utiles.Util.Subcadena(System.String)">
             <summary>
             Obtener una subcadena
+            </summary>
+            <param name="cadena"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Utiles.Util.Accion(System.String)">
+            <summary>
+            
             </summary>
             <param name="cadena"></param>
             <returns></returns>

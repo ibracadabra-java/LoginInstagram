@@ -14,6 +14,8 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using LoginWithIAS.Utiles;
+using System.Web;
 
 namespace LoginWithIAS.Controllers
 {
@@ -23,12 +25,15 @@ namespace LoginWithIAS.Controllers
     public class UssersProcessController : ApiController
     {
         Session session;
+        Log log;
+        string path = HttpContext.Current.Request.MapPath("~/Logs");
         /// <summary>
         /// constructor de la clase
         /// </summary>
         public UssersProcessController()
         {
             session = new Session();
+            log = new Log(path);
         }
 
         /// <summary>
@@ -38,7 +43,7 @@ namespace LoginWithIAS.Controllers
         /// <returns></returns>
         [HttpPost]
         public async Task<enResponseToken> DeleteFollower(mFollower deletefollower)
-        {
+        {            
             try
             {
                 enResponseToken token = new enResponseToken();
@@ -1052,6 +1057,49 @@ namespace LoginWithIAS.Controllers
 
                 throw new Exception(s.Message);
             }
-        }       
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mFollow"></param>
+        [HttpPost]
+        public async void VisitPerfil(mFollower mFollow)
+        {
+            try
+            {
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(mFollow.User) || string.IsNullOrEmpty(mFollow.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = mFollow.User,
+                        Password = mFollow.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    log.Add("Deben introducir Usuario y Contraseña");
+                    return;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(mFollow.Pass))
+                {
+                    log.Add("Contraseña incorrecta");
+                    return;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }
