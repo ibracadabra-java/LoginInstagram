@@ -967,6 +967,12 @@
             <param name="contacts"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.CuentasController.Cuentas_Ainactivas(LoginWithIAS.Models.mcuentas)">
+            <summary>
+            Este metodo no permitira definir si la cuenta de un usurio es falsa o poco inactiva
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.DeviceProcessController">
             <summary>
             Controlador de Dispositivos
@@ -1452,6 +1458,11 @@
         <member name="P:LoginWithIAS.Models.mContacts.ListContact">
             <summary>
             Lista de contactos
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mcuentas.Other_User">
+            <summary>
+            Usuario
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mdevice">

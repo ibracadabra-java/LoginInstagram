@@ -150,3 +150,4 @@ C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Release\ApiInstaProcess
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Release\ApiInstaProcess.csproj.CopyComplete
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Release\LoginWithIAS.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Release\LoginWithIAS.pdb
+C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Oracle.DataAccess.dll

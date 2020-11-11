@@ -377,123 +377,125 @@ namespace LoginWithIAS.Controllers
 
             for (int y = 0; y < userlista.Count; y++)                       
             {
-
+                count = 0;
+                cantlike = mlikemanypost.cantLike;
 
                 if (string.IsNullOrEmpty(mlikemanypost.userfollow))
                 {
                     var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(util.Subcadena(userlista[y]), PaginationParameters.MaxPagesToLoad(1));
-                    log.Add("Search user to like " + userlista[y] + "-" + instauser.Info.Message);
+                    log.Add(mlikemanypost.User+" Search user to like " + userlista[y] + "-" + instauser.Info.Message);
                     if (instauser.Succeeded)
                     {
                         var getusuario = await insta.UserProcessor.GetUserAsync(userlista[y]);
-                        var media = await insta.UserProcessor.GetUserMediaAsync(userlista[y], PaginationParameters.MaxPagesToLoad(1));
-                        log.Add("Get user to like " + userlista[y] + "-" + instauser.Info.Message);
+                        var media = await insta.UserProcessor.GetUserMediaAsync(userlista[y], PaginationParameters.MaxPagesToLoad(1));                        
                         if (getusuario.Succeeded)
                         {
-                            string accion = util.Accion(cadena);
-                            for (int i = 0; i < accion.Length; i++)
-                            {
-                                switch (accion[i])
-                                {
-                                    case 'a':
-                                        for (int j = 0; j < mlikemanypost.cantInter(mlikemanypost.vel); j++)
-                                        {
-                                            await insta.UserProcessor.GetUserMediaAsync(userlista[y], PaginationParameters.MaxPagesToLoad(1));
-                                            Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel));
-                                        }
-
-                                        break;
-                                    case 'b':
-                                        if (media.Value.Count > 0)
-                                        {
-
-                                            for (int j = 0; j < mlikemanypost.cant(mlikemanypost.vel); j++)
-                                            {
-                                                await insta.MediaProcessor.GetMediaByIdAsync(media.Value[valorandon.Next(0, media.Value.Count)].InstaIdentifier);
-                                                Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel) * 1000);
-                                            }
-                                        }
-                                        break;
-                                    case 'c':
-                                        await insta.UserProcessor.GetUserFollowersAsync(userlista[y], PaginationParameters.MaxPagesToLoad(mlikemanypost.cantInter(mlikemanypost.vel)));
-                                        break;
-                                    case 'd':
-                                        await insta.MessagingProcessor.GetPendingDirectAsync(PaginationParameters.MaxPagesToLoad(mlikemanypost.cantInter(mlikemanypost.vel)));
-                                        Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel));
-                                        break;
-                                    case 'e':
-                                        var historias = await insta.StoryProcessor.GetUserStoryFeedAsync(getusuario.Value.Pk);
-                                        if (historias.Value.Items.Count > 0)
-                                        {
-                                            for (int j = 0; j < mlikemanypost.cantInter(mlikemanypost.vel); j++)
-                                            {
-                                                int posicion = valorandon.Next(0, historias.Value.Items.Count);
-                                                long takenat = Convert.ToInt64(historias.Value.Items[posicion].TakenAt.ToLongDateString());
-                                                await insta.StoryProcessor.MarkStoryAsSeenAsync(historias.Value.Items[posicion].Id, takenat);
-                                                Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel));
-                                            }
-                                        }
-                                        break;
-
-                                }
-                                Thread.Sleep(mlikemanypost.tiempo(mlikemanypost.time) * 1000);
-                            }
-
-
-                            log.Add(media.Info.Message);
+                            log.Add(mlikemanypost.User+" Get user to like " + userlista[y] + "-" + getusuario.Info.Message);
                             if (media.Succeeded)
                             {
+                                log.Add(mlikemanypost.User + " Get media to like " + userlista[y] + "-" + media.Info.Message);
 
-                                for (int i = 0; i < media.Value.Count; i += valorandon.Next(1, 3))
+                                string accion = util.Accion(cadena);
+                                for (int i = 0; i < accion.Length; i++)
                                 {
-                                    if (!media.Value[i].HasLiked)
+                                    switch (accion[i])
                                     {
-                                        if (milista.Count <= 6)
-                                        {
-                                            milista.Add(media.Value[i]);
-                                        }
-                                        else
+                                        case 'a':
+                                            for (int j = 0; j < mlikemanypost.cantInter(mlikemanypost.vel); j++)
+                                            {
+                                                await insta.UserProcessor.GetUserMediaAsync(userlista[y], PaginationParameters.MaxPagesToLoad(1));
+                                                Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel));
+                                            }
+
                                             break;
+                                        case 'b':
+                                            if (media.Value.Count > 0)
+                                            {
+
+                                                for (int j = 0; j < mlikemanypost.cant(mlikemanypost.vel); j++)
+                                                {
+                                                    await insta.MediaProcessor.GetMediaByIdAsync(media.Value[valorandon.Next(0, media.Value.Count)].InstaIdentifier);
+                                                    Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel) * 1000);
+                                                }
+                                            }
+                                            break;
+                                        case 'c':
+                                            await insta.UserProcessor.GetUserFollowersAsync(userlista[y], PaginationParameters.MaxPagesToLoad(mlikemanypost.cantInter(mlikemanypost.vel)));
+                                            break;
+                                        case 'd':
+                                            await insta.MessagingProcessor.GetPendingDirectAsync(PaginationParameters.MaxPagesToLoad(mlikemanypost.cantInter(mlikemanypost.vel)));
+                                            Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel));
+                                            break;
+                                        case 'e':
+                                            var historias = await insta.StoryProcessor.GetUserStoryFeedAsync(getusuario.Value.Pk);
+                                            if (historias.Value.Items.Count > 0)
+                                            {
+                                                for (int j = 0; j < mlikemanypost.cantInter(mlikemanypost.vel); j++)
+                                                {
+                                                    int posicion = valorandon.Next(0, historias.Value.Items.Count);
+                                                    long takenat = Convert.ToInt64(historias.Value.Items[posicion].TakenAt.ToLongDateString());
+                                                    await insta.StoryProcessor.MarkStoryAsSeenAsync(historias.Value.Items[posicion].Id, takenat);
+                                                    Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel));
+                                                }
+                                            }
+                                            break;
+
                                     }
-                                }
+                                    Thread.Sleep(mlikemanypost.tiempo(mlikemanypost.time) * 1000);
+                                }                                                             
+
+                                    for (int i = 0; i < media.Value.Count; i += valorandon.Next(1, 3))
+                                    {
+                                        if (!media.Value[i].HasLiked)
+                                        {
+                                            if (milista.Count <= 6)
+                                            {
+                                                milista.Add(media.Value[i]);
+                                            }
+                                            else
+                                                break;
+                                        }
+                                    }
 
                                 for (int i = 0; i < milista.Count; i++)
                                 {
                                     if (cantlike > 0)
                                     {
-                                        var liked = await insta.MediaProcessor.LikeMediaAsync(milista[i].InstaIdentifier);
-                                        log.Add("Like to " + userlista[y] + "-" + liked.Info.Message);
+                                        var liked = await insta.MediaProcessor.LikeMediaAsync(milista[i].InstaIdentifier);                                       
                                         Thread.Sleep(mlikemanypost.tiempo(mlikemanypost.vel) * 1000);
-                                        if (liked.Info.Equals("feedback_required"))
-                                            return;
                                         if (liked.Succeeded)
                                         {
+                                            log.Add(mlikemanypost.User+" Like to " + userlista[y] + " - " + liked.Info.Message);
                                             cantlike--;
                                             count++;
                                         }
                                         else
+                                        {
+                                            log.Add(mlikemanypost.User+" Error to " + userlista[y] + " - " + liked.Info.Message);
+                                            if (liked.Info.Equals("feedback_required"))
+                                                return;
                                             Error.Add(liked.Info.Message);
-
+                                        }
                                     }
                                     else break;
-                                }
+                                }                                
                             }
                             else
                             {
-                                token.Message = media.Info.Message;
-                               
+                                log.Add(mlikemanypost.User + "Error Get media to like " + userlista[y] + "-" + media.Info.Message);
+
                             }
+                            
                         }
                         else
                         {
-                            token.Message = getusuario.Info.Message;
-                            
+                            log.Add(mlikemanypost.User + "Error Get User to like " + userlista[y] + "-" + getusuario.Info.Message);
                         }
                     }
                     else
                     {
-                        token.Message = instauser.Info.Message;
-                        
+                        log.Add(mlikemanypost.User + "Error Search User to like " + userlista[y] + "-" + instauser.Info.Message);
+
                     }
                 }
                 else
