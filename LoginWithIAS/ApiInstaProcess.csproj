@@ -61,7 +61,7 @@
     </Reference>
     <Reference Include="Oracle.DataAccess, Version=4.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Librerias\4\Oracle.DataAccess.dll</HintPath>
+      <HintPath>..\Librerias\Oracle.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -178,6 +178,7 @@
     <Compile Include="Controllers\ContacProcessController.cs" />
     <Compile Include="Controllers\CuentasController.cs" />
     <Compile Include="Controllers\DeviceProcessController.cs" />
+    <Compile Include="Controllers\GestorTareasController.cs" />
     <Compile Include="Controllers\StoryProcessController.cs" />
     <Compile Include="Controllers\MessageProcessController.cs" />
     <Compile Include="Controllers\UssersProcessController.cs" />
@@ -200,6 +201,9 @@
     <Compile Include="Models\mMethodLike.cs" />
     <Compile Include="Models\mPost.cs" />
     <Compile Include="Models\mStory.cs" />
+    <Compile Include="Models\mTarea.cs" />
+    <Compile Include="Models\mTareas.cs" />
+    <Compile Include="Models\mTareasDiarias.cs" />
     <Compile Include="Models\mUserMetodo.cs" />
     <Compile Include="Models\Session.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -86,5 +86,37 @@ namespace LoginWithIAS.Models
 
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vel"></param>
+        /// <returns></returns>
+        public int SleepDia(int vel) 
+        {
+            switch (vel)
+            {
+                case 0: return 25;
+                case 1: return 40;
+                case 2: return 80;
+                default: return 25;
+
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vel"></param>
+        /// <returns></returns>
+        public int SleepHora(int vel)
+        {
+            switch (vel)
+            {
+                case 0: return 3;
+                case 1: return 6;
+                case 2: return 8;
+                default: return 25;
+
+            }
+        }
     }
 }

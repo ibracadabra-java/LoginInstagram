@@ -49,3 +49,21 @@
 11/11/2020 16:51:36 - raulalex1995 Get user to like javier98284-No errors detected
 11/11/2020 16:51:36 - raulalex1995Error Get media to like javier98284-Not authorized to view user
 11/11/2020 16:51:36 - Se le dio like a 0 post del usuario javier98284 y se encontraron los siguientes errores No hubo errores
+11/11/2020 20:19:27 - raulalex1995 Search_user_to_like kaliese.acunningham0915-No errors detected
+11/11/2020 20:19:36 - raulalex1995 Get user to like kaliese.acunningham0915-No errors detected
+11/11/2020 20:19:36 - raulalex1995 Get_media_to_like kaliese.acunningham0915-No errors detected
+11/11/2020 20:19:59 - raulalex1995 viendo seguidores de kaliese.acunningham0915 - No errors detected
+11/11/2020 20:20:18 - Se le dio like a 0 post del usuario kaliese.acunningham0915 y se encontraron los siguientes errores No hubo errores
+11/11/2020 20:20:24 - raulalex1995 Search_user_to_like ahmet_osman10-No errors detected
+11/11/2020 20:20:33 - raulalex1995 Get user to like ahmet_osman10-No errors detected
+11/11/2020 20:20:33 - raulalex1995 Get_media_to_like ahmet_osman10-Not authorized to view user
+11/11/2020 20:20:33 - Se le dio like a 0 post del usuario ahmet_osman10 y se encontraron los siguientes errores No hubo errores
+11/11/2020 20:27:59 - raulalex1995 Search_user_to_like kaliese.acunningham0915-No errors detected
+11/11/2020 20:28:08 - raulalex1995 Get user to like kaliese.acunningham0915-No errors detected
+11/11/2020 20:28:08 - raulalex1995 Get_media_to_like kaliese.acunningham0915-No errors detected
+11/11/2020 20:28:08 - raulalex1995 Get_media_to_like kaliese.acunningham0915- No tiene publicaciones
+11/11/2020 20:28:08 - Se le dio like a 0 post del usuario kaliese.acunningham0915 y se encontraron los siguientes errores No hubo errores
+11/11/2020 20:28:14 - raulalex1995 Search_user_to_like ahmet_osman10-No errors detected
+11/11/2020 20:28:23 - raulalex1995 Get user to like ahmet_osman10-No errors detected
+11/11/2020 20:28:23 - raulalex1995 Get_media_to_like ahmet_osman10-Not authorized to view user
+11/11/2020 20:28:23 - Se le dio like a 0 post del usuario ahmet_osman10 y se encontraron los siguientes errores No hubo errores

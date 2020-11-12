@@ -990,6 +990,11 @@
             <param name="deletedevices"></param>
             <returns></returns>
         </member>
+        <member name="T:LoginWithIAS.Controllers.GestorTareasController">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Controllers.StoryProcessController">
             <summary>
             History Controler
@@ -1592,6 +1597,20 @@
             <returns></returns>
         </member>
         <member name="M:LoginWithIAS.Models.mMethodLike.tiempoInter(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="vel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Models.mMethodLike.SleepDia(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="vel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Models.mMethodLike.SleepHora(System.Int32)">
             <summary>
             
             </summary>
