@@ -502,6 +502,7 @@ C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Microsoft.CodeDom.Provi
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\netstandard.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Newtonsoft.Json.dll
+C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Oracle.DataAccess.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\System.Net.Http.Formatting.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\System.Web.Helpers.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\System.Web.Http.dll

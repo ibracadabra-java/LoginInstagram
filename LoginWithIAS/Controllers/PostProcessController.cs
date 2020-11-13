@@ -436,7 +436,7 @@ namespace LoginWithIAS.Controllers
                                                     Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel));
                                                     break;
                                                 case 'e':
-                                                    var historias = await insta.StoryProcessor.GetUserStoryFeedAsync(getusuario.Value.Pk);
+                                                    var historias = await insta.StoryProcessor.GetUserStoryAsync(getusuario.Value.Pk);
                                                     if (historias.Succeeded)
                                                     {
                                                         if (historias.Value.Items.Count > 0)
@@ -444,7 +444,7 @@ namespace LoginWithIAS.Controllers
                                                             for (int j = 0; j < mlikemanypost.cantInter(mlikemanypost.vel); j++)
                                                             {
                                                                 int posicion = valorandon.Next(0, historias.Value.Items.Count);
-                                                                long takenat = Convert.ToInt64(historias.Value.Items[posicion].TakenAt);
+                                                                long takenat = historias.Value.TakenAtUnix;
                                                                 var historia = await insta.StoryProcessor.MarkStoryAsSeenAsync(historias.Value.Items[posicion].Id, takenat);
                                                                 log.Add(mlikemanypost.User + " viendo historia de " + userlista[y] + " se esperan " + mlikemanypost.tiempoInter(mlikemanypost.vel) + " segundos para ver otra " + " - " + historia.Info.Message);
                                                                 Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel));

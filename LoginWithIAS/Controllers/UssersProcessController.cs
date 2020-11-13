@@ -790,7 +790,7 @@ namespace LoginWithIAS.Controllers
                     var lengt = cantFoller / 100;
                     for (int i = 0; i < lengt; i++)
                     {
-                        if (devolver.Count == 5000 * count)
+                        if (devolver.Count >= 5000 * count)
                         {
                             count++;
                             Thread.Sleep(1200000);

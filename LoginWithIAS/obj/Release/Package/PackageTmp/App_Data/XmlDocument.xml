@@ -967,6 +967,16 @@
             <param name="contacts"></param>
             <returns></returns>
         </member>
+        <member name="T:LoginWithIAS.Controllers.CuentasController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.CuentasController.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:LoginWithIAS.Controllers.CuentasController.Cuentas_Ainactivas(LoginWithIAS.Models.mcuentas)">
             <summary>
             Este metodo no permitira definir si la cuenta de un usurio es falsa o poco inactiva
@@ -1211,6 +1221,20 @@
             
             </summary>
             <param name="mFollow"></param>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.GetEstadistica(LoginWithIAS.Models.mLogin)">
+            <summary>
+            
+            </summary>
+            <param name="BusinesCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.GetEstadisticaPost(LoginWithIAS.Models.mLogin)">
+            <summary>
+            
+            </summary>
+            <param name="BusinesCount"></param>
+            <returns></returns>
         </member>
         <member name="T:LoginWithIAS.Controllers.PostProcessController">
             <summary>
@@ -1755,6 +1779,26 @@
             </summary>
             <param name="cadena"></param>
             <returns></returns>
+        </member>
+        <member name="T:LoginWithIAS.Worker.BackGroundWork">
+            <summary>
+            Traajos En segundo Plano
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.RealizarTrabajo">
+            <summary>
+            Trabajo en segundo Plano
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.CancelarTrabajo">
+            <summary>
+            Cancelar Trabajo
+            </summary>
         </member>
     </members>
 </doc>

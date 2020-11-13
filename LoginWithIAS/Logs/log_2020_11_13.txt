@@ -1,1 +1,130 @@
 13/11/2020 0:00:38 - Insights are not avaialble, try again later
+13/11/2020 1:21:23 -  Scrapeando usuarios de raulalex1995cantidad actual0
+13/11/2020 1:21:29 -  Scrapeando usuarios de raulalex1995cantidad actual100
+13/11/2020 1:21:35 -  Scrapeando usuarios de raulalex1995cantidad actual200
+13/11/2020 1:21:40 -  Scrapeando usuarios de raulalex1995cantidad actual300
+13/11/2020 1:21:46 -  Scrapeando usuarios de raulalex1995cantidad actual400
+13/11/2020 1:21:52 -  Scrapeando usuarios de raulalex1995cantidad actual500
+13/11/2020 1:21:58 -  Scrapeando usuarios de raulalex1995cantidad actual596
+13/11/2020 1:22:03 -  Scrapeando usuarios de raulalex1995cantidad actual695
+13/11/2020 1:22:09 -  Scrapeando usuarios de raulalex1995cantidad actual795
+13/11/2020 1:22:15 -  Scrapeando usuarios de raulalex1995cantidad actual895
+13/11/2020 1:22:21 -  Scrapeando usuarios de raulalex1995cantidad actual994
+13/11/2020 1:22:27 -  Scrapeando usuarios de raulalex1995cantidad actual1094
+13/11/2020 1:22:37 -  Scrapeando usuarios de raulalex1995cantidad actual1194
+13/11/2020 1:22:37 - el_pichy_oficial Search_user_to_like byalexemanuel-No errors detected
+13/11/2020 1:22:43 -  Scrapeando usuarios de raulalex1995cantidad actual1294
+13/11/2020 1:22:46 - el_pichy_oficial Get user to like byalexemanuel-No errors detected
+13/11/2020 1:22:46 - el_pichy_oficial Get_media_to_like byalexemanuel-No errors detected
+13/11/2020 1:22:49 -  Scrapeando usuarios de raulalex1995cantidad actual1394
+13/11/2020 1:22:49 - el_pichy_oficial abriendo post de byalexemanuel se esperan 2 segundos para abrir otro  - No errors detected
+13/11/2020 1:22:54 - el_pichy_oficial abriendo post de byalexemanuel se esperan 4 segundos para abrir otro  - No errors detected
+13/11/2020 1:22:55 -  Scrapeando usuarios de raulalex1995cantidad actual1492
+13/11/2020 1:23:00 - el_pichy_oficial abriendo post de byalexemanuel se esperan 1 segundos para abrir otro  - No errors detected
+13/11/2020 1:23:00 -  Scrapeando usuarios de raulalex1995cantidad actual1591
+13/11/2020 1:23:06 - el_pichy_oficial abriendo post de byalexemanuel se esperan 1 segundos para abrir otro  - No errors detected
+13/11/2020 1:23:06 -  Scrapeando usuarios de raulalex1995cantidad actual1691
+13/11/2020 1:23:09 - el_pichy_oficial abriendo post de byalexemanuel se esperan 2 segundos para abrir otro  - No errors detected
+13/11/2020 1:23:12 -  Scrapeando usuarios de raulalex1995cantidad actual1791
+13/11/2020 1:23:17 -  Scrapeando usuarios de raulalex1995cantidad actual1890
+13/11/2020 1:23:23 -  Scrapeando usuarios de raulalex1995cantidad actual1989
+13/11/2020 1:23:29 -  Scrapeando usuarios de raulalex1995cantidad actual2087
+13/11/2020 1:23:32 - el_pichy_oficial viendo seguidores de byalexemanuel - No errors detected
+13/11/2020 1:23:35 -  Scrapeando usuarios de raulalex1995cantidad actual2184
+13/11/2020 1:23:41 -  Scrapeando usuarios de raulalex1995cantidad actual2283
+13/11/2020 1:23:46 -  Scrapeando usuarios de raulalex1995cantidad actual2383
+13/11/2020 1:23:52 -  Scrapeando usuarios de raulalex1995cantidad actual2483
+13/11/2020 1:23:58 -  Scrapeando usuarios de raulalex1995cantidad actual2581
+13/11/2020 1:24:01 - el_pichy_oficial Like_to byalexemanuel - No errors detected
+13/11/2020 1:24:03 -  Scrapeando usuarios de raulalex1995cantidad actual2681
+13/11/2020 1:24:09 -  Scrapeando usuarios de raulalex1995cantidad actual2780
+13/11/2020 1:24:13 - el_pichy_oficial Like_to byalexemanuel - No errors detected
+13/11/2020 1:24:13 - Se le dio like a 2 post del usuario byalexemanuel y se encontraron los siguientes errores No hubo errores
+13/11/2020 1:24:16 - el_pichy_oficial Search_user_to_like lissintriago13-No errors detected
+13/11/2020 1:24:16 -  Scrapeando usuarios de raulalex1995cantidad actual2880
+13/11/2020 1:24:22 -  Scrapeando usuarios de raulalex1995cantidad actual2980
+13/11/2020 1:24:25 - el_pichy_oficial Get user to like lissintriago13-No errors detected
+13/11/2020 1:24:25 - el_pichy_oficial Get_media_to_like lissintriago13-No errors detected
+13/11/2020 1:24:27 -  Scrapeando usuarios de raulalex1995cantidad actual3080
+13/11/2020 1:24:32 - el_pichy_oficial abriendo direct de message  se esperan 1 segundos - No errors detected
+13/11/2020 1:24:33 -  Scrapeando usuarios de raulalex1995cantidad actual3179
+13/11/2020 1:24:39 -  Scrapeando usuarios de raulalex1995cantidad actual3278
+13/11/2020 1:24:45 -  Scrapeando usuarios de raulalex1995cantidad actual3377
+13/11/2020 1:24:50 -  Scrapeando usuarios de raulalex1995cantidad actual3477
+13/11/2020 1:24:56 -  Scrapeando usuarios de raulalex1995cantidad actual3577
+13/11/2020 1:25:02 -  Scrapeando usuarios de raulalex1995cantidad actual3677
+13/11/2020 1:25:07 -  Scrapeando usuarios de raulalex1995cantidad actual3776
+13/11/2020 1:25:13 -  Scrapeando usuarios de raulalex1995cantidad actual3876
+13/11/2020 1:25:16 - el_pichy_oficial Like_to lissintriago13 - No errors detected
+13/11/2020 1:25:19 -  Scrapeando usuarios de raulalex1995cantidad actual3974
+13/11/2020 1:25:24 -  Scrapeando usuarios de raulalex1995cantidad actual4072
+13/11/2020 1:25:27 - el_pichy_oficial Like_to lissintriago13 - No errors detected
+13/11/2020 1:25:27 - Se le dio like a 2 post del usuario lissintriago13 y se encontraron los siguientes errores No hubo errores
+13/11/2020 1:25:30 -  Scrapeando usuarios de raulalex1995cantidad actual4170
+13/11/2020 1:25:33 - el_pichy_oficial Search_user_to_like lauragutierrez6115-No errors detected
+13/11/2020 1:25:36 -  Scrapeando usuarios de raulalex1995cantidad actual4269
+13/11/2020 1:25:41 -  Scrapeando usuarios de raulalex1995cantidad actual4368
+13/11/2020 1:25:42 - el_pichy_oficial Get user to like lauragutierrez6115-No errors detected
+13/11/2020 1:25:42 - el_pichy_oficial Get_media_to_like lauragutierrez6115-No errors detected
+13/11/2020 1:25:45 - el_pichy_oficial abriendo post de lauragutierrez6115 se esperan 4 segundos para abrir otro  - No errors detected
+13/11/2020 1:25:47 -  Scrapeando usuarios de raulalex1995cantidad actual4468
+13/11/2020 1:25:51 - el_pichy_oficial abriendo post de lauragutierrez6115 se esperan 2 segundos para abrir otro  - No errors detected
+13/11/2020 1:25:53 -  Scrapeando usuarios de raulalex1995cantidad actual4563
+13/11/2020 1:25:55 - el_pichy_oficial abriendo post de lauragutierrez6115 se esperan 2 segundos para abrir otro  - No errors detected
+13/11/2020 1:25:58 -  Scrapeando usuarios de raulalex1995cantidad actual4661
+13/11/2020 1:25:59 - el_pichy_oficial abriendo post de lauragutierrez6115 se esperan 2 segundos para abrir otro  - No errors detected
+13/11/2020 1:26:04 - el_pichy_oficial abriendo post de lauragutierrez6115 se esperan 4 segundos para abrir otro  - No errors detected
+13/11/2020 1:26:04 -  Scrapeando usuarios de raulalex1995cantidad actual4760
+13/11/2020 1:26:10 -  Scrapeando usuarios de raulalex1995cantidad actual4860
+13/11/2020 1:26:10 - el_pichy_oficial abriendo post de lauragutierrez6115 se esperan 1 segundos para abrir otro  - No errors detected
+13/11/2020 1:26:16 -  Scrapeando usuarios de raulalex1995cantidad actual4959
+13/11/2020 1:26:21 -  Scrapeando usuarios de raulalex1995cantidad actual5059
+13/11/2020 1:26:27 -  Scrapeando usuarios de raulalex1995cantidad actual5158
+13/11/2020 1:26:33 -  Scrapeando usuarios de raulalex1995cantidad actual5257
+13/11/2020 1:26:34 - el_pichy_oficial viendo seguidores de lauragutierrez6115 - No errors detected
+13/11/2020 1:26:39 -  Scrapeando usuarios de raulalex1995cantidad actual5354
+13/11/2020 1:26:44 -  Scrapeando usuarios de raulalex1995cantidad actual5453
+13/11/2020 1:26:50 -  Scrapeando usuarios de raulalex1995cantidad actual5552
+13/11/2020 1:26:56 -  Scrapeando usuarios de raulalex1995cantidad actual5652
+13/11/2020 1:27:01 - el_pichy_oficial Like_to lauragutierrez6115 - No errors detected
+13/11/2020 1:27:01 -  Scrapeando usuarios de raulalex1995cantidad actual5752
+13/11/2020 1:27:07 -  Scrapeando usuarios de raulalex1995cantidad actual5850
+13/11/2020 1:27:09 - el_pichy_oficial Like_to lauragutierrez6115 - No errors detected
+13/11/2020 1:27:09 - Se le dio like a 2 post del usuario lauragutierrez6115 y se encontraron los siguientes errores No hubo errores
+13/11/2020 1:27:13 -  Scrapeando usuarios de raulalex1995cantidad actual5950
+13/11/2020 1:27:15 - el_pichy_oficial Search_user_to_like deepak5405e-No errors detected
+13/11/2020 1:27:18 -  Scrapeando usuarios de raulalex1995cantidad actual6050
+13/11/2020 1:27:24 - el_pichy_oficial Get user to like deepak5405e-No errors detected
+13/11/2020 1:27:24 - el_pichy_oficial Get_media_to_like deepak5405e-No errors detected
+13/11/2020 1:27:24 -  Scrapeando usuarios de raulalex1995cantidad actual6149
+13/11/2020 1:27:30 -  Scrapeando usuarios de raulalex1995cantidad actual6247
+13/11/2020 1:27:31 - el_pichy_oficial abriendo direct de message  se esperan 2 segundos - No errors detected
+13/11/2020 1:27:36 -  Scrapeando usuarios de raulalex1995cantidad actual6344
+13/11/2020 1:27:41 -  Scrapeando usuarios de raulalex1995cantidad actual6443
+13/11/2020 1:27:47 -  Scrapeando usuarios de raulalex1995cantidad actual6543
+13/11/2020 1:30:13 -  Scrapeando usuarios de raulalex1995cantidad actual6641
+13/11/2020 1:47:19 - el_pichy_oficial Search_user_to_like deepak5405e-No errors detected
+13/11/2020 1:47:27 - el_pichy_oficial Get user to like deepak5405e-No errors detected
+13/11/2020 1:47:27 - el_pichy_oficial Get_media_to_like deepak5405e-No errors detected
+13/11/2020 1:47:33 - el_pichy_oficial Entrando al perfil y obteniendo post de deepak5405e se esperan 1 segundos  - No errors detected
+13/11/2020 1:47:54 - el_pichy_oficial viendo historia de deepak5405e se esperan 1 segundos para ver otra  - No errors detected
+13/11/2020 1:47:57 - el_pichy_oficial viendo historia de deepak5405e se esperan 4 segundos para ver otra  - No errors detected
+13/11/2020 1:48:24 - el_pichy_oficial Like_to deepak5405e - No errors detected
+13/11/2020 1:48:33 - el_pichy_oficial Like_to deepak5405e - No errors detected
+13/11/2020 1:48:33 - Se le dio like a 2 post del usuario deepak5405e y se encontraron los siguientes errores No hubo errores
+13/11/2020 1:48:38 - el_pichy_oficial Search_user_to_like luis_miguel_g.o-No errors detected
+13/11/2020 1:48:48 - el_pichy_oficial Get user to like luis_miguel_g.o-No errors detected
+13/11/2020 1:48:48 - el_pichy_oficial Get_media_to_like luis_miguel_g.o-No errors detected
+13/11/2020 1:49:04 - el_pichy_oficial viendo seguidores de luis_miguel_g.o - No errors detected
+13/11/2020 1:49:25 - el_pichy_oficial viendo historia de luis_miguel_g.o se esperan 2 segundos para ver otra  - No errors detected
+13/11/2020 1:49:28 - el_pichy_oficial viendo historia de luis_miguel_g.o se esperan 2 segundos para ver otra  - No errors detected
+13/11/2020 1:49:38 -  Scrapeando usuarios de raulalex1995cantidad actual0
+13/11/2020 1:49:44 -  Scrapeando usuarios de raulalex1995cantidad actual100
+13/11/2020 1:49:49 -  Scrapeando usuarios de raulalex1995cantidad actual200
+13/11/2020 1:49:54 - el_pichy_oficial Like_to luis_miguel_g.o - No errors detected
+13/11/2020 1:49:55 -  Scrapeando usuarios de raulalex1995cantidad actual300
+13/11/2020 1:50:01 -  Scrapeando usuarios de raulalex1995cantidad actual400
+13/11/2020 1:50:03 - el_pichy_oficial Like_to luis_miguel_g.o - No errors detected
+13/11/2020 1:50:03 - Se le dio like a 2 post del usuario luis_miguel_g.o y se encontraron los siguientes errores No hubo errores
+13/11/2020 1:50:07 -  Scrapeando usuarios de raulalex1995cantidad actual500
+13/11/2020 1:50:09 - el_pichy_oficial Search_user_to_like daniela_sarahi20-No errors detected

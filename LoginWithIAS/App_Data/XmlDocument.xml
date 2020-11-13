@@ -1780,5 +1780,25 @@
             <param name="cadena"></param>
             <returns></returns>
         </member>
+        <member name="T:LoginWithIAS.Worker.BackGroundWork">
+            <summary>
+            Traajos En segundo Plano
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.RealizarTrabajo">
+            <summary>
+            Trabajo en segundo Plano
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.CancelarTrabajo">
+            <summary>
+            Cancelar Trabajo
+            </summary>
+        </member>
     </members>
 </doc>
