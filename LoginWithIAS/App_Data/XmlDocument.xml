@@ -967,6 +967,16 @@
             <param name="contacts"></param>
             <returns></returns>
         </member>
+        <member name="T:LoginWithIAS.Controllers.CuentasController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.CuentasController.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:LoginWithIAS.Controllers.CuentasController.Cuentas_Ainactivas(LoginWithIAS.Models.mcuentas)">
             <summary>
             Este metodo no permitira definir si la cuenta de un usurio es falsa o poco inactiva
@@ -994,6 +1004,13 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.GestorTareasController.SaveTask(LoginWithIAS.Models.mTareasDiarias)">
+            <summary>
+            
+            </summary>
+            <param name="tareasDia"></param>
+            <returns></returns>
         </member>
         <member name="T:LoginWithIAS.Controllers.StoryProcessController">
             <summary>
@@ -1204,6 +1221,20 @@
             
             </summary>
             <param name="mFollow"></param>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.GetEstadistica(LoginWithIAS.Models.mLogin)">
+            <summary>
+            
+            </summary>
+            <param name="BusinesCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.GetEstadisticaPost(LoginWithIAS.Models.mLogin)">
+            <summary>
+            
+            </summary>
+            <param name="BusinesCount"></param>
+            <returns></returns>
         </member>
         <member name="T:LoginWithIAS.Controllers.PostProcessController">
             <summary>
@@ -1650,6 +1681,46 @@
         <member name="P:LoginWithIAS.Models.mStory.cantidad">
             <summary>
             Cantidad de historias a compartir
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mTarea">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTarea.id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTarea.info">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mTareas">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTareas.user">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTareas.tareas">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mTareasDiarias">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTareasDiarias.TareasDia">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mUserMetodo">

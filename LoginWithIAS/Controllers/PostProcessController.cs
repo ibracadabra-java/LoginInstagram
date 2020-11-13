@@ -380,6 +380,7 @@ namespace LoginWithIAS.Controllers
             {
                 for (int y = 0; y < userlista.Count; y++)
                 {
+                    milista.Clear();
                     count = 0;
                     cantlike = mlikemanypost.cantLike;
 
@@ -406,12 +407,11 @@ namespace LoginWithIAS.Controllers
                                             switch (accion[i])
                                             {
                                                 case 'a':
-                                                    for (int j = 0; j < mlikemanypost.cantInter(mlikemanypost.vel); j++)
-                                                    {
+                                                    
                                                         var mediass = await insta.UserProcessor.GetUserMediaAsync(userlista[y], PaginationParameters.MaxPagesToLoad(1));
-                                                        log.Add(mlikemanypost.User + " Entrando al perfil y obteniendo post de " + userlista[y] + " se esperan " + mlikemanypost.tiempoInter(mlikemanypost.vel) + " segundos para pasar de página " + " - " + mediass.Info.Message);
+                                                        log.Add(mlikemanypost.User + " Entrando al perfil y obteniendo post de " + userlista[y] + " se esperan " + mlikemanypost.tiempoInter(mlikemanypost.vel) + " segundos " + " - " + mediass.Info.Message);
                                                         Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel));
-                                                    }
+                                                    
 
                                                     break;
                                                 case 'b':
@@ -444,7 +444,7 @@ namespace LoginWithIAS.Controllers
                                                             for (int j = 0; j < mlikemanypost.cantInter(mlikemanypost.vel); j++)
                                                             {
                                                                 int posicion = valorandon.Next(0, historias.Value.Items.Count);
-                                                                long takenat = Convert.ToInt64(historias.Value.Items[posicion].TakenAt.ToLongDateString());
+                                                                long takenat = Convert.ToInt64(historias.Value.Items[posicion].TakenAt);
                                                                 var historia = await insta.StoryProcessor.MarkStoryAsSeenAsync(historias.Value.Items[posicion].Id, takenat);
                                                                 log.Add(mlikemanypost.User + " viendo historia de " + userlista[y] + " se esperan " + mlikemanypost.tiempoInter(mlikemanypost.vel) + " segundos para ver otra " + " - " + historia.Info.Message);
                                                                 Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel));
@@ -607,12 +607,12 @@ namespace LoginWithIAS.Controllers
                         LogError += " " + error;
                     log.Add("Se le dio like a " + count + " post del usuario " + userlista[y] + " y se encontraron los siguientes errores " + LogError);
 
-                    if (y > mlikemanypost.SleepHora(mlikemanypost.vel) && (hora - DateTime.Now).TotalMinutes < 60)
+                    if (y > mlikemanypost.SleepHora(mlikemanypost.vel) && ( DateTime.Now - hora).TotalMinutes < 60)
                     {
                         Thread.Sleep(valorandon.Next(45, 61) * 1000);
                         hora = DateTime.Now;
                     }
-                    if (y > mlikemanypost.SleepDia(mlikemanypost.vel) && (Dia - DateTime.Now).TotalHours < 24)
+                    if (y > mlikemanypost.SleepDia(mlikemanypost.vel) && (DateTime.Now - Dia).TotalHours < 24)
                     {
                         Thread.Sleep(86400 * 1000 * 10);
                         Dia = DateTime.Now;

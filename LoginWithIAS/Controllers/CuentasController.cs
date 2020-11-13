@@ -15,11 +15,16 @@ using System.Web.Http;
 
 namespace LoginWithIAS.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CuentasController : ApiController
     {
         Session session;
         Util util;
-
+        /// <summary>
+        /// 
+        /// </summary>
         public CuentasController()
         {
             this.session = new Session();

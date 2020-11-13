@@ -1,0 +1,88 @@
+12/11/2020 18:18:25 - el_pichy_oficial Search_user_to_like ern_trendcare.id-No errors detected
+12/11/2020 18:18:34 - el_pichy_oficial Get user to like ern_trendcare.id-No errors detected
+12/11/2020 18:18:34 - el_pichy_oficial Get_media_to_like ern_trendcare.id-No errors detected
+12/11/2020 18:18:40 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 12 segundos para pasar de página  - No errors detected
+12/11/2020 18:18:46 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 11 segundos para pasar de página  - No errors detected
+12/11/2020 18:18:52 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 12 segundos para pasar de página  - No errors detected
+12/11/2020 18:18:58 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 11 segundos para pasar de página  - No errors detected
+12/11/2020 18:19:04 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 12 segundos para pasar de página  - No errors detected
+12/11/2020 18:19:10 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 11 segundos para pasar de página  - No errors detected
+12/11/2020 18:19:16 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 10 segundos para pasar de página  - No errors detected
+12/11/2020 18:19:22 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 11 segundos para pasar de página  - No errors detected
+12/11/2020 18:19:27 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 12 segundos para pasar de página  - No errors detected
+12/11/2020 18:19:33 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 10 segundos para pasar de página  - No errors detected
+12/11/2020 18:19:39 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 11 segundos para pasar de página  - No errors detected
+12/11/2020 18:21:36 - el_pichy_oficial Search_user_to_like ern_trendcare.id-No errors detected
+12/11/2020 18:21:45 - el_pichy_oficial Get user to like ern_trendcare.id-No errors detected
+12/11/2020 18:21:45 - el_pichy_oficial Get_media_to_like ern_trendcare.id-No errors detected
+12/11/2020 18:21:51 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 11 segundos para pasar de página  - No errors detected
+12/11/2020 18:21:57 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 10 segundos para pasar de página  - No errors detected
+12/11/2020 18:22:03 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 12 segundos para pasar de página  - No errors detected
+12/11/2020 18:22:09 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 12 segundos para pasar de página  - No errors detected
+12/11/2020 18:22:14 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 11 segundos para pasar de página  - No errors detected
+12/11/2020 18:22:20 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 12 segundos para pasar de página  - No errors detected
+12/11/2020 18:22:26 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 10 segundos para pasar de página  - No errors detected
+12/11/2020 18:22:32 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 10 segundos para pasar de página  - No errors detected
+12/11/2020 18:22:38 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 11 segundos para pasar de página  - No errors detected
+12/11/2020 18:22:44 - el_pichy_oficial Entrando al perfil y obteniendo post de ern_trendcare.id se esperan 10 segundos para pasar de página  - No errors detected
+12/11/2020 18:23:07 - el_pichy_oficial abriendo direct de message  se esperan 11 segundos - No errors detected
+12/11/2020 18:23:43 - el_pichy_oficial Like_to ern_trendcare.id - No errors detected
+12/11/2020 18:24:06 - el_pichy_oficial Like_to ern_trendcare.id - No errors detected
+12/11/2020 18:24:06 - Se le dio like a 2 post del usuario ern_trendcare.id y se encontraron los siguientes errores No hubo errores
+12/11/2020 18:24:09 - el_pichy_oficial Search_user_to_like _.exkabralibur619-No errors detected
+12/11/2020 18:24:18 - el_pichy_oficial Get user to like _.exkabralibur619-No errors detected
+12/11/2020 18:24:18 - el_pichy_oficial Get_media_to_like _.exkabralibur619-No errors detected
+12/11/2020 18:24:26 - el_pichy_oficial abriendo direct de message  se esperan 10 segundos - No errors detected
+12/11/2020 18:25:23 - el_pichy_oficial Like_to _.exkabralibur619 - No errors detected
+12/11/2020 18:25:50 - el_pichy_oficial Like_to _.exkabralibur619 - No errors detected
+12/11/2020 18:25:50 - Se le dio like a 2 post del usuario _.exkabralibur619 y se encontraron los siguientes errores No hubo errores
+12/11/2020 18:25:56 - el_pichy_oficial Search_user_to_like samuelmj84-No errors detected
+12/11/2020 18:26:05 - el_pichy_oficial Get user to like samuelmj84-No errors detected
+12/11/2020 18:26:06 - el_pichy_oficial Get_media_to_like samuelmj84-No errors detected
+12/11/2020 18:26:12 - el_pichy_oficial Entrando al perfil y obteniendo post de samuelmj84 se esperan 12 segundos para pasar de página  - No errors detected
+12/11/2020 18:26:17 - el_pichy_oficial Entrando al perfil y obteniendo post de samuelmj84 se esperan 12 segundos para pasar de página  - No errors detected
+12/11/2020 18:26:23 - el_pichy_oficial Entrando al perfil y obteniendo post de samuelmj84 se esperan 11 segundos para pasar de página  - No errors detected
+12/11/2020 18:26:29 - el_pichy_oficial Entrando al perfil y obteniendo post de samuelmj84 se esperan 12 segundos para pasar de página  - No errors detected
+12/11/2020 18:26:35 - el_pichy_oficial Entrando al perfil y obteniendo post de samuelmj84 se esperan 12 segundos para pasar de página  - No errors detected
+12/11/2020 18:26:41 - el_pichy_oficial Entrando al perfil y obteniendo post de samuelmj84 se esperan 11 segundos para pasar de página  - No errors detected
+12/11/2020 18:26:47 - el_pichy_oficial Entrando al perfil y obteniendo post de samuelmj84 se esperan 12 segundos para pasar de página  - No errors detected
+12/11/2020 18:26:53 - el_pichy_oficial Entrando al perfil y obteniendo post de samuelmj84 se esperan 11 segundos para pasar de página  - No errors detected
+12/11/2020 18:26:59 - el_pichy_oficial Entrando al perfil y obteniendo post de samuelmj84 se esperan 10 segundos para pasar de página  - No errors detected
+12/11/2020 18:27:06 - el_pichy_oficial Entrando al perfil y obteniendo post de samuelmj84 se esperan 10 segundos para pasar de página  - No errors detected
+12/11/2020 18:28:06 - el_pichy_oficial viendo seguidores de samuelmj84 - No errors detected
+12/11/2020 18:28:41 - el_pichy_oficial Like_to samuelmj84 - No errors detected
+12/11/2020 18:29:02 - el_pichy_oficial Like_to samuelmj84 - No errors detected
+12/11/2020 18:29:02 - Se le dio like a 2 post del usuario samuelmj84 y se encontraron los siguientes errores No hubo errores
+12/11/2020 18:29:08 - el_pichy_oficial Search_user_to_like erika__perdomo03-No errors detected
+12/11/2020 18:29:17 - el_pichy_oficial Get user to like erika__perdomo03-No errors detected
+12/11/2020 18:29:17 - el_pichy_oficial Get_media_to_like erika__perdomo03-No errors detected
+12/11/2020 18:29:19 - el_pichy_oficial abriendo post de erika__perdomo03 se esperan 11 segundos para abrir otro  - No errors detected
+12/11/2020 18:29:32 - el_pichy_oficial abriendo post de erika__perdomo03 se esperan 12 segundos para abrir otro  - No errors detected
+12/11/2020 18:29:46 - el_pichy_oficial abriendo post de erika__perdomo03 se esperan 11 segundos para abrir otro  - No errors detected
+12/11/2020 18:30:01 - el_pichy_oficial abriendo post de erika__perdomo03 se esperan 12 segundos para abrir otro  - No errors detected
+12/11/2020 18:30:16 - el_pichy_oficial abriendo post de erika__perdomo03 se esperan 11 segundos para abrir otro  - No errors detected
+12/11/2020 18:30:28 - el_pichy_oficial abriendo post de erika__perdomo03 se esperan 11 segundos para abrir otro  - No errors detected
+12/11/2020 18:30:43 - el_pichy_oficial abriendo post de erika__perdomo03 se esperan 12 segundos para abrir otro  - No errors detected
+12/11/2020 18:30:55 - el_pichy_oficial abriendo post de erika__perdomo03 se esperan 10 segundos para abrir otro  - No errors detected
+12/11/2020 18:31:08 - el_pichy_oficial abriendo post de erika__perdomo03 se esperan 11 segundos para abrir otro  - No errors detected
+12/11/2020 18:31:22 - el_pichy_oficial abriendo post de erika__perdomo03 se esperan 12 segundos para abrir otro  - No errors detected
+12/11/2020 18:31:35 - el_pichy_oficial abriendo post de erika__perdomo03 se esperan 12 segundos para abrir otro  - No errors detected
+12/11/2020 18:31:48 - el_pichy_oficial abriendo post de erika__perdomo03 se esperan 11 segundos para abrir otro  - No errors detected
+12/11/2020 18:32:03 - el_pichy_oficial abriendo post de erika__perdomo03 se esperan 11 segundos para abrir otro  - No errors detected
+12/11/2020 18:32:18 - el_pichy_oficial abriendo post de erika__perdomo03 se esperan 12 segundos para abrir otro  - No errors detected
+12/11/2020 18:36:14 - el_pichy_oficial Search_user_to_like ern_trendcare.id-No errors detected
+12/11/2020 18:36:36 - el_pichy_oficial Get user to like ern_trendcare.id-No errors detected
+12/11/2020 18:36:44 - el_pichy_oficial Get_media_to_like ern_trendcare.id-No errors detected
+12/11/2020 18:37:05 - el_pichy_oficial viendo seguidores de ern_trendcare.id - No errors detected
+12/11/2020 18:37:40 - el_pichy_oficial abriendo direct de message  se esperan 10 segundos - No errors detected
+12/11/2020 18:40:37 - el_pichy_oficial Like_to ern_trendcare.id - No errors detected
+12/11/2020 18:43:07 - el_pichy_oficial Like_to ern_trendcare.id - No errors detected
+12/11/2020 18:43:18 - Se le dio like a 2 post del usuario ern_trendcare.id y se encontraron los siguientes errores No hubo errores
+12/11/2020 18:43:51 - el_pichy_oficial Search_user_to_like _.exkabralibur619-No errors detected
+12/11/2020 18:44:12 - el_pichy_oficial Get user to like _.exkabralibur619-No errors detected
+12/11/2020 18:44:15 - el_pichy_oficial Get_media_to_like _.exkabralibur619-No errors detected
+12/11/2020 18:44:30 - el_pichy_oficial Entrando al perfil y obteniendo post de _.exkabralibur619 se esperan 12 segundos para pasar de página  - No errors detected
+12/11/2020 23:42:53 - Unexpected character encountered while parsing value: <. Path '', line 0, position 0.
+12/11/2020 23:45:44 - You can only view insights of your own media
+12/11/2020 23:55:51 - Insights are not avaialble, try again later
+12/11/2020 23:57:13 - Insights are not avaialble, try again later

@@ -502,7 +502,6 @@ C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Microsoft.CodeDom.Provi
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\netstandard.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Newtonsoft.Json.dll
-C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Oracle.DataAccess.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\System.Net.Http.Formatting.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\System.Web.Helpers.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\System.Web.Http.dll
@@ -539,6 +538,7 @@ C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\es\System.Web.Razor.res
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\es\System.Web.WebPages.resources.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProcess.csprojAssemblyReference.cache
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProcess.csproj.CoreCompileInputs.cache
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProcess.csproj.CopyComplete
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\LoginWithIAS.dll

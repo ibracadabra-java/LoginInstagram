@@ -995,6 +995,13 @@
             
             </summary>
         </member>
+        <member name="M:LoginWithIAS.Controllers.GestorTareasController.SaveTask(LoginWithIAS.Models.mTareasDiarias)">
+            <summary>
+            
+            </summary>
+            <param name="tareasDia"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.StoryProcessController">
             <summary>
             History Controler
@@ -1650,6 +1657,46 @@
         <member name="P:LoginWithIAS.Models.mStory.cantidad">
             <summary>
             Cantidad de historias a compartir
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mTarea">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTarea.id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTarea.info">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mTareas">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTareas.user">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTareas.tareas">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mTareasDiarias">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTareasDiarias.TareasDia">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mUserMetodo">

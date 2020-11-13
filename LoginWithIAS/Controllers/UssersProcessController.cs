@@ -1029,7 +1029,7 @@ namespace LoginWithIAS.Controllers
                 if (!string.IsNullOrEmpty(cliente.otheruser))
                 {
                     var user = await insta.UserProcessor.GetUserInfoByUsernameAsync(cliente.otheruser);
-
+                    
                     if (user.Succeeded)
                     {
                         if (user.Value.IsBusiness && user.Value.AccountType == InstaAccountType.Business)
@@ -1098,6 +1098,110 @@ namespace LoginWithIAS.Controllers
             {
 
                 throw;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="BusinesCount"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<InstaStatistics> GetEstadistica(mLogin BusinesCount) 
+        {
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            if (!(string.IsNullOrEmpty(BusinesCount.User) || string.IsNullOrEmpty(BusinesCount.Pass)))
+            {
+                var userSession = new UserSessionData
+                {
+                    UserName = BusinesCount.User,
+                    Password = BusinesCount.Pass
+                };
+                insta.SetUser(userSession);
+            }
+            else
+            {
+                log.Add("Deben introducir Usuario y Contraseña");
+                return null;
+            }
+
+            session.LoadSession(insta);
+
+            if (!insta.GetLoggedUser().Password.Equals(BusinesCount.Pass))
+            {
+                log.Add("Contraseña incorrecta");
+                return null;
+            }
+            if (insta.IsUserAuthenticated)
+            {
+                var busines = await insta.BusinessProcessor.GetStatisticsAsync();
+                if (busines.Succeeded) 
+                {
+                    return busines.Value;
+                }
+                else 
+                {
+                    log.Add(busines.Info.Message);
+                    return null;
+                }
+            }
+            else 
+            {
+                log.Add("No estas autenticado, logueese");
+                return null;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="BusinesCount"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<InstaMediaInsights> GetEstadisticaPost(mLogin BusinesCount)
+        {
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();            
+
+            if (!(string.IsNullOrEmpty(BusinesCount.User) || string.IsNullOrEmpty(BusinesCount.Pass)))
+            {
+                var userSession = new UserSessionData
+                {
+                    UserName = BusinesCount.User,
+                    Password = BusinesCount.Pass
+                };
+                insta.SetUser(userSession);
+            }
+            else
+            {
+                log.Add("Deben introducir Usuario y Contraseña");
+                return null;
+            }
+
+            session.LoadSession(insta);
+
+            if (!insta.GetLoggedUser().Password.Equals(BusinesCount.Pass))
+            {
+                log.Add("Contraseña incorrecta");
+                return null;
+            }
+            if (insta.IsUserAuthenticated)
+            {
+                var media = await insta.UserProcessor.GetUserMediaAsync(BusinesCount.User,PaginationParameters.MaxPagesToLoad(1));
+
+                var businesmedia = await insta.BusinessProcessor.GetMediaInsightsAsync(media.Value[3].Pk);
+                if (businesmedia.Succeeded)
+                {
+                    return businesmedia.Value;
+                }
+                else
+                {
+                    log.Add(businesmedia.Info.Message);
+                    return null;
+                }
+            }
+            else
+            {
+                log.Add("No estas autenticado, logueese");
+                return null;
             }
         }
 
