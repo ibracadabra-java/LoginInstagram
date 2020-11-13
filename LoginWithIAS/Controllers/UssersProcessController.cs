@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using LoginWithIAS.Utiles;
 using System.Web;
+using System.Threading;
 
 namespace LoginWithIAS.Controllers
 {
@@ -752,8 +753,8 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<List<string>> ListaFollowersUsers(mFollower followers)
         {
-            
-
+            int count = 1;
+            PaginationParameters pagination  = PaginationParameters.MaxPagesToLoad(1) ;           
             try
             {
                 List<string> devolver = new List<string>();
@@ -786,25 +787,30 @@ namespace LoginWithIAS.Controllers
                     var user = await insta.UserProcessor.GetUserAsync(followers.otheruser);
                     var userInfo = await insta.UserProcessor.GetFullUserInfoAsync(user.Value.Pk);
                     var cantFoller = userInfo.Value.UserDetail.FollowerCount;
-                    if (cantFoller > 4500) 
-                    {                       
-                        cantFoller = 4500;
-                    }                       
-                    var pag = (cantFoller / 100) + 1;
-                    
-                    var userlist = await insta.UserProcessor.GetUserFollowersAsync(followers.otheruser,PaginationParameters.MaxPagesToLoad(1),"",false,"2");
-                    if (userlist.Succeeded)
+                    var lengt = cantFoller / 100;
+                    for (int i = 0; i < lengt; i++)
                     {
+                        if (devolver.Count == 5000 * count)
+                        {
+                            count++;
+                            Thread.Sleep(1200000);
+                        }
+
+                        var userlist = await insta.UserProcessor.GetUserFollowersAsync(followers.otheruser, pagination, "", false, "2");
+                        log.Add(" Scrapeando usuarios de " + followers.User + "cantidad actual" + devolver.Count);
                         if (userlist.Succeeded)
                         {
-                            for (int i = 0; i < userlist.Value.Count; i++)
+                            if (userlist.Succeeded)
                             {
-                                devolver.Add(userlist.Value[i].UserName);
+                                for (int j = 0; j < userlist.Value.Count; j++)
+                                {
+                                    devolver.Add(userlist.Value[j].UserName);
+                                }
                             }
                         }
+                        else
+                            return null;
                     }
-                    else
-                        return null;
                 }
                 else
                     return null;
@@ -1064,7 +1070,7 @@ namespace LoginWithIAS.Controllers
         /// </summary>
         /// <param name="mFollow"></param>
         [HttpPost]
-        public async void VisitPerfil(mFollower mFollow)
+        public void VisitPerfil(mFollower mFollow)
         {
             try
             {
