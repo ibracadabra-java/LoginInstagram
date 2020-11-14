@@ -351,7 +351,8 @@ namespace LoginWithIAS.Controllers
             string cadena = "abcde";
             DateTime Dia = DateTime.Now;
             DateTime hora = DateTime.Now;
-
+            int cicloHora = 1;
+            int cicloDia = 1;
             var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
             if (!(string.IsNullOrEmpty(mlikemanypost.User) || string.IsNullOrEmpty(mlikemanypost.Pass)))
@@ -607,14 +608,24 @@ namespace LoginWithIAS.Controllers
                         LogError += " " + error;
                     log.Add("Se le dio like a " + count + " post del usuario " + userlista[y] + " y se encontraron los siguientes errores " + LogError);
 
-                    if (y > mlikemanypost.SleepHora(mlikemanypost.vel) && ( DateTime.Now - hora).TotalMinutes < 60)
+                    if (y == (mlikemanypost.SleepHora(mlikemanypost.vel)-1)*cicloHora)
                     {
-                        Thread.Sleep(valorandon.Next(45, 61) * 1000);
+                        cicloHora++;
+                        if ((DateTime.Now - hora).TotalMinutes < 60)
+                        {
+                            Thread.Sleep(valorandon.Next(45, 61) * 1000);
+                            
+                        }
                         hora = DateTime.Now;
                     }
-                    if (y > mlikemanypost.SleepDia(mlikemanypost.vel) && (DateTime.Now - Dia).TotalHours < 24)
+                    if (y >= (mlikemanypost.SleepDia(mlikemanypost.vel)-1)*cicloDia)
                     {
-                        Thread.Sleep(86400 * 1000 * 10);
+                        cicloDia++;
+                        if ((DateTime.Now - Dia).TotalHours < 24)
+                        {
+                            Thread.Sleep(86400 * 1000 * 10);
+                        }
+                        
                         Dia = DateTime.Now;
                     }
 
