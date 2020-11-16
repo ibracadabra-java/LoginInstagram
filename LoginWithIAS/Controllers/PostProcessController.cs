@@ -613,12 +613,20 @@ namespace LoginWithIAS.Controllers
                         cicloHora++;
                         if ((DateTime.Now - hora).TotalMinutes < 60)
                         {
+<<<<<<< HEAD
                             Thread.Sleep(valorandon.Next(45, 61)*60 * 1000);
+=======
+                            Thread.Sleep(valorandon.Next(45, 61) * 1000);
+>>>>>>> 681647d03d41c583cac245733e02d2573729d249
                             
                         }
                         hora = DateTime.Now;
                     }
+<<<<<<< HEAD
                     if (y == (mlikemanypost.SleepDia(mlikemanypost.vel)-1)*cicloDia)
+=======
+                    if (y >= (mlikemanypost.SleepDia(mlikemanypost.vel)-1)*cicloDia)
+>>>>>>> 681647d03d41c583cac245733e02d2573729d249
                     {
                         cicloDia++;
                         if ((DateTime.Now - Dia).TotalHours < 24)
