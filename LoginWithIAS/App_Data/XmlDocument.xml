@@ -4,6 +4,11 @@
         <name>LoginWithIAS</name>
     </assembly>
     <members>
+        <member name="T:LoginWithIAS.ApiBd.TareasBd">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.BundleConfig">
             <summary>
             
@@ -1661,6 +1666,11 @@
         <member name="P:LoginWithIAS.Models.mPost.tipo_media">
             <summary>
             Tipo de post
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mResultadoBd">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mStory">

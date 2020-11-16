@@ -61,7 +61,7 @@
     </Reference>
     <Reference Include="Oracle.DataAccess, Version=4.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Librerias\2.x\Oracle.DataAccess.dll</HintPath>
+      <HintPath>..\Librerias\Oracle.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -143,6 +143,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiBd\TareasBd.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="Models\mLogin.cs" />
     <Compile Include="Models\mMethodLike.cs" />
     <Compile Include="Models\mPost.cs" />
+    <Compile Include="Models\mResultadoBd.cs" />
     <Compile Include="Models\mStory.cs" />
     <Compile Include="Models\mTarea.cs" />
     <Compile Include="Models\mTareas.cs" />

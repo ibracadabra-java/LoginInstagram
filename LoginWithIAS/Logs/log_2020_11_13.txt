@@ -128,3 +128,83 @@
 13/11/2020 1:50:03 - Se le dio like a 2 post del usuario luis_miguel_g.o y se encontraron los siguientes errores No hubo errores
 13/11/2020 1:50:07 -  Scrapeando usuarios de raulalex1995cantidad actual500
 13/11/2020 1:50:09 - el_pichy_oficial Search_user_to_like daniela_sarahi20-No errors detected
+13/11/2020 3:32:19 - raulalex1995 Search_user_to_like deepak5405e-No errors detected
+13/11/2020 3:32:31 - raulalex1995 Get user to like deepak5405e-No errors detected
+13/11/2020 3:32:32 - raulalex1995 Get_media_to_like deepak5405e-No errors detected
+13/11/2020 3:32:51 - raulalex1995 viendo seguidores de deepak5405e - No errors detected
+13/11/2020 3:33:12 - raulalex1995 abriendo direct de message  se esperan 2 segundos - No errors detected
+13/11/2020 3:33:42 - raulalex1995 Like_to deepak5405e - No errors detected
+13/11/2020 3:33:52 - raulalex1995 Like_to deepak5405e - No errors detected
+13/11/2020 3:33:52 - Se le dio like a 2 post del usuario deepak5405e y se encontraron los siguientes errores No hubo errores
+13/11/2020 3:33:58 - raulalex1995 Search_user_to_like luis_miguel_g.o-No errors detected
+13/11/2020 3:34:07 - raulalex1995 Get user to like luis_miguel_g.o-No errors detected
+13/11/2020 3:34:07 - raulalex1995 Get_media_to_like luis_miguel_g.o-No errors detected
+13/11/2020 3:34:10 - raulalex1995 abriendo post de luis_miguel_g.o se esperan 2 segundos para abrir otro  - No errors detected
+13/11/2020 3:34:56 - raulalex1995 abriendo post de luis_miguel_g.o se esperan 4 segundos para abrir otro  - No errors detected
+13/11/2020 3:35:03 - raulalex1995 abriendo post de luis_miguel_g.o se esperan 2 segundos para abrir otro  - No errors detected
+13/11/2020 3:35:08 - raulalex1995 abriendo post de luis_miguel_g.o se esperan 2 segundos para abrir otro  - No errors detected
+13/11/2020 3:35:29 - raulalex1995 abriendo direct de message  se esperan 3 segundos - No errors detected
+13/11/2020 3:35:53 - raulalex1995 Like_to luis_miguel_g.o - No errors detected
+13/11/2020 3:36:05 - raulalex1995 Like_to luis_miguel_g.o - No errors detected
+13/11/2020 3:36:05 - Se le dio like a 2 post del usuario luis_miguel_g.o y se encontraron los siguientes errores No hubo errores
+13/11/2020 3:36:10 - raulalex1995 Search_user_to_like daniela_sarahi20-No errors detected
+13/11/2020 3:36:20 - raulalex1995 Get user to like daniela_sarahi20-No errors detected
+13/11/2020 3:36:20 - raulalex1995 Get_media_to_like daniela_sarahi20-No errors detected
+13/11/2020 3:36:26 - raulalex1995 Entrando al perfil y obteniendo post de daniela_sarahi20 se esperan 2 segundos  - No errors detected
+13/11/2020 3:36:45 - raulalex1995 abriendo post de daniela_sarahi20 se esperan 2 segundos para abrir otro  - No errors detected
+13/11/2020 3:36:50 - raulalex1995 abriendo post de daniela_sarahi20 se esperan 1 segundos para abrir otro  - No errors detected
+13/11/2020 3:36:56 - raulalex1995 abriendo post de daniela_sarahi20 se esperan 2 segundos para abrir otro  - No errors detected
+13/11/2020 3:37:00 - raulalex1995 abriendo post de daniela_sarahi20 se esperan 3 segundos para abrir otro  - No errors detected
+13/11/2020 3:37:07 - raulalex1995 abriendo post de daniela_sarahi20 se esperan 4 segundos para abrir otro  - No errors detected
+13/11/2020 3:37:14 - raulalex1995 abriendo post de daniela_sarahi20 se esperan 4 segundos para abrir otro  - No errors detected
+13/11/2020 3:37:18 - raulalex1995 abriendo post de daniela_sarahi20 se esperan 1 segundos para abrir otro  - No errors detected
+13/11/2020 3:37:46 - raulalex1995 Like_to daniela_sarahi20 - No errors detected
+13/11/2020 3:37:54 - raulalex1995 Like_to daniela_sarahi20 - No errors detected
+13/11/2020 3:37:54 - Se le dio like a 2 post del usuario daniela_sarahi20 y se encontraron los siguientes errores No hubo errores
+13/11/2020 3:37:56 - raulalex1995 Search_user_to_like andresithomendoza348gmail.com7-No errors detected
+13/11/2020 3:38:05 - raulalex1995 Get user to like andresithomendoza348gmail.com7-No errors detected
+13/11/2020 3:38:05 - raulalex1995 Get_media_to_like andresithomendoza348gmail.com7-No errors detected
+13/11/2020 3:38:11 - raulalex1995 Entrando al perfil y obteniendo post de andresithomendoza348gmail.com7 se esperan 2 segundos  - No errors detected
+13/11/2020 3:38:36 - raulalex1995 viendo seguidores de andresithomendoza348gmail.com7 - No errors detected
+13/11/2020 3:38:59 - raulalex1995 Like_to andresithomendoza348gmail.com7 - No errors detected
+13/11/2020 3:39:07 - raulalex1995 Like_to andresithomendoza348gmail.com7 - No errors detected
+13/11/2020 3:39:07 - Se le dio like a 2 post del usuario andresithomendoza348gmail.com7 y se encontraron los siguientes errores No hubo errores
+13/11/2020 3:39:13 - raulalex1995 Search_user_to_like the_net_02-No errors detected
+13/11/2020 3:39:22 - raulalex1995 Get user to like the_net_02-No errors detected
+13/11/2020 3:39:22 - raulalex1995 Get_media_to_like the_net_02-No errors detected
+13/11/2020 3:39:25 - raulalex1995 abriendo direct de message  se esperan 4 segundos - No errors detected
+13/11/2020 3:40:15 - raulalex1995 Like_to the_net_02 - No errors detected
+13/11/2020 3:40:27 - raulalex1995 Like_to the_net_02 - No errors detected
+13/11/2020 3:40:27 - Se le dio like a 2 post del usuario the_net_02 y se encontraron los siguientes errores No hubo errores
+13/11/2020 3:40:32 - raulalex1995 Search_user_to_like garcialaura814-No errors detected
+13/11/2020 3:40:42 - raulalex1995 Get user to like garcialaura814-No errors detected
+13/11/2020 3:40:42 - raulalex1995 Get_media_to_like garcialaura814-No errors detected
+13/11/2020 3:40:45 - raulalex1995 abriendo post de garcialaura814 se esperan 4 segundos para abrir otro  - No errors detected
+13/11/2020 3:40:52 - raulalex1995 abriendo post de garcialaura814 se esperan 1 segundos para abrir otro  - No errors detected
+13/11/2020 3:40:57 - raulalex1995 abriendo post de garcialaura814 se esperan 2 segundos para abrir otro  - No errors detected
+13/11/2020 3:41:03 - raulalex1995 abriendo post de garcialaura814 se esperan 3 segundos para abrir otro  - No errors detected
+13/11/2020 3:41:09 - raulalex1995 abriendo post de garcialaura814 se esperan 2 segundos para abrir otro  - No errors detected
+13/11/2020 3:41:15 - raulalex1995 abriendo post de garcialaura814 se esperan 2 segundos para abrir otro  - No errors detected
+13/11/2020 3:41:49 - raulalex1995 viendo seguidores de garcialaura814 - No errors detected
+13/11/2020 3:42:14 - raulalex1995 Like_to garcialaura814 - No errors detected
+13/11/2020 3:42:24 - raulalex1995 Like_to garcialaura814 - No errors detected
+13/11/2020 3:42:24 - Se le dio like a 2 post del usuario garcialaura814 y se encontraron los siguientes errores No hubo errores
+13/11/2020 3:42:28 - raulalex1995 Search_user_to_like polarizadosvillavicencio-No errors detected
+13/11/2020 3:42:37 - raulalex1995 Get user to like polarizadosvillavicencio-No errors detected
+13/11/2020 3:42:37 - raulalex1995 Get_media_to_like polarizadosvillavicencio-No errors detected
+13/11/2020 3:42:43 - raulalex1995 Entrando al perfil y obteniendo post de polarizadosvillavicencio se esperan 4 segundos  - No errors detected
+13/11/2020 3:43:07 - raulalex1995 viendo seguidores de polarizadosvillavicencio - No errors detected
+13/11/2020 3:43:32 - raulalex1995 Like_to polarizadosvillavicencio - No errors detected
+13/11/2020 3:43:42 - raulalex1995 Like_to polarizadosvillavicencio - No errors detected
+13/11/2020 3:43:42 - Se le dio like a 2 post del usuario polarizadosvillavicencio y se encontraron los siguientes errores No hubo errores
+13/11/2020 3:43:45 - raulalex1995 Search_user_to_like maripazdiazcarbajal-No errors detected
+13/11/2020 3:43:54 - raulalex1995 Get user to like maripazdiazcarbajal-No errors detected
+13/11/2020 3:43:54 - raulalex1995 Get_media_to_like maripazdiazcarbajal-No errors detected
+13/11/2020 3:43:57 - raulalex1995 abriendo direct de message  se esperan 3 segundos - No errors detected
+13/11/2020 3:44:40 - raulalex1995 Like_to maripazdiazcarbajal - No errors detected
+13/11/2020 3:44:50 - raulalex1995 Like_to maripazdiazcarbajal - No errors detected
+13/11/2020 3:44:50 - Se le dio like a 2 post del usuario maripazdiazcarbajal y se encontraron los siguientes errores No hubo errores
+13/11/2020 3:44:56 - raulalex1995 Search_user_to_like mireiacp4-No errors detected
+13/11/2020 3:45:05 - raulalex1995 Get user to like mireiacp4-No errors detected
+13/11/2020 3:45:05 - raulalex1995 Get_media_to_like mireiacp4-No errors detected
+13/11/2020 3:45:08 - raulalex1995 abriendo direct de message  se esperan 1 segundos - No errors detected
