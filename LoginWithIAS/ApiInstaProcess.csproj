@@ -143,6 +143,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiBd\OracleDatabaseHelper.cs" />
     <Compile Include="ApiBd\TareasBd.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Controllers\GestorTareasController.cs" />
     <Compile Include="Controllers\StoryProcessController.cs" />
     <Compile Include="Controllers\MessageProcessController.cs" />
+    <Compile Include="Controllers\TareasController.cs" />
     <Compile Include="Controllers\UssersProcessController.cs" />
     <Compile Include="Controllers\PostProcessController.cs" />
     <Compile Include="Controllers\LoginProcessController.cs" />
@@ -264,7 +266,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Tareas\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
