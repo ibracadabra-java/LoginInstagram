@@ -199,5 +199,68 @@ namespace LoginWithIAS.Controllers
             }
             return false;
         }
+
+        /// <summary>
+        /// Determina si un usuario ha sido eliminado por Instagram o la cuenta ha sido deshabilidata o
+        /// ha bloqueado a nuestro cliente
+        /// </summary>
+        /// <param name="otrocliente">Por parametro se logean en el sistema con otro cliente y se pasa por parametro el identificador del usuario que 
+        /// desean saber si fue elimiando por instagram p simplemente bloqueo o dejo de seguir a nuestro cliente principal</param>
+        /// <returns></returns>
+        public async Task<enResponseToken> Detector_Cuentas(mcuentas otrocliente)
+        {
+            try
+            {
+                enResponseToken token = new enResponseToken();
+                
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(otrocliente.User) || string.IsNullOrEmpty(otrocliente.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = otrocliente.User,
+                        Password = otrocliente.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(otrocliente.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+
+                var user = await insta.UserProcessor.GetUserInfoByIdAsync(otrocliente.Pk_Other_User);
+                if (user.Succeeded)
+                {
+                    token.Message = "El usuario dejo de seguir a nuestro cliente";
+                    
+                    return token;
+                }
+                else
+                {
+                    token.Message = "El usuario no existe o ha sido eliminado";
+                    return token;
+                }
+            }
+            catch (Exception s)
+            {
+                throw new Exception(s.Message);
+            }
+        }
+
+
+
+
+
     }
 }

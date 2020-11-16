@@ -1,0 +1,169 @@
+14/11/2020 11:09:01 - Debe autenticarse primero
+14/11/2020 11:26:09 - raulalex1995 Search_user_to_like miguel__angelb-No errors detected
+14/11/2020 11:26:11 - raulalex1995 Get user to like miguel__angelb-No errors detected
+14/11/2020 11:26:11 - raulalex1995 Get_media_to_like miguel__angelb-No errors detected
+14/11/2020 11:26:11 - raulalex1995 Get_media_to_like miguel__angelb- No tiene publicaciones
+14/11/2020 11:26:11 - Se le dio like a 0 post del usuario miguel__angelb y se encontraron los siguientes errores No hubo errores
+14/11/2020 11:26:12 - raulalex1995 Search_user_to_like cami_tovar15-No errors detected
+14/11/2020 11:26:14 - raulalex1995 Get user to like cami_tovar15-No errors detected
+14/11/2020 11:26:14 - raulalex1995 Get_media_to_like cami_tovar15-No errors detected
+14/11/2020 11:26:15 - raulalex1995 viendo seguidores de cami_tovar15 - No errors detected
+14/11/2020 11:26:31 - raulalex1995 abriendo direct de message  se esperan 4 segundos - No errors detected
+14/11/2020 11:26:46 - Se le dio like a 0 post del usuario cami_tovar15 y se encontraron los siguientes errores No hubo errores
+14/11/2020 11:26:46 - raulalex1995 Search_user_to_like sheluvs.erasmo-No errors detected
+14/11/2020 11:26:48 - raulalex1995 Get user to like sheluvs.erasmo-No errors detected
+14/11/2020 11:26:48 - raulalex1995 Get_media_to_like sheluvs.erasmo-No errors detected
+14/11/2020 11:26:49 - raulalex1995 abriendo post de sheluvs.erasmo se esperan 4 segundos para abrir otro  - No errors detected
+14/11/2020 11:26:52 - raulalex1995 abriendo post de sheluvs.erasmo se esperan 3 segundos para abrir otro  - No errors detected
+14/11/2020 11:26:54 - raulalex1995 abriendo post de sheluvs.erasmo se esperan 4 segundos para abrir otro  - No errors detected
+14/11/2020 11:26:56 - raulalex1995 abriendo post de sheluvs.erasmo se esperan 3 segundos para abrir otro  - No errors detected
+14/11/2020 11:27:01 - raulalex1995 abriendo post de sheluvs.erasmo se esperan 4 segundos para abrir otro  - No errors detected
+14/11/2020 11:27:06 - raulalex1995 abriendo post de sheluvs.erasmo se esperan 2 segundos para abrir otro  - No errors detected
+14/11/2020 11:31:07 - raulalex1995 Search_user_to_like miguel__angelb-No errors detected
+14/11/2020 11:31:08 - raulalex1995 Get user to like miguel__angelb-No errors detected
+14/11/2020 11:31:08 - raulalex1995 Get_media_to_like miguel__angelb-No errors detected
+14/11/2020 11:31:09 - raulalex1995 Get_media_to_like miguel__angelb- No tiene publicaciones
+14/11/2020 11:31:09 - Se le dio like a 0 post del usuario miguel__angelb y se encontraron los siguientes errores No hubo errores
+14/11/2020 11:31:13 - raulalex1995 Search_user_to_like cami_tovar15-No errors detected
+14/11/2020 11:31:15 - raulalex1995 Get user to like cami_tovar15-No errors detected
+14/11/2020 11:31:15 - raulalex1995 Get_media_to_like cami_tovar15-No errors detected
+14/11/2020 11:31:16 - raulalex1995 abriendo post de cami_tovar15 se esperan 3 segundos para abrir otro  - No errors detected
+14/11/2020 11:31:18 - raulalex1995 abriendo post de cami_tovar15 se esperan 2 segundos para abrir otro  - No errors detected
+14/11/2020 11:31:20 - raulalex1995 abriendo post de cami_tovar15 se esperan 4 segundos para abrir otro  - No errors detected
+14/11/2020 11:31:24 - raulalex1995 abriendo post de cami_tovar15 se esperan 4 segundos para abrir otro  - No errors detected
+14/11/2020 11:31:29 - raulalex1995 abriendo post de cami_tovar15 se esperan 3 segundos para abrir otro  - No errors detected
+14/11/2020 11:31:33 - raulalex1995 abriendo post de cami_tovar15 se esperan 3 segundos para abrir otro  - No errors detected
+14/11/2020 11:31:54 - raulalex1995 viendo seguidores de cami_tovar15 - No errors detected
+14/11/2020 11:32:11 - Se le dio like a 0 post del usuario cami_tovar15 y se encontraron los siguientes errores No hubo errores
+14/11/2020 11:32:12 - raulalex1995 Search_user_to_like sheluvs.erasmo-No errors detected
+14/11/2020 11:32:13 - raulalex1995 Get user to like sheluvs.erasmo-No errors detected
+14/11/2020 11:32:13 - raulalex1995 Get_media_to_like sheluvs.erasmo-No errors detected
+14/11/2020 11:32:19 - raulalex1995 viendo seguidores de sheluvs.erasmo - No errors detected
+14/11/2020 11:32:35 - raulalex1995 abriendo direct de message  se esperan 4 segundos - No errors detected
+14/11/2020 11:33:00 - raulalex1995 Like_to sheluvs.erasmo - No errors detected
+14/11/2020 11:33:00 - Se le dio like a 1 post del usuario sheluvs.erasmo y se encontraron los siguientes errores No hubo errores
+14/11/2020 11:33:01 - raulalex1995 Search_user_to_like popisrdoficial-No errors detected
+14/11/2020 11:33:03 - raulalex1995 Get user to like popisrdoficial-No errors detected
+14/11/2020 11:33:03 - raulalex1995 Get_media_to_like popisrdoficial-No errors detected
+14/11/2020 11:33:04 - raulalex1995 abriendo post de popisrdoficial se esperan 4 segundos para abrir otro  - No errors detected
+14/11/2020 11:33:06 - raulalex1995 abriendo post de popisrdoficial se esperan 2 segundos para abrir otro  - No errors detected
+14/11/2020 11:33:10 - raulalex1995 abriendo post de popisrdoficial se esperan 2 segundos para abrir otro  - No errors detected
+14/11/2020 11:33:14 - raulalex1995 abriendo post de popisrdoficial se esperan 1 segundos para abrir otro  - No errors detected
+14/11/2020 11:33:19 - raulalex1995 abriendo post de popisrdoficial se esperan 2 segundos para abrir otro  - No errors detected
+14/11/2020 11:33:22 - raulalex1995 abriendo post de popisrdoficial se esperan 1 segundos para abrir otro  - No errors detected
+14/11/2020 11:33:24 - raulalex1995 abriendo post de popisrdoficial se esperan 3 segundos para abrir otro  - No errors detected
+14/11/2020 11:34:14 - raulalex1995 Like_to popisrdoficial - No errors detected
+14/11/2020 11:34:22 - raulalex1995 Like_to popisrdoficial - No errors detected
+14/11/2020 11:34:29 - raulalex1995 Like_to popisrdoficial - No errors detected
+14/11/2020 11:34:29 - Se le dio like a 3 post del usuario popisrdoficial y se encontraron los siguientes errores No hubo errores
+14/11/2020 11:34:30 - raulalex1995 Search_user_to_like adrianoestanis-No errors detected
+14/11/2020 11:34:32 - raulalex1995 Get user to like adrianoestanis-No errors detected
+14/11/2020 11:34:32 - raulalex1995 Get_media_to_like adrianoestanis-No errors detected
+14/11/2020 11:34:33 - raulalex1995 Entrando al perfil y obteniendo post de adrianoestanis se esperan 1 segundos  - No errors detected
+14/11/2020 11:34:52 - raulalex1995 abriendo direct de message  se esperan 3 segundos - No errors detected
+14/11/2020 11:35:10 - Se le dio like a 0 post del usuario adrianoestanis y se encontraron los siguientes errores No hubo errores
+14/11/2020 11:35:11 - raulalex1995 Search_user_to_like xiomaraalexandrags-No errors detected
+14/11/2020 11:35:12 - raulalex1995 Get user to like xiomaraalexandrags-No errors detected
+14/11/2020 11:35:12 - raulalex1995 Get_media_to_like xiomaraalexandrags-No errors detected
+14/11/2020 11:35:14 - raulalex1995 Entrando al perfil y obteniendo post de xiomaraalexandrags se esperan 4 segundos  - No errors detected
+14/11/2020 11:35:30 - raulalex1995 abriendo direct de message  se esperan 4 segundos - No errors detected
+14/11/2020 11:35:46 - Se le dio like a 0 post del usuario xiomaraalexandrags y se encontraron los siguientes errores No hubo errores
+14/11/2020 12:52:23 - raulalex1995 Search_user_to_like geraldinesarmientoroa-No errors detected
+14/11/2020 12:52:26 - raulalex1995 Get user to like geraldinesarmientoroa-No errors detected
+14/11/2020 12:52:26 - raulalex1995 Get_media_to_like geraldinesarmientoroa-No errors detected
+14/11/2020 12:52:28 - raulalex1995 Entrando al perfil y obteniendo post de geraldinesarmientoroa se esperan 2 segundos  - No errors detected
+14/11/2020 12:52:47 - raulalex1995 viendo seguidores de geraldinesarmientoroa - Error al enviar la solicitud.
+14/11/2020 12:53:12 - raulalex1995 Like_to geraldinesarmientoroa - Error al enviar la solicitud.
+14/11/2020 12:53:20 - raulalex1995 Like_to geraldinesarmientoroa - Error al enviar la solicitud.
+14/11/2020 12:53:29 - raulalex1995 Like_to geraldinesarmientoroa - No errors detected
+14/11/2020 12:53:33 - raulalex1995 Search_user_to_like geraldinesarmientoroa-No errors detected
+14/11/2020 12:53:35 - raulalex1995 Get user to like geraldinesarmientoroa-No errors detected
+14/11/2020 12:53:35 - raulalex1995 Get_media_to_like geraldinesarmientoroa-No errors detected
+14/11/2020 12:53:37 - raulalex1995 Entrando al perfil y obteniendo post de geraldinesarmientoroa se esperan 1 segundos  - No errors detected
+14/11/2020 12:53:37 - raulalex1995 Like_to geraldinesarmientoroa - No errors detected
+14/11/2020 12:53:42 - raulalex1995 Like_to geraldinesarmientoroa - No errors detected
+14/11/2020 12:53:42 - Se le dio like a 3 post del usuario geraldinesarmientoroa y se encontraron los siguientes errores No hubo errores Error al enviar la solicitud. Error al enviar la solicitud.
+14/11/2020 12:53:43 - raulalex1995 Search_user_to_like leonardocrombet-No errors detected
+14/11/2020 12:53:45 - raulalex1995 Get user to like leonardocrombet-No errors detected
+14/11/2020 12:53:45 - raulalex1995 Get_media_to_like leonardocrombet-No errors detected
+14/11/2020 12:53:46 - raulalex1995 viendo seguidores de leonardocrombet - No errors detected
+14/11/2020 12:53:56 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 4 segundos para ver otra  - No errors detected
+14/11/2020 12:53:57 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 3 segundos para ver otra  - No errors detected
+14/11/2020 12:53:58 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 2 segundos para ver otra  - No errors detected
+14/11/2020 12:54:02 - raulalex1995 abriendo direct de message  se esperan 2 segundos - No errors detected
+14/11/2020 12:55:01 - raulalex1995 Search_user_to_like geraldinesarmientoroa-No errors detected
+14/11/2020 12:55:09 - raulalex1995 Get user to like geraldinesarmientoroa-No errors detected
+14/11/2020 12:55:12 - raulalex1995 Get_media_to_like geraldinesarmientoroa-No errors detected
+14/11/2020 12:55:22 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 4 segundos para abrir otro  - No errors detected
+14/11/2020 12:55:27 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 1 segundos para abrir otro  - No errors detected
+14/11/2020 12:55:30 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 2 segundos para abrir otro  - No errors detected
+14/11/2020 12:55:33 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 2 segundos para abrir otro  - No errors detected
+14/11/2020 12:55:35 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 1 segundos para abrir otro  - No errors detected
+14/11/2020 12:55:53 - raulalex1995 abriendo direct de message  se esperan 2 segundos - No errors detected
+14/11/2020 12:56:13 - raulalex1995 Like_to geraldinesarmientoroa - No errors detected
+14/11/2020 12:56:20 - raulalex1995 Like_to geraldinesarmientoroa - No errors detected
+14/11/2020 12:56:29 - raulalex1995 Like_to geraldinesarmientoroa - No errors detected
+14/11/2020 12:56:29 - Se le dio like a 3 post del usuario geraldinesarmientoroa y se encontraron los siguientes errores No hubo errores
+14/11/2020 12:56:47 - raulalex1995 Search_user_to_like leonardocrombet-No errors detected
+14/11/2020 12:56:49 - raulalex1995 Get user to like leonardocrombet-No errors detected
+14/11/2020 12:56:49 - raulalex1995 Get_media_to_like leonardocrombet-No errors detected
+14/11/2020 12:56:51 - raulalex1995 Entrando al perfil y obteniendo post de leonardocrombet se esperan 4 segundos  - No errors detected
+14/11/2020 12:57:12 - raulalex1995 abriendo direct de message  se esperan 3 segundos - No errors detected
+14/11/2020 12:57:41 - raulalex1995 Like_to leonardocrombet - No errors detected
+14/11/2020 12:57:49 - raulalex1995 Like_to leonardocrombet - No errors detected
+14/11/2020 12:57:58 - raulalex1995 Like_to leonardocrombet - No errors detected
+14/11/2020 12:58:05 - Se le dio like a 3 post del usuario leonardocrombet y se encontraron los siguientes errores No hubo errores
+14/11/2020 12:58:23 - raulalex1995 Search_user_to_like keylincalljas08-No errors detected
+14/11/2020 12:58:24 - raulalex1995 Get_User_to_like keylincalljas08-Can't find this user: keylincalljas08
+14/11/2020 12:58:29 - Se le dio like a 0 post del usuario keylincalljas08 y se encontraron los siguientes errores No hubo errores
+14/11/2020 12:58:40 - raulalex1995 Search_user_to_like mdcpooltile-No errors detected
+14/11/2020 12:58:42 - raulalex1995 Get user to like mdcpooltile-No errors detected
+14/11/2020 12:58:42 - raulalex1995 Get_media_to_like mdcpooltile-No errors detected
+14/11/2020 12:58:43 - raulalex1995 Entrando al perfil y obteniendo post de mdcpooltile se esperan 2 segundos  - No errors detected
+14/11/2020 12:59:04 - raulalex1995 viendo seguidores de mdcpooltile - No errors detected
+14/11/2020 12:59:31 - raulalex1995 Like_to mdcpooltile - No errors detected
+14/11/2020 12:59:38 - raulalex1995 Like_to mdcpooltile - No errors detected
+14/11/2020 12:59:43 - raulalex1995 Like_to mdcpooltile - No errors detected
+14/11/2020 12:59:50 - Se le dio like a 3 post del usuario mdcpooltile y se encontraron los siguientes errores No hubo errores
+14/11/2020 13:00:04 - raulalex1995 Search_user_to_like ogbeateangel-No errors detected
+14/11/2020 13:00:05 - raulalex1995 Get_User_to_like ogbeateangel-Can't find this user: ogbeateangel
+14/11/2020 13:00:07 - Se le dio like a 0 post del usuario ogbeateangel y se encontraron los siguientes errores No hubo errores
+14/11/2020 13:00:18 - raulalex1995 Search_user_to_like leidy_d_oficial-No errors detected
+14/11/2020 13:00:20 - raulalex1995 Get user to like leidy_d_oficial-No errors detected
+14/11/2020 13:00:20 - raulalex1995 Get_media_to_like leidy_d_oficial-No errors detected
+14/11/2020 13:00:22 - raulalex1995 Entrando al perfil y obteniendo post de leidy_d_oficial se esperan 1 segundos  - No errors detected
+14/11/2020 13:01:01 - raulalex1995 Like_to leidy_d_oficial - No errors detected
+14/11/2020 13:01:10 - raulalex1995 Like_to leidy_d_oficial - No errors detected
+14/11/2020 13:01:19 - raulalex1995 Like_to leidy_d_oficial - No errors detected
+14/11/2020 13:01:27 - Se le dio like a 3 post del usuario leidy_d_oficial y se encontraron los siguientes errores No hubo errores
+14/11/2020 13:05:52 - raulalex1995 Search_user_to_like geraldinesarmientoroa-No errors detected
+14/11/2020 13:05:55 - raulalex1995 Get user to like geraldinesarmientoroa-No errors detected
+14/11/2020 13:05:55 - raulalex1995 Get_media_to_like geraldinesarmientoroa-No errors detected
+14/11/2020 13:05:56 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 10 segundos para abrir otro  - No errors detected
+14/11/2020 13:06:07 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 11 segundos para abrir otro  - No errors detected
+14/11/2020 13:06:20 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 12 segundos para abrir otro  - No errors detected
+14/11/2020 13:06:32 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 11 segundos para abrir otro  - No errors detected
+14/11/2020 13:06:44 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 12 segundos para abrir otro  - No errors detected
+14/11/2020 13:06:56 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 11 segundos para abrir otro  - No errors detected
+14/11/2020 13:07:06 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 11 segundos para abrir otro  - No errors detected
+14/11/2020 13:07:17 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 12 segundos para abrir otro  - No errors detected
+14/11/2020 13:07:29 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 12 segundos para abrir otro  - No errors detected
+14/11/2020 13:07:39 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 12 segundos para abrir otro  - No errors detected
+14/11/2020 13:07:52 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 11 segundos para abrir otro  - No errors detected
+14/11/2020 13:08:03 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 11 segundos para abrir otro  - No errors detected
+14/11/2020 13:08:15 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 11 segundos para abrir otro  - No errors detected
+14/11/2020 13:08:25 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 11 segundos para abrir otro  - No errors detected
+14/11/2020 13:08:37 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 10 segundos para abrir otro  - No errors detected
+14/11/2020 13:08:49 - raulalex1995 abriendo post de geraldinesarmientoroa se esperan 11 segundos para abrir otro  - No errors detected
+14/11/2020 13:09:16 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 10 segundos para ver otra  - No errors detected
+14/11/2020 13:09:18 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 11 segundos para ver otra  - No errors detected
+14/11/2020 13:09:19 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 11 segundos para ver otra  - No errors detected
+14/11/2020 13:09:20 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 12 segundos para ver otra  - No errors detected
+14/11/2020 13:09:21 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 12 segundos para ver otra  - No errors detected
+14/11/2020 13:09:22 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 12 segundos para ver otra  - No errors detected
+14/11/2020 13:09:23 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 10 segundos para ver otra  - No errors detected
+14/11/2020 13:09:23 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 10 segundos para ver otra  - No errors detected
+14/11/2020 13:09:24 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 12 segundos para ver otra  - No errors detected
+14/11/2020 13:09:25 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 11 segundos para ver otra  - No errors detected
+14/11/2020 13:09:26 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 12 segundos para ver otra  - No errors detected
+14/11/2020 13:09:27 - raulalex1995 viendo historia de geraldinesarmientoroa se esperan 11 segundos para ver otra  - No errors detected

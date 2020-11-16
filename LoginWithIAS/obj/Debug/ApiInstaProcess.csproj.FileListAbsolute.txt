@@ -461,7 +461,6 @@ D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\e
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.WebPages.resources.dll
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.WebPages.Deployment.resources.dll
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.WebPages.Razor.resources.dll
-D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\obj\Debug\ApiInstaProcess.csprojAssemblyReference.cache
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\obj\Debug\ApiInstaProcess.csproj.CoreCompileInputs.cache
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\obj\Debug\ApiInstaProcess.csproj.CopyComplete
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\obj\Debug\LoginWithIAS.dll
@@ -703,3 +702,4 @@ D:\Study\Programacion\Mi Codigo\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProc
 D:\Study\Programacion\Mi Codigo\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProcess.csproj.CopyComplete
 D:\Study\Programacion\Mi Codigo\LoginWithIAS\LoginWithIAS\obj\Debug\LoginWithIAS.dll
 D:\Study\Programacion\Mi Codigo\LoginWithIAS\LoginWithIAS\obj\Debug\LoginWithIAS.pdb
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Oracle.DataAccess.dll
