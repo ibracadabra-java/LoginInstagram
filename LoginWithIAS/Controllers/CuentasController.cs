@@ -34,7 +34,7 @@ namespace LoginWithIAS.Controllers
         }
 
         /// <summary>
-        /// Este metodo no permitira definir si la cuenta de un usurio es falsa o poco inactiva
+        /// Este metodo nos permitira definir si la cuenta de un usurio es falsa o poco inactiva
         /// </summary>
         /// <returns></returns>
         public async Task<enResponseToken> Cuentas_Ainactivas(mcuentas cuentas)
