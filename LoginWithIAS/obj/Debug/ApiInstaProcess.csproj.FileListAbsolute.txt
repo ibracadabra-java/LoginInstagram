@@ -595,7 +595,6 @@ C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\System.Web.WebPages.Raz
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Thrift.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\WebGrease.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\BouncyCastle.Crypto.xml
-C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\InstagramApiSharp.pdb
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Newtonsoft.Json.xml
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\System.Net.Http.Formatting.xml
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\System.Web.Helpers.xml

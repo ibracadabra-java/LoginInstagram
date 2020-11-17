@@ -9,6 +9,14 @@
             
             </summary>
         </member>
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.insertarTareas(LoginWithIAS.Models.mMethodLike,System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="mmethodlike"></param>
+            <param name="userlist"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.BundleConfig">
             <summary>
             
@@ -984,15 +992,17 @@
         </member>
         <member name="M:LoginWithIAS.Controllers.CuentasController.Cuentas_Ainactivas(LoginWithIAS.Models.mcuentas)">
             <summary>
-            Este metodo no permitira definir si la cuenta de un usurio es falsa o poco inactiva
+            Este metodo nos permitira definir si la cuenta de un usurio es falsa o poco inactiva
             </summary>
             <returns></returns>
         </member>
-        <member name="M:LoginWithIAS.Controllers.CuentasController.Detector_Cuentas(LoginWithIAS.Models.mcuentas,LoginWithIAS.Models.mLogin)">
+        <member name="M:LoginWithIAS.Controllers.CuentasController.Detector_Cuentas(LoginWithIAS.Models.mcuentas)">
             <summary>
             Determina si un usuario ha sido eliminado por Instagram o la cuenta ha sido deshabilidata o
             ha bloqueado a nuestro cliente
             </summary>
+            <param name="otrocliente">Por parametro se logean en el sistema con otro cliente y se pasa por parametro el identificador del usuario que 
+            desean saber si fue elimiando por instagram p simplemente bloqueo o dejo de seguir a nuestro cliente principal</param>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.Controllers.DeviceProcessController">
@@ -1111,6 +1121,18 @@
             Enviar mensaje directo desde el search
             </summary>
             <param name="chat"></param>
+            <returns></returns>
+        </member>
+        <member name="T:LoginWithIAS.Controllers.TareasController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.TareasController.InsertarTareas(LoginWithIAS.Models.mTareasDiarias)">
+            <summary>
+            
+            </summary>
+            <param name="TareasDia"></param>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.Controllers.UssersProcessController">
@@ -1515,7 +1537,7 @@
         </member>
         <member name="P:LoginWithIAS.Models.mcuentas.Other_User">
             <summary>
-            Usuario
+            Otro Usuario
             </summary>
         </member>
         <member name="P:LoginWithIAS.Models.mcuentas.Pk_Other_User">

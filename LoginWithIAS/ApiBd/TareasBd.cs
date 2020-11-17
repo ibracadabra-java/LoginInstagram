@@ -21,8 +21,9 @@ namespace LoginWithIAS.ApiBd
         /// 
         /// </summary>
         /// <param name="mmethodlike"></param>
+        /// <param name="userlist"></param>
         /// <returns></returns>
-        public mResultadoBd insertarTareas(mMethodLike mmethodlike) 
+        public mResultadoBd insertarTareas(mMethodLike mmethodlike,string[] userlist) 
         {                  
 
 
@@ -33,6 +34,7 @@ namespace LoginWithIAS.ApiBd
                     parametros.Add(new OracleParameter("X_USER", OracleDbType.Varchar2, mmethodlike.User, ParameterDirection.Input));
                     parametros.Add(new OracleParameter("X_VEL", OracleDbType.Varchar2, mmethodlike.vel, ParameterDirection.Input));
                     parametros.Add(new OracleParameter("X_CANT", OracleDbType.Int32, mmethodlike.cantLike, ParameterDirection.Input));
+                    parametros.Add(new OracleParameter("X_USERLIST", OracleDbType.Array, userlist, ParameterDirection.Input));
                     parametros.Add(new OracleParameter("X_ERROR", OracleDbType.RefCursor) { Direction = ParameterDirection.Output });
 
                  OracleDatabaseHelper.RowMapper<mResultadoBd> rowMapper = (delegate (OracleDataReader oracleDataReader)
@@ -51,7 +53,7 @@ namespace LoginWithIAS.ApiBd
                 return objEnResultado;
                });
 
-            return objResultBd = OracleDatabaseHelper.ExecuteToEntity("PRC_TAREA_INSERTAR", parametros, "X_ERROR", rowMapper, TipoPaquete.MANT);             
+            return objResultBd = OracleDatabaseHelper.ExecuteToEntityMant("PRC_TAREA_INSERTAR", parametros, "X_ERROR", rowMapper);             
             
         }
 
