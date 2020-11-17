@@ -229,7 +229,7 @@ namespace LoginWithIAS.Controllers
                     var user = await insta.UserProcessor.GetUserAsync(unfollowkUsser.otheruser);
                     if (user.Succeeded)
                     {
-                        var resul = await insta.UserProcessor.(user.Value.Pk);
+                        var resul = await insta.UserProcessor.UnFollowUserAsync(user.Value.Pk);
                         if (resul.Succeeded)
                         {
                             token.Message = resul.Info.Message;

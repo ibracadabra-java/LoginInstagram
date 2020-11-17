@@ -9,13 +9,19 @@
             
             </summary>
         </member>
-        <member name="M:LoginWithIAS.ApiBd.TareasBd.insertarTareas(LoginWithIAS.Models.mMethodLike,System.String[])">
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.insertarTareas(LoginWithIAS.Models.mMethodLike,System.String)">
             <summary>
             
             </summary>
             <param name="mmethodlike"></param>
             <param name="userlist"></param>
             <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.gGetTareasT">
+            <summary>
+            
+            </summary>
+            <returns></returns>     
         </member>
         <member name="T:LoginWithIAS.BundleConfig">
             <summary>
@@ -1005,6 +1011,21 @@
             desean saber si fue elimiando por instagram p simplemente bloqueo o dejo de seguir a nuestro cliente principal</param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.CuentasController.Purificador(LoginWithIAS.Models.mLogin,System.Collections.Generic.List{System.String})">
+            <summary>
+            Este método se encargará de eliminar seguidores, específicamente seguidores falsos
+            </summary>
+            <param name="mLogin"></param>
+            <param name="usuarios"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.CuentasController.Reporte(LoginWithIAS.Models.mLogin)">
+            <summary>
+            Reporte de los usuarios que te han dejado de seguir
+            </summary>
+            <param name="mLogin"></param>.
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.DeviceProcessController">
             <summary>
             Controlador de Dispositivos
@@ -1133,6 +1154,12 @@
             
             </summary>
             <param name="TareasDia"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.TareasController.GetTareas">
+            <summary>
+            
+            </summary>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.Controllers.UssersProcessController">
@@ -1733,6 +1760,11 @@
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mTarea">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTarea.idTarea">
             <summary>
             
             </summary>

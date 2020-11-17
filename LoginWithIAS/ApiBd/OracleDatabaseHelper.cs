@@ -11,9 +11,9 @@ namespace LoginWithIAS.ApiBd
 {
     internal class OracleDatabaseHelper
     {
-       
+        private static string packageName_cons = "APIINST.PKG_API_CONS";
         private static string packageName_mant = "APIINST.PKG_API_MANT";
-        
+
 
         public delegate T RowMapper<T>(OracleDataReader oracleDataReader) where T : class;
         public delegate void RowMapperList<T>(OracleDataReader oracleDataReader, List<T> entityList) where T : class;
@@ -59,8 +59,12 @@ namespace LoginWithIAS.ApiBd
             oracleCommand.Connection = oracleConnection;
             oracleCommand.CommandType = CommandType.StoredProcedure;
             //oracleCommand.Transaction = oracleConnection.BeginTransaction();
-           
-           if (tipoPaquete == TipoPaquete.MANT)
+
+            if (tipoPaquete == TipoPaquete.CONS)
+            {
+                oracleCommand.CommandText = packageName_cons + "." + procedureName;
+            }
+            else if (tipoPaquete == TipoPaquete.MANT)
             {
                 oracleCommand.CommandText = packageName_mant + "." + procedureName;
             }           
@@ -84,7 +88,7 @@ namespace LoginWithIAS.ApiBd
             return ExecuteToList<T>(procedureName, parameters, cursorName, rowMapper);
         }
 
-        public static List<T> ExecuteToList<T>(string procedureName, List<OracleParameter> parameters, string cursorName, RowMapper<T> rowMapper, TipoPaquete tipoPaquete = TipoPaquete.MANT) where T : class
+        public static List<T> ExecuteToList<T>(string procedureName, List<OracleParameter> parameters, string cursorName, RowMapper<T> rowMapper, TipoPaquete tipoPaquete = TipoPaquete.CONS) where T : class
         {
             OracleConnection oracleConnection = null;
             OracleCommand oracleCommand = null;
@@ -135,7 +139,7 @@ namespace LoginWithIAS.ApiBd
             try
             {
                 oracleConnection = OpenConnection();
-                oracleCommand = PrepareCommand(procedureName, parameters, oracleConnection, TipoPaquete.MANT);
+                oracleCommand = PrepareCommand(procedureName, parameters, oracleConnection, TipoPaquete.CONS);
                 oracleCommand.ExecuteNonQuery();
                 oracleDataReader = ((OracleRefCursor)oracleCommand.Parameters[cursorName].Value).GetDataReader();
 
@@ -159,7 +163,7 @@ namespace LoginWithIAS.ApiBd
             return listEntity;
         }
 
-        public static T ExecuteToEntity<T>(string procedureName, List<OracleParameter> parameters, string cursorName, RowMapper<T> rowMapper, TipoPaquete tipoPaquete = TipoPaquete.MANT) where T : class
+        public static T ExecuteToEntity<T>(string procedureName, List<OracleParameter> parameters, string cursorName, RowMapper<T> rowMapper, TipoPaquete tipoPaquete = TipoPaquete.CONS) where T : class
         {
             OracleConnection oracleConnection = null;
             OracleCommand oracleCommand = null;
@@ -293,7 +297,9 @@ namespace LoginWithIAS.ApiBd
  }*/
 
     enum TipoPaquete
-    {              MANT
-        
+    {
+        CONS,
+        MANT,
+
     }
 }

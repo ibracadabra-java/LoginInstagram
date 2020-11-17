@@ -45,8 +45,8 @@ namespace LoginWithIAS.Controllers
                             mlike.vel = Convert.ToInt32(Datos[0]);
                             mlike.User = TareasDia.TareasDia[i].user;
                             mlike.cantLike =Convert.ToInt32(Datos[1]);
-                            string[] userlist = Datos[2].Split(',');
-                            objbd.insertarTareas(mlike, userlist);
+                            string userlist = Datos[2];
+                            objResultado =  objbd.insertarTareas(mlike, userlist);
                             break;
                     }
 
@@ -54,6 +54,16 @@ namespace LoginWithIAS.Controllers
 
             }
             return objResultado;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public List<mTarea> GetTareas() 
+        {
+            TareasBd objbd = new TareasBd();
+            return objbd.gGetTareasT();
         }
     }
 }

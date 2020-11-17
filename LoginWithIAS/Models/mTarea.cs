@@ -14,10 +14,15 @@ namespace LoginWithIAS.Models
         /// <summary>
         /// 
         /// </summary>
+        public int idTarea { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int id { get; set;}
         /// <summary>
         /// 
         /// </summary>
         public List<string> info { get; set; }
+        
     }
 }
