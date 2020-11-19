@@ -775,6 +775,7 @@ C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\es\System.Web.Razor.res
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\es\System.Web.WebPages.resources.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProcess.csprojAssemblyReference.cache
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProcess.csproj.CoreCompileInputs.cache
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProcess.csproj.CopyComplete
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\LoginWithIAS.dll

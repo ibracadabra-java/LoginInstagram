@@ -1880,5 +1880,31 @@
             Traajos En segundo Plano
             </summary>
         </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.ejecutarTareas(System.Int32,System.String,LoginWithIAS.Models.mFollower)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="follower"></param>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.pararTarea(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="razon"></param>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.AudienceAlgorithm(System.Object)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.SimulationHumanLikeManyPost(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+        </member>
     </members>
 </doc>
