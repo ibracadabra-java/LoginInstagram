@@ -679,6 +679,7 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<List<string>> ListaUsserActive(mFollower followers)
         {
+            DateTime now = DateTime.Now;
             try
             {
                 List<string> devolver = new List<string>();
@@ -711,21 +712,35 @@ namespace LoginWithIAS.Controllers
 
                     if (user.Succeeded)
                     {
-                        var useractives = await insta.MessagingProcessor.GetUsersPresenceAsync();
-                        if (useractives.Succeeded)
+                        while ((DateTime.Now - now).TotalHours < 24)
                         {
-                            for (int i = 0; i < useractives.Value.Count; i++)
+                            var useractives = await insta.MessagingProcessor.GetUsersPresenceAsync();
+                            if (useractives.Succeeded)
                             {
-                                if (useractives.Value[i].IsActive)
+                                devolver.Clear();
+                                if (useractives.Value.Count > 0)
                                 {
-                                    var userinfo = await insta.UserProcessor.GetFullUserInfoAsync(useractives.Value[i].Pk);
-                                    string username = userinfo.Value.UserDetail.UserName;
-                                    devolver.Add(username);
+                                    for (int i = 0; i < useractives.Value.Count; i++)
+                                    {
+                                        if (useractives.Value[i].IsActive)
+                                        {
+                                            var userinfo = await insta.UserProcessor.GetFullUserInfoAsync(useractives.Value[i].Pk);
+                                            string username = userinfo.Value.UserDetail.UserName + " horario " + DateTime.Now.ToString();
+                                            log.Add(" usuarios activos de " + followers.User + " " + username);
+                                            devolver.Add(username);
+
+                                        }
+
+                                    }
                                 }
+                                if (devolver.Count == 0)
+                                    log.Add(" Ningun usuario activo de " + followers.User);
+                                log.Add(" Esperando 5 minutos para volver a comprobar");
+                                Thread.Sleep(300 * 1000);
                             }
+                            else
+                                return null;
                         }
-                        else
-                            return null;
                     }
                     else
                     {

@@ -13,6 +13,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using LoginWithIAS.ApiBd;
+using LoginWithIAS.Worker;
 namespace LoginWithIAS.Controllers
 {
     /// <summary>
@@ -63,7 +64,24 @@ namespace LoginWithIAS.Controllers
         public List<mTarea> GetTareas() 
         {
             TareasBd objbd = new TareasBd();
-            return objbd.gGetTareasT();
+            return objbd.GetTareas();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public mTarea GetTareaEspecifica(int id)
+        {
+            TareasBd objbd = new TareasBd();            
+            return objbd.GetTareaEspecifica(id);
+            
+
+        }
+       
+       
+        
+
     }
 }

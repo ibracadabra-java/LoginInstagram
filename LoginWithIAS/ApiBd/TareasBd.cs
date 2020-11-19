@@ -57,7 +57,7 @@ namespace LoginWithIAS.ApiBd
         /// 
         /// </summary>
         /// <returns></returns>     
-        public List<mTarea> gGetTareasT( )
+        public List<mTarea> GetTareas( )
         {
 
 
@@ -76,7 +76,35 @@ namespace LoginWithIAS.ApiBd
                 return tarea;
             });
 
-            return OracleDatabaseHelper.ExecuteToList<mTarea>("PRC_GET_OFERTAS", parametros, "X_CURSOR", rowMapper,TipoPaquete.CONS);
+            return OracleDatabaseHelper.ExecuteToList<mTarea>("PRC_GET_TAREAS", parametros, "X_CURSOR", rowMapper,TipoPaquete.CONS);
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public mTarea GetTareaEspecifica(int ID)
+        {
+
+
+
+            mResultadoBd objResultBd = new mResultadoBd();
+            List<OracleParameter> parametros = new List<OracleParameter>();
+            parametros.Add(new OracleParameter("X_ID_TAREA", OracleDbType.Int32, ID, ParameterDirection.Input));
+            parametros.Add(new OracleParameter("X_CURSOR", OracleDbType.RefCursor) { Direction = ParameterDirection.Output });
+
+            OracleDatabaseHelper.RowMapper<mTarea> rowMapper = (delegate (OracleDataReader oracleDataReader)
+            {
+                mTarea tarea = new mTarea();
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_TAREA")))
+                    tarea.idTarea = Convert.ToInt32(oracleDataReader["ID_TAREA"]);
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_TIPO_TAREA")))
+                    tarea.id = Convert.ToInt32(oracleDataReader["ID_TIPO_TAREA"]);
+                return tarea;
+            });
+
+            return OracleDatabaseHelper.ExecuteToEntity<mTarea>("PRC_GET_TAREA_ESPECIFICA", parametros, "X_CURSOR", rowMapper, TipoPaquete.CONS);
 
         }
 

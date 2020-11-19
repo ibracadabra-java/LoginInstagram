@@ -17,11 +17,18 @@
             <param name="userlist"></param>
             <returns></returns>
         </member>
-        <member name="M:LoginWithIAS.ApiBd.TareasBd.gGetTareasT">
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.GetTareas">
             <summary>
             
             </summary>
             <returns></returns>     
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.GetTareaEspecifica(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
         </member>
         <member name="T:LoginWithIAS.BundleConfig">
             <summary>
@@ -1162,6 +1169,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.TareasController.GetTareaEspecifica(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.UssersProcessController">
             <summary>
             Controlador para eliminar
@@ -1864,21 +1878,6 @@
         <member name="T:LoginWithIAS.Worker.BackGroundWork">
             <summary>
             Traajos En segundo Plano
-            </summary>
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.RealizarTrabajo">
-            <summary>
-            Trabajo en segundo Plano
-            </summary>
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.CancelarTrabajo">
-            <summary>
-            Cancelar Trabajo
             </summary>
         </member>
     </members>
