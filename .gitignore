@@ -19,3 +19,4 @@ LoginWithIAS/obj/Release/LoginWithIAS.pdb
 LoginWithIAS/obj/Release/Package/PackageTmp/App_Data/XmlDocument.xml
 LoginWithIAS/obj/Release/Package/PackageTmp/bin/LoginWithIAS.dll
 LoginWithIAS/obj/Release/Package/PackageTmp/bin/LoginWithIAS.pdb
+LoginWithIAS/bin/Oracle.DataAccess.dll

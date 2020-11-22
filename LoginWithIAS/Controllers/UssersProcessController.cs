@@ -27,6 +27,7 @@ namespace LoginWithIAS.Controllers
     {
         Session session;
         Log log;
+        Log logacti;
         string path = HttpContext.Current.Request.MapPath("~/Logs");
         /// <summary>
         /// constructor de la clase
@@ -679,6 +680,8 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<List<string>> ListaUsserActive(mFollower followers)
         {
+            string pathact  = HttpContext.Current.Request.MapPath("~/Logs/"+followers.User);
+            logacti = new Log(pathact);
             DateTime now = DateTime.Now;
             try
             {
@@ -726,7 +729,7 @@ namespace LoginWithIAS.Controllers
                                         {
                                             var userinfo = await insta.UserProcessor.GetFullUserInfoAsync(useractives.Value[i].Pk);
                                             string username = userinfo.Value.UserDetail.UserName + " horario " + DateTime.Now.ToString();
-                                            log.Add(" usuarios activos de " + followers.User + " " + username);
+                                            logacti.Add(" usuarios activos de " + followers.User + " " + username);
                                             devolver.Add(username);
 
                                         }
@@ -734,9 +737,9 @@ namespace LoginWithIAS.Controllers
                                     }
                                 }
                                 if (devolver.Count == 0)
-                                    log.Add(" Ningun usuario activo de " + followers.User);
-                                log.Add(" Esperando 5 minutos para volver a comprobar");
-                                Thread.Sleep(300 * 1000);
+                                    logacti.Add(" Ningun usuario activo de " + followers.User);
+                                logacti.Add(" Esperando 1 minuto para volver a comprobar");
+                                Thread.Sleep(60 * 1000);
                             }
                             else
                                 return null;
