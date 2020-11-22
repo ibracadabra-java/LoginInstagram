@@ -56,6 +56,7 @@ namespace LoginWithIAS.Controllers
             }
             return objResultado;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -66,6 +67,7 @@ namespace LoginWithIAS.Controllers
             TareasBd objbd = new TareasBd();
             return objbd.GetTareas();
         }
+
         /// <summary>
         /// 
         /// </summary>

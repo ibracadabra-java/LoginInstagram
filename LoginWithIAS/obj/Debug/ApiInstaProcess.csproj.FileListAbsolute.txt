@@ -264,7 +264,6 @@ D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\roslyn\VBCSCompi
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\roslyn\VBCSCompiler.exe.config
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\Antlr3.Runtime.dll
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\BouncyCastle.Crypto.dll
-D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\InstagramApiSharp.dll
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\Microsoft.Web.Infrastructure.dll
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\netstandard.dll
@@ -282,7 +281,6 @@ D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\System.Web.WebPa
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\Thrift.dll
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\WebGrease.dll
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\BouncyCastle.Crypto.xml
-D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\InstagramApiSharp.pdb
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\Newtonsoft.Json.xml
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\System.Net.Http.Formatting.xml
 D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\System.Web.Helpers.xml
@@ -780,3 +778,4 @@ C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProcess.c
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProcess.csproj.CopyComplete
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\LoginWithIAS.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\LoginWithIAS.pdb
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginWithIAS\bin\Oracle.DataAccess.dll

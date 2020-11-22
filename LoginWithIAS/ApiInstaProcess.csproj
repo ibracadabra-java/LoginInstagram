@@ -203,6 +203,7 @@
     <Compile Include="Models\mLogin.cs" />
     <Compile Include="Models\mMethodLike.cs" />
     <Compile Include="Models\mPost.cs" />
+    <Compile Include="Models\mReports_Mess.cs" />
     <Compile Include="Models\mResultadoBd.cs" />
     <Compile Include="Models\mStory.cs" />
     <Compile Include="Models\mTarea.cs" />

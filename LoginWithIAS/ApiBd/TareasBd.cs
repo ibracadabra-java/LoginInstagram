@@ -53,15 +53,57 @@ namespace LoginWithIAS.ApiBd
             return objResultBd = OracleDatabaseHelper.ExecuteToEntityMant("PRC_TAREA_INSERTAR", parametros, "X_ERROR", rowMapper);
 
         }
+
+        /// <summary>
+        /// Insertar Reporte de los Mensajes enviados
+        /// </summary>
+        /// <param name="reports_Mess"></param>
+        /// <returns></returns>
+        public mResultadoBd Insertar_Reportes_Mensages(mReports_Mess reports_Mess)
+        {
+            try
+            {
+                mResultadoBd objResultBd = new mResultadoBd();
+                List<OracleParameter> parametros = new List<OracleParameter>();
+                parametros.Add(new OracleParameter("X_THREAD_ID", OracleDbType.Varchar2, reports_Mess.Thread_Id, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_ITEM_ID", OracleDbType.Varchar2, reports_Mess.Item_Id, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_CLIENTE_ID", OracleDbType.Int32, reports_Mess.Cliente_Id, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_CANT_TOTAL", OracleDbType.Int32, reports_Mess.Cant_Total, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_CANT_ENV", OracleDbType.Int32, reports_Mess.Cant_Env, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_LIST_IDS", OracleDbType.Varchar2, reports_Mess.List_Ids, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_ERROR", OracleDbType.RefCursor) { Direction = ParameterDirection.Output });
+
+                OracleDatabaseHelper.RowMapper<mResultadoBd> rowMapper = (delegate (OracleDataReader oracleDataReader)
+                {
+                    mResultadoBd objEnResultado = new mResultadoBd();
+
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_TIPO")))
+                        objEnResultado.ID_TIPO = Convert.ToInt32(oracleDataReader["ID_TIPO"]);
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_ERROR")))
+                        objEnResultado.ID_ERROR = oracleDataReader["ID_ERROR"].ToString();
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("DES_ERROR")))
+                        objEnResultado.DES_ERROR = oracleDataReader["DES_ERROR"].ToString();
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("VALOR")))
+                        objEnResultado.VALOR = oracleDataReader["VALOR"].ToString();
+
+                    return objEnResultado;
+                });
+
+                return objResultBd = OracleDatabaseHelper.ExecuteToEntityMant("PRC_INSERT_REPORT_MESS", parametros, "X_ERROR", rowMapper);
+            }
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
+            }
+
+        }
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>     
         public List<mTarea> GetTareas( )
         {
-
-
-
             mResultadoBd objResultBd = new mResultadoBd();
             List<OracleParameter> parametros = new List<OracleParameter>();
             parametros.Add(new OracleParameter("X_CURSOR", OracleDbType.RefCursor) { Direction = ParameterDirection.Output });
@@ -86,9 +128,6 @@ namespace LoginWithIAS.ApiBd
         /// <returns></returns>
         public mTarea GetTareaEspecifica(int ID)
         {
-
-
-
             mResultadoBd objResultBd = new mResultadoBd();
             List<OracleParameter> parametros = new List<OracleParameter>();
             parametros.Add(new OracleParameter("X_ID_TAREA", OracleDbType.Int32, ID, ParameterDirection.Input));
@@ -105,7 +144,6 @@ namespace LoginWithIAS.ApiBd
             });
 
             return OracleDatabaseHelper.ExecuteToEntity<mTarea>("PRC_GET_TAREA_ESPECIFICA", parametros, "X_CURSOR", rowMapper, TipoPaquete.CONS);
-
         }
 
 

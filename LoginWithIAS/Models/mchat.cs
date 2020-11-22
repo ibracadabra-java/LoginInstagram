@@ -52,5 +52,11 @@ namespace LoginWithIAS.Models
         /// </summary>
         public string Hashtag { get; set; }
 
+
+        /// <summary>
+        /// Listado de usuarios a los que enviar mensajes
+        /// </summary>
+        public List<long> listado_pk { get; set; }
+
     }
 }

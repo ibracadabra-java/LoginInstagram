@@ -14,6 +14,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using LoginWithIAS.ApiBd;
 
 namespace LoginWithIAS.Controllers
 {
@@ -478,7 +479,6 @@ namespace LoginWithIAS.Controllers
             }
         }
 
-
         /// <summary>
         /// Metodo para enviar Objetos animados a un usuario
         /// </summary>
@@ -680,7 +680,6 @@ namespace LoginWithIAS.Controllers
             else
             {
                 return "Deben introducir Usuario y Contraseña";
-                
             }
 
             session.LoadSession(insta);
@@ -688,9 +687,7 @@ namespace LoginWithIAS.Controllers
             if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
             {
                 return "Contraseña incorrecta";
-                
             }
-
             var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(util.Subcadena(chat.otheruser), PaginationParameters.MaxPagesToLoad(1));
 
             if(instauser.Succeeded)
@@ -702,8 +699,7 @@ namespace LoginWithIAS.Controllers
                     {
                         var resul = await insta.MessagingProcessor.SendDirectTextAsync(getusuario.Value.Pk.ToString(), String.Empty, chat.text);
                         if (resul.Succeeded)
-                        {                            
-                          
+                        {        
                             return resul.Info.Message;
                         }
                         else
@@ -713,18 +709,170 @@ namespace LoginWithIAS.Controllers
                     }
                     else
                     {
-
                         return "Introdusca el texto a enviar";
-                        
                     }
-
                 }
             }
 
             return "";
         }
 
+        /// <summary>
+        /// Metodo para enviar un mensaje de texto a un usuario
+        /// </summary>
+        /// <param name="chat"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<enResponseToken> Mass_Sending(mchat chat)
+        {
+            try
+            {
+                mResultadoBd objResultado = new mResultadoBd();
+                TareasBd objbd = new TareasBd();
+                enResponseToken token = new enResponseToken();
 
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
+                if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = chat.User,
+                        Password = chat.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+
+                if (!string.IsNullOrEmpty(chat.text))
+                {
+                    token.Message = "Debe Introducir el texto del mensaje a enviar";
+                    return token;
+                }
+                var user = await insta.UserProcessor.GetUserAsync(chat.User);
+                var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(string.Empty, PaginationParameters.MaxPagesToLoad(1));
+                #region Enviar Si el cliente esta Online
+                string recipients = "";
+                if (instauser.Succeeded)
+                {
+                    var online = await insta.MessagingProcessor.GetUsersPresenceAsync();
+                    if (online.Succeeded)
+                    {
+                        int contador = 0;
+                        for (int i = 0; i < online.Value.Count; i++)
+                        {
+                            if (online.Value[i].IsActive && Aparece(chat.listado_pk, online.Value[i].Pk))
+                            {
+                                recipients = recipients + ',' + online.Value[i].Pk.ToString();
+                                contador++;
+                            }
+                        }
+
+                        var resultado = await insta.MessagingProcessor.SendDirectTextAsync(recipients, String.Empty, chat.text);
+
+                        if (resultado.Succeeded)
+                        {
+                            mReports_Mess mReports_Mess = new mReports_Mess(resultado.Value.ThreadId, resultado.Value.ItemId, user.Value.Pk, chat.listado_pk.Count, contador, 0, 0, recipients);
+                            objResultado = objbd.Insertar_Reportes_Mensages(mReports_Mess);
+                            token.Message = "De un total de:" + chat.listado_pk.Count + ", mensajes se enviaron:" + contador + ".";
+                        }
+                    }
+                    else
+                    {
+                        token.Message = online.Info.Message;
+                    }
+                }
+                else
+                {
+                    token.Message = instauser.Info.Message;
+                }
+                #endregion
+
+                return token;
+            }
+            catch (Exception s)
+            {
+                throw new Exception(s.Message);
+            }
+        }
+
+        private bool Aparece(List<long> lista, long valor)
+        {
+            for (int i = 0; i < lista.Count; i++)
+            {
+                if (lista[i].Equals(valor))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Obtener Reporte de los mensajes enviados a los usuarios de los clientes
+        /// </summary>
+        /// <returns></returns>
+        public async Task<enResponseToken> Reporte_Mensaje(mchat chat)
+        {
+            try
+            {
+                mResultadoBd objResultado = new mResultadoBd();
+                TareasBd objbd = new TareasBd();
+                enResponseToken token = new enResponseToken();
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = chat.User,
+                        Password = chat.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    token.Message = "Deben introducir Usuario y Contraseña";
+                    return token;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
+                {
+                    token.Message = "Contraseña incorrecta";
+                    return token;
+                }
+
+                var user = await insta.UserProcessor.GetUserAsync(chat.User);
+                if (user.Succeeded)
+                {
+
+                }
+                else
+                {
+                    token.Message = user.Info.Message;
+                }
+
+                return token;
+            }
+            catch (Exception s)
+            {
+                throw new Exception(s.Message);
+            }
+        }
     }
 }

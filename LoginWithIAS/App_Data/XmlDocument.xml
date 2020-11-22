@@ -17,6 +17,13 @@
             <param name="userlist"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.Insertar_Reportes_Mensages(LoginWithIAS.Models.mReports_Mess)">
+            <summary>
+            Insertar Reporte de los Mensajes enviados
+            </summary>
+            <param name="reports_Mess"></param>
+            <returns></returns>
+        </member>
         <member name="M:LoginWithIAS.ApiBd.TareasBd.GetTareas">
             <summary>
             
@@ -1151,6 +1158,13 @@
             <param name="chat"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.Mass_Sending(LoginWithIAS.Models.mchat)">
+            <summary>
+            Metodo para enviar un mensaje de texto a un usuario
+            </summary>
+            <param name="chat"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.TareasController">
             <summary>
             
@@ -1556,6 +1570,11 @@
             Enviar un Hashtag
             </summary>
         </member>
+        <member name="P:LoginWithIAS.Models.mchat.listado_pk">
+            <summary>
+            Listado de usuarios a los que enviar mensajes
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.mContacts">
             <summary>
             Clase Contactos
@@ -1746,6 +1765,57 @@
         <member name="P:LoginWithIAS.Models.mPost.tipo_media">
             <summary>
             Tipo de post
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mReports_Mess">
+            <summary>
+            Clase para el reporte de los mensajes
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Models.mReports_Mess.#ctor(System.String,System.String,System.Int64,System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mReports_Mess.Thread_Id">
+            <summary>
+            Identificador del Hilo de conversacion
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mReports_Mess.Item_Id">
+            <summary>
+            Identificador
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mReports_Mess.Cliente_Id">
+            <summary>
+            Identificador del Cliente
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mReports_Mess.Cant_Total">
+            <summary>
+            Cantidad Total de Mensajes a Enviar
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mReports_Mess.Cant_Env">
+            <summary>
+            Cantidad de mensajes enviados
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mReports_Mess.Cant_Vistos">
+            <summary>
+            Cantidad de Mensajes Vistos
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mReports_Mess.Cant_Reacc">
+            <summary>
+            Cantidad de Reacciones a los mensajes
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mReports_Mess.List_Ids">
+            <summary>
+            Lista de Identificadores a los que se les envio el mensaje
+            Los indentificadores estan separados por coma.
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mResultadoBd">

@@ -19,8 +19,5 @@ namespace LoginWithIAS.Models
         /// Identificador de la Propiedad Other_User
         /// </summary>
         public long Pk_Other_User { get; set; }
-
-        
-
     }
 }

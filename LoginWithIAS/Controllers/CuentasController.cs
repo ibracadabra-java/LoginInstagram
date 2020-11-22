@@ -4,6 +4,7 @@ using InstagramApiSharp.Classes;
 using InstagramApiSharp.Classes.Models;
 using InstagramApiSharp.Enums;
 using InstagramApiSharp.Logger;
+using LoginWithIAS.ApiBd;
 using LoginWithIAS.Models;
 using LoginWithIAS.Utiles;
 using System;
@@ -389,102 +390,6 @@ namespace LoginWithIAS.Controllers
                 }
                 else
                     token.Message = user.Info.Message;
-
-                return token;
-            }
-            catch (Exception s)
-            {
-                throw new Exception(s.Message);
-            }
-        }
-
-        /// <summary>
-        /// Metodo para enviar un mensaje de texto a un usuario
-        /// </summary>
-        /// <param name="chat"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<enResponseToken> Mass_Sending(mchat chat)
-        {
-
-            try
-            {
-                enResponseToken token = new enResponseToken();
-
-                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
-
-                if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
-                {
-                    var userSession = new UserSessionData
-                    {
-                        UserName = chat.User,
-                        Password = chat.Pass
-                    };
-                    insta.SetUser(userSession);
-                }
-                else
-                {
-                    token.Message = "Deben introducir Usuario y Contraseña";
-                    return token;
-                }
-
-                session.LoadSession(insta);
-
-                if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
-                {
-                    token.Message = "Contraseña incorrecta";
-                    return token;
-                }
-
-                if (!string.IsNullOrEmpty(chat.text))
-                {
-                    token.Message = "Debe Introducir el texto del mensaje a enviar";
-                    return token;
-                }
-
-
-                #region Enviar mensaje a Traves del Direct Message
-                var inboxThreads = await insta.MessagingProcessor.GetDirectInboxAsync(InstagramApiSharp.PaginationParameters.MaxPagesToLoad(4));
-                if (!inboxThreads.Succeeded)
-                {
-                    int cont = inboxThreads.Value.PendingUsers.Count;
-                    for (int i = 0; i < cont; i++)
-                    {
-                        await insta.MessagingProcessor.SendDirectTextAsync(inboxThreads.Value.PendingUsers[i].Pk.ToString(), String.Empty, chat.text);                        
-                    }
-
-                    token.Message = inboxThreads.Info.Message;
-                    token.AuthToken = session.GenerarToken();
-                }
-                else
-                {
-                    token.Message = inboxThreads.Info.Message;                    
-                }
-                #endregion
-
-
-                #region Enviar Si el cliente esta Online
-
-                var online = await insta.MessagingProcessor.GetUsersPresenceAsync();
-                if (online.Succeeded)
-                {
-                    for (int i = 0; i < online.Value.Count; i++)
-                    {
-                        if (online.Value[i].IsActive)
-                        {
-                            await insta.MessagingProcessor.SendDirectTextAsync(online.Value[i].Pk.ToString(), String.Empty, chat.text);
-                        }
-                    }
-
-                    token.Message = inboxThreads.Info.Message;
-                    token.AuthToken = session.GenerarToken();
-
-                }
-                else
-                {
-                    token.Message= online.Info.Message;
-                }
-                #endregion
 
                 return token;
             }
