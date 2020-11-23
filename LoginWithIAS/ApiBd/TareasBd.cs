@@ -98,6 +98,50 @@ namespace LoginWithIAS.ApiBd
             }
 
         }
+
+        /// <summary>
+        /// Actualizar Cantidad de Reaccines y Cantidad de vistos.
+        /// </summary>
+        /// <param name="reports_Mess"></param>
+        /// <returns></returns>
+        public mResultadoBd Update_Reportes_Mensages(mReports_Mess reports_Mess)
+        {
+            try
+            {
+                mResultadoBd objResultBd = new mResultadoBd();
+                List<OracleParameter> parametros = new List<OracleParameter>();
+                parametros.Add(new OracleParameter("X_THREAD_ID", OracleDbType.Varchar2, reports_Mess.Thread_Id, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_CLIENTE_ID", OracleDbType.Int32, reports_Mess.Cliente_Id, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_CANT_VISTOS", OracleDbType.Int32, reports_Mess.Cant_Vistos, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_CANT_REACC", OracleDbType.Int32, reports_Mess.Cant_Reacc, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_ERROR", OracleDbType.RefCursor) { Direction = ParameterDirection.Output });
+
+                OracleDatabaseHelper.RowMapper<mResultadoBd> rowMapper = (delegate (OracleDataReader oracleDataReader)
+                {
+                    mResultadoBd objEnResultado = new mResultadoBd();
+
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_TIPO")))
+                        objEnResultado.ID_TIPO = Convert.ToInt32(oracleDataReader["ID_TIPO"]);
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_ERROR")))
+                        objEnResultado.ID_ERROR = oracleDataReader["ID_ERROR"].ToString();
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("DES_ERROR")))
+                        objEnResultado.DES_ERROR = oracleDataReader["DES_ERROR"].ToString();
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("VALOR")))
+                        objEnResultado.VALOR = oracleDataReader["VALOR"].ToString();
+
+                    return objEnResultado;
+                });
+
+                return objResultBd = OracleDatabaseHelper.ExecuteToEntityMant("PRC_UPDATE_REPORT_MESS", parametros, "X_ERROR", rowMapper);
+            }
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
+            }
+
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -121,10 +165,11 @@ namespace LoginWithIAS.ApiBd
             return OracleDatabaseHelper.ExecuteToList<mTarea>("PRC_GET_TAREAS", parametros, "X_CURSOR", rowMapper,TipoPaquete.CONS);
 
         }
+       
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="ID"></param>
         /// <returns></returns>
         public mTarea GetTareaEspecifica(int ID)
         {
@@ -146,6 +191,48 @@ namespace LoginWithIAS.ApiBd
             return OracleDatabaseHelper.ExecuteToEntity<mTarea>("PRC_GET_TAREA_ESPECIFICA", parametros, "X_CURSOR", rowMapper, TipoPaquete.CONS);
         }
 
+        /// <summary>
+        /// Actualizar y mostrar resumen de los mensajes enviados a los clientes
+        /// </summary>
+        /// <returns></returns>
+        public List<mReports_Mess> Get_Reports_Mess(long ID)
+        {
+            mResultadoBd objResultBd = new mResultadoBd();
+            List<OracleParameter> parametros = new List<OracleParameter>();
+            parametros.Add(new OracleParameter("X_CLIENTE_ID", OracleDbType.Int64, ID, ParameterDirection.Input));
+            parametros.Add(new OracleParameter("X_CURSOR", OracleDbType.RefCursor) { Direction = ParameterDirection.Output });
 
+            OracleDatabaseHelper.RowMapper<mReports_Mess> rowMapper = (delegate (OracleDataReader oracleDataReader)
+            {
+                mReports_Mess reporte = new mReports_Mess();
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("THREAD_ID")))
+                    reporte.Thread_Id = oracleDataReader["THREAD_ID"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ITEM_ID")))
+                    reporte.Item_Id = oracleDataReader["ITEM_ID"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("CLIENTE_ID")))
+                    reporte.Cliente_Id = Convert.ToInt64(oracleDataReader["CLIENTE_ID"]);
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("CANT_TOTAL")))
+                    reporte.Cant_Total = Convert.ToInt32(oracleDataReader["CANT_TOTAL"]);
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("CANT_ENV")))
+                    reporte.Cant_Env = Convert.ToInt32(oracleDataReader["CANT_ENV"]);
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("CANT_VISTOS")))
+                    reporte.Cant_Vistos = Convert.ToInt32(oracleDataReader["CANT_VISTOS"]);
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("CANT_REACC")))
+                    reporte.Cant_Reacc = Convert.ToInt32(oracleDataReader["CANT_REACC"]);
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("LIST_IDS")))
+                    reporte.List_Ids = oracleDataReader["LIST_IDS"].ToString();
+                return reporte;
+            });
+
+            return OracleDatabaseHelper.ExecuteToList<mReports_Mess>("PRC_GET_REPORES_MSJ", parametros, "X_CURSOR", rowMapper, TipoPaquete.CONS);
+
+        }
     }
 }

@@ -824,13 +824,13 @@ namespace LoginWithIAS.Controllers
         /// Obtener Reporte de los mensajes enviados a los usuarios de los clientes
         /// </summary>
         /// <returns></returns>
-        public async Task<enResponseToken> Reporte_Mensaje(mchat chat)
+        public async Task<List<mReports_Mess>> Reporte_Mensaje(mchat chat)
         {
             try
             {
                 mResultadoBd objResultado = new mResultadoBd();
                 TareasBd objbd = new TareasBd();
-                enResponseToken token = new enResponseToken();
+                List<mReports_Mess> mReports_Messes = new List<mReports_Mess>();
 
                 var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
@@ -845,29 +845,39 @@ namespace LoginWithIAS.Controllers
                 }
                 else
                 {
-                    token.Message = "Deben introducir Usuario y Contraseña";
-                    return token;
+                    return null;
                 }
 
                 session.LoadSession(insta);
 
                 if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
                 {
-                    token.Message = "Contraseña incorrecta";
-                    return token;
+                    return null;
                 }
 
                 var user = await insta.UserProcessor.GetUserAsync(chat.User);
                 if (user.Succeeded)
                 {
+                   mReports_Messes = objbd.Get_Reports_Mess(user.Value.Pk);
+                    for (int i = 0; i < mReports_Messes.Count; i++)
+                    {                        
+                        var thread = await insta.MessagingProcessor.GetDirectInboxThreadAsync(mReports_Messes[i].Thread_Id, PaginationParameters.MaxPagesToLoad(1));
 
+                        if (thread.Succeeded)
+                        {
+                            //esto no me convence quiero verlo con raul
+                            mReports_Messes[i].Cant_Vistos = thread.Value.Items[0].RavenSeenCount;
+                            mReports_Messes[i].Cant_Reacc = thread.Value.Items[0].RavenSeenUserIds.Count;
+                            objbd.Update_Reportes_Mensages(mReports_Messes[i]);
+                        }
+                    }
                 }
                 else
                 {
-                    token.Message = user.Info.Message;
+                    return null;
                 }
 
-                return token;
+                return mReports_Messes;
             }
             catch (Exception s)
             {
