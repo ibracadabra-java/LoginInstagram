@@ -56,6 +56,7 @@ namespace LoginWithIAS.Worker
             List<mTarea> Tareas = new List<mTarea>();
             TareasBd objtarea = new TareasBd();
             PurificacionBd objpuri = new PurificacionBd();
+            MasSendingBD objmass = new MasSendingBD();
             Tareas = objtarea.GetTareas();
             for (int i = 0; i < Tareas.Count; i++)
             {
@@ -66,6 +67,7 @@ namespace LoginWithIAS.Worker
                         ejecutarTareaExpancion(expancion);
                         break;
                     case 2:
+                        mMasSending massending = objmass.Get_MasSending(Tareas[i].idTarea);
 
                         break;
                     case 3:
@@ -409,45 +411,60 @@ namespace LoginWithIAS.Worker
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="chat"></param>
-        public async void Mass_Sending(mchat chat)
+        /// <param name="sending"></param>
+        public void ejecutarTareaMass_Sending(mMasSending sending)
+        {
+            Thread hilo = new Thread(Mass_Sending);
+            hilo.Name = sending.User;
+            hilo.IsBackground = true;
+            hilo.Start(sending);
+            threads.Add(hilo);
+
+        }
+        /// <summary>
+        /// Metodo para enviar un mensaje de texto a un usuario
+        /// </summary>
+        /// <param name="Data"></param>
+        /// <returns></returns>        
+        public async void Mass_Sending(object Data)
         {
             try
             {
-                mResultadoBd objResultado = new mResultadoBd();
-                TareasBd objbd = new TareasBd();
-                enResponseToken token = new enResponseToken();
+                mMasSending sending = (mMasSending)Data;
+
+                TareasBd objbd = new TareasBd();               
 
                 var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-                if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
+                if (!(string.IsNullOrEmpty(sending.User) || string.IsNullOrEmpty(sending.Pass)))
                 {
                     var userSession = new UserSessionData
                     {
-                        UserName = chat.User,
-                        Password = chat.Pass
+                        UserName = sending.User,
+                        Password = sending.Pass
                     };
                     insta.SetUser(userSession);
                 }
                 else
                 {
-                    log.Add( "Deben introducir Usuario y Contraseña");                   
+                    log.Add( "Deben introducir Usuario y Contraseña");
+                   
                 }
 
                 session.LoadSession(insta);
 
-                if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
+                if (!insta.GetLoggedUser().Password.Equals(sending.Pass))
                 {
-                   log.Add( "Contraseña incorrecta");
+                    log.Add("Contraseña incorrecta");
                     
                 }
 
-                if (!string.IsNullOrEmpty(chat.text))
+                if (!string.IsNullOrEmpty(sending.Texto))
                 {
                     log.Add( "Debe Introducir el texto del mensaje a enviar");
                     
                 }
-                var user = await insta.UserProcessor.GetUserAsync(chat.User);
+                var user = await insta.UserProcessor.GetUserAsync(sending.User);
                 var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(string.Empty, PaginationParameters.MaxPagesToLoad(1));
                 #region Enviar Si el cliente esta Online
                 string recipients = "";
@@ -457,22 +474,23 @@ namespace LoginWithIAS.Worker
                     if (online.Succeeded)
                     {
                         int contador = 0;
+                        string[] linea = sending.Usuarios.Split(',');
                         for (int i = 0; i < online.Value.Count; i++)
                         {
-                            if (online.Value[i].IsActive && Aparece(chat.listado_pk, online.Value[i].Pk))
+                            if (online.Value[i].IsActive && Aparece(linea, online.Value[i].Pk.ToString()))
                             {
                                 recipients = recipients + ',' + online.Value[i].Pk.ToString();
                                 contador++;
                             }
                         }
 
-                        var resultado = await insta.MessagingProcessor.SendDirectTextAsync(recipients, String.Empty, chat.text);
+                        var resultado = await insta.MessagingProcessor.SendDirectTextAsync(recipients, String.Empty, sending.Texto);
 
                         if (resultado.Succeeded)
                         {
-                            mReports_Mess mReports_Mess = new mReports_Mess(resultado.Value.ThreadId, resultado.Value.ItemId, user.Value.Pk, chat.listado_pk.Count, contador, 0, 0, recipients);
-                            objResultado = objbd.Insertar_Reportes_Mensages(mReports_Mess);
-                            log.Add("De un total de:" + chat.listado_pk.Count + ", mensajes se enviaron:" + contador + ".");
+                            mReports_Mess mReports_Mess = new mReports_Mess(resultado.Value.ThreadId, resultado.Value.ItemId, user.Value.Pk, linea.Length, contador, 0, 0, recipients);
+                            objbd.Insertar_Reportes_Mensages(mReports_Mess);
+                            log.Add("De un total de:" + linea.Length + ", mensajes se enviaron:" + contador + ".");
                         }
                     }
                     else
@@ -482,9 +500,11 @@ namespace LoginWithIAS.Worker
                 }
                 else
                 {
-                    log.Add( instauser.Info.Message);
+                   log.Add( instauser.Info.Message);
                 }
-                #endregion                
+                #endregion
+
+                
             }
             catch (Exception s)
             {
@@ -492,9 +512,9 @@ namespace LoginWithIAS.Worker
             }
         }
 
-        private bool Aparece(List<long> lista, long valor)
+        private bool Aparece(string[] lista, string valor)
         {
-            for (int i = 0; i < lista.Count; i++)
+            for (int i = 0; i < lista.Length; i++)
             {
                 if (lista[i].Equals(valor))
                 {

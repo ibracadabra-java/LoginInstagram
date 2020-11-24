@@ -34,6 +34,7 @@ namespace LoginWithIAS.Controllers
             mResultadoBd objResultado = new mResultadoBd();
             TareasBd objbd = new TareasBd();
             PurificacionBd objpuri = new PurificacionBd();
+            MasSendingBD objmass = new MasSendingBD();
             for (int i = 0; i < TareasDia.TareasDia.Count; i++)
             {
                 
@@ -52,6 +53,12 @@ namespace LoginWithIAS.Controllers
                             objResultado =  objbd.insertarTareas(mlike, userlist);
                             break;
                         case 2:
+                            mMasSending mmassending = new mMasSending();
+                            List<string> Datos1 = TareasDia.TareasDia[i].tareas[j].info;
+                            mmassending.Usuario = TareasDia.TareasDia[i].user;
+                            mmassending.Texto = Datos1[0];
+                            mmassending.Usuarios = Datos1[1];
+                            objResultado = objmass.Insertar_MasSending(mmassending);
                             break;
                         case 3:
                             mPurificador purificador = new mPurificador();
