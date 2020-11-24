@@ -124,26 +124,42 @@ namespace LoginWithIAS.ApiBd
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="ID"></param>
         /// <returns></returns>
-        public mTarea GetTareaEspecifica(int ID)
+        public mMethodLike GetTareaExpancion(int ID)
         {
             mResultadoBd objResultBd = new mResultadoBd();
             List<OracleParameter> parametros = new List<OracleParameter>();
             parametros.Add(new OracleParameter("X_ID_TAREA", OracleDbType.Int32, ID, ParameterDirection.Input));
             parametros.Add(new OracleParameter("X_CURSOR", OracleDbType.RefCursor) { Direction = ParameterDirection.Output });
 
-            OracleDatabaseHelper.RowMapper<mTarea> rowMapper = (delegate (OracleDataReader oracleDataReader)
+            OracleDatabaseHelper.RowMapper<mMethodLike> rowMapper = (delegate (OracleDataReader oracleDataReader)
             {
-                mTarea tarea = new mTarea();
+                mMethodLike tarea = new mMethodLike();
+                string usuarios = string.Empty;
+                tarea.ListUser = new List<string>();
                 if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_TAREA")))
-                    tarea.idTarea = Convert.ToInt32(oracleDataReader["ID_TAREA"]);
-                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_TIPO_TAREA")))
-                    tarea.id = Convert.ToInt32(oracleDataReader["ID_TIPO_TAREA"]);
+                    tarea.id_tarea = Convert.ToInt32(oracleDataReader["ID_TAREA"]);
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("USUARIO")))
+                    tarea.User = oracleDataReader["USUARIO"].ToString();
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("PASS")))
+                    tarea.Pass = oracleDataReader["PASS"].ToString();
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("VELOCIDAD")))
+                    tarea.vel = Convert.ToInt32(oracleDataReader["VELOCIDAD"]);
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("USUARIOS")))
+                     usuarios = oracleDataReader["USUARIOS"].ToString();
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("CANTLIKE")))
+                    tarea.cantLike = Convert.ToInt32(oracleDataReader["CANTLIKE"]);
+                var user_list = usuarios.Split(',');
+                for (int i = 0; i < user_list.Length; i++)
+                {
+                    tarea.ListUser.Add(user_list[i].ToString());
+
+                }
                 return tarea;
             });
 
-            return OracleDatabaseHelper.ExecuteToEntity<mTarea>("PRC_GET_TAREA_ESPECIFICA", parametros, "X_CURSOR", rowMapper, TipoPaquete.CONS);
+            return OracleDatabaseHelper.ExecuteToEntity<mMethodLike>("PRC_GET_TAREA_EXPANCION", parametros, "X_CURSOR", rowMapper, TipoPaquete.CONS);
         }
 
 

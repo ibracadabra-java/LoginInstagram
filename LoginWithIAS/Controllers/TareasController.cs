@@ -74,12 +74,37 @@ namespace LoginWithIAS.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public mTarea GetTareaEspecifica(int id)
+        public mMethodLike GetTareaExpancion(int id)
         {
             TareasBd objbd = new TareasBd();            
-            return objbd.GetTareaEspecifica(id);
+            return objbd.GetTareaExpancion(id);
             
 
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        [HttpPost]
+        public void EjecutarTareas()
+        {
+            BackGroundWork groundWork = new BackGroundWork();
+            groundWork.MainThreadEjecutarTareas();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Values"></param>
+        [HttpPost]
+        public void StopTareas(string Values) 
+        {
+            BackGroundWork tareasobj = new BackGroundWork();
+            var Datos = Values.Split(',');
+            string Name = Datos[0];
+            string Reazon = Datos[1];
+
+            tareasobj.pararTarea(Name,Reazon);
+
+            
         }
        
        

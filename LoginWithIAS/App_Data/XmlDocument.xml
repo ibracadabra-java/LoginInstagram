@@ -30,11 +30,11 @@
             </summary>
             <returns></returns>     
         </member>
-        <member name="M:LoginWithIAS.ApiBd.TareasBd.GetTareaEspecifica(System.Int32)">
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.GetTareaExpancion(System.Int32)">
             <summary>
             
             </summary>
-            <param name="id"></param>
+            <param name="ID"></param>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.BundleConfig">
@@ -1165,6 +1165,12 @@
             <param name="chat"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.Reporte_Mensaje(LoginWithIAS.Models.mchat)">
+            <summary>
+            Obtener Reporte de los mensajes enviados a los usuarios de los clientes
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.TareasController">
             <summary>
             
@@ -1183,12 +1189,23 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:LoginWithIAS.Controllers.TareasController.GetTareaEspecifica(System.Int32)">
+        <member name="M:LoginWithIAS.Controllers.TareasController.GetTareaExpancion(System.Int32)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.TareasController.EjecutarTareas">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.TareasController.StopTareas(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="Values"></param>
         </member>
         <member name="T:LoginWithIAS.Controllers.UssersProcessController">
             <summary>
@@ -1700,6 +1717,11 @@
             
             </summary>
         </member>
+        <member name="P:LoginWithIAS.Models.mMethodLike.id_tarea">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:LoginWithIAS.Models.mMethodLike.ListUser">
             <summary>
             
@@ -1950,13 +1972,26 @@
             Traajos En segundo Plano
             </summary>
         </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.ejecutarTareas(System.Int32,System.String,LoginWithIAS.Models.mFollower)">
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.#ctor">
             <summary>
             
             </summary>
-            <param name="id"></param>
-            <param name="name"></param>
-            <param name="follower"></param>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.MainThreadEjecutarTareas">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.EjecutarTareas">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.ejecutarTareaExpancion(LoginWithIAS.Models.mMethodLike)">
+            <summary>
+            
+            </summary>
+            <param name="expancion"></param>
         </member>
         <member name="M:LoginWithIAS.Worker.BackGroundWork.pararTarea(System.String,System.String)">
             <summary>
@@ -1964,11 +1999,6 @@
             </summary>
             <param name="name"></param>
             <param name="razon"></param>
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.AudienceAlgorithm(System.Object)">
-            <summary>
-            
-            </summary>
         </member>
         <member name="M:LoginWithIAS.Worker.BackGroundWork.SimulationHumanLikeManyPost(System.Object)">
             <summary>

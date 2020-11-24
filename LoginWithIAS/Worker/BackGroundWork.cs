@@ -26,6 +26,9 @@ namespace LoginWithIAS.Worker
         Log log;
         Util util;
         string path = HttpContext.Current.Request.MapPath("~/Logs");
+        /// <summary>
+        /// 
+        /// </summary>
         public BackGroundWork()
         {
 
@@ -33,26 +36,50 @@ namespace LoginWithIAS.Worker
             util = new Util();
             log = new Log(path);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void MainThreadEjecutarTareas()
+        {
+            Thread mainthread = new Thread(new ThreadStart(EjecutarTareas));
+            mainthread.Name = "mainthread";
+            mainthread.Start();
+            threads.Add(mainthread);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void EjecutarTareas()
+        {
+
+            List<mTarea> Tareas = new List<mTarea>();
+            TareasBd objtarea = new TareasBd();
+            Tareas = objtarea.GetTareas();
+            for (int i = 0; i < Tareas.Count; i++)
+            {
+                switch (Tareas[i].id)
+                {
+                    case 1:
+                        mMethodLike expancion = objtarea.GetTareaExpancion(Tareas[i].idTarea);
+                        ejecutarTareaExpancion(expancion);
+                        break;
+                }
+
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="follower"></param>
-        public void ejecutarTareas(int id, string name,mFollower follower) 
+        /// <param name="expancion"></param>
+        public void ejecutarTareaExpancion(mMethodLike expancion) 
         {
-            switch (id)
-            {
-                case 1: Thread hilo = new Thread(AudienceAlgorithm);
-                    hilo.Name = name;
+                    Thread hilo = new Thread(SimulationHumanLikeManyPost);
+                    hilo.Name = expancion.User;
                     hilo.IsBackground = true;
-                    hilo.Start(follower);
+                    hilo.Start(expancion);
                     threads.Add(hilo);
-                    break;
-                default:
-                    break;
-            }
+             
         }
         /// <summary>
         /// 
@@ -67,15 +94,7 @@ namespace LoginWithIAS.Worker
                     threads[i].Abort(razon);
 
             }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public void AudienceAlgorithm(object data) 
-        {
-            var follower = (mFollower)data;
-           
-        }
+        }     
         /// <summary>
         /// 
         /// </summary>
@@ -374,6 +393,102 @@ namespace LoginWithIAS.Worker
             }
             else { log.Add("Debe autenticarse primero"); }
         }
-      
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="chat"></param>
+        public async void Mass_Sending(mchat chat)
+        {
+            try
+            {
+                mResultadoBd objResultado = new mResultadoBd();
+                TareasBd objbd = new TareasBd();
+                enResponseToken token = new enResponseToken();
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = chat.User,
+                        Password = chat.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    log.Add( "Deben introducir Usuario y Contraseña");                   
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
+                {
+                   log.Add( "Contraseña incorrecta");
+                    
+                }
+
+                if (!string.IsNullOrEmpty(chat.text))
+                {
+                    log.Add( "Debe Introducir el texto del mensaje a enviar");
+                    
+                }
+                var user = await insta.UserProcessor.GetUserAsync(chat.User);
+                var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(string.Empty, PaginationParameters.MaxPagesToLoad(1));
+                #region Enviar Si el cliente esta Online
+                string recipients = "";
+                if (instauser.Succeeded)
+                {
+                    var online = await insta.MessagingProcessor.GetUsersPresenceAsync();
+                    if (online.Succeeded)
+                    {
+                        int contador = 0;
+                        for (int i = 0; i < online.Value.Count; i++)
+                        {
+                            if (online.Value[i].IsActive && Aparece(chat.listado_pk, online.Value[i].Pk))
+                            {
+                                recipients = recipients + ',' + online.Value[i].Pk.ToString();
+                                contador++;
+                            }
+                        }
+
+                        var resultado = await insta.MessagingProcessor.SendDirectTextAsync(recipients, String.Empty, chat.text);
+
+                        if (resultado.Succeeded)
+                        {
+                            mReports_Mess mReports_Mess = new mReports_Mess(resultado.Value.ThreadId, resultado.Value.ItemId, user.Value.Pk, chat.listado_pk.Count, contador, 0, 0, recipients);
+                            objResultado = objbd.Insertar_Reportes_Mensages(mReports_Mess);
+                            log.Add("De un total de:" + chat.listado_pk.Count + ", mensajes se enviaron:" + contador + ".");
+                        }
+                    }
+                    else
+                    {
+                       log.Add(online.Info.Message);
+                    }
+                }
+                else
+                {
+                    log.Add( instauser.Info.Message);
+                }
+                #endregion                
+            }
+            catch (Exception s)
+            {
+                throw new Exception(s.Message);
+            }
+        }
+
+        private bool Aparece(List<long> lista, long valor)
+        {
+            for (int i = 0; i < lista.Count; i++)
+            {
+                if (lista[i].Equals(valor))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

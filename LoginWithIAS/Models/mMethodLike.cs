@@ -13,6 +13,10 @@ namespace LoginWithIAS.Models
         /// <summary>
         /// 
         /// </summary>
+        public int id_tarea { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public List<string> ListUser {get;set;}
         /// <summary>
         /// 
