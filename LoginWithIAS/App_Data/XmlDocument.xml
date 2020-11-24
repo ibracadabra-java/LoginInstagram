@@ -4,25 +4,6 @@
         <name>LoginWithIAS</name>
     </assembly>
     <members>
-        <member name="T:LoginWithIAS.ApiBd.PurificacionBd">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:LoginWithIAS.ApiBd.PurificacionBd.insertarTareasPurificacion(LoginWithIAS.Models.mPurificador,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="purificador"></param>
-            <param name="userlist"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LoginWithIAS.ApiBd.PurificacionBd.GetTareaPurificacion(System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="ID"></param>
-
         <member name="T:LoginWithIAS.ApiBd.MasSendingBD">
             <summary>
             Tarea para enviar mensajes
@@ -41,7 +22,13 @@
             </summary>
             <param name="reports_Mess"></param>
             <returns></returns>
-        </member>        
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.MasSendingBD.GetTareas">
+            <summary>
+            
+            </summary>
+            <returns></returns>     
+        </member>
         <member name="M:LoginWithIAS.ApiBd.MasSendingBD.Get_Reports_Mess(System.Int64)">
             <summary>
             Actualizar y mostrar resumen de los mensajes enviados a los clientes
@@ -53,6 +40,33 @@
             Obtiene la Tarea MasSending que se encargara de enviar un texto a una lista de usuarios
             </summary>
             <param name="idtarea"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.MasSendingBD.Insertar_MasSending(LoginWithIAS.Models.mMasSending)">
+            <summary>
+            Insertar Reporte de los Mensajes enviados
+            </summary>
+            <param name="sending"></param>
+            <returns></returns>
+        </member>
+        <member name="T:LoginWithIAS.ApiBd.PurificacionBd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.PurificacionBd.insertarTareasPurificacion(LoginWithIAS.Models.mPurificador,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="purificador"></param>
+            <param name="userlist"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.PurificacionBd.GetTareaPurificacion(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="ID"></param>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.ApiBd.TareasBd">
@@ -67,14 +81,40 @@
             <param name="mmethodlike"></param>
             <param name="userlist"></param>
             <returns></returns>
-        </member>       
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.Insertar_Reportes_Mensages(LoginWithIAS.Models.mReports_Mess)">
+            <summary>
+            Insertar Reporte de los Mensajes enviados
+            </summary>
+            <param name="reports_Mess"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.Update_Reportes_Mensages(LoginWithIAS.Models.mReports_Mess)">
+            <summary>
+            Actualizar Cantidad de Reaccines y Cantidad de vistos.
+            </summary>
+            <param name="reports_Mess"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.GetTareas">
+            <summary>
+            
+            </summary>
+            <returns></returns>     
+        </member>
         <member name="M:LoginWithIAS.ApiBd.TareasBd.GetTareaExpancion(System.Int32)">
             <summary>
             
             </summary>
             <param name="ID"></param>
             <returns></returns>
-        </member>        
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.Get_Reports_Mess(System.Int64)">
+            <summary>
+            Actualizar y mostrar resumen de los mensajes enviados a los clientes
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.BundleConfig">
             <summary>
             
@@ -1195,11 +1235,11 @@
             <param name="chat"></param>
             <returns></returns>
         </member>
-        <member name="M:LoginWithIAS.Controllers.MessageProcessController.Mass_Sending(LoginWithIAS.Models.mchat)">
+        <member name="M:LoginWithIAS.Controllers.MessageProcessController.Mass_Sending(LoginWithIAS.Models.mMasSending)">
             <summary>
             Metodo para enviar un mensaje de texto a un usuario
             </summary>
-            <param name="chat"></param>
+            <param name="sending"></param>
             <returns></returns>
         </member>
         <member name="M:LoginWithIAS.Controllers.MessageProcessController.Reporte_Mensaje(LoginWithIAS.Models.mchat)">
@@ -2099,7 +2139,6 @@
             </summary>
             <param name="chat"></param>
         </member>
-<<<<<<< HEAD
         <member name="M:LoginWithIAS.Worker.BackGroundWork.ejecutarTareaPurificacion(LoginWithIAS.Models.mPurificador)">
             <summary>
             
@@ -2113,7 +2152,5 @@
             <param name="Data"></param>
             <returns></returns>
         </member>
-=======
->>>>>>> a39edfe095587a26a85aa5a274afb40691c1032a
     </members>
 </doc>
