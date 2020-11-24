@@ -4,6 +4,44 @@
         <name>LoginWithIAS</name>
     </assembly>
     <members>
+        <member name="T:LoginWithIAS.ApiBd.MasSendingBD">
+            <summary>
+            Tarea para enviar mensajes
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.MasSendingBD.Insertar_Reportes_Mensages(LoginWithIAS.Models.mReports_Mess)">
+            <summary>
+            Insertar Reporte de los Mensajes enviados
+            </summary>
+            <param name="reports_Mess"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.MasSendingBD.Update_Reportes_Mensages(LoginWithIAS.Models.mReports_Mess)">
+            <summary>
+            Actualizar Cantidad de Reaccines y Cantidad de vistos.
+            </summary>
+            <param name="reports_Mess"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.MasSendingBD.GetTareas">
+            <summary>
+            
+            </summary>
+            <returns></returns>     
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.MasSendingBD.Get_Reports_Mess(System.Int64)">
+            <summary>
+            Actualizar y mostrar resumen de los mensajes enviados a los clientes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.MasSendingBD.Get_MasSending(System.Int32)">
+            <summary>
+            Obtiene la Tarea MasSending que se encargara de enviar un texto a una lista de usuarios
+            </summary>
+            <param name="idtarea"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.ApiBd.TareasBd">
             <summary>
             
@@ -24,6 +62,13 @@
             <param name="reports_Mess"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.Update_Reportes_Mensages(LoginWithIAS.Models.mReports_Mess)">
+            <summary>
+            Actualizar Cantidad de Reaccines y Cantidad de vistos.
+            </summary>
+            <param name="reports_Mess"></param>
+            <returns></returns>
+        </member>
         <member name="M:LoginWithIAS.ApiBd.TareasBd.GetTareas">
             <summary>
             
@@ -35,6 +80,12 @@
             
             </summary>
             <param name="ID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.Get_Reports_Mess(System.Int64)">
+            <summary>
+            Actualizar y mostrar resumen de los mensajes enviados a los clientes
+            </summary>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.BundleConfig">
@@ -1712,6 +1763,31 @@
             Password del proxy
             </summary>
         </member>
+        <member name="T:LoginWithIAS.Models.mMasSending">
+            <summary>
+            Clase que hace referencia a la tabla MasSending
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mMasSending.Usuarios">
+            <summary>
+            PK de los usuarios a los que deseamos enviar un mensaje. Estos estaran separados por coma.
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mMasSending.Texto">
+            <summary>
+            Mensajes que seran enviados a la lista de usuarios
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mMasSending.Usuario">
+            <summary>
+            Usuario del cliente que se encuentra autenticado
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mMasSending.Pass">
+            <summary>
+            Contrasena del usuario que se encuentra autenticado
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.mMethodLike">
             <summary>
             
@@ -2005,6 +2081,12 @@
             
             </summary>
             <param name="data"></param>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.Mass_Sending(LoginWithIAS.Models.mchat)">
+            <summary>
+            
+            </summary>
+            <param name="chat"></param>
         </member>
     </members>
 </doc>

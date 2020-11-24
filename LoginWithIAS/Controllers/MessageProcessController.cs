@@ -720,10 +720,10 @@ namespace LoginWithIAS.Controllers
         /// <summary>
         /// Metodo para enviar un mensaje de texto a un usuario
         /// </summary>
-        /// <param name="chat"></param>
+        /// <param name="sending"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<enResponseToken> Mass_Sending(mchat chat)
+        public async Task<enResponseToken> Mass_Sending(mMasSending sending)
         {
             try
             {
@@ -733,12 +733,12 @@ namespace LoginWithIAS.Controllers
 
                 var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-                if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
+                if (!(string.IsNullOrEmpty(sending.Usuario) || string.IsNullOrEmpty(sending.Pass)))
                 {
                     var userSession = new UserSessionData
                     {
-                        UserName = chat.User,
-                        Password = chat.Pass
+                        UserName = sending.Usuario,
+                        Password = sending.Pass
                     };
                     insta.SetUser(userSession);
                 }
@@ -750,18 +750,18 @@ namespace LoginWithIAS.Controllers
 
                 session.LoadSession(insta);
 
-                if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
+                if (!insta.GetLoggedUser().Password.Equals(sending.Pass))
                 {
                     token.Message = "Contraseña incorrecta";
                     return token;
                 }
 
-                if (!string.IsNullOrEmpty(chat.text))
+                if (!string.IsNullOrEmpty(sending.Texto))
                 {
                     token.Message = "Debe Introducir el texto del mensaje a enviar";
                     return token;
                 }
-                var user = await insta.UserProcessor.GetUserAsync(chat.User);
+                var user = await insta.UserProcessor.GetUserAsync(sending.Usuario);
                 var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(string.Empty, PaginationParameters.MaxPagesToLoad(1));
                 #region Enviar Si el cliente esta Online
                 string recipients = "";
@@ -771,22 +771,23 @@ namespace LoginWithIAS.Controllers
                     if (online.Succeeded)
                     {
                         int contador = 0;
+                        string[] linea = sending.Usuarios.Split(',');
                         for (int i = 0; i < online.Value.Count; i++)
                         {
-                            if (online.Value[i].IsActive && Aparece(chat.listado_pk, online.Value[i].Pk))
+                            if (online.Value[i].IsActive && Aparece(linea, online.Value[i].Pk.ToString()))
                             {
                                 recipients = recipients + ',' + online.Value[i].Pk.ToString();
                                 contador++;
                             }
                         }
 
-                        var resultado = await insta.MessagingProcessor.SendDirectTextAsync(recipients, String.Empty, chat.text);
+                        var resultado = await insta.MessagingProcessor.SendDirectTextAsync(recipients, String.Empty, sending.Texto);
 
                         if (resultado.Succeeded)
                         {
-                            mReports_Mess mReports_Mess = new mReports_Mess(resultado.Value.ThreadId, resultado.Value.ItemId, user.Value.Pk, chat.listado_pk.Count, contador, 0, 0, recipients);
+                            mReports_Mess mReports_Mess = new mReports_Mess(resultado.Value.ThreadId, resultado.Value.ItemId, user.Value.Pk, linea.Length, contador, 0, 0, recipients);
                             objResultado = objbd.Insertar_Reportes_Mensages(mReports_Mess);
-                            token.Message = "De un total de:" + chat.listado_pk.Count + ", mensajes se enviaron:" + contador + ".";
+                            token.Message = "De un total de:" + linea.Length + ", mensajes se enviaron:" + contador + ".";
                         }
                     }
                     else
@@ -808,9 +809,9 @@ namespace LoginWithIAS.Controllers
             }
         }
 
-        private bool Aparece(List<long> lista, long valor)
+        private bool Aparece(string[] lista, string valor)
         {
-            for (int i = 0; i < lista.Count; i++)
+            for (int i = 0; i < lista.Length; i++)
             {
                 if (lista[i].Equals(valor))
                 {

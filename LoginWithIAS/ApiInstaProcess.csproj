@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiBd\OracleDatabaseHelper.cs" />
+    <Compile Include="ApiBd\MasSendingBD.cs" />
     <Compile Include="ApiBd\TareasBd.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Models\mFollower.cs" />
     <Compile Include="Models\mLikeManyPost.cs" />
     <Compile Include="Models\mLogin.cs" />
+    <Compile Include="Models\mMasSending.cs" />
     <Compile Include="Models\mMethodLike.cs" />
     <Compile Include="Models\mPost.cs" />
     <Compile Include="Models\mReports_Mess.cs" />
