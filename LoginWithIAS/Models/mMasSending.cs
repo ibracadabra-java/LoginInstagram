@@ -8,7 +8,7 @@ namespace LoginWithIAS.Models
     /// <summary>
     /// Clase que hace referencia a la tabla MasSending
     /// </summary>
-    public class mMasSending
+    public class mMasSending:mLogin
     {
         /// <summary>
         /// PK de los usuarios a los que deseamos enviar un mensaje. Estos estaran separados por coma.
@@ -19,16 +19,6 @@ namespace LoginWithIAS.Models
         /// Mensajes que seran enviados a la lista de usuarios
         /// </summary>
         public string Texto { get; set; }
-
-        /// <summary>
-        /// Usuario del cliente que se encuentra autenticado
-        /// </summary>
-        public string Usuario { get; set; }
-
-
-        /// <summary>
-        /// Contrasena del usuario que se encuentra autenticado
-        /// </summary>
-        public string Pass { get; set; }
+       
     }
 }

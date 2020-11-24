@@ -103,30 +103,7 @@ namespace LoginWithIAS.ApiBd
                 throw new Exception(s.Message);
             }
 
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>     
-        public List<mTarea> GetTareas()
-        {
-            List<OracleParameter> parametros = new List<OracleParameter>();
-            parametros.Add(new OracleParameter("X_CURSOR", OracleDbType.RefCursor) { Direction = ParameterDirection.Output });
-
-            OracleDatabaseHelper.RowMapper<mTarea> rowMapper = (delegate (OracleDataReader oracleDataReader)
-            {
-                mTarea tarea = new mTarea();
-                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_TAREA")))
-                    tarea.idTarea = Convert.ToInt32(oracleDataReader["ID_TAREA"]);
-                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_TIPO_TAREA")))
-                    tarea.id = Convert.ToInt32(oracleDataReader["ID_TIPO_TAREA"]);
-                return tarea;
-            });
-
-            return OracleDatabaseHelper.ExecuteToList<mTarea>("PRC_GET_TAREAS", parametros, "X_CURSOR", rowMapper, TipoPaquete.CONS);
-
-        }
+        }     
 
         /// <summary>
         /// Actualizar y mostrar resumen de los mensajes enviados a los clientes
@@ -217,7 +194,7 @@ namespace LoginWithIAS.ApiBd
                 parametros.Add(new OracleParameter("X_IDMLOGIN", OracleDbType.Varchar2, sending.Usuario, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_USUARIOS", OracleDbType.Varchar2, sending.Usuarios, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_TEXTO", OracleDbType.Int32, sending.Texto, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_ID_TIPO", OracleDbType.Int32, 3, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_ID_TIPO", OracleDbType.Int32, 2, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_ERROR", OracleDbType.RefCursor) { Direction = ParameterDirection.Output });
 
                 OracleDatabaseHelper.RowMapper<mResultadoBd> rowMapper = (delegate (OracleDataReader oracleDataReader)
