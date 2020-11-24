@@ -264,10 +264,9 @@ namespace LoginWithIAS.Controllers
         /// <summary>
         /// Este método se encargará de eliminar seguidores, específicamente seguidores falsos
         /// </summary>
-        /// <param name="mLogin"></param>
-        /// <param name="usuarios"></param>
+        /// <param name="purificador"></param>
         /// <returns></returns>
-        public async Task<enResponseToken> Purificador(mLogin mLogin, List<string> usuarios)
+        public async Task<enResponseToken> Purificador(mPurificador purificador)
         {
             try
             {
@@ -277,12 +276,12 @@ namespace LoginWithIAS.Controllers
 
                 var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-                if (!(string.IsNullOrEmpty(mLogin.User) || string.IsNullOrEmpty(mLogin.Pass)))
+                if (!(string.IsNullOrEmpty(purificador.User) || string.IsNullOrEmpty(purificador.Pass)))
                 {
                     var userSession = new UserSessionData
                     {
-                        UserName = mLogin.User,
-                        Password = mLogin.Pass
+                        UserName = purificador.User,
+                        Password = purificador.Pass
                     };
                     insta.SetUser(userSession);
                 }
@@ -294,19 +293,19 @@ namespace LoginWithIAS.Controllers
 
                 session.LoadSession(insta);
 
-                if (!insta.GetLoggedUser().Password.Equals(mLogin.Pass))
+                if (!insta.GetLoggedUser().Password.Equals(purificador.Pass))
                 {
                     token.Message = "Contraseña incorrecta";
                     return token;
                 }
                 //Cargar lista de los seguidores del cliente
                 int count = 0;
-                var userlist = await insta.UserProcessor.GetUserFollowersAsync(mLogin.User, PaginationParameters.MaxPagesToLoad(1));
+                var userlist = await insta.UserProcessor.GetUserFollowersAsync(purificador.User, PaginationParameters.MaxPagesToLoad(1));
                 if (userlist.Succeeded)
                 {
-                    for (int i = 0; i < usuarios.Count; i++)
+                    for (int i = 0; i < purificador.UserList.Count; i++)
                     {
-                        var user = await insta.UserProcessor.GetUserAsync(usuarios[i]);
+                        var user = await insta.UserProcessor.GetUserAsync(purificador.UserList[i]);
                         if (user.Succeeded)
                         {
                             var userInfo = await insta.UserProcessor.GetFullUserInfoAsync(user.Value.Pk);

@@ -4,6 +4,26 @@
         <name>LoginWithIAS</name>
     </assembly>
     <members>
+        <member name="T:LoginWithIAS.ApiBd.PurificacionBd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.PurificacionBd.insertarTareasPurificacion(LoginWithIAS.Models.mPurificador,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="purificador"></param>
+            <param name="userlist"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.PurificacionBd.GetTareaPurificacion(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="ID"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.ApiBd.TareasBd">
             <summary>
             
@@ -24,6 +44,13 @@
             <param name="reports_Mess"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.Update_Reportes_Mensages(LoginWithIAS.Models.mReports_Mess)">
+            <summary>
+            Actualizar Cantidad de Reaccines y Cantidad de vistos.
+            </summary>
+            <param name="reports_Mess"></param>
+            <returns></returns>
+        </member>
         <member name="M:LoginWithIAS.ApiBd.TareasBd.GetTareas">
             <summary>
             
@@ -35,6 +62,12 @@
             
             </summary>
             <param name="ID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.TareasBd.Get_Reports_Mess(System.Int64)">
+            <summary>
+            Actualizar y mostrar resumen de los mensajes enviados a los clientes
+            </summary>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.BundleConfig">
@@ -1025,12 +1058,11 @@
             desean saber si fue elimiando por instagram p simplemente bloqueo o dejo de seguir a nuestro cliente principal</param>
             <returns></returns>
         </member>
-        <member name="M:LoginWithIAS.Controllers.CuentasController.Purificador(LoginWithIAS.Models.mLogin,System.Collections.Generic.List{System.String})">
+        <member name="M:LoginWithIAS.Controllers.CuentasController.Purificador(LoginWithIAS.Models.mPurificador)">
             <summary>
             Este método se encargará de eliminar seguidores, específicamente seguidores falsos
             </summary>
-            <param name="mLogin"></param>
-            <param name="usuarios"></param>
+            <param name="purificador"></param>
             <returns></returns>
         </member>
         <member name="M:LoginWithIAS.Controllers.CuentasController.Reporte(LoginWithIAS.Models.mLogin)">
@@ -1201,7 +1233,7 @@
             
             </summary>
         </member>
-        <member name="M:LoginWithIAS.Controllers.TareasController.StopTareas(System.String)">
+        <member name="M:LoginWithIAS.Controllers.TareasController.StopTareas(LoginWithIAS.Models.mStopTarea)">
             <summary>
             
             </summary>
@@ -1789,6 +1821,21 @@
             Tipo de post
             </summary>
         </member>
+        <member name="T:LoginWithIAS.Models.mPurificador">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mPurificador.UserList">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mPurificador.id_tarea">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.mReports_Mess">
             <summary>
             Clase para el reporte de los mensajes
@@ -1841,6 +1888,16 @@
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mResultadoBd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mStopTarea.Nombre">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mStopTarea.Razon">
             <summary>
             
             </summary>
@@ -1987,12 +2044,6 @@
             
             </summary>
         </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.ejecutarTareaExpancion(LoginWithIAS.Models.mMethodLike)">
-            <summary>
-            
-            </summary>
-            <param name="expancion"></param>
-        </member>
         <member name="M:LoginWithIAS.Worker.BackGroundWork.pararTarea(System.String,System.String)">
             <summary>
             
@@ -2000,11 +2051,36 @@
             <param name="name"></param>
             <param name="razon"></param>
         </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.ejecutarTareaExpancion(LoginWithIAS.Models.mMethodLike)">
+            <summary>
+            
+            </summary>
+            <param name="expancion"></param>
+        </member>
         <member name="M:LoginWithIAS.Worker.BackGroundWork.SimulationHumanLikeManyPost(System.Object)">
             <summary>
             
             </summary>
             <param name="data"></param>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.Mass_Sending(LoginWithIAS.Models.mchat)">
+            <summary>
+            
+            </summary>
+            <param name="chat"></param>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.ejecutarTareaPurificacion(LoginWithIAS.Models.mPurificador)">
+            <summary>
+            
+            </summary>
+            <param name="purificador"></param>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.Purificador(System.Object)">
+            <summary>
+            Este método se encargará de eliminar seguidores, específicamente seguidores falsos
+            </summary>
+            <param name="Data"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

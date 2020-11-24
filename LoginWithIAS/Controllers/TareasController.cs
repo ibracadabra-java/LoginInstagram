@@ -21,6 +21,7 @@ namespace LoginWithIAS.Controllers
     /// </summary>
     public class TareasController : ApiController
     {
+        BackGroundWork groundWork = new BackGroundWork();
         /// <summary>
         /// 
         /// </summary>
@@ -32,6 +33,7 @@ namespace LoginWithIAS.Controllers
             mTareas tareas = new mTareas();
             mResultadoBd objResultado = new mResultadoBd();
             TareasBd objbd = new TareasBd();
+            PurificacionBd objpuri = new PurificacionBd();
             for (int i = 0; i < TareasDia.TareasDia.Count; i++)
             {
                 
@@ -48,6 +50,15 @@ namespace LoginWithIAS.Controllers
                             mlike.cantLike =Convert.ToInt32(Datos[1]);
                             string userlist = Datos[2];
                             objResultado =  objbd.insertarTareas(mlike, userlist);
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            mPurificador purificador = new mPurificador();
+                            List<string> Datos2 = TareasDia.TareasDia[i].tareas[j].info;
+                            purificador.User = TareasDia.TareasDia[i].user;
+                            string ListUser = Datos2[0];
+                            objResultado = objpuri.insertarTareasPurificacion(purificador, ListUser);
                             break;
                     }
 
@@ -87,7 +98,7 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public void EjecutarTareas()
         {
-            BackGroundWork groundWork = new BackGroundWork();
+            
             groundWork.MainThreadEjecutarTareas();
         }
         /// <summary>
@@ -95,14 +106,13 @@ namespace LoginWithIAS.Controllers
         /// </summary>
         /// <param name="Values"></param>
         [HttpPost]
-        public void StopTareas(string Values) 
+        public void StopTareas(mStopTarea Values) 
         {
-            BackGroundWork tareasobj = new BackGroundWork();
-            var Datos = Values.Split(',');
-            string Name = Datos[0];
-            string Reazon = Datos[1];
+                      
+            string Name = Values.Nombre;
+            string Reazon = Values.Razon;
 
-            tareasobj.pararTarea(Name,Reazon);
+            groundWork.pararTarea(Name,Reazon);
 
             
         }

@@ -36,6 +36,7 @@ namespace LoginWithIAS.Worker
             util = new Util();
             log = new Log(path);
         }
+        #region Hilo Principal y TareasGenerales
         /// <summary>
         /// 
         /// </summary>
@@ -54,6 +55,7 @@ namespace LoginWithIAS.Worker
 
             List<mTarea> Tareas = new List<mTarea>();
             TareasBd objtarea = new TareasBd();
+            PurificacionBd objpuri = new PurificacionBd();
             Tareas = objtarea.GetTareas();
             for (int i = 0; i < Tareas.Count; i++)
             {
@@ -63,11 +65,33 @@ namespace LoginWithIAS.Worker
                         mMethodLike expancion = objtarea.GetTareaExpancion(Tareas[i].idTarea);
                         ejecutarTareaExpancion(expancion);
                         break;
+                    case 2:
+
+                        break;
+                    case 3:
+                        mPurificador purificador = objpuri.GetTareaPurificacion(Tareas[i].idTarea);
+
+                        break;
                 }
 
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="razon"></param>
+        public void pararTarea(string name, string razon)
+        {
+            for (int i = 0; i < threads.Count; i++)
+            {
+                if (threads[i].Name == name)
+                    threads[i].Abort(razon);
 
+            }
+        }
+        #endregion
+        #region Tarea Expancion
         /// <summary>
         /// 
         /// </summary>
@@ -81,20 +105,7 @@ namespace LoginWithIAS.Worker
                     threads.Add(hilo);
              
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="razon"></param>
-        public void pararTarea(string name, string razon) 
-        {
-            for (int i = 0; i < threads.Count; i++)
-            {
-                if (threads[i].Name == name)
-                    threads[i].Abort(razon);
-
-            }
-        }     
+            
         /// <summary>
         /// 
         /// </summary>
@@ -393,6 +404,8 @@ namespace LoginWithIAS.Worker
             }
             else { log.Add("Debe autenticarse primero"); }
         }
+        #endregion
+        #region Tarea Mensaje Masivo
         /// <summary>
         /// 
         /// </summary>
@@ -490,5 +503,83 @@ namespace LoginWithIAS.Worker
             }
             return false;
         }
+        #endregion
+        #region Tarea Purificacion
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="purificador"></param>
+        public void ejecutarTareaPurificacion(mPurificador purificador)
+        {
+            Thread hilo = new Thread(SimulationHumanLikeManyPost);
+            hilo.Name = purificador.User;
+            hilo.IsBackground = true;
+            hilo.Start(purificador);
+            threads.Add(hilo);
+
+        }
+        /// <summary>
+        /// Este método se encargará de eliminar seguidores, específicamente seguidores falsos
+        /// </summary>
+        /// <param name="Data"></param>
+        /// <returns></returns>
+        public async void Purificador(object Data)
+        {
+
+            try
+            {
+                mPurificador purificador = (mPurificador)Data;
+                List<string> devolver = new List<string>();
+                PaginationParameters pagination = PaginationParameters.MaxPagesToLoad(1);
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(purificador.User) || string.IsNullOrEmpty(purificador.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = purificador.User,
+                        Password = purificador.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    log.Add( "Deben introducir Usuario y Contraseña");
+                    
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(purificador.Pass))
+                {
+                    log.Add( "Contraseña incorrecta");
+                    
+                }
+                //Cargar lista de los seguidores del cliente
+                int count = 0;
+                var userlist = await insta.UserProcessor.GetUserFollowersAsync(purificador.User, PaginationParameters.MaxPagesToLoad(1));
+                if (userlist.Succeeded)
+                {
+                    for (int i = 0; i < purificador.UserList.Count; i++)
+                    {                       
+                            var remove = await insta.UserProcessor.RemoveFollowerAsync(Convert.ToInt64(purificador.UserList[i]));
+                        if (remove.Succeeded)
+                        {
+                            count++;
+                        }
+                        else
+                            log.Add("Eliminando usuarios falsos de :" + purificador.User+" "+ remove.Info.Message);
+                        
+                    }
+                }
+               log.Add( "Fueron eliminados un total de:" + count.ToString() + ", de seguidores.");              
+            }
+            catch (Exception s)
+            {
+                throw new Exception(s.Message);
+            }
+        }
+        #endregion
     }
 }
