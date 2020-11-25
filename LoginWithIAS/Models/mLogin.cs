@@ -18,6 +18,7 @@ namespace LoginWithIAS.Models
         private string addressProxy;
         private string usernameProxy;
         private string passProxy;
+        private string pk;
         /// <summary>
         /// Usuario que desea loguearse
         /// </summary>
@@ -42,9 +43,11 @@ namespace LoginWithIAS.Models
         /// <summary>
         /// Password del proxy
         /// </summary>
-        public string PassProxy { get => passProxy; set => passProxy = value; } 
-
-
-
+        public string PassProxy { get => passProxy; set => passProxy = value; }
+       
+        /// <summary>
+        /// Identificador unico
+        /// </summary>
+        public string PK { get => pk; set => pk = value; }
     }
 }

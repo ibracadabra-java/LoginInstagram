@@ -145,6 +145,7 @@
   <ItemGroup>
     <Compile Include="ApiBd\ErrorBd.cs" />
     <Compile Include="ApiBd\MasSendingBD.cs" />
+    <Compile Include="ApiBd\MloginBD.cs" />
     <Compile Include="ApiBd\OracleDatabaseHelper.cs" />
     <Compile Include="ApiBd\PurificacionBd.cs" />
     <Compile Include="ApiBd\TareasBd.cs" />
