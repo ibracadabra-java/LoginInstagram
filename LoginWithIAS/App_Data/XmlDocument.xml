@@ -4,6 +4,18 @@
         <name>LoginWithIAS</name>
     </assembly>
     <members>
+        <member name="T:LoginWithIAS.ApiBd.ErrorBd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.ErrorBd.SysError(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="desc_error"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.ApiBd.MasSendingBD">
             <summary>
             Tarea para enviar mensajes
@@ -22,12 +34,6 @@
             </summary>
             <param name="reports_Mess"></param>
             <returns></returns>
-        </member>
-        <member name="M:LoginWithIAS.ApiBd.MasSendingBD.GetTareas">
-            <summary>
-            
-            </summary>
-            <returns></returns>     
         </member>
         <member name="M:LoginWithIAS.ApiBd.MasSendingBD.Get_Reports_Mess(System.Int64)">
             <summary>
@@ -1714,6 +1720,26 @@
             Password del usuario que desea loguearse
             </summary>
         </member>
+        <member name="T:LoginWithIAS.Models.mError">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mError.id_tipo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mError.desc_error">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mError.action">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.mFollower">
             <summary>
             
@@ -1802,16 +1828,6 @@
         <member name="P:LoginWithIAS.Models.mMasSending.Texto">
             <summary>
             Mensajes que seran enviados a la lista de usuarios
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mMasSending.Usuario">
-            <summary>
-            Usuario del cliente que se encuentra autenticado
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mMasSending.Pass">
-            <summary>
-            Contrasena del usuario que se encuentra autenticado
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mMethodLike">
@@ -2133,11 +2149,18 @@
             </summary>
             <param name="data"></param>
         </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.Mass_Sending(LoginWithIAS.Models.mchat)">
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.ejecutarTareaMass_Sending(LoginWithIAS.Models.mMasSending)">
             <summary>
             
             </summary>
-            <param name="chat"></param>
+            <param name="sending"></param>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.Mass_Sending(System.Object)">
+            <summary>
+            Metodo para enviar un mensaje de texto a un usuario
+            </summary>
+            <param name="Data"></param>
+            <returns></returns>        
         </member>
         <member name="M:LoginWithIAS.Worker.BackGroundWork.ejecutarTareaPurificacion(LoginWithIAS.Models.mPurificador)">
             <summary>

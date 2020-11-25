@@ -55,7 +55,7 @@ namespace LoginWithIAS.Controllers
                         case 2:
                             mMasSending mmassending = new mMasSending();
                             List<string> Datos1 = TareasDia.TareasDia[i].tareas[j].info;
-                            mmassending.Usuario = TareasDia.TareasDia[i].user;
+                            mmassending.User = TareasDia.TareasDia[i].user;
                             mmassending.Texto = Datos1[0];
                             mmassending.Usuarios = Datos1[1];
                             objResultado = objmass.Insertar_MasSending(mmassending);

@@ -733,11 +733,11 @@ namespace LoginWithIAS.Controllers
 
                 var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
-                if (!(string.IsNullOrEmpty(sending.Usuario) || string.IsNullOrEmpty(sending.Pass)))
+                if (!(string.IsNullOrEmpty(sending.User) || string.IsNullOrEmpty(sending.Pass)))
                 {
                     var userSession = new UserSessionData
                     {
-                        UserName = sending.Usuario,
+                        UserName = sending.User,
                         Password = sending.Pass
                     };
                     insta.SetUser(userSession);
@@ -761,7 +761,7 @@ namespace LoginWithIAS.Controllers
                     token.Message = "Debe Introducir el texto del mensaje a enviar";
                     return token;
                 }
-                var user = await insta.UserProcessor.GetUserAsync(sending.Usuario);
+                var user = await insta.UserProcessor.GetUserAsync(sending.User);
                 var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(string.Empty, PaginationParameters.MaxPagesToLoad(1));
                 #region Enviar Si el cliente esta Online
                 string recipients = "";

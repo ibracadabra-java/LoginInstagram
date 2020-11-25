@@ -143,6 +143,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiBd\ErrorBd.cs" />
     <Compile Include="ApiBd\MasSendingBD.cs" />
     <Compile Include="ApiBd\OracleDatabaseHelper.cs" />
     <Compile Include="ApiBd\PurificacionBd.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="Models\mContacts.cs" />
     <Compile Include="Models\mcuentas.cs" />
     <Compile Include="Models\mdevice.cs" />
+    <Compile Include="Models\mError.cs" />
     <Compile Include="Models\mFollower.cs" />
     <Compile Include="Models\mLikeManyPost.cs" />
     <Compile Include="Models\mLogin.cs" />

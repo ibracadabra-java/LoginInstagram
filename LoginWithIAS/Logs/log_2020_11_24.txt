@@ -1,0 +1,17 @@
+24/11/2020 11:52:31 - raulalex1995 Search_user_to_like -No search query provided
+24/11/2020 11:52:31 - raulalex1995 Search_User_to_like -No search query provided
+24/11/2020 11:52:31 - Se le dio like a 0 post del usuario  y se encontraron los siguientes errores No hubo errores
+24/11/2020 11:52:35 - raulalex1995 Search_user_to_like Raul-No errors detected
+24/11/2020 11:52:46 - raulalex1995 Get user to like Raul-No errors detected
+24/11/2020 11:52:46 - raulalex1995 Get_media_to_like Raul-No errors detected
+24/11/2020 11:52:49 - raulalex1995 abriendo direct de message  se esperan 8 segundos - No errors detected
+24/11/2020 11:53:13 - raulalex1995 viendo historia de Raul se esperan 6 segundos para ver otra  - No errors detected
+24/11/2020 11:53:17 - raulalex1995 viendo historia de Raul se esperan 5 segundos para ver otra  - No errors detected
+24/11/2020 11:53:20 - raulalex1995 viendo historia de Raul se esperan 9 segundos para ver otra  - No errors detected
+24/11/2020 11:53:23 - raulalex1995 viendo historia de Raul se esperan 7 segundos para ver otra  - No errors detected
+24/11/2020 11:53:27 - raulalex1995 viendo historia de Raul se esperan 5 segundos para ver otra  - No errors detected
+24/11/2020 11:53:30 - raulalex1995 viendo historia de Raul se esperan 8 segundos para ver otra  - No errors detected
+24/11/2020 11:57:14 - raulalex1995 Search_user_to_like -No search query provided
+24/11/2020 11:57:14 - raulalex1995 Search_User_to_like -No search query provided
+24/11/2020 11:57:14 - Se le dio like a 0 post del usuario  y se encontraron los siguientes errores No hubo errores
+24/11/2020 11:57:17 - raulalex1995 Search_user_to_like Raul-No errors detected

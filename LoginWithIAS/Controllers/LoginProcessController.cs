@@ -95,7 +95,7 @@ namespace LoginWithIAS.Controllers
                     Proxy = proxy,
                 };
 
-                var InstaApi = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All))/*.UseHttpClientHandler(httpClientHandler)*/.Build();
+                var InstaApi = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
 
                 if (!(credencial.AdId ==null || string.IsNullOrEmpty(credencial.AndroidBoardName) || string.IsNullOrEmpty(credencial.AndroidBootloader)||
                     credencial.AndroidBoardName == null || string.IsNullOrEmpty(credencial.DeviceBrand) || credencial.DeviceGuid == null ||string.IsNullOrEmpty(credencial.DeviceId) ||

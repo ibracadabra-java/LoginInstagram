@@ -170,7 +170,7 @@ namespace LoginWithIAS.ApiBd
                     massending.Texto = oracleDataReader["TEXTO"].ToString();
 
                 if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("USUARIO")))
-                    massending.Usuario = oracleDataReader["USUARIO"].ToString();
+                    massending.User = oracleDataReader["USUARIO"].ToString();
 
                 if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("PASS")))
                     massending.Pass = oracleDataReader["PASS"].ToString();
@@ -191,7 +191,7 @@ namespace LoginWithIAS.ApiBd
             {
                 mResultadoBd objResultBd = new mResultadoBd();
                 List<OracleParameter> parametros = new List<OracleParameter>();
-                parametros.Add(new OracleParameter("X_IDMLOGIN", OracleDbType.Varchar2, sending.Usuario, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_IDMLOGIN", OracleDbType.Varchar2, sending.User, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_USUARIOS", OracleDbType.Varchar2, sending.Usuarios, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_TEXTO", OracleDbType.Int32, sending.Texto, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_ID_TIPO", OracleDbType.Int32, 2, ParameterDirection.Input));

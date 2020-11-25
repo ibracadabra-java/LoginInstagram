@@ -11,6 +11,7 @@ using InstagramApiSharp.Classes.Models;
 using InstagramApiSharp.API.Builder;
 using InstagramApiSharp.Logger;
 using InstagramApiSharp.Classes;
+using LoginWithIAS.ApiBd;
 using LoginWithIAS.Utiles;
 using InstagramApiSharp;
 
@@ -23,6 +24,7 @@ namespace LoginWithIAS.Worker
     {
         Session session;
         List<Thread> threads = new List<Thread>();
+        ErrorBd objerror;
         Log log;
         Util util;
         string path = HttpContext.Current.Request.MapPath("~/Logs");
@@ -35,6 +37,7 @@ namespace LoginWithIAS.Worker
             session = new Session();
             util = new Util();
             log = new Log(path);
+            objerror = new ErrorBd();
         }
         #region Hilo Principal y TareasGenerales
         /// <summary>
@@ -98,14 +101,15 @@ namespace LoginWithIAS.Worker
         /// 
         /// </summary>
         /// <param name="expancion"></param>
-        public void ejecutarTareaExpancion(mMethodLike expancion) 
+        public void ejecutarTareaExpancion(mMethodLike expancion)
         {
-                    Thread hilo = new Thread(SimulationHumanLikeManyPost);
-                    hilo.Name = expancion.User;
-                    hilo.IsBackground = true;
-                    hilo.Start(expancion);
-                    threads.Add(hilo);
-             
+            Thread hilo = new Thread(SimulationHumanLikeManyPost);
+            hilo.Name = expancion.User;
+            hilo.IsBackground = true;
+            threads.Add(hilo);
+            hilo.Start(expancion);
+
+
         }
             
         /// <summary>
@@ -128,6 +132,7 @@ namespace LoginWithIAS.Worker
             DateTime hora = DateTime.Now;
             int cicloHora = 1;
             int cicloDia = 1;
+            mError TareaError = new mError();
             var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
             if (!(string.IsNullOrEmpty(mlikemanypost.User) || string.IsNullOrEmpty(mlikemanypost.Pass)))
@@ -261,8 +266,7 @@ namespace LoginWithIAS.Worker
                                                 else
                                                 {
                                                     log.Add(mlikemanypost.User + " Like_to " + userlista[y] + " - " + liked.Info.Message);
-                                                    if (liked.Info.Equals("feedback_required"))
-                                                        return;
+                                                     TareaError = objerror.SysError(liked.Info.Message);
                                                     Error.Add(liked.Info.Message);
                                                 }
                                             }

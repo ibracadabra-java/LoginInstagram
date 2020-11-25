@@ -13,6 +13,7 @@ namespace LoginWithIAS.ApiBd
     {
         private static string packageName_cons = "APIINST.PKG_API_CONS";
         private static string packageName_mant = "APIINST.PKG_API_MANT";
+        private static string packageName_error = "SYS_ERROR.PKG_MANT_ERROR";
 
 
         public delegate T RowMapper<T>(OracleDataReader oracleDataReader) where T : class;
@@ -67,7 +68,11 @@ namespace LoginWithIAS.ApiBd
             else if (tipoPaquete == TipoPaquete.MANT)
             {
                 oracleCommand.CommandText = packageName_mant + "." + procedureName;
-            }           
+            }
+            else if (tipoPaquete == TipoPaquete.ERROR)
+            {
+                oracleCommand.CommandText = packageName_error + "." + procedureName;
+            }
             else
             {
                 throw new Exception("Tipo de paquete no definido");
@@ -300,6 +305,7 @@ namespace LoginWithIAS.ApiBd
     {
         CONS,
         MANT,
+        ERROR,
 
     }
 }
