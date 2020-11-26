@@ -12,7 +12,7 @@ namespace LoginWithIAS.Models
     /// <summary>
     /// 
     /// </summary>
-    public class Session
+    public class Sesion
     {
         /// <summary>
         /// Método para cargar session

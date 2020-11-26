@@ -1,0 +1,55 @@
+26/11/2020 0:37:01 - raulalex1995 Search_user_to_like ernesto-No errors detected
+26/11/2020 0:38:22 - raulalex1995 Search_user_to_like raul-No errors detected
+26/11/2020 0:38:22 - raulalex1995 Search_user_to_like ernesto-No errors detected
+26/11/2020 0:38:27 - raulalex1995 Get user to like ernesto-No errors detected
+26/11/2020 0:38:27 - raulalex1995 Get_media_to_like ernesto-No errors detected
+26/11/2020 0:38:27 - raulalex1995 Get_media_to_like ernesto- No tiene publicaciones
+26/11/2020 0:38:27 - Se le dio like a 0 post del usuario ernesto y se encontraron los siguientes errores No hubo errores
+26/11/2020 0:38:28 - raulalex1995 Get user to like raul-No errors detected
+26/11/2020 0:38:28 - raulalex1995 Get_media_to_like raul-No errors detected
+26/11/2020 0:38:32 - raulalex1995 Entrando al perfil y obteniendo post de raul se esperan 9 segundos  - No errors detected
+26/11/2020 0:38:33 - raulalex1995 Search_user_to_like raul-No errors detected
+26/11/2020 0:38:38 - raulalex1995 Get user to like raul-No errors detected
+26/11/2020 0:38:38 - raulalex1995 Get_media_to_like raul-No errors detected
+26/11/2020 0:38:43 - raulalex1995 Entrando al perfil y obteniendo post de raul se esperan 5 segundos  - No errors detected
+26/11/2020 0:38:51 - raulalex1995 abriendo direct de message  se esperan 9 segundos - No errors detected
+26/11/2020 0:39:17 - raulalex1995 viendo seguidores de raul - No errors detected
+26/11/2020 0:39:20 - raulalex1995 Like_to raul - No errors detected
+26/11/2020 0:39:20 - Se le dio like a 1 post del usuario raul y se encontraron los siguientes errores No hubo errores
+26/11/2020 0:39:27 - raulalex1995 Search_user_to_like alina-No errors detected
+26/11/2020 0:39:32 - raulalex1995 Get user to like alina-No errors detected
+26/11/2020 0:39:32 - raulalex1995 Get_media_to_like alina-Not authorized to view user
+26/11/2020 0:39:32 - Se le dio like a 0 post del usuario alina y se encontraron los siguientes errores No hubo errores
+26/11/2020 0:39:38 - raulalex1995 Search_user_to_like juan-No errors detected
+26/11/2020 0:39:43 - raulalex1995 Get user to like juan-No errors detected
+26/11/2020 0:39:43 - raulalex1995 Get_media_to_like juan-No errors detected
+26/11/2020 0:39:44 - raulalex1995 abriendo direct de message  se esperan 8 segundos - No errors detected
+26/11/2020 0:39:48 - raulalex1995 Like_to raul - No errors detected
+26/11/2020 0:40:04 - raulalex1995 Like_to raul - No errors detected
+26/11/2020 0:40:04 - Se le dio like a 2 post del usuario raul y se encontraron los siguientes errores No hubo errores
+26/11/2020 0:40:26 - raulalex1995 viendo historia de juan se esperan 6 segundos para ver otra  - No errors detected
+26/11/2020 0:40:31 - raulalex1995 viendo historia de juan se esperan 6 segundos para ver otra  - No errors detected
+26/11/2020 0:40:40 - raulalex1995 viendo historia de juan se esperan 9 segundos para ver otra  - No errors detected
+26/11/2020 0:41:00 - raulalex1995 viendo historia de juan se esperan 8 segundos para ver otra  - No errors detected
+26/11/2020 0:41:10 - raulalex1995 viendo historia de juan se esperan 9 segundos para ver otra  - No errors detected
+26/11/2020 0:41:24 - raulalex1995 Search_user_to_like alberto-No errors detected
+26/11/2020 0:41:29 - raulalex1995 viendo historia de juan se esperan 7 segundos para ver otra  - No errors detected
+26/11/2020 0:41:38 - raulalex1995 Get user to like alberto-No errors detected
+26/11/2020 0:41:38 - raulalex1995 Get_media_to_like alberto-No errors detected
+26/11/2020 0:41:48 - raulalex1995 Entrando al perfil y obteniendo post de alberto se esperan 9 segundos  - No errors detected
+26/11/2020 0:42:17 - raulalex1995 Like_to juan - No errors detected
+26/11/2020 0:42:17 - Se le dio like a 1 post del usuario juan y se encontraron los siguientes errores No hubo errores
+26/11/2020 0:42:21 - raulalex1995 viendo seguidores de alberto - No errors detected
+26/11/2020 0:43:55 - raulalex1995 Search_user_to_like ernesto-No errors detected
+26/11/2020 0:43:56 - raulalex1995 Search_user_to_like raul-No errors detected
+26/11/2020 0:44:01 - raulalex1995 Get user to like ernesto-No errors detected
+26/11/2020 0:44:01 - raulalex1995 Get_media_to_like ernesto-No errors detected
+26/11/2020 0:44:01 - raulalex1995 Get_media_to_like ernesto- No tiene publicaciones
+26/11/2020 0:44:01 - Se le dio like a 0 post del usuario ernesto y se encontraron los siguientes errores No hubo errores
+26/11/2020 0:44:02 - raulalex1995 Get user to like raul-No errors detected
+26/11/2020 0:44:02 - raulalex1995 Get_media_to_like raul-No errors detected
+26/11/2020 0:44:07 - raulalex1995 Search_user_to_like raul-No errors detected
+26/11/2020 0:44:13 - raulalex1995 Get user to like raul-No errors detected
+26/11/2020 0:44:13 - raulalex1995 Get_media_to_like raul-No errors detected
+26/11/2020 0:44:13 - raulalex1995 abriendo post de raul se esperan 7 segundos para abrir otro  - No errors detected
+26/11/2020 0:44:23 - raulalex1995 abriendo post de raul se esperan 9 segundos para abrir otro  - No errors detected

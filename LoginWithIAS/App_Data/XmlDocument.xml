@@ -2068,24 +2068,24 @@
             
             </summary>
         </member>
-        <member name="T:LoginWithIAS.Models.Session">
+        <member name="T:LoginWithIAS.Models.Sesion">
             <summary>
             
             </summary>
         </member>
-        <member name="M:LoginWithIAS.Models.Session.LoadSession(InstagramApiSharp.API.IInstaApi)">
+        <member name="M:LoginWithIAS.Models.Sesion.LoadSession(InstagramApiSharp.API.IInstaApi)">
             <summary>
             Método para cargar session
             </summary>
             <param name="IstanciaApi">Instancia del objeto IInstaApi</param>
         </member>
-        <member name="M:LoginWithIAS.Models.Session.SaveSession(InstagramApiSharp.API.IInstaApi)">
+        <member name="M:LoginWithIAS.Models.Sesion.SaveSession(InstagramApiSharp.API.IInstaApi)">
             <summary>
             Método para guardar la session
             </summary>
             <param name="IstanciaApi">Instancia del objeto IInstaApi</param>
         </member>
-        <member name="M:LoginWithIAS.Models.Session.GenerarToken">
+        <member name="M:LoginWithIAS.Models.Sesion.GenerarToken">
             <summary>
             Metodo para generar Token de salida al loguarse
             </summary>   
@@ -2116,11 +2116,6 @@
             </summary>
         </member>
         <member name="M:LoginWithIAS.Worker.BackGroundWork.#ctor">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.MainThreadEjecutarTareas">
             <summary>
             
             </summary>

@@ -23,14 +23,14 @@ namespace LoginWithIAS.Controllers
     /// </summary>
     public class CuentasController : ApiController
     {
-        Session session;
+        Sesion session;
         Util util;
         /// <summary>
         /// 
         /// </summary>
         public CuentasController()
         {
-            this.session = new Session();
+            this.session = new Sesion();
             this.util = new Util();
         }
 

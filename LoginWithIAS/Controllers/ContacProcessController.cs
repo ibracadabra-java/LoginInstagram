@@ -21,14 +21,14 @@ namespace LoginWithIAS.Controllers
         /// <summary>
         /// Objeto seccion para salvar y calgar los datos
         /// </summary>
-        Session session;
+        Sesion session;
 
         /// <summary>
         /// Constructor de la clase
         /// </summary>
         public ContacProcessController()
         {
-            this.session = new Session();
+            this.session = new Sesion();
         }
 
         /*/// <summary>

@@ -23,7 +23,7 @@ namespace LoginWithIAS.Controllers
     /// </summary>
     public class MessageProcessController : ApiController
     {
-        Session session;
+        Sesion session;
         Util util;
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace LoginWithIAS.Controllers
         /// </summary>
         public MessageProcessController()
         {
-            session = new Session();
+            session = new Sesion();
             util = new Util();
         }
 

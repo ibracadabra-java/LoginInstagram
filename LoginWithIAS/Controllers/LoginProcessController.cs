@@ -30,20 +30,20 @@ namespace LoginWithIAS.Controllers
     /// </summary>
     public class LoginProcessController : ApiController
     {
-        Session session;       
+        Sesion session;       
         
         /// <summary>
         /// 
         /// </summary>
         public LoginProcessController()
         {
-            session = new Session();
+            session = new Sesion();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public Session Session { get => session; set => session = value; }
+        public Sesion Session { get => session; set => session = value; }
 
         /// <summary>
         /// Metodo para Loguearse en la plataforma

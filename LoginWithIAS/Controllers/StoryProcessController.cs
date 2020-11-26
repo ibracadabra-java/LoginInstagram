@@ -19,13 +19,13 @@ namespace LoginWithIAS.Controllers
     /// </summary>
     public class StoryProcessController : ApiController
     {
-        Session session;
+        Sesion session;
         /// <summary>
         /// Constructor del Controlador History
         /// </summary>
         public StoryProcessController()
         {
-            session = new Session();
+            session = new Sesion();
         }
 
         /// <summary>
