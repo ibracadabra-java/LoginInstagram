@@ -1,4 +1,5 @@
-﻿using LoginWithIAS.Models;
+﻿using InstagramApiSharp.Classes.Android.DeviceInfo;
+using LoginWithIAS.Models;
 using Oracle.DataAccess.Client;
 using System;
 using System.Collections.Generic;
@@ -76,6 +77,140 @@ namespace LoginWithIAS.ApiBd
                 throw new Exception(s.Message);
             }
 
+        }
+
+        /// <summary>
+        /// Eliminar Usuario Autenticado
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        public mResultadoBd Eliminar_Mlogin(string login)
+        {
+            try
+            {
+                mResultadoBd objResultBd = new mResultadoBd();
+                List<OracleParameter> parametros = new List<OracleParameter>();
+                
+                parametros.Add(new OracleParameter("X_PK", OracleDbType.Varchar2, login, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_ERROR", OracleDbType.RefCursor) { Direction = ParameterDirection.Output });
+
+                OracleDatabaseHelper.RowMapper<mResultadoBd> rowMapper = (delegate (OracleDataReader oracleDataReader)
+                {
+                    mResultadoBd objEnResultado = new mResultadoBd();
+
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_TIPO")))
+                        objEnResultado.ID_TIPO = Convert.ToInt32(oracleDataReader["ID_TIPO"]);
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_ERROR")))
+                        objEnResultado.ID_ERROR = oracleDataReader["ID_ERROR"].ToString();
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("DES_ERROR")))
+                        objEnResultado.DES_ERROR = oracleDataReader["DES_ERROR"].ToString();
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("VALOR")))
+                        objEnResultado.VALOR = oracleDataReader["VALOR"].ToString();
+
+                    return objEnResultado;
+                });
+
+                return objResultBd = OracleDatabaseHelper.ExecuteToEntityMant("PRC_MLOGIN_DELETE", parametros, "X_ERROR", rowMapper);
+            }
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Obtener Usuario Autenticado
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        public mLogin Get_Mlogin(string login)
+        {
+            List<OracleParameter> parametros = new List<OracleParameter>();
+            parametros.Add(new OracleParameter("X_PK", OracleDbType.Varchar2, login, ParameterDirection.Input));
+            parametros.Add(new OracleParameter("X_ERROR", OracleDbType.RefCursor) { Direction = ParameterDirection.Output });
+
+            OracleDatabaseHelper.RowMapper<mLogin> rowMapper = (delegate (OracleDataReader oracleDataReader)
+            {
+                mLogin logeado = new mLogin();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("USUARIO")))
+                    logeado.User = oracleDataReader["USUARIO"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("PASS")))
+                    logeado.Pass = oracleDataReader["PASS"].ToString();                
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("DEVICE")))
+                    logeado.DeviceId = oracleDataReader["DEVICE"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("PK")))
+                    logeado.PK = oracleDataReader["PK"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ADID")))
+                    logeado.AdId = new Guid(oracleDataReader["ADID"].ToString());
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ANDROIDBOARDNAME")))
+                    logeado.AndroidBoardName = oracleDataReader["ANDROIDBOARDNAME"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ANDROIDBOOTLOADER")))
+                    logeado.AndroidBootloader = oracleDataReader["ANDROIDBOOTLOADER"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("DEVICEBRAND")))
+                    logeado.DeviceBrand = oracleDataReader["DEVICEBRAND"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("DEVICEGUID")))
+                    logeado.DeviceGuid = new Guid(oracleDataReader["DEVICEGUID"].ToString());
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("DEVICEMODEL")))
+                    logeado.DeviceModel = oracleDataReader["DEVICEMODEL"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("DEVICEMODELBOOT")))
+                    logeado.DeviceModelBoot = oracleDataReader["DEVICEMODELBOOT"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("DEVICEMODELIDENTIFIER")))
+                    logeado.DeviceModelIdentifier = oracleDataReader["DEVICEMODELIDENTIFIER"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("DPI")))
+                    logeado.Dpi = oracleDataReader["DPI"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("FIRMWAREFINGERPRINT")))
+                    logeado.FirmwareFingerprint = oracleDataReader["FIRMWAREFINGERPRINT"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("FIRMWARETAGS")))
+                    logeado.FirmwareTags = oracleDataReader["FIRMWARETAGS"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("FIRMWARETYPE")))
+                    logeado.FirmwareType = oracleDataReader["FIRMWARETYPE"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("RESOLUTION")))
+                    logeado.Resolution = oracleDataReader["RESOLUTION"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("RESOLUTION")))
+                    logeado.Resolution = oracleDataReader["RESOLUTION"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("APILEVEL")))
+                    logeado.AndroidVer.APILevel = oracleDataReader["APILEVEL"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("CODENAME")))
+                    logeado.AndroidVer.Codename = oracleDataReader["CODENAME"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("VERSIONNUMBER")))
+                    logeado.AndroidVer.VersionNumber = oracleDataReader["VERSIONNUMBER"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ADDRESSPROXY")))
+                    logeado.AddressProxy = oracleDataReader["ADDRESSPROXY"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("PASSPROXY")))
+                    logeado.AddressProxy = oracleDataReader["PASSPROXY"].ToString();
+
+                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("USERPROXY")))
+                    logeado.UsernameProxy = oracleDataReader["USERPROXY"].ToString();
+
+                return logeado;
+            });
+
+            return OracleDatabaseHelper.ExecuteToEntity<mLogin>("PRC_GET_MLOGIN", parametros, "X_CURSOR", rowMapper, TipoPaquete.CONS);
         }
 
 

@@ -22,6 +22,7 @@ using InstagramApiSharp.Helpers;
 using InstagramApiSharp.Classes.SessionHandlers;
 using System.Text;
 using System.Runtime.InteropServices;
+using LoginWithIAS.ApiBd;
 
 namespace LoginWithIAS.Controllers
 {
@@ -30,7 +31,8 @@ namespace LoginWithIAS.Controllers
     /// </summary>
     public class LoginProcessController : ApiController
     {
-        Session session;       
+        Session session;
+        MloginBD bd;
         
         /// <summary>
         /// 
@@ -38,6 +40,7 @@ namespace LoginWithIAS.Controllers
         public LoginProcessController()
         {
             session = new Session();
+            bd = new MloginBD();
         }
 
         /// <summary>
@@ -81,15 +84,16 @@ namespace LoginWithIAS.Controllers
                 }
                 var proxy = new WebProxy()
                 {
-                    Address = new Uri(credencial.AddressProxy),
+                    Address = new Uri(credencial.AddressProxy),                    
                     BypassProxyOnLocal = false,
                     UseDefaultCredentials = false,
                     Credentials = new NetworkCredential(
                      userName: credencial.UsernameProxy,
                      password: credencial.PassProxy
                      )
+                    
 
-                };
+                };                
                 var httpClientHandler = new HttpClientHandler()
                 {
                     Proxy = proxy,
@@ -127,6 +131,7 @@ namespace LoginWithIAS.Controllers
                 }
 
                 session.LoadSession(InstaApi);
+                
                 if (!InstaApi.GetLoggedUser().Password.Equals(credencial.Pass))
                 {
                     token.Message = "Contraseña incorrecta";
@@ -142,6 +147,7 @@ namespace LoginWithIAS.Controllers
                         token.AuthToken = session.GenerarToken();
                         token.Message = logInResult.Info.Message;
                         session.SaveSession(InstaApi);
+                        bd.Insertar_Mlogin(credencial);
                         return token;
 
                     }
@@ -166,6 +172,7 @@ namespace LoginWithIAS.Controllers
                                                 token.Message = logInResult.Info.Message;
                                                 token.AuthToken = session.GenerarToken();
                                                 session.SaveSession(InstaApi);
+                                                bd.Insertar_Mlogin(credencial);
                                                 return token;
                                             }
                                             else
@@ -201,6 +208,7 @@ namespace LoginWithIAS.Controllers
                                                 {
                                                     // Save session
                                                     session.SaveSession(InstaApi);
+                                                    bd.Insertar_Mlogin(credencial);
                                                     token.Message = verifyLogin.Info.Message;
                                                     return token;
                                                 }
@@ -221,6 +229,7 @@ namespace LoginWithIAS.Controllers
                                                 {
                                                     // Save session
                                                     session.SaveSession(InstaApi);
+                                                    bd.Insertar_Mlogin(credencial);
                                                     token.Message = verifyLogin.Info.Message;
                                                     token.AuthToken = session.GenerarToken();
                                                     return token;
@@ -261,6 +270,7 @@ namespace LoginWithIAS.Controllers
                                 // connected
                                 // save session
                                 session.SaveSession(InstaApi);
+                                bd.Insertar_Mlogin(credencial);
                                 token.Message = twoFactorLogin.Info.Message;
                                 token.AuthToken = session.GenerarToken();
                                 return token;
@@ -322,7 +332,11 @@ namespace LoginWithIAS.Controllers
 
             var logoutResult = await insta.LogoutAsync();
             if (logoutResult.Succeeded)
-                File.Delete(path);
+            {
+                 File.Delete(path);
+                bd.Eliminar_Mlogin(credencial.PK);
+            }
+               
             msgSalida = logoutResult.Info.Message;
 
             return msgSalida;
@@ -669,7 +683,7 @@ namespace LoginWithIAS.Controllers
         /// <param name="size"></param>
         /// <param name="dwFlags"></param>
         /// <param name="lpReserved"></param>
-        /// <returns></returns>
+        /// <returns></returns>        
         #region DllImport for getting full cookies from WebBrowser
         [DllImport("wininet.dll", SetLastError = true)]
         public static extern bool InternetGetCookieEx(string url,
