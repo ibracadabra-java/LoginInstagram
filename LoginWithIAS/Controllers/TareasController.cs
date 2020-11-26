@@ -106,7 +106,8 @@ namespace LoginWithIAS.Controllers
         public void EjecutarTareas()
         {
             
-            groundWork.MainThreadEjecutarTareas();
+                groundWork.EjecutarTareas();            
+            
         }
         /// <summary>
         /// 

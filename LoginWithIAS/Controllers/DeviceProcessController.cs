@@ -18,14 +18,14 @@ namespace LoginWithIAS.Controllers
     /// </summary>
     public class DeviceProcessController : ApiController
     {
-        Session session;
+        Sesion session;
 
         /// <summary>
         /// Constructor del controlador
         /// </summary>
         public DeviceProcessController()
         {
-            this.session = new Session();
+            this.session = new Sesion();
         }
 
         /// <summary>

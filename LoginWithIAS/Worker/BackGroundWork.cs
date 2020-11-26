@@ -11,7 +11,8 @@ using InstagramApiSharp.Classes.Models;
 using InstagramApiSharp.API.Builder;
 using InstagramApiSharp.Logger;
 using InstagramApiSharp.Classes;
-using LoginWithIAS.ApiBd;
+using Telegram.Bot;
+using System.Configuration;
 using LoginWithIAS.Utiles;
 using InstagramApiSharp;
 
@@ -22,11 +23,15 @@ namespace LoginWithIAS.Worker
     /// </summary>
     public class BackGroundWork
     {
-        Session session;
+        Sesion session;
         List<Thread> threads = new List<Thread>();
         ErrorBd objerror;
         Log log;
         Util util;
+        TelegramBotClient botClient;
+
+
+
         string path = HttpContext.Current.Request.MapPath("~/Logs");
         /// <summary>
         /// 
@@ -34,22 +39,12 @@ namespace LoginWithIAS.Worker
         public BackGroundWork()
         {
 
-            session = new Session();
+            session = new Sesion();
             util = new Util();
             log = new Log(path);
             objerror = new ErrorBd();
-        }
-        #region Hilo Principal y TareasGenerales
-        /// <summary>
-        /// 
-        /// </summary>
-        public void MainThreadEjecutarTareas()
-        {
-            Thread mainthread = new Thread(new ThreadStart(EjecutarTareas));
-            mainthread.Name = "mainthread";
-            mainthread.Start();
-            threads.Add(mainthread);
-        }
+            botClient = new TelegramBotClient(ConfigurationManager.AppSettings["AccesToken"]);
+        }        
         /// <summary>
         /// 
         /// </summary>
@@ -75,7 +70,7 @@ namespace LoginWithIAS.Worker
                         break;
                     case 3:
                         mPurificador purificador = objpuri.GetTareaPurificacion(Tareas[i].idTarea);
-
+                        
                         break;
                 }
 
@@ -95,7 +90,7 @@ namespace LoginWithIAS.Worker
 
             }
         }
-        #endregion
+        
         #region Tarea Expancion
         /// <summary>
         /// 
@@ -133,6 +128,13 @@ namespace LoginWithIAS.Worker
             int cicloHora = 1;
             int cicloDia = 1;
             mError TareaError = new mError();
+            System.Net.ServicePointManager.SecurityProtocol =
+                System.Net.SecurityProtocolType.Tls12;
+            var me = botClient.GetMeAsync().Result;
+            await botClient.SendTextMessageAsync(
+            chatId: ConfigurationManager.AppSettings["ChannelId"],
+            text: "Se ha iniciado la Tarea Expancion para el usuario: "+ mlikemanypost.User + " a las:" + DateTime.Now 
+             );
             var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
             if (!(string.IsNullOrEmpty(mlikemanypost.User) || string.IsNullOrEmpty(mlikemanypost.Pass)))
@@ -266,7 +268,21 @@ namespace LoginWithIAS.Worker
                                                 else
                                                 {
                                                     log.Add(mlikemanypost.User + " Like_to " + userlista[y] + " - " + liked.Info.Message);
-                                                     TareaError = objerror.SysError(liked.Info.Message);
+                                                    TareaError = objerror.SysError(liked.Info.Message);
+                                                    switch (TareaError.action)
+                                                    {
+                                                        case 1:
+                                                            return;
+                                                        case 2:
+                                                            pararTarea(mlikemanypost.User, liked.Info.Message);
+                                                            break;
+                                                        case 3:
+                                                            pararTarea("mainthread", liked.Info.Message);
+                                                            break;
+                                                        case 4: 
+                                                            return;
+
+                                                    }
                                                     Error.Add(liked.Info.Message);
                                                 }
                                             }
@@ -421,8 +437,9 @@ namespace LoginWithIAS.Worker
             Thread hilo = new Thread(Mass_Sending);
             hilo.Name = sending.User;
             hilo.IsBackground = true;
-            hilo.Start(sending);
             threads.Add(hilo);
+            hilo.Start(sending);
+            
 
         }
         /// <summary>

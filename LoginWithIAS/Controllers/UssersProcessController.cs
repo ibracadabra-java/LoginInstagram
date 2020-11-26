@@ -25,7 +25,7 @@ namespace LoginWithIAS.Controllers
     /// </summary>
     public class UssersProcessController : ApiController
     {
-        Session session;
+        Sesion session;
         Log log;
         Log logacti;
         string path = HttpContext.Current.Request.MapPath("~/Logs");
@@ -34,7 +34,7 @@ namespace LoginWithIAS.Controllers
         /// </summary>
         public UssersProcessController()
         {
-            session = new Session();
+            session = new Sesion();
             log = new Log(path);
         }
 
