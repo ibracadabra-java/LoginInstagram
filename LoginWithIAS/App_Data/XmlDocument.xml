@@ -4,6 +4,20 @@
         <name>LoginWithIAS</name>
     </assembly>
     <members>
+        <member name="T:LoginWithIAS.ApiBd.ActComBd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.ActComBd.ActInsertar(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="pk"></param>
+            <param name="hora"></param>
+            <param name="dia"></param>
+            <param name="cant"></param>
+        </member>
         <member name="T:LoginWithIAS.ApiBd.ErrorBd">
             <summary>
             
@@ -15,6 +29,12 @@
             </summary>
             <param name="desc_error"></param>
             <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.ErrorBd.update_accion(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
         </member>
         <member name="T:LoginWithIAS.ApiBd.MasSendingBD">
             <summary>
@@ -53,6 +73,32 @@
             Insertar Reporte de los Mensajes enviados
             </summary>
             <param name="sending"></param>
+            <returns></returns>
+        </member>
+        <member name="T:LoginWithIAS.ApiBd.MloginBD">
+            <summary>
+            Clase para la persistencia de datos de los clientes autenticados en la aplicacion
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.MloginBD.Insertar_Mlogin(LoginWithIAS.Models.mLogin)">
+            <summary>
+            Insertar Clientes en el sistema
+            </summary>
+            <param name="login"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.MloginBD.Eliminar_Mlogin(System.String)">
+            <summary>
+            Eliminar Usuario Autenticado
+            </summary>
+            <param name="login"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.MloginBD.Get_Mlogin(System.String)">
+            <summary>
+            Obtener Usuario Autenticado
+            </summary>
+            <param name="login"></param>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.ApiBd.PurificacionBd">
@@ -1425,6 +1471,13 @@
             <param name="BusinesCount"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.Act_Comunidad(LoginWithIAS.Models.mFollower)">
+            <summary>
+            
+            </summary>
+            <param name="followers"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.PostProcessController">
             <summary>
             Controlador para dar likes
@@ -1508,11 +1561,6 @@
             
             </summary>
         </member>
-        <member name="P:LoginWithIAS.Controllers.LoginProcessController.Session">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="M:LoginWithIAS.Controllers.LoginProcessController.LoginUser(LoginWithIAS.Models.mLogin)">
             <summary>
             Metodo para Loguearse en la plataforma
@@ -1553,7 +1601,7 @@
             <param name="size"></param>
             <param name="dwFlags"></param>
             <param name="lpReserved"></param>
-            <returns></returns>
+            <returns></returns>        
         </member>
         <member name="M:LoginWithIAS.Controllers.LoginProcessController.GetUriCookies(System.Uri)">
             <summary>
@@ -1813,6 +1861,11 @@
         <member name="P:LoginWithIAS.Models.mLogin.PassProxy">
             <summary>
             Password del proxy
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mLogin.PK">
+            <summary>
+            Identificador unico
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mMasSending">
@@ -2143,6 +2196,14 @@
             
             </summary>
             <param name="data"></param>
+        </member>
+        <member name="M:LoginWithIAS.Worker.BackGroundWork.BotClient_OnMessage(System.Object,Telegram.Bot.Args.MessageEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+            <returns></returns>
         </member>
         <member name="M:LoginWithIAS.Worker.BackGroundWork.ejecutarTareaMass_Sending(LoginWithIAS.Models.mMasSending)">
             <summary>

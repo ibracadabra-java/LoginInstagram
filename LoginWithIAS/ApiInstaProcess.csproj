@@ -152,6 +152,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiBd\ActComBd.cs" />
     <Compile Include="ApiBd\ErrorBd.cs" />
     <Compile Include="ApiBd\MasSendingBD.cs" />
     <Compile Include="ApiBd\MloginBD.cs" />

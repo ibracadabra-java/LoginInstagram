@@ -17,6 +17,7 @@ using System.Web.Http;
 using LoginWithIAS.Utiles;
 using System.Web;
 using System.Threading;
+using LoginWithIAS.ApiBd;
 
 namespace LoginWithIAS.Controllers
 {
@@ -25,6 +26,7 @@ namespace LoginWithIAS.Controllers
     /// </summary>
     public class UssersProcessController : ApiController
     {
+        ActComBd actcom;
         Sesion session;
         Log log;
         Log logacti;
@@ -36,6 +38,7 @@ namespace LoginWithIAS.Controllers
         {
             session = new Sesion();
             log = new Log(path);
+            actcom = new ActComBd();
         }
 
         /// <summary>
@@ -1225,6 +1228,92 @@ namespace LoginWithIAS.Controllers
             {
                 log.Add("No estas autenticado, logueese");
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="followers"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<string> Act_Comunidad(mFollower followers) 
+        {
+            
+            DateTime now = DateTime.Now;
+            try
+            {
+                List<string> devolver = new List<string>();
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                if (!(string.IsNullOrEmpty(followers.User) || string.IsNullOrEmpty(followers.Pass)))
+                {
+                    var userSession = new UserSessionData
+                    {
+                        UserName = followers.User,
+                        Password = followers.Pass
+                    };
+                    insta.SetUser(userSession);
+                }
+                else
+                {
+                    return null;
+                }
+
+                session.LoadSession(insta);
+
+                if (!insta.GetLoggedUser().Password.Equals(followers.Pass))
+                {
+                    return null;
+                }
+
+                if (!string.IsNullOrEmpty(followers.User))
+                {
+                    var user = await insta.UserProcessor.GetUserAsync(followers.User);
+
+                    if (user.Succeeded)
+                    {
+                        while ((DateTime.Now - now).TotalDays < 28)
+                        {
+                            var useractives = await insta.MessagingProcessor.GetUsersPresenceAsync();
+                            if (useractives.Succeeded)
+                            {
+                                devolver.Clear();
+                                if (useractives.Value.Count > 0)
+                                {
+                                    for (int i = 0; i < useractives.Value.Count; i++)
+                                    {
+                                        if (useractives.Value[i].IsActive)
+                                        {
+                                            var userinfo = await insta.UserProcessor.GetFullUserInfoAsync(useractives.Value[i].Pk);
+                                            string username = userinfo.Value.UserDetail.UserName + " horario " + DateTime.Now.ToString();                                            
+                                            devolver.Add(username);
+
+                                        }
+
+                                    }
+                                }
+                                actcom.ActInsertar(user.Value.Pk.ToString(),DateTime.Now.Hour.ToString(),DateTime.Now.DayOfWeek.ToString(),devolver.Count);
+                                Thread.Sleep(3600 * 1000);
+                            }
+                            else
+                                return null;
+                        }
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                    return null;
+
+                return "Concluido estudio de la comunidad del usuario:"+followers.User;
+            }
+            catch (Exception s)
+            {
+
+                throw new Exception(s.Message);
             }
         }
 

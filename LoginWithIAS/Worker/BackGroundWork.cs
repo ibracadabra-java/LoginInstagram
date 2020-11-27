@@ -15,6 +15,8 @@ using Telegram.Bot;
 using System.Configuration;
 using LoginWithIAS.Utiles;
 using InstagramApiSharp;
+using Telegram.Bot.Args;
+using System.Threading.Tasks;
 
 namespace LoginWithIAS.Worker
 {
@@ -44,6 +46,7 @@ namespace LoginWithIAS.Worker
             log = new Log(path);
             objerror = new ErrorBd();
             botClient = new TelegramBotClient(ConfigurationManager.AppSettings["AccesToken"]);
+
         }        
         /// <summary>
         /// 
@@ -131,6 +134,8 @@ namespace LoginWithIAS.Worker
             System.Net.ServicePointManager.SecurityProtocol =
                 System.Net.SecurityProtocolType.Tls12;
             var me = botClient.GetMeAsync().Result;
+            botClient.OnMessage += BotClient_OnMessage;
+            botClient.StartReceiving();
             await botClient.SendTextMessageAsync(
             chatId: ConfigurationManager.AppSettings["ChannelId"],
             text: "Se ha iniciado la Tarea Expancion para el usuario: "+ mlikemanypost.User + " a las:" + DateTime.Now 
@@ -425,6 +430,19 @@ namespace LoginWithIAS.Worker
                 }
             }
             else { log.Add("Debe autenticarse primero"); }
+        }
+      
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        static void BotClient_OnMessage(object sender, MessageEventArgs e)
+        {
+            ErrorBd objErr = new ErrorBd(); 
+            objErr.update_accion(e.Message.Text);
         }
         #endregion
         #region Tarea Mensaje Masivo

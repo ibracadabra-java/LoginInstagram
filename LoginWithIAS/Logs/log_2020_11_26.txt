@@ -53,3 +53,109 @@
 26/11/2020 0:44:13 - raulalex1995 Get_media_to_like raul-No errors detected
 26/11/2020 0:44:13 - raulalex1995 abriendo post de raul se esperan 7 segundos para abrir otro  - No errors detected
 26/11/2020 0:44:23 - raulalex1995 abriendo post de raul se esperan 9 segundos para abrir otro  - No errors detected
+26/11/2020 0:55:18 - raulalex1995 Search_user_to_like ernesto-No errors detected
+26/11/2020 0:55:19 - raulalex1995 Search_user_to_like raul-No errors detected
+26/11/2020 0:55:23 - raulalex1995 Get user to like ernesto-No errors detected
+26/11/2020 0:55:23 - raulalex1995 Get_media_to_like ernesto-No errors detected
+26/11/2020 0:55:23 - raulalex1995 Get_media_to_like ernesto- No tiene publicaciones
+26/11/2020 0:55:23 - Se le dio like a 0 post del usuario ernesto y se encontraron los siguientes errores No hubo errores
+26/11/2020 0:55:24 - raulalex1995 Get user to like raul-No errors detected
+26/11/2020 0:55:24 - raulalex1995 Get_media_to_like raul-No errors detected
+26/11/2020 0:55:30 - raulalex1995 Entrando al perfil y obteniendo post de raul se esperan 8 segundos  - No errors detected
+26/11/2020 0:55:30 - raulalex1995 Search_user_to_like raul-No errors detected
+26/11/2020 0:55:36 - raulalex1995 Get user to like raul-No errors detected
+26/11/2020 0:55:36 - raulalex1995 Get_media_to_like raul-No errors detected
+26/11/2020 0:55:37 - raulalex1995 abriendo direct de message  se esperan 7 segundos - No errors detected
+26/11/2020 0:55:47 - raulalex1995 abriendo post de raul se esperan 8 segundos para abrir otro  - No errors detected
+26/11/2020 0:55:57 - raulalex1995 abriendo post de raul se esperan 6 segundos para abrir otro  - No errors detected
+26/11/2020 0:55:59 - raulalex1995 viendo historia de raul se esperan 8 segundos para ver otra  - No errors detected
+26/11/2020 0:56:02 - raulalex1995 viendo historia de raul se esperan 5 segundos para ver otra  - No errors detected
+26/11/2020 0:56:04 - raulalex1995 abriendo post de raul se esperan 6 segundos para abrir otro  - No errors detected
+26/11/2020 0:56:06 - raulalex1995 viendo historia de raul se esperan 5 segundos para ver otra  - No errors detected
+26/11/2020 0:56:10 - raulalex1995 viendo historia de raul se esperan 8 segundos para ver otra  - No errors detected
+26/11/2020 0:56:10 - raulalex1995 abriendo post de raul se esperan 5 segundos para abrir otro  - No errors detected
+26/11/2020 0:56:13 - raulalex1995 viendo historia de raul se esperan 8 segundos para ver otra  - No errors detected
+26/11/2020 0:56:20 - raulalex1995 abriendo post de raul se esperan 7 segundos para abrir otro  - No errors detected
+26/11/2020 0:56:30 - raulalex1995 abriendo post de raul se esperan 8 segundos para abrir otro  - No errors detected
+26/11/2020 1:00:52 - dayron.miranda Search_user_to_like ernesto-login_required
+26/11/2020 1:00:52 - dayron.miranda Search_User_to_like ernesto-login_required
+26/11/2020 1:00:52 - Se le dio like a 0 post del usuario ernesto y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:00:53 - raulalex1995 Search_user_to_like raul-No errors detected
+26/11/2020 1:00:55 - dayron.miranda Search_user_to_like raul-login_required
+26/11/2020 1:00:55 - dayron.miranda Search_User_to_like raul-login_required
+26/11/2020 1:00:55 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:00:58 - dayron.miranda Search_user_to_like alberto-login_required
+26/11/2020 1:00:59 - dayron.miranda Search_User_to_like alberto-login_required
+26/11/2020 1:00:59 - Se le dio like a 0 post del usuario alberto y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:00:59 - raulalex1995 Get user to like raul-No errors detected
+26/11/2020 1:00:59 - raulalex1995 Get_media_to_like raul-No errors detected
+26/11/2020 1:01:04 - raulalex1995 Entrando al perfil y obteniendo post de raul se esperan 5 segundos  - No errors detected
+26/11/2020 1:01:43 - raulalex1995 viendo seguidores de raul - No errors detected
+26/11/2020 1:02:29 - raulalex1995 Like_to raul - No errors detected
+26/11/2020 1:02:44 - raulalex1995 Like_to raul - No errors detected
+26/11/2020 1:02:44 - Se le dio like a 2 post del usuario raul y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:02:57 - raulalex1995 Search_user_to_like alina-No errors detected
+26/11/2020 1:03:02 - raulalex1995 Get user to like alina-No errors detected
+26/11/2020 1:03:02 - raulalex1995 Get_media_to_like alina-Not authorized to view user
+26/11/2020 1:03:02 - Se le dio like a 0 post del usuario alina y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:03:08 - raulalex1995 Search_user_to_like juan-No errors detected
+26/11/2020 1:03:14 - raulalex1995 Get user to like juan-No errors detected
+26/11/2020 1:03:14 - raulalex1995 Get_media_to_like juan-No errors detected
+26/11/2020 1:03:50 - dayron.miranda Search_user_to_like ernesto-login_required
+26/11/2020 1:03:50 - dayron.miranda Search_User_to_like ernesto-login_required
+26/11/2020 1:03:50 - Se le dio like a 0 post del usuario ernesto y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:03:51 - raulalex1995 Search_user_to_like raul-No errors detected
+26/11/2020 1:03:53 - dayron.miranda Search_user_to_like raul-login_required
+26/11/2020 1:03:53 - dayron.miranda Search_User_to_like raul-login_required
+26/11/2020 1:03:53 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:03:56 - dayron.miranda Search_user_to_like alberto-login_required
+26/11/2020 1:03:56 - dayron.miranda Search_User_to_like alberto-login_required
+26/11/2020 1:03:56 - Se le dio like a 0 post del usuario alberto y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:03:56 - raulalex1995 Get user to like raul-No errors detected
+26/11/2020 1:03:56 - raulalex1995 Get_media_to_like raul-No errors detected
+26/11/2020 1:04:54 - dayron.miranda Search_user_to_like raul-login_required
+26/11/2020 1:04:54 - dayron.miranda Search_User_to_like raul-login_required
+26/11/2020 1:04:54 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:04:55 - raulalex1995 Search_user_to_like ernesto-No errors detected
+26/11/2020 1:04:57 - dayron.miranda Search_user_to_like alina-login_required
+26/11/2020 1:04:57 - dayron.miranda Search_User_to_like alina-login_required
+26/11/2020 1:04:57 - Se le dio like a 0 post del usuario alina y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:04:59 - raulalex1995 Get user to like ernesto-No errors detected
+26/11/2020 1:04:59 - raulalex1995 Get_media_to_like ernesto-No errors detected
+26/11/2020 1:04:59 - raulalex1995 Get_media_to_like ernesto- No tiene publicaciones
+26/11/2020 1:04:59 - Se le dio like a 0 post del usuario ernesto y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:05:00 - dayron.miranda Search_user_to_like juan-login_required
+26/11/2020 1:05:00 - dayron.miranda Search_User_to_like juan-login_required
+26/11/2020 1:05:00 - Se le dio like a 0 post del usuario juan y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:05:06 - raulalex1995 Search_user_to_like raul-No errors detected
+26/11/2020 1:05:11 - raulalex1995 Get user to like raul-No errors detected
+26/11/2020 1:05:11 - raulalex1995 Get_media_to_like raul-No errors detected
+26/11/2020 1:05:12 - raulalex1995 abriendo post de raul se esperan 5 segundos para abrir otro  - No errors detected
+26/11/2020 1:05:20 - raulalex1995 abriendo post de raul se esperan 5 segundos para abrir otro  - No errors detected
+26/11/2020 1:09:22 - dayron.miranda Search_user_to_like raul-login_required
+26/11/2020 1:09:22 - dayron.miranda Search_User_to_like raul-login_required
+26/11/2020 1:09:22 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:09:25 - dayron.miranda Search_user_to_like alina-login_required
+26/11/2020 1:09:25 - dayron.miranda Search_User_to_like alina-login_required
+26/11/2020 1:09:25 - Se le dio like a 0 post del usuario alina y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:09:28 - dayron.miranda Search_user_to_like juan-login_required
+26/11/2020 1:09:28 - dayron.miranda Search_User_to_like juan-login_required
+26/11/2020 1:09:28 - Se le dio like a 0 post del usuario juan y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:13:30 - dayron.miranda Search_user_to_like raul-login_required
+26/11/2020 1:13:30 - dayron.miranda Search_User_to_like raul-login_required
+26/11/2020 1:13:30 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:13:33 - dayron.miranda Search_user_to_like alina-login_required
+26/11/2020 1:13:33 - dayron.miranda Search_User_to_like alina-login_required
+26/11/2020 1:13:33 - Se le dio like a 0 post del usuario alina y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:13:37 - dayron.miranda Search_user_to_like juan-login_required
+26/11/2020 1:13:37 - dayron.miranda Search_User_to_like juan-login_required
+26/11/2020 1:13:37 - Se le dio like a 0 post del usuario juan y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:16:59 - dayron.miranda Search_user_to_like raul-login_required
+26/11/2020 1:16:59 - dayron.miranda Search_User_to_like raul-login_required
+26/11/2020 1:16:59 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:17:16 - dayron.miranda Search_user_to_like alina-login_required
+26/11/2020 1:17:16 - dayron.miranda Search_User_to_like alina-login_required
+26/11/2020 1:17:16 - Se le dio like a 0 post del usuario alina y se encontraron los siguientes errores No hubo errores
+26/11/2020 1:17:19 - dayron.miranda Search_user_to_like juan-login_required
+26/11/2020 1:17:19 - dayron.miranda Search_User_to_like juan-login_required
+26/11/2020 1:17:19 - Se le dio like a 0 post del usuario juan y se encontraron los siguientes errores No hubo errores

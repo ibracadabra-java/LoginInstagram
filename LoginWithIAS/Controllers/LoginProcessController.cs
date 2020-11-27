@@ -30,31 +30,22 @@ namespace LoginWithIAS.Controllers
     /// 
     /// </summary>
     public class LoginProcessController : ApiController
-    {
-<<<<<<< HEAD
-        Session session;
+    {        
         MloginBD bd;
-=======
+
         Sesion session;       
->>>>>>> 9d06a891c0a056bdd463cc09a30248faa72614b5
+
         
         /// <summary>
         /// 
         /// </summary>
         public LoginProcessController()
         {
-<<<<<<< HEAD
-            session = new Session();
-            bd = new MloginBD();
-=======
-            session = new Sesion();
->>>>>>> 9d06a891c0a056bdd463cc09a30248faa72614b5
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Sesion Session { get => session; set => session = value; }
+            bd = new MloginBD();
+            session = new Sesion();
+
+        }     
 
         /// <summary>
         /// Metodo para Loguearse en la plataforma
