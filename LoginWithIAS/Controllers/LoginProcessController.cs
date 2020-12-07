@@ -98,7 +98,9 @@ namespace LoginWithIAS.Controllers
                     Proxy = proxy,
                 };
 
-                var InstaApi = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).Build();
+                var InstaApi = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All))./*UseHttpClientHandler(httpClientHandler)*/Build();
+                
+
 
                 if (!(credencial.AdId ==null || string.IsNullOrEmpty(credencial.AndroidBoardName) || string.IsNullOrEmpty(credencial.AndroidBootloader)||
                     credencial.AndroidBoardName == null || string.IsNullOrEmpty(credencial.DeviceBrand) || credencial.DeviceGuid == null ||string.IsNullOrEmpty(credencial.DeviceId) ||
@@ -146,7 +148,8 @@ namespace LoginWithIAS.Controllers
                         token.AuthToken = session.GenerarToken();
                         token.Message = logInResult.Info.Message;
                         session.SaveSession(InstaApi);
-                        bd.Insertar_Mlogin(credencial);
+                        credencial.PK = InstaApi.GetLoggedUser().LoggedInUser.Pk.ToString();
+                        mResultadoBd result = bd.Insertar_Mlogin(credencial,InstaApi.GetCurrentDevice());
                         return token;
 
                     }
@@ -171,7 +174,7 @@ namespace LoginWithIAS.Controllers
                                                 token.Message = logInResult.Info.Message;
                                                 token.AuthToken = session.GenerarToken();
                                                 session.SaveSession(InstaApi);
-                                                bd.Insertar_Mlogin(credencial);
+                                                bd.Insertar_Mlogin(credencial,InstaApi.GetCurrentDevice());
                                                 return token;
                                             }
                                             else
@@ -207,7 +210,7 @@ namespace LoginWithIAS.Controllers
                                                 {
                                                     // Save session
                                                     session.SaveSession(InstaApi);
-                                                    bd.Insertar_Mlogin(credencial);
+                                                    mResultadoBd result = bd.Insertar_Mlogin(credencial,InstaApi.GetCurrentDevice());
                                                     token.Message = verifyLogin.Info.Message;
                                                     return token;
                                                 }
@@ -228,7 +231,7 @@ namespace LoginWithIAS.Controllers
                                                 {
                                                     // Save session
                                                     session.SaveSession(InstaApi);
-                                                    bd.Insertar_Mlogin(credencial);
+                                                    bd.Insertar_Mlogin(credencial,InstaApi.GetCurrentDevice());
                                                     token.Message = verifyLogin.Info.Message;
                                                     token.AuthToken = session.GenerarToken();
                                                     return token;
@@ -269,7 +272,7 @@ namespace LoginWithIAS.Controllers
                                 // connected
                                 // save session
                                 session.SaveSession(InstaApi);
-                                bd.Insertar_Mlogin(credencial);
+                                bd.Insertar_Mlogin(credencial,InstaApi.GetCurrentDevice());
                                 token.Message = twoFactorLogin.Info.Message;
                                 token.AuthToken = session.GenerarToken();
                                 return token;

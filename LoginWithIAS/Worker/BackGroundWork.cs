@@ -31,7 +31,7 @@ namespace LoginWithIAS.Worker
         Log log;
         Util util;
         TelegramBotClient botClient;
-
+        PostProcessController expancion;        
 
 
         string path = HttpContext.Current.Request.MapPath("~/Logs");
@@ -45,8 +45,8 @@ namespace LoginWithIAS.Worker
             util = new Util();
             log = new Log(path);
             objerror = new ErrorBd();
-            botClient = new TelegramBotClient(ConfigurationManager.AppSettings["AccesToken"]);
-
+            botClient = new TelegramBotClient(ConfigurationManager.AppSettings["AccesToken"]);            
+            expancion = new PostProcessController();           
         }        
         /// <summary>
         /// 
@@ -103,7 +103,7 @@ namespace LoginWithIAS.Worker
         {
             Thread hilo = new Thread(SimulationHumanLikeManyPost);
             hilo.Name = expancion.User;
-            hilo.IsBackground = true;
+            hilo.IsBackground = true;            
             threads.Add(hilo);
             hilo.Start(expancion);
 
@@ -115,8 +115,9 @@ namespace LoginWithIAS.Worker
         /// </summary>
         /// <param name="data"></param>
         public async void SimulationHumanLikeManyPost(object data)
-        {
-            var mlikemanypost = (mMethodLike) data;
+        {            
+            
+            var mlikemanypost = (mMethodLike) data;            
             List<string> Error = new List<string>();
             List<string> userlista = mlikemanypost.ListUser;
             int cantlike = mlikemanypost.cantLike;
@@ -139,6 +140,7 @@ namespace LoginWithIAS.Worker
             await botClient.SendTextMessageAsync(
             chatId: ConfigurationManager.AppSettings["ChannelId"],
             text: "Se ha iniciado la Tarea Expancion para el usuario: "+ mlikemanypost.User + " a las:" + DateTime.Now 
+
              );
             var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
@@ -430,7 +432,7 @@ namespace LoginWithIAS.Worker
                 }
             }
             else { log.Add("Debe autenticarse primero"); }
-        }
+        }  
       
 
         /// <summary>

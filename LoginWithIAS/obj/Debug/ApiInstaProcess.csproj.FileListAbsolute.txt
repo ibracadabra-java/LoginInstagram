@@ -803,6 +803,6 @@ C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\roslyn\System.Xml.Reade
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\roslyn\System.Xml.XmlDocument.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\roslyn\System.Xml.XPath.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\roslyn\System.Xml.XPath.XDocument.dll
-C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProcess.csprojAssemblyReference.cache
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Telegram.Bot.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\Telegram.Bot.xml
+C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProcess.csprojAssemblyReference.cache

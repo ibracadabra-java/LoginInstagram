@@ -18,11 +18,12 @@ namespace LoginWithIAS.ApiBd
         string conexion = ConfigurationManager.ConnectionStrings["ConexBD"].ToString();
 
         /// <summary>
-        /// Insertar Clientes en el sistema
+        /// Insertar Clientes en el sistema 
         /// </summary>
         /// <param name="login"></param>
+        /// <param name="device"></param>
         /// <returns></returns>
-        public mResultadoBd Insertar_Mlogin(mLogin login)
+        public mResultadoBd Insertar_Mlogin(mLogin login,AndroidDevice device)
         {
             try
             {
@@ -31,20 +32,20 @@ namespace LoginWithIAS.ApiBd
                 parametros.Add(new OracleParameter("X_CODENAME", OracleDbType.Varchar2, login.AndroidVer.Codename, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_VERSIONUMBER", OracleDbType.Varchar2, login.AndroidVer.VersionNumber, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_APILEVEL", OracleDbType.Varchar2, login.AndroidVer.APILevel, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_ADID", OracleDbType.Varchar2, login.AdId.ToString(), ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_ANDBOARDNAME", OracleDbType.Varchar2, login.AndroidBoardName, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_ANDBOOTLOADER", OracleDbType.Varchar2, login.AndroidBootloader, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_DEVICEBRAND", OracleDbType.Varchar2, login.DeviceBrand, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_DEVICEGUID", OracleDbType.Varchar2, login.DeviceGuid.ToString(), ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_DEVICEID", OracleDbType.Varchar2, login.DeviceId, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_DEVICEMODEL", OracleDbType.Varchar2, login.DeviceModel, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_DEVICEMODELBOOT", OracleDbType.Varchar2, login.DeviceModelBoot, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_DEVICEMODELIDENTIFIER", OracleDbType.Varchar2, login.DeviceModelIdentifier, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_DPI", OracleDbType.Varchar2, login.Dpi, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_RESOLUTION", OracleDbType.Varchar2, login.Resolution, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_FIRMWAREFINGERPRINT", OracleDbType.Varchar2, login.FirmwareFingerprint, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_FIRMWARETAGS", OracleDbType.Varchar2, login.FirmwareTags, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_FIRMWARETYPE", OracleDbType.Varchar2, login.FirmwareType, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_ADID", OracleDbType.Varchar2, device.AdId.ToString(), ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_ANDBOARDNAME", OracleDbType.Varchar2, device.AndroidBoardName, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_ANDBOOTLOADER", OracleDbType.Varchar2, device.AndroidBootloader, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_DEVICEBRAND", OracleDbType.Varchar2, device.DeviceBrand, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_DEVICEGUID", OracleDbType.Varchar2, device.DeviceGuid.ToString(), ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_DEVICEID", OracleDbType.Varchar2, device.DeviceId, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_DEVICEMODEL", OracleDbType.Varchar2, device.DeviceModel, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_DEVICEMODELBOOT", OracleDbType.Varchar2, device.DeviceModelBoot, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_DEVICEMODELIDENTIFIER", OracleDbType.Varchar2, device.DeviceModelIdentifier, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_DPI", OracleDbType.Varchar2, device.Dpi, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_RESOLUTION", OracleDbType.Varchar2, device.Resolution, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_FIRMWAREFINGERPRINT", OracleDbType.Varchar2, device.FirmwareFingerprint, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_FIRMWARETAGS", OracleDbType.Varchar2, device.FirmwareTags, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_FIRMWARETYPE", OracleDbType.Varchar2, device.FirmwareType, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_ADDRESSPROXY", OracleDbType.Varchar2, login.AddressProxy, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_USERPROXY", OracleDbType.Varchar2, login.UsernameProxy, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_PASSPROXY", OracleDbType.Varchar2, login.PassProxy, ParameterDirection.Input));

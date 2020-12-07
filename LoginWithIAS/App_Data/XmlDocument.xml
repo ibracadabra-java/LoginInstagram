@@ -80,11 +80,12 @@
             Clase para la persistencia de datos de los clientes autenticados en la aplicacion
             </summary>
         </member>
-        <member name="M:LoginWithIAS.ApiBd.MloginBD.Insertar_Mlogin(LoginWithIAS.Models.mLogin)">
+        <member name="M:LoginWithIAS.ApiBd.MloginBD.Insertar_Mlogin(LoginWithIAS.Models.mLogin,InstagramApiSharp.Classes.Android.DeviceInfo.AndroidDevice)">
             <summary>
-            Insertar Clientes en el sistema
+            Insertar Clientes en el sistema 
             </summary>
             <param name="login"></param>
+            <param name="device"></param>
             <returns></returns>
         </member>
         <member name="M:LoginWithIAS.ApiBd.MloginBD.Eliminar_Mlogin(System.String)">
@@ -1495,7 +1496,7 @@
             <param name="mlikemanypost"></param>
             <returns></returns>
         </member>
-        <member name="M:LoginWithIAS.Controllers.PostProcessController.SimulationLikeManyPost(LoginWithIAS.Models.mLikeManyPost)">
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.SimulationLikeManyPost(LoginWithIAS.Models.mMethodLike)">
             <summary>
             Simular dar like a través del buscador o de la lista de seguidores
             </summary>
@@ -1978,6 +1979,11 @@
         <member name="T:LoginWithIAS.Models.mReports_Mess">
             <summary>
             Clase para el reporte de los mensajes
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Models.mReports_Mess.#ctor">
+            <summary>
+            
             </summary>
         </member>
         <member name="M:LoginWithIAS.Models.mReports_Mess.#ctor(System.String,System.String,System.Int64,System.Int32,System.Int32,System.Int32,System.Int32,System.String)">

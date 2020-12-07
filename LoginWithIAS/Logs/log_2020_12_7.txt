@@ -1,0 +1,166 @@
+07/12/2020 0:02:04 - raulalex1995 Search_user_to_like raul-No errors detected
+07/12/2020 0:02:13 - raulalex1995 Get user to like raul-No errors detected
+07/12/2020 0:02:13 - raulalex1995 Get_media_to_like raul-No errors detected
+07/12/2020 0:02:21 - raulalex1995 Entrando al perfil y obteniendo post de raul se esperan 6 segundos  - No errors detected
+07/12/2020 0:02:40 - raulalex1995 abriendo post de raul se esperan 6 segundos para abrir otro  - No errors detected
+07/12/2020 0:02:49 - raulalex1995 abriendo post de raul se esperan 7 segundos para abrir otro  - No errors detected
+07/12/2020 0:02:59 - raulalex1995 abriendo post de raul se esperan 6 segundos para abrir otro  - No errors detected
+07/12/2020 0:03:08 - raulalex1995 abriendo post de raul se esperan 7 segundos para abrir otro  - No errors detected
+07/12/2020 0:03:19 - raulalex1995 abriendo post de raul se esperan 5 segundos para abrir otro  - No errors detected
+07/12/2020 0:03:28 - raulalex1995 abriendo post de raul se esperan 6 segundos para abrir otro  - No errors detected
+07/12/2020 0:03:38 - raulalex1995 abriendo post de raul se esperan 8 segundos para abrir otro  - No errors detected
+07/12/2020 0:03:49 - raulalex1995 abriendo post de raul se esperan 8 segundos para abrir otro  - No errors detected
+07/12/2020 0:04:02 - raulalex1995 abriendo post de raul se esperan 6 segundos para abrir otro  - No errors detected
+07/12/2020 0:04:11 - raulalex1995 abriendo post de raul se esperan 8 segundos para abrir otro  - No errors detected
+07/12/2020 0:04:34 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+07/12/2020 0:12:30 - raulalex1995 Search_user_to_like raul-No errors detected
+07/12/2020 0:12:40 - raulalex1995 Get user to like raul-No errors detected
+07/12/2020 0:12:40 - raulalex1995 Get_media_to_like raul-No errors detected
+07/12/2020 0:12:43 - raulalex1995 abriendo post de raul se esperan 6 segundos para abrir otro  - No errors detected
+07/12/2020 0:12:52 - raulalex1995 abriendo post de raul se esperan 9 segundos para abrir otro  - No errors detected
+07/12/2020 0:13:05 - raulalex1995 abriendo post de raul se esperan 5 segundos para abrir otro  - No errors detected
+07/12/2020 0:13:15 - raulalex1995 abriendo post de raul se esperan 6 segundos para abrir otro  - No errors detected
+07/12/2020 0:13:24 - raulalex1995 abriendo post de raul se esperan 9 segundos para abrir otro  - No errors detected
+07/12/2020 0:13:37 - raulalex1995 abriendo post de raul se esperan 7 segundos para abrir otro  - No errors detected
+07/12/2020 0:13:48 - raulalex1995 abriendo post de raul se esperan 7 segundos para abrir otro  - No errors detected
+07/12/2020 0:14:05 - raulalex1995 abriendo post de raul se esperan 9 segundos para abrir otro  - No errors detected
+07/12/2020 0:14:18 - raulalex1995 abriendo post de raul se esperan 9 segundos para abrir otro  - No errors detected
+07/12/2020 0:14:30 - raulalex1995 abriendo post de raul se esperan 5 segundos para abrir otro  - No errors detected
+07/12/2020 0:14:55 - raulalex1995 abriendo direct de message  se esperan 5 segundos - No errors detected
+07/12/2020 0:17:27 - raulalex1995 Search_user_to_like raul-No errors detected
+07/12/2020 0:17:38 - raulalex1995 Get user to like raul-No errors detected
+07/12/2020 0:17:38 - raulalex1995 Get_media_to_like raul-No errors detected
+07/12/2020 0:18:07 - raulalex1995 viendo seguidores de raul - No errors detected
+07/12/2020 0:18:26 - raulalex1995 abriendo direct de message  se esperan 8 segundos - No errors detected
+07/12/2020 0:18:56 - raulalex1995 Like_to raul - No errors detected
+07/12/2020 0:18:56 - Se le dio like a 1 post del usuario raul y se encontraron los siguientes errores No hubo errores
+07/12/2020 0:22:03 - raulalex1995 Search_user_to_like raul-No errors detected
+07/12/2020 0:22:13 - raulalex1995 Get user to like raul-No errors detected
+07/12/2020 0:22:13 - raulalex1995 Get_media_to_like raul-No errors detected
+07/12/2020 0:22:21 - raulalex1995 Entrando al perfil y obteniendo post de raul se esperan 5 segundos  - No errors detected
+07/12/2020 0:22:42 - raulalex1995 viendo historia de raul se esperan 7 segundos para ver otra  - No errors detected
+07/12/2020 0:22:45 - raulalex1995 viendo historia de raul se esperan 7 segundos para ver otra  - No errors detected
+07/12/2020 0:22:49 - raulalex1995 viendo historia de raul se esperan 5 segundos para ver otra  - No errors detected
+07/12/2020 0:22:53 - raulalex1995 viendo historia de raul se esperan 8 segundos para ver otra  - No errors detected
+07/12/2020 0:22:56 - raulalex1995 viendo historia de raul se esperan 7 segundos para ver otra  - No errors detected
+07/12/2020 0:22:59 - raulalex1995 viendo historia de raul se esperan 9 segundos para ver otra  - No errors detected
+07/12/2020 0:23:31 - raulalex1995 Like_to raul - No errors detected
+07/12/2020 0:23:31 - Se le dio like a 1 post del usuario raul y se encontraron los siguientes errores No hubo errores
+07/12/2020 0:31:00 - raulalex1995 Search_user_to_like raul-No errors detected
+07/12/2020 0:31:14 - raulalex1995 Get user to like raul-No errors detected
+07/12/2020 0:31:16 - raulalex1995 Get_media_to_like raul-No errors detected
+07/12/2020 0:31:31 - raulalex1995 Entrando al perfil y obteniendo post de raul se esperan 8 segundos  - No errors detected
+07/12/2020 0:32:10 - raulalex1995 viendo historia de raul se esperan 7 segundos para ver otra  - No errors detected
+07/12/2020 0:32:19 - raulalex1995 viendo historia de raul se esperan 5 segundos para ver otra  - No errors detected
+07/12/2020 0:32:31 - raulalex1995 viendo historia de raul se esperan 7 segundos para ver otra  - No errors detected
+07/12/2020 0:32:44 - raulalex1995 viendo historia de raul se esperan 9 segundos para ver otra  - No errors detected
+07/12/2020 0:32:51 - raulalex1995 viendo historia de raul se esperan 9 segundos para ver otra  - No errors detected
+07/12/2020 0:32:57 - raulalex1995 viendo historia de raul se esperan 8 segundos para ver otra  - No errors detected
+07/12/2020 0:33:04 - raulalex1995 viendo historia de raul se esperan 9 segundos para ver otra  - No errors detected
+07/12/2020 0:33:52 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+07/12/2020 0:49:20 - raulalex1995 Search_user_to_like raul-No errors detected
+07/12/2020 0:49:30 - raulalex1995 Get user to like raul-No errors detected
+07/12/2020 0:49:30 - raulalex1995 Get_media_to_like raul-No errors detected
+07/12/2020 0:49:33 - raulalex1995 abriendo direct de message  se esperan 8 segundos - No errors detected
+07/12/2020 0:49:58 - raulalex1995 viendo historia de raul se esperan 6 segundos para ver otra  - No errors detected
+07/12/2020 0:50:01 - raulalex1995 viendo historia de raul se esperan 8 segundos para ver otra  - No errors detected
+07/12/2020 0:50:05 - raulalex1995 viendo historia de raul se esperan 8 segundos para ver otra  - No errors detected
+07/12/2020 0:50:08 - raulalex1995 viendo historia de raul se esperan 9 segundos para ver otra  - No errors detected
+07/12/2020 0:50:11 - raulalex1995 viendo historia de raul se esperan 9 segundos para ver otra  - No errors detected
+07/12/2020 0:50:15 - raulalex1995 viendo historia de raul se esperan 8 segundos para ver otra  - No errors detected
+07/12/2020 0:50:19 - raulalex1995 viendo historia de raul se esperan 7 segundos para ver otra  - No errors detected
+07/12/2020 0:50:35 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+07/12/2020 0:55:22 - raulalex1995 Search_user_to_like juan-No errors detected
+07/12/2020 0:55:22 - raulalex1995 Search_user_to_like juan-No errors detected
+07/12/2020 0:55:22 - raulalex1995 Search_user_to_like juan-No errors detected
+07/12/2020 0:55:32 - raulalex1995 Get user to like juan-No errors detected
+07/12/2020 0:55:32 - raulalex1995 Get_media_to_like juan-No errors detected
+07/12/2020 0:55:32 - raulalex1995 Get user to like juan-No errors detected
+07/12/2020 0:55:32 - raulalex1995 Get_media_to_like juan-No errors detected
+07/12/2020 0:55:32 - raulalex1995 Get user to like juan-No errors detected
+07/12/2020 0:55:32 - raulalex1995 Get_media_to_like juan-No errors detected
+07/12/2020 0:55:35 - raulalex1995 abriendo direct de message  se esperan 6 segundos - No errors detected
+07/12/2020 0:55:39 - raulalex1995 Entrando al perfil y obteniendo post de juan se esperan 9 segundos  - No errors detected
+07/12/2020 0:55:40 - raulalex1995 Entrando al perfil y obteniendo post de juan se esperan 6 segundos  - No errors detected
+07/12/2020 1:01:33 - raulalex1995 Search_user_to_like raul-No errors detected
+07/12/2020 1:01:43 - raulalex1995 Get user to like raul-No errors detected
+07/12/2020 1:01:43 - raulalex1995 Get_media_to_like raul-No errors detected
+07/12/2020 1:01:46 - raulalex1995 abriendo post de raul se esperan 7 segundos para abrir otro  - No errors detected
+07/12/2020 1:01:57 - raulalex1995 abriendo post de raul se esperan 9 segundos para abrir otro  - No errors detected
+07/12/2020 1:02:09 - raulalex1995 abriendo post de raul se esperan 6 segundos para abrir otro  - No errors detected
+07/12/2020 1:02:18 - raulalex1995 abriendo post de raul se esperan 5 segundos para abrir otro  - No errors detected
+07/12/2020 1:02:27 - raulalex1995 abriendo post de raul se esperan 5 segundos para abrir otro  - No errors detected
+07/12/2020 1:02:36 - raulalex1995 abriendo post de raul se esperan 5 segundos para abrir otro  - No errors detected
+07/12/2020 1:02:44 - raulalex1995 abriendo post de raul se esperan 8 segundos para abrir otro  - No errors detected
+07/12/2020 1:02:56 - raulalex1995 abriendo post de raul se esperan 6 segundos para abrir otro  - No errors detected
+07/12/2020 1:03:05 - raulalex1995 abriendo post de raul se esperan 7 segundos para abrir otro  - No errors detected
+07/12/2020 1:03:16 - raulalex1995 abriendo post de raul se esperan 7 segundos para abrir otro  - No errors detected
+07/12/2020 1:03:26 - raulalex1995 abriendo post de raul se esperan 7 segundos para abrir otro  - No errors detected
+07/12/2020 1:03:53 - raulalex1995 abriendo direct de message  se esperan 7 segundos - No errors detected
+07/12/2020 1:04:09 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+07/12/2020 1:05:34 - raulalex1995 Search_user_to_like raul-No errors detected
+07/12/2020 1:05:44 - raulalex1995 Get user to like raul-No errors detected
+07/12/2020 1:05:44 - raulalex1995 Get_media_to_like raul-No errors detected
+07/12/2020 1:05:47 - raulalex1995 abriendo direct de message  se esperan 9 segundos - No errors detected
+07/12/2020 1:06:40 - raulalex1995 viendo historia de raul se esperan 7 segundos para ver otra  - No errors detected
+07/12/2020 1:06:43 - raulalex1995 viendo historia de raul se esperan 7 segundos para ver otra  - No errors detected
+07/12/2020 1:06:46 - raulalex1995 viendo historia de raul se esperan 6 segundos para ver otra  - No errors detected
+07/12/2020 1:06:50 - raulalex1995 viendo historia de raul se esperan 7 segundos para ver otra  - No errors detected
+07/12/2020 1:06:53 - raulalex1995 viendo historia de raul se esperan 9 segundos para ver otra  - No errors detected
+07/12/2020 1:06:56 - raulalex1995 viendo historia de raul se esperan 9 segundos para ver otra  - No errors detected
+07/12/2020 1:07:12 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+07/12/2020 1:26:10 - raulalex1995 Search_user_to_like raul-No errors detected
+07/12/2020 1:26:25 - raulalex1995 Get user to like raul-No errors detected
+07/12/2020 1:26:27 - raulalex1995 Get_media_to_like raul-No errors detected
+07/12/2020 1:26:40 - raulalex1995 Entrando al perfil y obteniendo post de raul se esperan 10 segundos  - No errors detected
+07/12/2020 1:30:08 - raulalex1995 viendo historia de raul se esperan 11 segundos para ver otra  - No errors detected
+07/12/2020 1:30:14 - raulalex1995 viendo historia de raul se esperan 11 segundos para ver otra  - No errors detected
+07/12/2020 1:30:17 - raulalex1995 viendo historia de raul se esperan 12 segundos para ver otra  - No errors detected
+07/12/2020 1:30:18 - raulalex1995 Search_user_to_like raul-No errors detected
+07/12/2020 1:30:20 - raulalex1995 viendo historia de raul se esperan 11 segundos para ver otra  - No errors detected
+07/12/2020 1:30:24 - raulalex1995 viendo historia de raul se esperan 10 segundos para ver otra  - No errors detected
+07/12/2020 1:30:27 - raulalex1995 viendo historia de raul se esperan 12 segundos para ver otra  - No errors detected
+07/12/2020 1:30:29 - raulalex1995 Get user to like raul-No errors detected
+07/12/2020 1:30:29 - raulalex1995 Get_media_to_like raul-No errors detected
+07/12/2020 1:30:31 - raulalex1995 viendo historia de raul se esperan 11 segundos para ver otra  - No errors detected
+07/12/2020 1:30:34 - raulalex1995 viendo historia de raul se esperan 12 segundos para ver otra  - No errors detected
+07/12/2020 1:30:36 - raulalex1995 Entrando al perfil y obteniendo post de raul se esperan 9 segundos  - No errors detected
+07/12/2020 1:30:37 - raulalex1995 viendo historia de raul se esperan 11 segundos para ver otra  - No errors detected
+07/12/2020 1:30:41 - raulalex1995 viendo historia de raul se esperan 10 segundos para ver otra  - No errors detected
+07/12/2020 1:30:45 - raulalex1995 viendo historia de raul se esperan 10 segundos para ver otra  - No errors detected
+07/12/2020 1:30:55 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+07/12/2020 1:30:58 - raulalex1995 abriendo direct de message  se esperan 6 segundos - No errors detected
+07/12/2020 1:31:16 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+07/12/2020 1:35:20 - raulalex1995 Search_user_to_like raul-No errors detected
+07/12/2020 1:35:30 - raulalex1995 Get user to like raul-No errors detected
+07/12/2020 1:35:30 - raulalex1995 Get_media_to_like raul-No errors detected
+07/12/2020 1:35:37 - raulalex1995 Entrando al perfil y obteniendo post de raul se esperan 8 segundos  - No errors detected
+07/12/2020 1:36:02 - raulalex1995 viendo historia de raul se esperan 8 segundos para ver otra  - No errors detected
+07/12/2020 1:36:05 - raulalex1995 viendo historia de raul se esperan 6 segundos para ver otra  - No errors detected
+07/12/2020 1:36:09 - raulalex1995 viendo historia de raul se esperan 6 segundos para ver otra  - No errors detected
+07/12/2020 1:36:12 - raulalex1995 viendo historia de raul se esperan 7 segundos para ver otra  - No errors detected
+07/12/2020 1:36:15 - raulalex1995 viendo historia de raul se esperan 6 segundos para ver otra  - No errors detected
+07/12/2020 1:36:19 - raulalex1995 viendo historia de raul se esperan 5 segundos para ver otra  - No errors detected
+07/12/2020 1:36:23 - raulalex1995 viendo historia de raul se esperan 8 segundos para ver otra  - No errors detected
+07/12/2020 1:36:38 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+07/12/2020 1:37:35 - raulalex1995 Search_user_to_like raul-No errors detected
+07/12/2020 1:37:45 - raulalex1995 Get user to like raul-No errors detected
+07/12/2020 1:37:45 - raulalex1995 Get_media_to_like raul-No errors detected
+07/12/2020 1:37:52 - raulalex1995 Entrando al perfil y obteniendo post de raul se esperan 9 segundos  - No errors detected
+07/12/2020 1:38:38 - raulalex1995 viendo seguidores de raul - No errors detected
+07/12/2020 1:38:54 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores
+07/12/2020 1:56:50 - raulalex1995 Search_user_to_like raul-No errors detected
+07/12/2020 1:57:01 - raulalex1995 Get user to like raul-No errors detected
+07/12/2020 1:57:01 - raulalex1995 Get_media_to_like raul-No errors detected
+07/12/2020 1:57:04 - raulalex1995 abriendo post de raul se esperan 5 segundos para abrir otro  - No errors detected
+07/12/2020 1:57:13 - raulalex1995 abriendo post de raul se esperan 9 segundos para abrir otro  - No errors detected
+07/12/2020 1:57:25 - raulalex1995 abriendo post de raul se esperan 8 segundos para abrir otro  - No errors detected
+07/12/2020 1:57:37 - raulalex1995 abriendo post de raul se esperan 8 segundos para abrir otro  - No errors detected
+07/12/2020 1:57:49 - raulalex1995 abriendo post de raul se esperan 5 segundos para abrir otro  - No errors detected
+07/12/2020 1:57:58 - raulalex1995 abriendo post de raul se esperan 9 segundos para abrir otro  - No errors detected
+07/12/2020 1:58:11 - raulalex1995 abriendo post de raul se esperan 6 segundos para abrir otro  - No errors detected
+07/12/2020 1:58:20 - raulalex1995 abriendo post de raul se esperan 5 segundos para abrir otro  - No errors detected
+07/12/2020 1:58:28 - raulalex1995 abriendo post de raul se esperan 5 segundos para abrir otro  - No errors detected
+07/12/2020 1:58:37 - raulalex1995 abriendo post de raul se esperan 5 segundos para abrir otro  - No errors detected
+07/12/2020 1:59:03 - raulalex1995 abriendo direct de message  se esperan 6 segundos - No errors detected
+07/12/2020 1:59:19 - Se le dio like a 0 post del usuario raul y se encontraron los siguientes errores No hubo errores

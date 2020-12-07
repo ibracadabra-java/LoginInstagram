@@ -10,6 +10,9 @@ namespace LoginWithIAS.Models
     /// </summary>
     public class mReports_Mess
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public mReports_Mess()
         {
         }
