@@ -756,7 +756,7 @@ namespace LoginWithIAS.Controllers
                     return token;
                 }
 
-                if (!string.IsNullOrEmpty(sending.Texto))
+                if (string.IsNullOrEmpty(sending.Texto))
                 {
                     token.Message = "Debe Introducir el texto del mensaje a enviar";
                     return token;
@@ -767,32 +767,36 @@ namespace LoginWithIAS.Controllers
                 string recipients = "";
                 if (instauser.Succeeded)
                 {
-                    var online = await insta.MessagingProcessor.GetUsersPresenceAsync();
-                    if (online.Succeeded)
+                    //var online = await insta.MessagingProcessor.GetUsersPresenceAsync();
+
+                    int contador = 0;
+                    string[] linea = sending.Usuarios.Split(',');
+
+                    for (int i = 0; i < linea.Length; i++)
                     {
-                        int contador = 0;
-                        string[] linea = sending.Usuarios.Split(',');
-                        for (int i = 0; i < online.Value.Count; i++)
+
+                        var pk = await insta.UserProcessor.GetUserAsync(linea[i]);
+                        if (pk.Succeeded)
                         {
-                            if (online.Value[i].IsActive && Aparece(linea, online.Value[i].Pk.ToString()))
+                            if (recipients == "")
                             {
-                                recipients = recipients + ',' + online.Value[i].Pk.ToString();
-                                contador++;
+                                recipients = pk.Value.Pk.ToString();
                             }
-                        }
+                            else
+                            {
+                                recipients = recipients + ',' + pk.Value.Pk.ToString();
+                            }
 
-                        var resultado = await insta.MessagingProcessor.SendDirectTextAsync(recipients, String.Empty, sending.Texto);
-
-                        if (resultado.Succeeded)
-                        {
-                            mReports_Mess mReports_Mess = new mReports_Mess(resultado.Value.ThreadId, resultado.Value.ItemId, user.Value.Pk, linea.Length, contador, 0, 0, recipients);
-                            objResultado = objbd.Insertar_Reportes_Mensages(mReports_Mess);
-                            token.Message = "De un total de:" + linea.Length + ", mensajes se enviaron:" + contador + ".";
                         }
                     }
-                    else
+
+                    var resultado = await insta.MessagingProcessor.SendDirectTextAsync(recipients, String.Empty, sending.Texto);
+
+                    if (resultado.Succeeded)
                     {
-                        token.Message = online.Info.Message;
+                        mReports_Mess mReports_Mess = new mReports_Mess(resultado.Value.ThreadId, resultado.Value.ItemId, user.Value.Pk, linea.Length, contador, 0, 0, recipients);
+                        objResultado = objbd.Insertar_Reportes_Mensages(mReports_Mess);
+                        token.Message = "De un total de:" + linea.Length + ", mensajes se enviaron:" + contador + ".";
                     }
                 }
                 else
@@ -805,7 +809,7 @@ namespace LoginWithIAS.Controllers
             }
             catch (Exception s)
             {
-                throw new Exception(s.Message);
+                  throw new Exception(s.Message);
             }
         }
 

@@ -19,6 +19,7 @@ namespace LoginWithIAS.Models
         private string usernameProxy;
         private string passProxy;
         private string pk;
+        private bool freeTrial;
         /// <summary>
         /// Usuario que desea loguearse
         /// </summary>
@@ -49,5 +50,9 @@ namespace LoginWithIAS.Models
         /// Identificador unico
         /// </summary>
         public string PK { get => pk; set => pk = value; }
+        /// <summary>
+        /// Face de Prueba activada
+        /// </summary>
+        public bool FreeTrial { get => freeTrial; set => freeTrial = value; }
     }
 }

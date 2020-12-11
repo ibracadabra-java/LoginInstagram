@@ -23,6 +23,10 @@ using InstagramApiSharp.Classes.SessionHandlers;
 using System.Text;
 using System.Runtime.InteropServices;
 using LoginWithIAS.ApiBd;
+using LoginWithIAS.Utiles;
+using System.Web;
+using System.Configuration;
+using LoginWithIAS.App_Start;
 
 namespace LoginWithIAS.Controllers
 {
@@ -32,10 +36,12 @@ namespace LoginWithIAS.Controllers
     public class LoginProcessController : ApiController
     {        
         MloginBD bd;
+        Sesion session;
+        Util util;
+        Log log;
+        string path = HttpContext.Current.Request.MapPath("~/Logs");
 
-        Sesion session;       
 
-        
         /// <summary>
         /// 
         /// </summary>
@@ -44,6 +50,8 @@ namespace LoginWithIAS.Controllers
 
             bd = new MloginBD();
             session = new Sesion();
+            util = new Util();
+            log = new Log(path);
 
         }     
 
@@ -145,11 +153,30 @@ namespace LoginWithIAS.Controllers
                     var logInResult = await InstaApi.LoginAsync();
                     if (logInResult.Succeeded)
                     {
-                        token.AuthToken = session.GenerarToken();
+                        
                         token.Message = logInResult.Info.Message;
                         session.SaveSession(InstaApi);
                         credencial.PK = InstaApi.GetLoggedUser().LoggedInUser.Pk.ToString();
                         mResultadoBd result = bd.Insertar_Mlogin(credencial,InstaApi.GetCurrentDevice());
+                        token.PkUsuario = credencial.PK;
+                        int expirationdays = 0;
+                        if(credencial.FreeTrial)
+                        {
+                          expirationdays = Convert.ToInt32(ConfigurationManager.AppSettings["TokenExpirationShortDays"]);
+                        }
+                        else 
+                        {
+                           expirationdays = Convert.ToInt32(ConfigurationManager.AppSettings["TokenExpirationLongDays"]);
+                        }
+                        var now = DateTime.Now;
+                        var payload = new Dictionary<string, object>()
+                          {
+                          { "IdUsuario", token.PkUsuario },
+                          { "CreationDate", now },
+                          { "ExpirationDate", now.AddDays(expirationdays) }
+                          };
+
+                        token.AuthToken = SecurityAPI.Encrypt(payload);
                         return token;
 
                     }
@@ -725,6 +752,85 @@ namespace LoginWithIAS.Controllers
                 cookies = cookieData.ToString();
             }
             return cookies;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mlikemanypost"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<List<mPerfil>> SearchUser (mMethodLike mlikemanypost) 
+        {
+            List<mPerfil> listperfiles = new List<mPerfil>();
+             string path = HttpContext.Current.Request.MapPath("~/Logs");
+             mlikemanypost.User = ConfigurationManager.AppSettings["UserApp"];
+             mlikemanypost.Pass = ConfigurationManager.AppSettings["PassApp"];
+
+             int count = 0;
+             Exception ex = new Exception();            
+
+             var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+             if (!(string.IsNullOrEmpty(mlikemanypost.User) || string.IsNullOrEmpty(mlikemanypost.Pass)))
+             {
+                 var userSession = new UserSessionData
+                 {
+                     UserName = mlikemanypost.User,
+                     Password = mlikemanypost.Pass
+                 };
+                 insta.SetUser(userSession);
+             }
+             else
+             {
+                 log.Add("Deben introducir Usuario y Contraseña");
+                 throw new Exception("Deben introducir Usuario y Contraseña");
+
+             }
+
+             session.LoadSession(insta);
+
+             if (!insta.GetLoggedUser().Password.Equals(mlikemanypost.Pass))
+             {
+                 log.Add("Contraseña incorrecta");
+                 throw new Exception("Contraseña incorrecta"); 
+             }
+             if (insta.IsUserAuthenticated)
+             {
+                 var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
+                 if (instauser.Succeeded)
+                 {
+                     foreach (var item in instauser.Value.Users)
+                     {
+                         count++;
+                         mPerfil perfil = new mPerfil();                        
+                         var user = await insta.UserProcessor.GetFullUserInfoAsync(item.Pk);
+                         perfil.Nombre = user.Value.UserDetail.FullName;
+                         perfil.UserName = user.Value.UserDetail.UserName;
+                         perfil.Followers = user.Value.UserDetail.FollowerCount;
+                         var imgpk = user.Value.UserDetail.ProfilePictureId;
+                         if (imgpk!=null)
+                         {
+                             var imgpr = await insta.MediaProcessor.GetMediaByIdAsync(imgpk);
+                             perfil.ProfilePicture = imgpr.Value.Images[0].Uri;
+                         }
+                         else
+                         perfil.ProfilePicture = user.Value.UserDetail.ProfilePicture;
+                         listperfiles.Add(perfil);
+                         if (count > 5)
+                             break;
+                     }
+
+
+
+                     return listperfiles;
+                 }
+
+                 else
+                     throw new Exception(instauser.Info.Message);
+             }
+             else
+                 throw new Exception("Debe auntenticarse primero");
         }
 
         #endregion

@@ -18,5 +18,9 @@ namespace LoginWithIAS.Models
         /// Mensaje descriptivo al loguarse
         /// </summary>
         public string Message { get; set; }
+        /// <summary>
+        /// id unico del usuario en instagram
+        /// </summary>
+        public string PkUsuario { get; set; }
     }
 }

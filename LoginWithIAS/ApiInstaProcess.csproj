@@ -55,6 +55,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\InstagramApiSharpMine-master\src\InstagramApiSharp\bin\Debug\netstandard2.0\InstagramApiSharp.dll</HintPath>
     </Reference>
+    <Reference Include="jose-jwt">
+      <HintPath>..\Librerias\jose-jwt.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -159,9 +162,12 @@
     <Compile Include="ApiBd\OracleDatabaseHelper.cs" />
     <Compile Include="ApiBd\PurificacionBd.cs" />
     <Compile Include="ApiBd\TareasBd.cs" />
+    <Compile Include="App_Start\AuthorizationRequiredAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\CustomPrincipal.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SecurityAPI.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -218,6 +224,7 @@
     <Compile Include="Models\mLogin.cs" />
     <Compile Include="Models\mMasSending.cs" />
     <Compile Include="Models\mMethodLike.cs" />
+    <Compile Include="Models\mPerfil.cs" />
     <Compile Include="Models\mPost.cs" />
     <Compile Include="Models\mPurificador.cs" />
     <Compile Include="Models\mReports_Mess.cs" />

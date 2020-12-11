@@ -19,6 +19,7 @@ using System.Web;
 using Telegram.Bot;
 using System.Configuration;
 using LoginWithIAS.ApiBd;
+using LoginWithIAS.App_Start;
 
 namespace LoginWithIAS.Controllers
 {
@@ -144,6 +145,7 @@ namespace LoginWithIAS.Controllers
         /// </summary>
         /// <param name="mlikemanypost"></param>
         /// <returns></returns>
+        [AuthorizationRequired]
         [HttpPost]
         public async Task<string> SimulationLikeManyPost(mMethodLike mlikemanypost)
         {

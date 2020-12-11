@@ -168,6 +168,25 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:LoginWithIAS.App_Start.SecurityAPI">
+            <summary>
+            clase que implementa seguridad en la api
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.App_Start.SecurityAPI.Encrypt(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Metodo para encryptar el token
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.App_Start.SecurityAPI.Decrypt(System.String)">
+            <summary>
+            Metodo para desencryptar
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.BundleConfig">
             <summary>
             
@@ -1611,6 +1630,13 @@
             <param name="uri"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.SearchUser(LoginWithIAS.Models.mMethodLike)">
+            <summary>
+            
+            </summary>
+            <param name="mlikemanypost"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.WebApiApplication">
             <summary>
             
@@ -1634,6 +1660,11 @@
         <member name="P:LoginWithIAS.Models.enResponseToken.Message">
             <summary>
             Mensaje descriptivo al loguarse
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.enResponseToken.PkUsuario">
+            <summary>
+            id unico del usuario en instagram
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.InstaApiList">
@@ -1869,6 +1900,11 @@
             Identificador unico
             </summary>
         </member>
+        <member name="P:LoginWithIAS.Models.mLogin.FreeTrial">
+            <summary>
+            Face de Prueba activada
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.mMasSending">
             <summary>
             Clase que hace referencia a la tabla MasSending
@@ -1945,6 +1981,31 @@
             </summary>
             <param name="vel"></param>
             <returns></returns>
+        </member>
+        <member name="T:LoginWithIAS.Models.mPerfil">
+            <summary>
+            Perfil de un usuario
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mPerfil.UserName">
+            <summary>
+            nombre de usuario
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mPerfil.Nombre">
+            <summary>
+            nombre del usuario
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mPerfil.Followers">
+            <summary>
+            cantidad de seguidores
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mPerfil.ProfilePicture">
+            <summary>
+            Foto de perfil
+            </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mPost">
             <summary>
