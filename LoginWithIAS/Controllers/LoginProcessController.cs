@@ -20,7 +20,10 @@ using LoginWithIAS.Utiles;
 using System.Web;
 using System.Configuration;
 using LoginWithIAS.App_Start;
+<<<<<<< HEAD
 using System.Text.RegularExpressions;
+=======
+>>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
 
 namespace LoginWithIAS.Controllers
 {
@@ -30,6 +33,7 @@ namespace LoginWithIAS.Controllers
     public class LoginProcessController : ApiController
     {
         MloginBD bd;
+<<<<<<< HEAD
         ProxyBD prbd;
         Sesion session;
         Util util;
@@ -37,6 +41,12 @@ namespace LoginWithIAS.Controllers
         ProxyBD bdprox;
         string path = HttpContext.Current.Request.MapPath("~/Logs");
 
+=======
+        Sesion session;
+        Util util;
+        Log log;
+        string path = HttpContext.Current.Request.MapPath("~/Logs");
+>>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
 
 
         /// <summary>
@@ -48,7 +58,10 @@ namespace LoginWithIAS.Controllers
             bd = new MloginBD();
             bdprox = new ProxyBD();
             session = new Sesion();
+<<<<<<< HEAD
             prbd = new ProxyBD();
+=======
+>>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
             util = new Util();
             log = new Log(path);
 
@@ -165,10 +178,15 @@ namespace LoginWithIAS.Controllers
                     log.Add(logInResult.Info.Message);
                     if (logInResult.Succeeded)
                     {
+<<<<<<< HEAD
                         bdprox.Update_Proxy(proxyconnect, -1);                  
                         token.result = InstaLoginResult.Success;
+=======
+                        
+>>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
                         token.Message = logInResult.Info.Message;
                         credencial.PK = InstaApi.GetLoggedUser().LoggedInUser.Pk.ToString();
+<<<<<<< HEAD
                         token.PkUsuario = credencial.PK;
                         int expirationdays = 0;
                         if (credencial.FreeTrial)
@@ -178,6 +196,18 @@ namespace LoginWithIAS.Controllers
                         else
                         {
                             expirationdays = Convert.ToInt32(ConfigurationManager.AppSettings["TokenExpirationLongDays"]);
+=======
+                        mResultadoBd result = bd.Insertar_Mlogin(credencial,InstaApi.GetCurrentDevice());
+                        token.PkUsuario = credencial.PK;
+                        int expirationdays = 0;
+                        if(credencial.FreeTrial)
+                        {
+                          expirationdays = Convert.ToInt32(ConfigurationManager.AppSettings["TokenExpirationShortDays"]);
+                        }
+                        else 
+                        {
+                           expirationdays = Convert.ToInt32(ConfigurationManager.AppSettings["TokenExpirationLongDays"]);
+>>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
                         }
                         var now = DateTime.Now;
                         var payload = new Dictionary<string, object>()
@@ -186,6 +216,7 @@ namespace LoginWithIAS.Controllers
                           { "CreationDate", now },
                           { "ExpirationDate", now.AddDays(expirationdays) }
                           };
+<<<<<<< HEAD
                         var pass = new Dictionary<string, object>()
                         {
                             {"Pass",credencial.Pass
@@ -202,6 +233,10 @@ namespace LoginWithIAS.Controllers
                         session.SaveSession(InstaApi);
                         session.SaveSessionBackup(InstaApi);
                         mResultadoBd result = bd.Insertar_Mlogin(credencial, InstaApi.GetCurrentDevice());
+=======
+
+                        token.AuthToken = SecurityAPI.Encrypt(payload);
+>>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
                         return token;
 
                     }
@@ -1413,6 +1448,7 @@ namespace LoginWithIAS.Controllers
              else
                  throw new Exception("Debe auntenticarse primero");
         }
+<<<<<<< HEAD
         /// <summary>
         /// 
         /// </summary>
@@ -1540,6 +1576,9 @@ namespace LoginWithIAS.Controllers
         {
             return nombre;
         }
+=======
+
+>>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
         #endregion
 
 

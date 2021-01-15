@@ -833,5 +833,8 @@ D:\Instaladores\Programacion\LoginWithIAS\LoginWithIAS\bin\TeleSharp.TL.dll
 D:\Instaladores\Programacion\LoginWithIAS\LoginWithIAS\bin\TLSharp.Core.dll
 D:\Instaladores\Programacion\LoginWithIAS\LoginWithIAS\bin\Telegram.Bot.xml
 D:\Instaladores\Programacion\LoginWithIAS\LoginWithIAS\bin\jose-jwt.dll
+<<<<<<< HEAD
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\bin\jose-jwt.dll
 D:\Instaladores\Programacion\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProcess.csprojAssemblyReference.cache
+=======
+>>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b

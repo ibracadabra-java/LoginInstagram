@@ -151,7 +151,11 @@ namespace LoginWithIAS.Controllers
         /// </summary>
         /// <param name="mlikemanypost"></param>
         /// <returns></returns>
+<<<<<<< HEAD
         //[AuthorizationRequired]
+=======
+        [AuthorizationRequired]
+>>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
         [HttpPost]
         public async Task<string> SimulationLikeManyPost(mMethodLike mlikemanypost)
         {

@@ -201,6 +201,7 @@
             </summary>
             <returns></returns>
         </member>
+<<<<<<< HEAD
         <member name="T:LoginWithIAS.App_Start.AuthorizationRequiredAttribute">
             <summary>
             
@@ -246,6 +247,8 @@
             <param name="role"></param>
             <returns></returns>
         </member>
+=======
+>>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
         <member name="T:LoginWithIAS.App_Start.SecurityAPI">
             <summary>
             clase que implementa seguridad en la api
@@ -1807,6 +1810,7 @@
             <param name="mlikemanypost"></param>
             <returns></returns>
         </member>
+<<<<<<< HEAD
         <member name="M:LoginWithIAS.Controllers.LoginProcessController.SearchUserPrueba(LoginWithIAS.Models.mMethodLike)">
             <summary>
             
@@ -1821,6 +1825,8 @@
             <param name="nombre"></param>
             <returns></returns>
         </member>
+=======
+>>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
         <member name="T:LoginWithIAS.WebApiApplication">
             <summary>
             
@@ -2011,6 +2017,7 @@
             id unico del usuario en instagram
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="P:LoginWithIAS.Models.enResponseToken.UserEmail">
             <summary>
             Email del usuario
@@ -2031,6 +2038,8 @@
             Requiere que el usuario envie su numero de telefono a instagram
             </summary>
         </member>
+=======
+>>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
         <member name="T:LoginWithIAS.Models.InstaApiList">
             <summary>
             
@@ -2287,6 +2296,11 @@
         <member name="P:LoginWithIAS.Models.mLogin.Country">
             <summary>
             Pais del cliente
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mLogin.FreeTrial">
+            <summary>
+            Face de Prueba activada
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mMasSending">
