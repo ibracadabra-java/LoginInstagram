@@ -19,10 +19,11 @@ using System.Web;
 using Telegram.Bot;
 using System.Configuration;
 using LoginWithIAS.ApiBd;
+using LoginWithIAS.App_Start;
 
 namespace LoginWithIAS.Controllers
 {
-    
+
     /// <summary>
     /// Controlador para dar likes
     /// </summary>
@@ -34,18 +35,24 @@ namespace LoginWithIAS.Controllers
         string path = HttpContext.Current.Request.MapPath("~/Logs");
         TelegramBotClient botClient;
         ErrorBd objerror;
+        ProxyBD prbd;
+        ProxyBD bdprox;
+        MloginBD bd;
 
         /// <summary>
         /// constructor de la clase
         /// </summary>
         public PostProcessController()
         {
-            
+
             session = new Sesion();
             util = new Util();
             log = new Log(path);
             botClient = new TelegramBotClient(ConfigurationManager.AppSettings["AccesToken"]);
             objerror = new ErrorBd();
+            prbd = new ProxyBD();
+            bdprox = new ProxyBD();
+            bd = new MloginBD();
         }
 
         /// <summary>
@@ -92,7 +99,7 @@ namespace LoginWithIAS.Controllers
                 if (!string.IsNullOrEmpty(mlikemanypost.userlike))
                 {
                     var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
-                    log.Add("Get post from "+ mlikemanypost.userlike+" -"+media.Info.Message);
+                    log.Add("Get post from " + mlikemanypost.userlike + " -" + media.Info.Message);
                     if (media.Succeeded)
                     {
                         for (int i = 0; i < media.Value.Count; i++)
@@ -100,7 +107,7 @@ namespace LoginWithIAS.Controllers
                             if (cantlike > 0)
                             {
                                 var liked = await insta.MediaProcessor.LikeMediaAsync(media.Value[i].InstaIdentifier);
-                                log.Add("like to "+ mlikemanypost.userlike +"-" +liked.Info.Message);
+                                log.Add("like to " + mlikemanypost.userlike + "-" + liked.Info.Message);
 
                                 if (liked.Succeeded)
                                 {
@@ -117,7 +124,7 @@ namespace LoginWithIAS.Controllers
                         if (count > 0) {
                             foreach (string error in Error)
                                 LogError += " " + error;
-                            token.Message = "Se le dio like a " + count + " post del usuario " + mlikemanypost.userlike + " y se encontraron los siguientes errores " + LogError ; }                    
+                            token.Message = "Se le dio like a " + count + " post del usuario " + mlikemanypost.userlike + " y se encontraron los siguientes errores " + LogError; }
                         return token;
                     }
                     else
@@ -144,51 +151,61 @@ namespace LoginWithIAS.Controllers
         /// </summary>
         /// <param name="mlikemanypost"></param>
         /// <returns></returns>
+        //[AuthorizationRequired]
         [HttpPost]
         public async Task<string> SimulationLikeManyPost(mMethodLike mlikemanypost)
         {
-            List<string> Error = new List<string>();            
+            List<string> Error = new List<string>();
             int cantlike = mlikemanypost.cantLike;
             int count = 0;
             Random valorandon = new Random();
             string LogError = "No hubo errores";
             List<InstaMedia> milista = new List<InstaMedia>();
             enResponseToken token = new enResponseToken();
-            string cadena = "abcde"; 
+            string cadena = "abcde";
             mError TareaError = new mError();
             ServicePointManager.SecurityProtocol =
             SecurityProtocolType.Tls12;
-            var me = botClient.GetMeAsync().Result;           
+            var me = botClient.GetMeAsync().Result;
             await botClient.SendTextMessageAsync(
             chatId: ConfigurationManager.AppSettings["ChannelId"],
             text: "Se ha iniciado la Tarea Expancion para el usuario: " + mlikemanypost.User + " a las:" + DateTime.Now
 
              );
+            string PassTem = string.Empty;
             var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
             if (!(string.IsNullOrEmpty(mlikemanypost.User) || string.IsNullOrEmpty(mlikemanypost.Pass)))
             {
-                var userSession = new UserSessionData
+                var userSessiontemp = new UserSessionData
                 {
                     UserName = mlikemanypost.User,
                     Password = mlikemanypost.Pass
                 };
-                insta.SetUser(userSession);
+                insta.SetUser(userSessiontemp);
             }
             else
             {
-                log.Add("Deben introducir Usuario y Contraseña");                
+                log.Add("Deben introducir Usuario y Contraseña");
                 return "Deben introducir Usuario y Contraseña";
-                
+
             }
 
             session.LoadSession(insta);
 
-            if (!insta.GetLoggedUser().Password.Equals(mlikemanypost.Pass))
+            if (!SecurityAPI.Decrypt(insta.GetLoggedUser().Password).Equals(mlikemanypost.Pass))
             {
                 log.Add("Contraseña incorrecta");
                 return "Contraseña incorrecta";
             }
+
+            var userSession = new UserSessionData
+            {
+                UserName = mlikemanypost.User,
+                Password = mlikemanypost.Pass
+            };
+            insta.SetUser(userSession);
+
             if (insta.IsUserAuthenticated)
             {
                 count = 0;
@@ -300,18 +317,18 @@ namespace LoginWithIAS.Controllers
                                                 {
                                                     case 1:
                                                         return "1";
-                                                        
+
                                                     case 2:
-                                                        return"2";                                                       
+                                                        return "2";
                                                     case 3:
-                                                        return"3";                                                      
+                                                        return "3";
                                                     case 4:
                                                         await botClient.SendTextMessageAsync(
                                                         chatId: ConfigurationManager.AppSettings["ChannelId"],
                                                         text: "Ha ocurrido un error no registrado con el usuario : " + mlikemanypost.User + " a las:" + DateTime.Now + " tipo de error: " + liked.Info.Message
                                                          );
                                                         return "4";
-                                                        
+
 
                                                 }
                                                 Error.Add(liked.Info.Message);
@@ -323,22 +340,22 @@ namespace LoginWithIAS.Controllers
                                 else
                                 {
                                     log.Add(mlikemanypost.User + " Get_media_to_like " + mlikemanypost.userlike + "-" + " No tiene publicaciones");
-                                   return  " No tiene publicaciones";
-                                    
+                                    return " No tiene publicaciones";
+
                                 }
                             }
                             else
                             {
                                 log.Add(mlikemanypost.User + " Get_media_to_like " + mlikemanypost.userlike + "-" + media.Info.Message);
                                 return media.Info.Message;
-                                
+
                             }
                         }
                         else
                         {
                             log.Add(mlikemanypost.User + " Get_User_to_like " + mlikemanypost.userlike + "-" + getusuario.Info.Message);
-                            return  getusuario.Info.Message;
-                            
+                            return getusuario.Info.Message;
+
                         }
                     }
                     else
@@ -407,7 +424,7 @@ namespace LoginWithIAS.Controllers
                                     else
                                     {
                                         token.Message = media.Info.Message;
-                                       return  media.Info.Message;
+                                        return media.Info.Message;
                                     }
                                 }
                                 else
@@ -438,7 +455,7 @@ namespace LoginWithIAS.Controllers
                 foreach (string error in Error)
                     LogError += " " + error;
                 log.Add("Se le dio like a " + count + " post del usuario " + mlikemanypost.userlike + " y se encontraron los siguientes errores " + LogError);
-               return "Método expanción realizado con éxito con el fan: " + mlikemanypost.userlike;
+                return "Método expanción realizado con éxito con el fan: " + mlikemanypost.userlike;
 
             }
             else
@@ -447,9 +464,6 @@ namespace LoginWithIAS.Controllers
 
             }
         }
-       
-
-
 
         /// <summary>
         /// 
@@ -472,16 +486,54 @@ namespace LoginWithIAS.Controllers
             DateTime hora = DateTime.Now;
             int cicloHora = 1;
             int cicloDia = 1;
-            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+            mProxy proxyconnect = new mProxy();
+            List<mProxy> proxys = new List<mProxy>();
+
+            proxys = prbd.CargarProxy();
+            proxyconnect = util.ChoseProxy(proxys, mlikemanypost.Country, 1);
+            if (proxyconnect.ErrorResult)
+            {
+                //insertar en la pila de errores de tareas de login pendientes pendientes
+                bd.InsertarLogin(mlikemanypost);
+            }
+            else
+            {
+                //update disponibilidad de los proxys. 
+                bdprox.Update_Proxy(proxyconnect, 1);
+            }
+            if (!string.IsNullOrEmpty(proxyconnect.AddressProxy) || !string.IsNullOrEmpty(proxyconnect.UsernameProxy) || !string.IsNullOrEmpty(proxyconnect.PassProxy))
+            {
+                token.Message = "Deben introducir el Proxy completo";
+            }
+
+            var proxy = new WebProxy()
+            {
+                Address = new Uri(proxyconnect.AddressProxy),
+                BypassProxyOnLocal = false,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(
+                 userName: proxyconnect.UsernameProxy,
+                 password: proxyconnect.PassProxy
+                 )
+
+
+            };
+            var httpClientHandler = new HttpClientHandler()
+            {
+                Proxy = proxy,
+            };
+
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).UseHttpClientHandler(httpClientHandler).Build();
+
 
             if (!(string.IsNullOrEmpty(mlikemanypost.User) || string.IsNullOrEmpty(mlikemanypost.Pass)))
             {
-                var userSession = new UserSessionData
+                var userSessiontemp = new UserSessionData
                 {
                     UserName = mlikemanypost.User,
                     Password = mlikemanypost.Pass
                 };
-                insta.SetUser(userSession);
+                insta.SetUser(userSessiontemp);
             }
             else
             {
@@ -490,12 +542,20 @@ namespace LoginWithIAS.Controllers
             }
 
             session.LoadSession(insta);
+            var pass = SecurityAPI.Decrypt(insta.GetLoggedUser().Password);
 
-            if (!insta.GetLoggedUser().Password.Equals(mlikemanypost.Pass))
+            if (!pass["Pass"].Equals(mlikemanypost.Pass))
             {
                 log.Add("Contraseña incorrecta");
                 return;
             }
+
+            var userSession = new UserSessionData
+            {
+                UserName = mlikemanypost.User,
+                Password = mlikemanypost.Pass
+            };
+            insta.SetUser(userSession);
             if (insta.IsUserAuthenticated)
             {
                 for (int y = 0; y < userlista.Count; y++)
@@ -605,7 +665,7 @@ namespace LoginWithIAS.Controllers
                                                 else
                                                 {
                                                     log.Add(mlikemanypost.User + " Like_to " + userlista[y] + " - " + liked.Info.Message);
-                                                    if (liked.Info.Equals("feedback_required"))
+                                                    if (liked.Info.Message.Equals("feedback_required"))
                                                         return;
                                                     Error.Add(liked.Info.Message);
                                                 }
@@ -741,7 +801,7 @@ namespace LoginWithIAS.Controllers
                         cicloDia++;
                         if ((DateTime.Now - Dia).TotalHours < 24)
                         {
-                            Thread.Sleep(86400 * 1000 * 10);
+                            Thread.Sleep(3600 * 1000 * 10);
                         }                        
                         Dia = DateTime.Now;
                     }
@@ -811,12 +871,13 @@ namespace LoginWithIAS.Controllers
         /// <param name="userpost"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> deletePost(mPost userpost)
+        public async Task<string> deleteallPost(mFollower userpost)
         {
             try
-            {
-                bool eliminarpost = false;
-
+            {                
+                int count = 0;                
+                InstaMediaList listpost = new InstaMediaList() ;
+                PaginationParameters pagination = PaginationParameters.MaxPagesToLoad(1);
                 var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
 
                 if (!(string.IsNullOrEmpty(userpost.User) || string.IsNullOrEmpty(userpost.Pass)))
@@ -841,29 +902,55 @@ namespace LoginWithIAS.Controllers
                     return "Contraseña incorrecta";
 
                 }
+                var user = await insta.UserProcessor.GetUserAsync(userpost.User);
+                var userinfo = await insta.UserProcessor.GetFullUserInfoAsync(user.Value.Pk);
+                var cantpost = userinfo.Value.UserDetail.MediaCount;
+                long countpost = cantpost / 12;
+                for (int j = 0; j < countpost+1; j++)
+                {
 
-                if (userpost.tipo_media == 1)
-                {
-                    var post = await insta.MediaProcessor.DeleteMediaAsync(userpost.idpost, InstaMediaType.Image);
-                    if (post.Succeeded)
-                        eliminarpost = post.Value;
 
+                    var listmedia = await insta.UserProcessor.GetUserMediaAsync(userpost.User, pagination);
+                    if (listmedia.Succeeded)
+                    {
+                        for (int i = 0; i < listmedia.Value.Count; i++)
+                        {
+                            listpost.Add(listmedia.Value[i]);
+                        }
+                    }                  
                 }
-                else if (userpost.tipo_media == 2)
+                for (int i = 0; i < listpost.Count; i++)
                 {
-                    var post = await insta.MediaProcessor.DeleteMediaAsync(userpost.idpost, InstaMediaType.Video);
-                    if (post.Succeeded)
-                        eliminarpost = post.Value;
+
+
+                    if (listpost[i].MediaType == InstaMediaType.Image)
+                    {
+                        var post = await insta.MediaProcessor.DeleteMediaAsync(listpost[i].InstaIdentifier, InstaMediaType.Image);
+                        if (post.Succeeded)
+                        { count++; log.Add("post " + count + " eliminado"); }
+                           
+                        else
+                            log.Add(post.Info.Message);
+                    }
+                    else if (listpost[i].MediaType == InstaMediaType.Video)
+                    {
+                        var post = await insta.MediaProcessor.DeleteMediaAsync(listpost[i].InstaIdentifier, InstaMediaType.Video);
+                        if (post.Succeeded)
+                        { count++; log.Add("post " + count + " eliminado"); }
+                        else
+                            log.Add(post.Info.Message);
+                    }
+                    else if (listpost[i].MediaType == InstaMediaType.Carousel)
+                    {
+                        var post = await insta.MediaProcessor.DeleteMediaAsync(listpost[i].InstaIdentifier, InstaMediaType.Carousel);
+                        if (post.Succeeded)
+                        { count++; log.Add("post " + count + " eliminado"); }
+                        else
+                            log.Add( post.Info.Message);
+                    }
+                   
                 }
-                else if (userpost.tipo_media == 8)
-                {
-                    var post = await insta.MediaProcessor.DeleteMediaAsync(userpost.idpost, InstaMediaType.Carousel);
-                    if (post.Succeeded)
-                        eliminarpost = post.Value;
-                }
-                if (!eliminarpost)
-                    return "No se pudo encontrar el post, corrija el id del post o el tipo de post";
-                return "Post eliminado con éxito.";
+                return "fin de la tarea eliminados " + count + " post";
             }
             catch (Exception s)
             {
@@ -1110,6 +1197,543 @@ namespace LoginWithIAS.Controllers
 
                 throw new Exception(s.Message);
             }        
-        }    
+        }   
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mlikemanypost"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<string> Engagement(mMethodLike mlikemanypost) 
+        {
+            List<InstaMedia> milista = new List<InstaMedia>();
+            Random valorandon = new Random();
+            string PassTem = string.Empty;
+            string cadena = "abcde";
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+            if (!(string.IsNullOrEmpty(mlikemanypost.User) || string.IsNullOrEmpty(mlikemanypost.Pass)))
+            {
+                var userSessiontemp = new UserSessionData
+                {
+                    UserName = mlikemanypost.User,
+                    Password = mlikemanypost.Pass
+                };
+                insta.SetUser(userSessiontemp);
+            }
+            else
+            {
+                log.Add("Deben introducir Usuario y Contraseña");
+                return "Deben introducir Usuario y Contraseña";
+
+            }
+            session.LoadSession(insta);
+
+            if (!SecurityAPI.Decrypt(insta.GetLoggedUser().Password).Equals(mlikemanypost.Pass))
+            {
+                log.Add("Contraseña incorrecta");
+                return "Contraseña incorrecta";
+            }
+            var userSession = new UserSessionData
+            {
+                UserName = mlikemanypost.User,
+                Password = mlikemanypost.Pass
+            };
+            insta.SetUser(userSession);
+            
+                var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(util.Subcadena(mlikemanypost.userlike), PaginationParameters.MaxPagesToLoad(1));
+                log.Add(mlikemanypost.User + " Search_user_to_like " + mlikemanypost.userlike + "-" + instauser.Info.Message);
+                if (instauser.Succeeded)
+                {
+                    var getusuario = await insta.UserProcessor.GetUserAsync(mlikemanypost.userlike);
+                    var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
+                    if (getusuario.Succeeded)
+                    {
+                        log.Add(mlikemanypost.User + " Get user to like " + mlikemanypost.userlike + "-" + getusuario.Info.Message);
+                        if (media.Succeeded)
+                        {
+                            log.Add(mlikemanypost.User + " Get_media_to_like " + mlikemanypost.userlike + "-" + media.Info.Message);
+                            if (media.Value.Count > 0)
+                            {
+
+                                string accion = util.Accion(cadena);
+                                for (int i = 0; i < accion.Length; i++)
+                                {
+                                    switch (accion[i])
+                                    {
+                                        case 'a':
+
+                                            var mediass = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
+                                            log.Add(mlikemanypost.User + " Entrando al perfil y obteniendo post de " + mlikemanypost.userlike + " se esperan " + mlikemanypost.tiempoInter(mlikemanypost.vel) + " segundos " + " - " + mediass.Info.Message);
+                                            Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel));
+
+
+                                            break;
+                                        case 'b':
+                                            if (media.Value.Count > 0)
+                                            {
+
+                                                for (int j = 0; j < mlikemanypost.cant(mlikemanypost.vel); j++)
+                                                {
+                                                    var post = await insta.MediaProcessor.GetMediaByIdAsync(media.Value[valorandon.Next(0, media.Value.Count)].InstaIdentifier);
+                                                    log.Add(mlikemanypost.User + " abriendo post de " + mlikemanypost.userlike + " se esperan " + mlikemanypost.tiempoInter(mlikemanypost.vel) + " segundos para abrir otro " + " - " + post.Info.Message);
+                                                    Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel) * 1000);
+                                                }
+                                            }
+                                            break;
+                                        case 'c':
+                                            var seguidores = await insta.UserProcessor.GetUserFollowersAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(mlikemanypost.cantInter(mlikemanypost.vel)));
+                                            log.Add(mlikemanypost.User + " viendo seguidores de " + mlikemanypost.userlike + " - " + seguidores.Info.Message);
+                                            break;
+                                        case 'd':
+                                            var direct = await insta.MessagingProcessor.GetPendingDirectAsync(PaginationParameters.MaxPagesToLoad(mlikemanypost.cantInter(mlikemanypost.vel)));
+                                            log.Add(mlikemanypost.User + " abriendo direct de message " + " se esperan " + mlikemanypost.tiempoInter(mlikemanypost.vel) + " segundos" + " - " + direct.Info.Message);
+                                            Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel));
+                                            break;
+                                        case 'e':
+                                            var historias = await insta.StoryProcessor.GetUserStoryAsync(getusuario.Value.Pk);
+                                            if (historias.Succeeded)
+                                            {
+                                                if (historias.Value.Items.Count > 0)
+                                                {
+                                                    for (int j = 0; j < mlikemanypost.cantInter(mlikemanypost.vel); j++)
+                                                    {
+                                                        int posicion = valorandon.Next(0, historias.Value.Items.Count);
+                                                        long takenat = historias.Value.TakenAtUnix;
+                                                        var historia = await insta.StoryProcessor.MarkStoryAsSeenAsync(historias.Value.Items[posicion].Id, takenat);
+                                                        log.Add(mlikemanypost.User + " viendo historia de " + mlikemanypost.userlike + " se esperan " + mlikemanypost.tiempoInter(mlikemanypost.vel) + " segundos para ver otra " + " - " + historia.Info.Message);
+                                                        Thread.Sleep(mlikemanypost.tiempoInter(mlikemanypost.vel));
+                                                    }
+                                                }
+                                            }
+                                            break;
+
+                                    }
+                                    Thread.Sleep(mlikemanypost.tiempo(mlikemanypost.time) * 1000);
+                                }
+                            return string.Empty;
+                        }
+                            else
+                            {
+                                log.Add(mlikemanypost.User + " Get_media_to_like " + mlikemanypost.userlike + "-" + " No tiene publicaciones");
+                                return " No tiene publicaciones";
+
+                            }
+                        }
+                        else
+                        {
+                            log.Add(mlikemanypost.User + " Get_media_to_like " + mlikemanypost.userlike + "-" + media.Info.Message);
+                            return media.Info.Message;
+
+                        }
+                    }
+                    else
+                    {
+                        log.Add(mlikemanypost.User + " Get_User_to_like " + mlikemanypost.userlike + "-" + getusuario.Info.Message);
+                        return getusuario.Info.Message;
+
+                    }
+                
+                }
+                else
+                {
+                    log.Add(mlikemanypost.User + " Search_User_to_like " + mlikemanypost.userlike + "-" + instauser.Info.Message);
+                    return instauser.Info.Message;
+                }         
+
+
+        }
+        #region Metodos prueba
+        /// <summary>
+        /// Dar un like
+        /// </summary>
+        /// <param name="mlikemanypost"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<string> DarLike(mLikeManyPost mlikemanypost)
+        {
+            Random valorandon = new Random();
+            List<InstaMedia> milista = new List<InstaMedia>();
+            enResponseToken token = new enResponseToken();
+            DateTime Dia = DateTime.Now;
+            DateTime hora = DateTime.Now;
+            mProxy proxyconnect = new mProxy();
+            List<mProxy> proxys = new List<mProxy>();
+
+
+            proxys = prbd.CargarProxy();
+            proxyconnect = util.ChoseProxy(proxys, mlikemanypost.Country, 1);
+            if (proxyconnect.ErrorResult)
+            {
+                //insertar en la pila de errores de tareas de login pendientes pendientes
+                bd.InsertarLogin(mlikemanypost);
+                //devolver el tipo de error a la app para que notifique al cliente push notification al cliente
+                //para esperar unos minutos.
+                return "No hay Proxys disponibles";
+            }
+            else
+            {
+                //update disponibilidad de los proxys. 
+                bdprox.Update_Proxy(proxyconnect, 1);
+            }
+            if (string.IsNullOrEmpty(proxyconnect.AddressProxy) || string.IsNullOrEmpty(proxyconnect.UsernameProxy) || string.IsNullOrEmpty(proxyconnect.PassProxy))
+            {
+
+
+                return "Deben introducir el Proxy completo";
+
+
+            }
+            var proxy = new WebProxy()
+            {
+                Address = new Uri(proxyconnect.AddressProxy),
+                BypassProxyOnLocal = false,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(
+                 userName: proxyconnect.UsernameProxy,
+                 password: proxyconnect.PassProxy
+                 )
+
+
+            };
+            var httpClientHandler = new HttpClientHandler()
+            {
+                Proxy = proxy,
+            };
+
+
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).UseHttpClientHandler(httpClientHandler).Build();
+
+            if (!(string.IsNullOrEmpty(mlikemanypost.User) || string.IsNullOrEmpty(mlikemanypost.Pass)))
+            {
+                var userSessiontemp = new UserSessionData
+                {
+                    UserName = mlikemanypost.User,
+                    Password = mlikemanypost.Pass
+                };
+                insta.SetUser(userSessiontemp);
+            }
+            else
+            {
+                log.Add("Deben introducir Usuario y Contraseña");
+                return "Deben introducir Usuario y Contraseña";
+            }
+
+            session.LoadSession(insta);
+            var pass = SecurityAPI.Decrypt(insta.GetLoggedUser().Password);
+
+            if (!pass["Pass"].Equals(mlikemanypost.Pass))
+            {
+                log.Add("Contraseña incorrecta");
+                return "Contraseña incorrecta";
+            }
+
+            var userSession = new UserSessionData
+            {
+                UserName = mlikemanypost.User,
+                Password = mlikemanypost.Pass
+            };
+            insta.SetUser(userSession);
+            if (insta.IsUserAuthenticated)
+            {
+                var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
+                for (int i = 0; i < media.Value.Count; i += valorandon.Next(1, 3))
+                {
+                    if (!media.Value[i].HasLiked)
+                    {
+                        if (milista.Count <= 6)
+                        {
+                            milista.Add(media.Value[i]);
+                        }
+                        else
+                            break;
+                    }
+                }                 
+                        var liked = await insta.MediaProcessor.LikeMediaAsync(milista[0].InstaIdentifier);
+                        if (liked.Succeeded)
+                        {
+                            log.Add(mlikemanypost.User + " Like_to " + mlikemanypost.userlike + " - " + liked.Info.Message);
+                            return mlikemanypost.User + " Like_to " + mlikemanypost.userlike + " - " + liked.Info.Message;
+                        }
+                        else
+                        {
+                            log.Add(mlikemanypost.User + " Like_to " + mlikemanypost.userlike + " - " + liked.Info.Message);
+                            if (liked.Info.Message.Equals("feedback_required"))
+                               return "feedback_required";                           
+                        }
+                   
+                
+            }
+            else
+                return "Debe autenticarse ";
+            return string.Empty;
+        }
+        /// <summary>
+        /// Dar varios like
+        /// </summary>
+        /// <param name="mlikemanypost"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<string> DarvariosLike(mMethodLike mlikemanypost)
+        {
+            List<string> Error = new List<string>();
+            List<string> userlista = mlikemanypost.ListUser;
+            int cantlike = mlikemanypost.cantLike;
+            int count = 0;
+            Random valorandon = new Random();
+            List<InstaMedia> milista = new List<InstaMedia>();
+            DateTime Dia = DateTime.Now;
+            DateTime hora = DateTime.Now;
+            int cicloHora = 1;
+            int cicloDia = 1;
+            LoginProcessController login = new LoginProcessController();
+            mProxy proxyconnect = new mProxy();
+            List<mProxy> proxys = new List<mProxy>();
+
+            proxys = prbd.CargarProxy();
+            proxyconnect = util.ChoseProxy(proxys, mlikemanypost.Country, 1);
+            if (proxyconnect.ErrorResult)
+            {
+                //insertar en la pila de errores de tareas de login pendientes pendientes
+                bd.InsertarLogin(mlikemanypost);
+                //devolver el tipo de error a la app para que notifique al cliente push notification al cliente
+                //para esperar unos minutos.
+                return "No hay Proxys disponibles";
+            }
+            else
+            {
+                //update disponibilidad de los proxys. 
+                bdprox.Update_Proxy(proxyconnect, 1);
+            }
+            if (string.IsNullOrEmpty(proxyconnect.AddressProxy) || string.IsNullOrEmpty(proxyconnect.UsernameProxy) || string.IsNullOrEmpty(proxyconnect.PassProxy))
+            {
+                return "Deben introducir el Proxy completo";
+            }
+            var proxy = new WebProxy()
+            {
+                Address = new Uri(proxyconnect.AddressProxy),
+                BypassProxyOnLocal = false,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(
+                 userName: proxyconnect.UsernameProxy,
+                 password: proxyconnect.PassProxy
+                 )
+
+
+            };
+            var httpClientHandler = new HttpClientHandler()
+            {
+                Proxy = proxy,
+            };
+
+
+
+
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).UseHttpClientHandler(httpClientHandler).Build();
+
+            if (!(string.IsNullOrEmpty(mlikemanypost.User) || string.IsNullOrEmpty(mlikemanypost.Pass)))
+            {
+                var userSessiontemp = new UserSessionData
+                {
+                    UserName = mlikemanypost.User,
+                    Password = mlikemanypost.Pass
+                };
+                insta.SetUser(userSessiontemp);
+            }
+            else
+            {
+                log.Add("Deben introducir Usuario y Contraseña");
+                return "Deben introducir Usuario y Contraseña";
+            }
+
+            session.LoadSession(insta);
+            var pass = SecurityAPI.Decrypt(insta.GetLoggedUser().Password);
+
+            if (!pass["Pass"].Equals(mlikemanypost.Pass))
+            {
+                log.Add("Contraseña incorrecta");
+                return "Contraseña incorrecta";
+            }
+
+            var userSession = new UserSessionData
+            {
+                UserName = mlikemanypost.User,
+                Password = mlikemanypost.Pass
+            };
+            insta.SetUser(userSession);
+            if (insta.IsUserAuthenticated)
+            {
+                for (int y = 0; y < userlista.Count; y++)
+                {
+                    milista.Clear();
+                    count = 0;
+                    cantlike = mlikemanypost.cantLike;
+                    var media = await insta.UserProcessor.GetUserMediaAsync(mlikemanypost.userlike, PaginationParameters.MaxPagesToLoad(1));
+                    for (int i = 0; i < media.Value.Count; i += valorandon.Next(1, 3))
+                    {
+                        if (!media.Value[i].HasLiked)
+                        {
+                            if (milista.Count <= 6)
+                            {
+                                milista.Add(media.Value[i]);
+                            }
+                            else
+                                break;
+                        }
+                    }
+
+                    for (int i = 0; i < milista.Count; i++)
+                    {
+                        if (cantlike > 0)
+                        {
+                            var liked = await insta.MediaProcessor.LikeMediaAsync(milista[i].InstaIdentifier);
+                            Thread.Sleep(mlikemanypost.tiempo(mlikemanypost.vel) * 1000);
+                            if (liked.Succeeded)
+                            {
+                                log.Add(mlikemanypost.User + " Like_to " + userlista[y] + " - " + liked.Info.Message);
+                                cantlike--;
+                                count++;
+                            }
+                            else
+                            {
+                                log.Add(mlikemanypost.User + " Like_to " + userlista[y] + " - " + liked.Info.Message);
+                                if (liked.Info.Message.Equals("feedback_required")) 
+                                {
+                                    var relogin = await login.Relogin(mlikemanypost);
+                                    if(relogin.AuthToken == null)
+                                        return "feedback_required";
+                                }                                    
+                            }
+                        }
+                        else break;
+                    }
+                    if (y == (mlikemanypost.SleepHora(mlikemanypost.vel) - 1) * cicloHora)
+                    {
+                        cicloHora++;
+                        if ((DateTime.Now - hora).TotalMinutes < 60)
+                        {
+                            Thread.Sleep(valorandon.Next(45, 61) * 60 * 1000);
+                        }
+                        hora = DateTime.Now;
+                    }
+                    if (y >= (mlikemanypost.SleepDia(mlikemanypost.vel) - 1) * cicloDia)
+                    {
+                        cicloDia++;
+                        if ((DateTime.Now - Dia).TotalHours < 24)
+                        {
+                            Thread.Sleep(3600 * 1000 * 10);
+                        }
+                        Dia = DateTime.Now;
+                    }
+
+                }
+            }
+            else
+                return "Debe autenticarse ";
+            return string.Empty;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mlikemanypost"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<string> cargarFeed(mLikeManyPost mlikemanypost)
+        {
+            Random valorandon = new Random();
+            List<InstaMedia> milista = new List<InstaMedia>();
+            enResponseToken token = new enResponseToken();
+            DateTime Dia = DateTime.Now;
+            DateTime hora = DateTime.Now;
+            mProxy proxyconnect = new mProxy();
+            List<mProxy> proxys = new List<mProxy>();
+
+            proxys = prbd.CargarProxy();
+            proxyconnect = util.ChoseProxy(proxys, mlikemanypost.Country, 1);
+            if (proxyconnect.ErrorResult)
+            {
+                //insertar en la pila de errores de tareas de login pendientes pendientes
+                bd.InsertarLogin(mlikemanypost);
+                //devolver el tipo de error a la app para que notifique al cliente push notification al cliente
+                //para esperar unos minutos.
+                return "No hay Proxys disponibles";
+            }
+            else
+            {
+                //update disponibilidad de los proxys. 
+                bdprox.Update_Proxy(proxyconnect, 1);
+            }
+            if (string.IsNullOrEmpty(proxyconnect.AddressProxy) || string.IsNullOrEmpty(proxyconnect.UsernameProxy) || string.IsNullOrEmpty(proxyconnect.PassProxy))
+            {
+                return "Deben introducir el Proxy completo";
+            }
+
+            var proxy = new WebProxy()
+            {
+                Address = new Uri(proxyconnect.AddressProxy),
+                BypassProxyOnLocal = false,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(
+                 userName: proxyconnect.UsernameProxy,
+                 password: proxyconnect.PassProxy
+                 )
+
+
+            };
+            var httpClientHandler = new HttpClientHandler()
+            {
+                Proxy = proxy,
+            };
+
+
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).UseHttpClientHandler(httpClientHandler).Build();
+
+            if (!(string.IsNullOrEmpty(mlikemanypost.User) || string.IsNullOrEmpty(mlikemanypost.Pass)))
+            {
+                var userSessiontemp = new UserSessionData
+                {
+                    UserName = mlikemanypost.User,
+                    Password = mlikemanypost.Pass
+                };
+                insta.SetUser(userSessiontemp);
+            }
+            else
+            {
+                log.Add("Deben introducir Usuario y Contraseña");
+                return "Deben introducir Usuario y Contraseña";
+            }
+
+            session.LoadSession(insta);
+            var pass = SecurityAPI.Decrypt(insta.GetLoggedUser().Password);
+
+            if (!pass["Pass"].Equals(mlikemanypost.Pass))
+            {
+                log.Add("Contraseña incorrecta");
+                return "Contraseña incorrecta";
+            }
+
+            var userSession = new UserSessionData
+            {
+                UserName = mlikemanypost.User,
+                Password = mlikemanypost.Pass
+            };
+            insta.SetUser(userSession);
+            if (insta.IsUserAuthenticated)
+            {
+                var feed = await insta.FeedProcessor.GetExploreFeedAsync(PaginationParameters.MaxPagesToLoad(1));
+
+                if (feed.Succeeded)
+                {
+                    return feed.Info.Message;
+                }
+                else
+                    return feed.Info.Message;
+
+            }
+            else
+                return "Debe autenticarse ";
+           
+        }
+        #endregion
     }
 }

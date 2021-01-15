@@ -49,9 +49,9 @@ namespace LoginWithIAS.Models
             Random objram = new Random();
             switch (vel)
             {
-                case 0: return objram.Next(15, 21);
-                case 1: return objram.Next(9, 15);
-                case 2: return objram.Next(4, 9);
+                case 0: return 1;
+                case 1: return 2;
+                case 2: return 3;
                 default: return 25;
 
             }

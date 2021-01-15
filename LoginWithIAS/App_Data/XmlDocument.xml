@@ -6,7 +6,7 @@
     <members>
         <member name="T:LoginWithIAS.ApiBd.ActComBd">
             <summary>
-            
+            Actividad de usuario
             </summary>
         </member>
         <member name="M:LoginWithIAS.ApiBd.ActComBd.ActInsertar(System.String,System.String,System.String,System.Int32)">
@@ -102,6 +102,39 @@
             <param name="login"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.ApiBd.MloginBD.InsertarLogin(LoginWithIAS.Models.mLogin)">
+            <summary>
+            insertar login
+            </summary>
+            <param name="usuario"></param>
+            <returns></returns>
+        </member>
+        <member name="T:LoginWithIAS.ApiBd.ProxyBD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.ProxyBD.Insertar_Proxy(LoginWithIAS.Models.mProxy)">
+            <summary>
+            INSERTAR NUEVO PROXY
+            </summary>
+            <param name="proxy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.ProxyBD.CargarProxy">
+            <summary>
+            Cargar proxy
+            </summary>       
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.ApiBd.ProxyBD.Update_Proxy(LoginWithIAS.Models.mProxy,System.Int32)">
+            <summary>
+            actualizar disponibilidad del proxy
+            </summary>
+            <param name="proxy"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.ApiBd.PurificacionBd">
             <summary>
             
@@ -166,6 +199,70 @@
             <summary>
             Actualizar y mostrar resumen de los mensajes enviados a los clientes
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:LoginWithIAS.App_Start.AuthorizationRequiredAttribute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LoginWithIAS.App_Start.AuthorizationRequiredAttribute.Token">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.App_Start.AuthorizationRequiredAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            
+            </summary>
+            <param name="filterContext"></param>
+        </member>
+        <member name="M:LoginWithIAS.App_Start.AuthorizationRequiredAttribute.ValidateToken(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="T:LoginWithIAS.App_Start.UserLogged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.App_Start.UserLogged.User">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.App_Start.UserLogged.Identity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.App_Start.UserLogged.IsInRole(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="role"></param>
+            <returns></returns>
+        </member>
+        <member name="T:LoginWithIAS.App_Start.SecurityAPI">
+            <summary>
+            clase que implementa seguridad en la api
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.App_Start.SecurityAPI.Encrypt(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Metodo para encryptar el token
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.App_Start.SecurityAPI.Decrypt(System.String)">
+            <summary>
+            Metodo para desencryptar
+            </summary>
+            <param name="token"></param>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.BundleConfig">
@@ -1143,7 +1240,7 @@
         </member>
         <member name="M:LoginWithIAS.Controllers.CuentasController.Cuentas_Ainactivas(LoginWithIAS.Models.mcuentas)">
             <summary>
-            Este metodo nos permitira definir si la cuenta de un usurio es falsa o poco inactiva
+            Este metodo nos permitira definir si la cuenta de un usurio es falsa o poco inactiva//Revisarrrrrrrr
             </summary>
             <returns></returns>
         </member>
@@ -1219,6 +1316,13 @@
         <member name="M:LoginWithIAS.Controllers.StoryProcessController.VerStory(LoginWithIAS.Models.mStory)">
             <summary>
             Ver historias de un seguidor
+            </summary>
+            <param name="credenciales"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.StoryProcessController.VerunaStory(LoginWithIAS.Models.mStory)">
+            <summary>
+            
             </summary>
             <param name="credenciales"></param>
             <returns></returns>
@@ -1479,6 +1583,27 @@
             <param name="followers"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.UnfollowNoMutual(LoginWithIAS.Models.mLogin)">
+            <summary>
+            Eliminar usuarios que no te siguen
+            </summary>
+            <param name="credencial"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.Cantidad_Post_Segudires(LoginWithIAS.Models.mLogin)">
+            <summary>
+            Obtiene la sumatoria de post y de seguidores de un usuario.
+            </summary>
+            <param name="cliente"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.UssersProcessController.GetDetailsUser(LoginWithIAS.Models.mLogin)">
+            <summary>
+            Obtiene la informacion Completa de un usuario
+            </summary>
+            <param name="cliente"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.PostProcessController">
             <summary>
             Controlador para dar likes
@@ -1517,7 +1642,7 @@
             <param name="userpost"></param>
             <returns></returns>
         </member>
-        <member name="M:LoginWithIAS.Controllers.PostProcessController.deletePost(LoginWithIAS.Models.mPost)">
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.deleteallPost(LoginWithIAS.Models.mFollower)">
             <summary>
             Eliminar un post
             </summary>
@@ -1552,6 +1677,34 @@
             <param name="media"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.Engagement(LoginWithIAS.Models.mMethodLike)">
+            <summary>
+            
+            </summary>
+            <param name="mlikemanypost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.DarLike(LoginWithIAS.Models.mLikeManyPost)">
+            <summary>
+            Dar un like
+            </summary>
+            <param name="mlikemanypost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.DarvariosLike(LoginWithIAS.Models.mMethodLike)">
+            <summary>
+            Dar varios like
+            </summary>
+            <param name="mlikemanypost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.PostProcessController.cargarFeed(LoginWithIAS.Models.mLikeManyPost)">
+            <summary>
+            
+            </summary>
+            <param name="mlikemanypost"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.LoginProcessController">
             <summary>
             
@@ -1567,6 +1720,42 @@
             Metodo para Loguearse en la plataforma
             </summary>
             <param name="credencial"> Clase del modelo que captura las credenciales del usuario autenticado</param>        
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.SubmitPhoneNumber(LoginWithIAS.Models.mChallengeRequire)">
+            <summary>
+            Enviar el telefono del usuario a instagram para ChallengeRequire
+            </summary>
+            <param name="credencial"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.SubmitCode(LoginWithIAS.Models.mChallengeRequire)">
+            <summary>
+            pedir el envio del codigo de verificacion
+            </summary>
+            <param name="credencial"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.VerificationCode(LoginWithIAS.Models.mChallengeRequire)">
+            <summary>
+            Verificar el codigo del challenge require
+            </summary>
+            <param name="credencial"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.LoginTwoFactor(LoginWithIAS.Models.mChallengeRequire)">
+            <summary>
+            Autenticacion de dos factores
+            </summary>
+            <param name="credencial"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.Relogin(LoginWithIAS.Models.mLogin,System.Int32)">
+            <summary>
+            relogear a un Usuario
+            </summary>
+            <param name="credencial"></param>
+            <param name="count"></param>
             <returns></returns>
         </member>
         <member name="M:LoginWithIAS.Controllers.LoginProcessController.LogoutUser(LoginWithIAS.Models.mLogin)">
@@ -1611,6 +1800,27 @@
             <param name="uri"></param>
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.SearchUser(LoginWithIAS.Models.mMethodLike)">
+            <summary>
+            
+            </summary>
+            <param name="mlikemanypost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.SearchUserPrueba(LoginWithIAS.Models.mMethodLike)">
+            <summary>
+            
+            </summary>
+            <param name="mlikemanypost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Controllers.LoginProcessController.prueba(System.String)">
+            <summary>
+            prueba
+            </summary>
+            <param name="nombre"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.WebApiApplication">
             <summary>
             
@@ -1619,6 +1829,166 @@
         <member name="M:LoginWithIAS.WebApiApplication.Application_Start">
             <summary>
             
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mClientAccounType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientAccounType.clientaccountype">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientAccounType.clientaccounttypecategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mClientDescription">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientDescription.clientdescription">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientDescription.clientdescriptionurl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mClientPost">
+            <summary>
+            Post del cliente
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientPost.postid">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientPost.likers">
+            <summary>
+            Likers
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientPost.cantlike">
+            <summary>
+            Cantidad de likes
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mClientAudience">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientAudience.seguidor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientAudience.empatylevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mInfoClient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientusername">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientname">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientcantpost">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientcantfollowers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientcantfollowing">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientdescription">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientemail">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientphone">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientcity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientcountry">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.ClientAccounType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mClients">
+            <summary>
+            Cliente
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClients.Id">
+            <summary>
+            PK
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClients.Info">
+            <summary>
+            Info
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClients.ClientAudience">
+            <summary>
+            Audience
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClients.posts">
+            <summary>
+            Post
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClients.Tags">
+            <summary>
+            Tags
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.enResponseToken">
@@ -1634,6 +2004,31 @@
         <member name="P:LoginWithIAS.Models.enResponseToken.Message">
             <summary>
             Mensaje descriptivo al loguarse
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.enResponseToken.PkUsuario">
+            <summary>
+            id unico del usuario en instagram
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.enResponseToken.UserEmail">
+            <summary>
+            Email del usuario
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.enResponseToken.UserPhone">
+            <summary>
+            Phone del usuario
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.enResponseToken.result">
+            <summary>
+            Resultado del login
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.enResponseToken.requireSubmitPhoneNumber">
+            <summary>
+            Requiere que el usuario envie su numero de telefono a instagram
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.InstaApiList">
@@ -1672,6 +2067,36 @@
         <member name="P:LoginWithIAS.Models.mcaption.texto">
             <summary>
             
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mChallengeRequire">
+            <summary>
+            modelo del challengeRequire
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mChallengeRequire.UserPhone">
+            <summary>
+            Telefono del challenge
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mChallengeRequire.UserEmail">
+            <summary>
+            User del challenge
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mChallengeRequire.VerifyCode">
+            <summary>
+            Codigo de verificacion del challenge
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mChallengeRequire.IsEmail">
+            <summary>
+            Si el codigo se enviara al email
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mChallengeRequire.IsPhone">
+            <summary>
+            Si el codigo se enviara por sms
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mchat">
@@ -1849,24 +2274,19 @@
             Propiedad para autenticacion en dos pasos
             </summary>
         </member>
-        <member name="P:LoginWithIAS.Models.mLogin.AddressProxy">
-            <summary>
-            Proxy que usará el cliente
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mLogin.UsernameProxy">
-            <summary>
-            Usuario del Proxy
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mLogin.PassProxy">
-            <summary>
-            Password del proxy
-            </summary>
-        </member>
         <member name="P:LoginWithIAS.Models.mLogin.PK">
             <summary>
             Identificador unico
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mLogin.FreeTrial">
+            <summary>
+            Face de Prueba activada
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mLogin.Country">
+            <summary>
+            Pais del cliente
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mMasSending">
@@ -1946,6 +2366,31 @@
             <param name="vel"></param>
             <returns></returns>
         </member>
+        <member name="T:LoginWithIAS.Models.mPerfil">
+            <summary>
+            Perfil de un usuario
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mPerfil.UserName">
+            <summary>
+            nombre de usuario
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mPerfil.Nombre">
+            <summary>
+            nombre del usuario
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mPerfil.Followers">
+            <summary>
+            cantidad de seguidores
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mPerfil.ProfilePicture">
+            <summary>
+            Foto de perfil
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.mPost">
             <summary>
             Media Post
@@ -1959,6 +2404,56 @@
         <member name="P:LoginWithIAS.Models.mPost.tipo_media">
             <summary>
             Tipo de post
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mProxy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mProxy.AddressProxy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mProxy.UsernameProxy">
+            <summary>
+            Usuario del Proxy
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mProxy.PassProxy">
+            <summary>
+            Password del proxy
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mProxy.Pais">
+            <summary>
+            Pais del prpxy
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mProxy.Estado">
+            <summary>
+            Estado del proxy
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mProxy.CurrentTask">
+            <summary>
+            Cantidad de Tareas ejecutandose
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mProxy.TareaPrioridad">
+            <summary>
+            Tarea para la que es prioridad
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mProxy.ErrorResult">
+            <summary>
+            Error en la asignacion de proxy
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mProxy.Id_proxy">
+            <summary>
+            identificador del proxy
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mPurificador">
@@ -2033,6 +2528,31 @@
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mResultadoBd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mResultadoBd.ID_TIPO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mResultadoBd.ID_ERROR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mResultadoBd.DES_ERROR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mResultadoBd.VALOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mStopTarea">
             <summary>
             
             </summary>
@@ -2138,17 +2658,71 @@
             </summary>
             <param name="IstanciaApi">Instancia del objeto IInstaApi</param>
         </member>
+        <member name="M:LoginWithIAS.Models.Sesion.LoadSessionBackup(InstagramApiSharp.API.IInstaApi)">
+            <summary>
+            
+            </summary>
+            <param name="IstanciaApi"></param>
+        </member>
         <member name="M:LoginWithIAS.Models.Sesion.SaveSession(InstagramApiSharp.API.IInstaApi)">
             <summary>
             Método para guardar la session
             </summary>
             <param name="IstanciaApi">Instancia del objeto IInstaApi</param>
         </member>
+        <member name="M:LoginWithIAS.Models.Sesion.SaveSessionBackup(InstagramApiSharp.API.IInstaApi)">
+            <summary>
+            
+            </summary>
+            <param name="IstanciaApi"></param>
+        </member>
         <member name="M:LoginWithIAS.Models.Sesion.GenerarToken">
             <summary>
             Metodo para generar Token de salida al loguarse
             </summary>   
             <returns>Retorna un objeto enResponseToken con el token y un mensaje descriptivo</returns>
+        </member>
+        <member name="T:LoginWithIAS.Models.mTags">
+            <summary>
+            Tags
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTags.country">
+            <summary>
+            Country
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTags.countrytarget">
+            <summary>
+            country Target
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTags.industry">
+            <summary>
+            Industria
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTags.industrysub">
+            <summary>
+            Sub Industria
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Utiles.Log">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.Utiles.Log.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="Path"></param>
+        </member>
+        <member name="M:LoginWithIAS.Utiles.Log.Add(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sLog"></param>
         </member>
         <member name="T:LoginWithIAS.Utiles.Util">
             <summary>
@@ -2167,6 +2741,23 @@
             
             </summary>
             <param name="cadena"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LoginWithIAS.Utiles.Util.compararListas(System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.Int64})">
+            <summary>
+            Comparar lista de seguidos y mutuos
+            </summary>
+            <param name="mutuos"></param>
+            <param name="seguidos"></param>
+            <returns>Los usuarios que sigues pero no te siguen</returns>
+        </member>
+        <member name="M:LoginWithIAS.Utiles.Util.ChoseProxy(System.Collections.Generic.List{LoginWithIAS.Models.mProxy},System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="proxis"></param>
+            <param name="pais"></param>
+            <param name="tarea"></param>
             <returns></returns>
         </member>
         <member name="T:LoginWithIAS.Worker.BackGroundWork">

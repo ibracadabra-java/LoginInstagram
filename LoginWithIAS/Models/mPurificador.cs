@@ -13,7 +13,7 @@ namespace LoginWithIAS.Models
         /// <summary>
         /// 
         /// </summary>
-        public List<string> UserList { get; set; }
+        public List<long> UserList { get; set; }
         /// <summary>
         /// 
         /// </summary>

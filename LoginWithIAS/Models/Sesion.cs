@@ -37,7 +37,30 @@ namespace LoginWithIAS.Models
                 throw new Exception(ex.Message);
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="IstanciaApi"></param>
+        public void LoadSessionBackup(IInstaApi IstanciaApi)
+        {
+            var path = Path.Combine(Helper.AccountPathDirectory + "Backup", $"{IstanciaApi.GetLoggedUser().UserName}{Helper.SessionExtension}");
+            try
+            {
+                if (File.Exists(path))
+                {
+
+                    using (var fs = File.OpenRead(path))
+                    {
+                        IstanciaApi.LoadStateDataFromStream(fs);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
         /// <summary>
         /// Método para guardar la session
@@ -63,6 +86,31 @@ namespace LoginWithIAS.Models
                 throw new Exception(e.Message);
             }
             
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="IstanciaApi"></param>
+        public void SaveSessionBackup(IInstaApi IstanciaApi)
+        {
+            Helper.CreateAccountDirectoryBackup();
+            try
+            {
+                if (IstanciaApi == null)
+                    return;
+                var state = IstanciaApi.GetStateDataAsStream();
+                var path = Path.Combine(Helper.AccountPathDirectory + "Backup", $"{IstanciaApi.GetLoggedUser().UserName}{Helper.SessionExtension}");
+                using (var fileStream = File.Create(path))
+                {
+                    state.Seek(0, SeekOrigin.Begin);
+                    state.CopyTo(fileStream);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
         }
 
         /// <summary>

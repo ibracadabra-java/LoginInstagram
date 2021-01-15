@@ -66,7 +66,7 @@ namespace LoginWithIAS.ApiBd
             {
                 mPurificador tarea = new mPurificador();
                 string usuarios = string.Empty;
-                tarea.UserList = new List<string>();
+                tarea.UserList = new List<long>();
                 if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_TAREA")))
                     tarea.id_tarea = Convert.ToInt32(oracleDataReader["ID_TAREA"]);
                 if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("USUARIO")))
@@ -78,7 +78,7 @@ namespace LoginWithIAS.ApiBd
                 var user_list = usuarios.Split(',');
                 for (int i = 0; i < user_list.Length; i++)
                 {
-                    tarea.UserList.Add(user_list[i].ToString());
+                    tarea.UserList.Add(Convert.ToInt64(user_list[i]));
 
                 }
                 return tarea;

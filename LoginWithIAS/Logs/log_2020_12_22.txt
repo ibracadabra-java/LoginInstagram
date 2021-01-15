@@ -1,0 +1,31 @@
+22/12/2020 22:30:25 - mario_baby_oficial Search_user_to_like ern_trendcare.id-Error al enviar la solicitud.
+22/12/2020 22:30:28 - mario_baby_oficial Search_User_to_like ern_trendcare.id-Error al enviar la solicitud.
+22/12/2020 22:30:30 - Se le dio like a 0 post del usuario ern_trendcare.id y se encontraron los siguientes errores No hubo errores
+22/12/2020 22:30:37 - mario_baby_oficial Search_user_to_like _.exkabralibur619-Error al enviar la solicitud.
+22/12/2020 22:30:37 - mario_baby_oficial Search_User_to_like _.exkabralibur619-Error al enviar la solicitud.
+22/12/2020 22:30:37 - Se le dio like a 0 post del usuario _.exkabralibur619 y se encontraron los siguientes errores No hubo errores
+22/12/2020 22:30:37 - mario_baby_oficial Search_user_to_like samuelmj84-Error al enviar la solicitud.
+22/12/2020 22:30:38 - mario_baby_oficial Search_User_to_like samuelmj84-Error al enviar la solicitud.
+22/12/2020 22:30:38 - Se le dio like a 0 post del usuario samuelmj84 y se encontraron los siguientes errores No hubo errores
+22/12/2020 23:35:10 - mario_baby_oficial Search_user_to_like ern_trendcare.id-No errors detected
+22/12/2020 23:35:12 - mario_baby_oficial Get user to like ern_trendcare.id-No errors detected
+22/12/2020 23:35:12 - mario_baby_oficial Get_media_to_like ern_trendcare.id-No errors detected
+22/12/2020 23:35:13 - mario_baby_oficial abriendo direct de message  se esperan 12 segundos - No errors detected
+22/12/2020 23:36:05 - mario_baby_oficial Like_to ern_trendcare.id - No errors detected
+22/12/2020 23:36:26 - mario_baby_oficial Like_to ern_trendcare.id - No errors detected
+22/12/2020 23:36:26 - Se le dio like a 2 post del usuario ern_trendcare.id y se encontraron los siguientes errores No hubo errores
+22/12/2020 23:36:27 - mario_baby_oficial Search_user_to_like _.exkabralibur619-No errors detected
+22/12/2020 23:36:31 - mario_baby_oficial Get user to like _.exkabralibur619-No errors detected
+22/12/2020 23:36:31 - mario_baby_oficial Get_media_to_like _.exkabralibur619-No errors detected
+22/12/2020 23:36:34 - mario_baby_oficial Entrando al perfil y obteniendo post de _.exkabralibur619 se esperan 12 segundos  - No errors detected
+22/12/2020 23:36:58 - mario_baby_oficial viendo seguidores de _.exkabralibur619 - No errors detected
+22/12/2020 23:37:33 - mario_baby_oficial Like_to _.exkabralibur619 - No errors detected
+22/12/2020 23:37:52 - mario_baby_oficial Like_to _.exkabralibur619 - No errors detected
+22/12/2020 23:37:52 - Se le dio like a 2 post del usuario _.exkabralibur619 y se encontraron los siguientes errores No hubo errores
+22/12/2020 23:37:54 - mario_baby_oficial Search_user_to_like samuelmj84-No errors detected
+22/12/2020 23:37:59 - mario_baby_oficial Get user to like samuelmj84-No errors detected
+22/12/2020 23:37:59 - mario_baby_oficial Get_media_to_like samuelmj84-No errors detected
+22/12/2020 23:38:02 - mario_baby_oficial Entrando al perfil y obteniendo post de samuelmj84 se esperan 10 segundos  - No errors detected
+22/12/2020 23:38:57 - mario_baby_oficial Like_to samuelmj84 - No errors detected
+22/12/2020 23:39:14 - mario_baby_oficial Like_to samuelmj84 - No errors detected
+22/12/2020 23:39:14 - Se le dio like a 2 post del usuario samuelmj84 y se encontraron los siguientes errores No hubo errores

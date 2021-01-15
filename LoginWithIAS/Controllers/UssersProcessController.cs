@@ -16,8 +16,10 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using LoginWithIAS.Utiles;
 using System.Web;
+using System.Web.Http.Results;
 using System.Threading;
 using LoginWithIAS.ApiBd;
+using LoginWithIAS.App_Start;
 
 namespace LoginWithIAS.Controllers
 {
@@ -30,7 +32,12 @@ namespace LoginWithIAS.Controllers
         Sesion session;
         Log log;
         Log logacti;
+        ProxyBD prbd;
+        Util util;
+        MloginBD bd;
+        ProxyBD bdprox;
         string path = HttpContext.Current.Request.MapPath("~/Logs");
+
         /// <summary>
         /// constructor de la clase
         /// </summary>
@@ -39,6 +46,10 @@ namespace LoginWithIAS.Controllers
             session = new Sesion();
             log = new Log(path);
             actcom = new ActComBd();
+            util = new Util();
+            prbd = new ProxyBD();
+            bd = new MloginBD();
+            bdprox = new ProxyBD();
         }
 
         /// <summary>
@@ -197,7 +208,7 @@ namespace LoginWithIAS.Controllers
         /// <param name="unfollowkUsser"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<enResponseToken> UnFollowUser(mFollower unfollowkUsser)
+        public async Task<string> UnFollowUser(mFollower unfollowkUsser)
         {
             try
             {
@@ -217,15 +228,17 @@ namespace LoginWithIAS.Controllers
                 else
                 {
                     token.Message = "Deben introducir Usuario y Contraseña";
-                    return token;
+                    return "Deben introducir Usuario y Contraseña";
                 }
 
                 session.LoadSession(insta);
 
-                if (!insta.GetLoggedUser().Password.Equals(unfollowkUsser.Pass))
+                var pass = SecurityAPI.Decrypt(insta.GetLoggedUser().Password);
+
+                if (!pass["Pass"].Equals(unfollowkUsser.Pass))
                 {
-                    token.Message = "Contraseña incorrecta";
-                    return token;
+                    log.Add("Contraseña incorrecta");
+                    return "Contraseña incorrecta";
                 }
 
                 if (!string.IsNullOrEmpty(unfollowkUsser.otheruser))
@@ -238,25 +251,25 @@ namespace LoginWithIAS.Controllers
                         {
                             token.Message = resul.Info.Message;
                             token.AuthToken = session.GenerarToken();
-                            return token;
+                            return resul.Info.Message;
                         }
                         else
                         {
                             token.Message = resul.Info.Message;
-                            return token;
+                            return resul.Info.Message;
                         }
                     }
                     else
                     {
                         token.Message = user.Info.Message;
-                        return token;
+                        return user.Info.Message;
                     }
 
                 }
                 else
                 {
                     token.Message = "Debe Introducir el Otro Usuario";
-                    return token;
+                    return "Debe Introducir el Otro Usuario";
                 }
             }
             catch (Exception s)
@@ -468,7 +481,6 @@ namespace LoginWithIAS.Controllers
                 throw new Exception(s.Message);
             }
         }
-
 
         /// <summary>
         /// Obtener Biografia
@@ -820,13 +832,12 @@ namespace LoginWithIAS.Controllers
                         log.Add(" Scrapeando usuarios de " + followers.User + "cantidad actual" + devolver.Count);
                         if (userlist.Succeeded)
                         {
-                            if (userlist.Succeeded)
-                            {
-                                for (int j = 0; j < userlist.Value.Count; j++)
+                         
+                           for (int j = 0; j < userlist.Value.Count; j++)
                                 {
                                     devolver.Add(userlist.Value[j].UserName);
                                 }
-                            }
+                            
                         }
                         else
                             return null;
@@ -1315,6 +1326,367 @@ namespace LoginWithIAS.Controllers
 
                 throw new Exception(s.Message);
             }
+        }
+        /// <summary>
+        /// Eliminar usuarios que no te siguen
+        /// </summary>
+        /// <param name="credencial"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<string> UnfollowNoMutual(mLogin credencial) 
+        {
+            PaginationParameters pagination = PaginationParameters.MaxPagesToLoad(1);
+            List<long> Listid = new List<long>();
+            List<long> Listmutuos = new List<long>();
+            List<long> eliminar = new List<long>();
+            int count = 0;
+            mProxy proxyconnect = new mProxy();
+            List<mProxy> proxys = new List<mProxy>();
+
+
+            proxys = prbd.CargarProxy();
+            proxyconnect = util.ChoseProxy(proxys, credencial.Country, 1);
+            if (proxyconnect.ErrorResult)
+            {
+                //insertar en la pila de errores de tareas de login pendientes pendientes
+                bd.InsertarLogin(credencial);
+                //devolver el tipo de error a la app para que notifique al cliente push notification al cliente
+                //para esperar unos minutos.
+                return "No hay Proxys disponibles";
+            }
+            else
+            {
+                //update disponibilidad de los proxys. 
+                bdprox.Update_Proxy(proxyconnect, 1);
+            }
+            if (string.IsNullOrEmpty(proxyconnect.AddressProxy) || string.IsNullOrEmpty(proxyconnect.UsernameProxy) || string.IsNullOrEmpty(proxyconnect.PassProxy))
+            {
+
+
+                return "Deben introducir el Proxy completo";
+
+
+            }
+            var proxy = new WebProxy()
+            {
+                Address = new Uri(proxyconnect.AddressProxy),
+                BypassProxyOnLocal = false,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(
+                 userName: proxyconnect.UsernameProxy,
+                 password: proxyconnect.PassProxy
+                 )
+
+
+            };
+            var httpClientHandler = new HttpClientHandler()
+            {
+                Proxy = proxy,
+            };
+
+
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).UseHttpClientHandler(httpClientHandler).Build();
+
+            if (!(string.IsNullOrEmpty(credencial.User) || string.IsNullOrEmpty(credencial.Pass)))
+            {
+                var userSessiontemp = new UserSessionData
+                {
+                    UserName = credencial.User,
+                    Password = credencial.Pass
+                };
+                insta.SetUser(userSessiontemp);
+            }
+            else
+            {
+                log.Add("Deben introducir Usuario y Contraseña");
+                return "Deben introducir Usuario y Contraseña";
+            }
+
+            session.LoadSession(insta);
+            var pass = SecurityAPI.Decrypt(insta.GetLoggedUser().Password);
+
+            if (!pass["Pass"].Equals(credencial.Pass))
+            {
+                log.Add("Contraseña incorrecta");
+                return "Deben introducir Usuario y Contraseña";
+            }
+
+            var userSession = new UserSessionData
+            {
+                UserName = credencial.User,
+                Password = credencial.Pass
+            };
+            insta.SetUser(userSession);
+            if (insta.IsUserAuthenticated)
+            {
+                var user = await insta.UserProcessor.GetUserAsync(credencial.User);
+                if (user.Succeeded)
+                {
+                    var mutualfollower = await insta.UserProcessor.GetMutualFriendsOrSuggestionAsync(user.Value.Pk);
+                    if (mutualfollower.Succeeded)
+                    {
+                        for (int i = 0; i < mutualfollower.Value.MutualFollowers.Count; i++)
+                        {
+                            Listmutuos.Add(mutualfollower.Value.MutualFollowers[i].Pk);
+                        }
+                        var userinfo = await insta.UserProcessor.GetFullUserInfoAsync(user.Value.Pk);
+                        if (userinfo.Succeeded)
+                        {
+                            var following = userinfo.Value.UserDetail.FollowingCount;
+                            long countpag = following / 100;
+                            for (int i = 0; i < countpag + 1; i++)
+                            {
+                                var listfollowing = await insta.UserProcessor.GetUserFollowingByIdAsync(user.Value.Pk, pagination);
+                                if (listfollowing.Succeeded)
+                                {
+                                    for (int j = 0; j < listfollowing.Value.Count; j++)
+                                    {
+                                        Listid.Add(listfollowing.Value[i].Pk);
+                                    }
+                                }
+                            }
+                            eliminar = util.compararListas(Listmutuos, Listid);
+                            for (int i = 0; i < eliminar.Count; i++)
+                            {
+                                var eliminarid = insta.UserProcessor.GetUserInfoByIdAsync(eliminar[i]);
+                                if (eliminarid.Result.Value.FollowerCount > 2000)
+                                {
+                                    if (userinfo.Value.UserDetail.FollowerCount * 3 < eliminarid.Result.Value.FollowerCount)
+                                    {
+                                        var eliminado = await insta.UserProcessor.UnFollowUserAsync(eliminar[i], InstaMediaSurfaceType.None);
+                                        if (eliminado.Succeeded)
+                                        {
+                                            count++;
+                                        }
+                                    }
+                                }
+                                else
+                                    if (userinfo.Value.UserDetail.FollowerCount * 6 < eliminarid.Result.Value.FollowerCount)
+                                {
+                                    var eliminado = await insta.UserProcessor.UnFollowUserAsync(eliminar[i], InstaMediaSurfaceType.None);
+                                    if (eliminado.Succeeded)
+                                    {
+                                        count++;
+                                    }
+                                }
+                            }
+                            return "Fueron eliminados " + count + " usuarios seguidos que no te seguian de un total de " + eliminar.Count;
+                        }
+                        else
+                            return userinfo.Info.Message;
+                    }
+                    else
+                        return mutualfollower.Info.Message;
+                }
+                else
+                    return user.Info.Message;
+            }
+            else
+                return "Debe autenticarse primero";
+        }
+
+        /// <summary>
+        /// Obtiene la sumatoria de post y de seguidores de un usuario.
+        /// </summary>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<long> Cantidad_Post_Segudires(mLogin cliente)
+        {
+            mProxy proxyconnect = new mProxy();
+            List<mProxy> proxys = new List<mProxy>();
+
+            long cantidad = 0;
+
+            proxys = prbd.CargarProxy();
+            proxyconnect = util.ChoseProxy(proxys, cliente.Country, 1);
+            if (proxyconnect.ErrorResult)
+            {
+                //insertar en la pila de errores de tareas de login pendientes pendientes
+                bd.InsertarLogin(cliente);
+                //devolver el tipo de error a la app para que notifique al cliente push notification al cliente
+                //para esperar unos minutos.
+                log.Add("No hay Proxys disponibles");
+            }
+            else
+            {
+                //update disponibilidad de los proxys. 
+                bdprox.Update_Proxy(proxyconnect, 1);
+            }
+            if (string.IsNullOrEmpty(proxyconnect.AddressProxy) || string.IsNullOrEmpty(proxyconnect.UsernameProxy) || string.IsNullOrEmpty(proxyconnect.PassProxy))
+            {
+                log.Add("Deben introducir el Proxy completo");
+            }
+            var proxy = new WebProxy()
+            {
+                Address = new Uri(proxyconnect.AddressProxy),
+                BypassProxyOnLocal = false,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(
+                 userName: proxyconnect.UsernameProxy,
+                 password: proxyconnect.PassProxy
+                 )
+            };
+
+            var httpClientHandler = new HttpClientHandler()
+            {
+                Proxy = proxy,
+            };
+
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).UseHttpClientHandler(httpClientHandler).Build();
+
+            if (!(string.IsNullOrEmpty(cliente.User) || string.IsNullOrEmpty(cliente.Pass)))
+            {
+                var userSession = new UserSessionData
+                {
+                    UserName = cliente.User,
+                    Password = cliente.Pass
+                };
+                insta.SetUser(userSession);
+            }
+            else
+            {
+                log.Add("Deben introducir Usuario y Contraseña");
+            }
+
+            session.LoadSession(insta);
+
+            if (!insta.GetLoggedUser().Password.Equals(cliente.Pass))
+            {
+                log.Add("Contraseña incorrecta");
+            }
+
+            var user = await insta.UserProcessor.GetUserInfoByUsernameAsync(cliente.User);
+
+            if (user.Succeeded)
+            {
+                var userfull = await insta.UserProcessor.GetFullUserInfoAsync(user.Value.Pk);
+
+                if (userfull.Succeeded)
+                {
+                    cantidad = user.Value.FollowingCount + user.Value.MediaCount;
+                }
+            }
+            return cantidad;
+        }
+
+        /// <summary>
+        /// Obtiene la informacion Completa de un usuario
+        /// </summary>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<mClients> GetDetailsUser(mLogin cliente)
+        {
+            
+            mProxy proxyconnect = new mProxy();
+            List<mProxy> proxys = new List<mProxy>();
+            mClients cliente_info = new mClients();
+            
+            proxys = prbd.CargarProxy();
+            proxyconnect = util.ChoseProxy(proxys, cliente.Country, 1);
+            if (proxyconnect.ErrorResult)
+            {
+                //insertar en la pila de errores de tareas de login pendientes pendientes
+                bd.InsertarLogin(cliente);
+                //devolver el tipo de error a la app para que notifique al cliente push notification al cliente
+                //para esperar unos minutos.
+                log.Add("No hay Proxys disponibles");
+            }
+            else
+            {
+                //update disponibilidad de los proxys. 
+                bdprox.Update_Proxy(proxyconnect, 1);
+            }
+            if (string.IsNullOrEmpty(proxyconnect.AddressProxy) || string.IsNullOrEmpty(proxyconnect.UsernameProxy) || string.IsNullOrEmpty(proxyconnect.PassProxy))
+            {
+                log.Add("Deben introducir el Proxy completo");
+            }
+            var proxy = new WebProxy()
+            {
+                Address = new Uri(proxyconnect.AddressProxy),
+                BypassProxyOnLocal = false,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(
+                 userName: proxyconnect.UsernameProxy,
+                 password: proxyconnect.PassProxy
+                 )
+            };
+
+            var httpClientHandler = new HttpClientHandler()
+            {
+                Proxy = proxy,
+            };
+
+            var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).UseHttpClientHandler(httpClientHandler).Build();
+
+            if (!(string.IsNullOrEmpty(cliente.User) || string.IsNullOrEmpty(cliente.Pass)))
+            {
+                var userSession = new UserSessionData
+                {
+                    UserName = cliente.User,
+                    Password = cliente.Pass
+                };
+                insta.SetUser(userSession);
+            }
+            else
+            {
+                log.Add("Deben introducir Usuario y Contraseña");
+            }
+
+            session.LoadSession(insta);
+
+            if (!insta.GetLoggedUser().Password.Equals(cliente.Pass))
+            {
+                log.Add("Contraseña incorrecta");
+            }
+
+            var user = await insta.UserProcessor.GetUserInfoByUsernameAsync(cliente.User);
+
+            if (user.Succeeded)
+            {
+                var userfull = await insta.UserProcessor.GetFullUserInfoAsync(user.Value.Pk);
+
+                if (userfull.Succeeded)
+                {
+                    cliente_info.Info.clientid = userfull.Value.UserDetail.Pk.ToString();
+                    cliente_info.Info.clientusername = userfull.Value.UserDetail.UserName;
+                    cliente_info.Info.clientname = userfull.Value.UserDetail.FullName;
+                    cliente_info.Info.clientcantpost = userfull.Value.UserDetail.MediaCount;
+                    cliente_info.Info.clientcantfollowers = userfull.Value.UserDetail.FollowerCount;
+                    cliente_info.Info.clientcantfollowing = userfull.Value.UserDetail.FollowingCount;
+                    cliente_info.Info.clientemail = userfull.Value.UserDetail.PublicEmail;
+                    cliente_info.Info.clientphone = userfull.Value.UserDetail.PublicPhoneNumber;
+                    cliente_info.Info.clientcity = userfull.Value.UserDetail.CityName;
+                    cliente_info.Info.clientcountry = userfull.Value.UserDetail.CityName;//Este tengo que revisarlo con raul;
+                    cliente_info.Info.ClientAccounType.clientaccounttypecategory = userfull.Value.UserDetail.AccountType.ToString();//esto tengo que verlo con raul
+                    cliente_info.Info.ClientAccounType.clientaccountype = userfull.Value.UserDetail.Category;
+                    cliente_info.Tags.country = userfull.Value.UserDetail.CityName; //esto es ambiguo hay que verlo con raul
+                    cliente_info.Tags.countrytarget = "No se de donde sacar esto";
+                    cliente_info.Tags.industry = "No se de donde sacar esto";
+                    cliente_info.Tags.industrysub = "No se de donde sacar esto";
+
+
+                    //Aqui saco toda la informacion que necesito de los post del cliente
+                    var post = await insta.UserProcessor.GetUserMediaAsync(cliente.User, PaginationParameters.MaxPagesToLoad(1));
+                    if (post.Succeeded)
+                    {
+                        for (int i = 0; i < post.Value.Count; i++)
+                        {
+                            mClientPost clientPost = new mClientPost();
+                            clientPost.cantlike = post.Value[i].LikesCount;
+                            clientPost.postid = post.Value[i].Pk;
+                            for (int j = 0; j < post.Value[i].Likers.Count; j++)
+                            {
+                                clientPost.likers.Add(post.Value[i].Likers[j].Pk.ToString());
+                            }
+                            cliente_info.posts.Add(clientPost);        
+                        }
+                    }
+
+                }
+            }
+            return cliente_info;
         }
 
     }

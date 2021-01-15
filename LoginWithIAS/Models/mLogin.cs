@@ -14,11 +14,10 @@ namespace LoginWithIAS.Models
     {
         private string user;
         private string pass;
-        private string pass_thow_factor;
-        private string addressProxy;
-        private string usernameProxy;
-        private string passProxy;
+        private string pass_thow_factor;        
         private string pk;
+        private bool freeTrial;
+        private string country;
         /// <summary>
         /// Usuario que desea loguearse
         /// </summary>
@@ -32,22 +31,18 @@ namespace LoginWithIAS.Models
         /// Propiedad para autenticacion en dos pasos
         /// </summary>
         public string Pass_thow_factor { get => pass_thow_factor; set => pass_thow_factor = value; }
-        /// <summary>
-        /// Proxy que usará el cliente
-        /// </summary>
-        public string AddressProxy { get => addressProxy; set => addressProxy = value; }
-        /// <summary>
-        /// Usuario del Proxy
-        /// </summary>
-        public string UsernameProxy { get => usernameProxy; set => usernameProxy = value; }
-        /// <summary>
-        /// Password del proxy
-        /// </summary>
-        public string PassProxy { get => passProxy; set => passProxy = value; }
        
         /// <summary>
         /// Identificador unico
         /// </summary>
         public string PK { get => pk; set => pk = value; }
+        /// <summary>
+        /// Face de Prueba activada
+        /// </summary>
+        public bool FreeTrial { get => freeTrial; set => freeTrial = value; }
+        /// <summary>
+        /// Pais del cliente
+        /// </summary>
+        public string Country { get => country; set => country = value; }
     }
 }

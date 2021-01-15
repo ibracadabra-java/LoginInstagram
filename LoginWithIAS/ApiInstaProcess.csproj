@@ -55,6 +55,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\InstagramApiSharpMine-master\src\InstagramApiSharp\bin\Debug\netstandard2.0\InstagramApiSharp.dll</HintPath>
     </Reference>
+    <Reference Include="jose-jwt">
+      <HintPath>..\Librerias\jose-jwt.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -157,11 +160,15 @@
     <Compile Include="ApiBd\MasSendingBD.cs" />
     <Compile Include="ApiBd\MloginBD.cs" />
     <Compile Include="ApiBd\OracleDatabaseHelper.cs" />
+    <Compile Include="ApiBd\ProxyBD.cs" />
     <Compile Include="ApiBd\PurificacionBd.cs" />
     <Compile Include="ApiBd\TareasBd.cs" />
+    <Compile Include="App_Start\AuthorizationRequiredAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\CustomPrincipal.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SecurityAPI.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -204,10 +211,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\mClientAccounType.cs" />
+    <Compile Include="Models\mClientDescription.cs" />
+    <Compile Include="Models\mClientPost.cs" />
+    <Compile Include="Models\mClientAudience.cs" />
+    <Compile Include="Models\mInfoClient.cs" />
+    <Compile Include="Models\mClients.cs" />
     <Compile Include="Models\enResponseToken.cs" />
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\InstaApiList.cs" />
     <Compile Include="Models\mcaption.cs" />
+    <Compile Include="Models\mChallengeRequire.cs" />
     <Compile Include="Models\mchat.cs" />
     <Compile Include="Models\mContacts.cs" />
     <Compile Include="Models\mcuentas.cs" />
@@ -218,7 +232,9 @@
     <Compile Include="Models\mLogin.cs" />
     <Compile Include="Models\mMasSending.cs" />
     <Compile Include="Models\mMethodLike.cs" />
+    <Compile Include="Models\mPerfil.cs" />
     <Compile Include="Models\mPost.cs" />
+    <Compile Include="Models\mProxy.cs" />
     <Compile Include="Models\mPurificador.cs" />
     <Compile Include="Models\mReports_Mess.cs" />
     <Compile Include="Models\mResultadoBd.cs" />
@@ -229,6 +245,7 @@
     <Compile Include="Models\mTareasDiarias.cs" />
     <Compile Include="Models\mUserMetodo.cs" />
     <Compile Include="Models\Sesion.cs" />
+    <Compile Include="Models\mTags.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utiles\Log.cs" />
     <Compile Include="Utiles\Util.cs" />
@@ -335,7 +352,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>39506</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44330/</IISUrl>
+          <IISUrl>http://localhost:44330/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -5,16 +5,26 @@ using System.Linq;
 using System.Web;
 namespace LoginWithIAS.Utiles
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Log
     {
         private string Path = "";
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Path"></param>
         public Log(string Path)
         {
             this.Path = Path;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sLog"></param>
         public void Add(string sLog)
         {
             CreateDirectory();

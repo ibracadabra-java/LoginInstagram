@@ -1,0 +1,9 @@
+23/12/2020 0:30:18 - dayron.miranda Search_user_to_like ern_trendcare.id-No errors detected
+23/12/2020 0:30:20 - dayron.miranda Get user to like ern_trendcare.id-No errors detected
+23/12/2020 0:30:20 - dayron.miranda Get_media_to_like ern_trendcare.id-No errors detected
+23/12/2020 0:30:21 - dayron.miranda abriendo post de ern_trendcare.id se esperan 10 segundos para abrir otro  - No errors detected
+23/12/2020 0:57:15 - dayron.miranda Search_user_to_like ern_trendcare.id-No errors detected
+23/12/2020 0:57:18 - dayron.miranda Get user to like ern_trendcare.id-No errors detected
+23/12/2020 0:57:18 - dayron.miranda Get_media_to_like ern_trendcare.id-No errors detected
+23/12/2020 0:57:20 - dayron.miranda viendo seguidores de ern_trendcare.id - No errors detected
+23/12/2020 0:57:37 - dayron.miranda abriendo direct de message  se esperan 12 segundos - No errors detected

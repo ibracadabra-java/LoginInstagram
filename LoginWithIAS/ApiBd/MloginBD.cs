@@ -45,10 +45,7 @@ namespace LoginWithIAS.ApiBd
                 parametros.Add(new OracleParameter("X_RESOLUTION", OracleDbType.Varchar2, device.Resolution, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_FIRMWAREFINGERPRINT", OracleDbType.Varchar2, device.FirmwareFingerprint, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_FIRMWARETAGS", OracleDbType.Varchar2, device.FirmwareTags, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_FIRMWARETYPE", OracleDbType.Varchar2, device.FirmwareType, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_ADDRESSPROXY", OracleDbType.Varchar2, login.AddressProxy, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_USERPROXY", OracleDbType.Varchar2, login.UsernameProxy, ParameterDirection.Input));
-                parametros.Add(new OracleParameter("X_PASSPROXY", OracleDbType.Varchar2, login.PassProxy, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_FIRMWARETYPE", OracleDbType.Varchar2, device.FirmwareType, ParameterDirection.Input));                
                 parametros.Add(new OracleParameter("X_USUARIO", OracleDbType.Varchar2, login.User, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_PASS", OracleDbType.Varchar2, login.Pass, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_PK", OracleDbType.Varchar2, login.PK, ParameterDirection.Input));
@@ -198,21 +195,53 @@ namespace LoginWithIAS.ApiBd
 
                 if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("VERSIONNUMBER")))
                     logeado.AndroidVer.VersionNumber = oracleDataReader["VERSIONNUMBER"].ToString();
-
-                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ADDRESSPROXY")))
-                    logeado.AddressProxy = oracleDataReader["ADDRESSPROXY"].ToString();
-
-                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("PASSPROXY")))
-                    logeado.AddressProxy = oracleDataReader["PASSPROXY"].ToString();
-
-                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("USERPROXY")))
-                    logeado.UsernameProxy = oracleDataReader["USERPROXY"].ToString();
+                
 
                 return logeado;
             });
 
             return OracleDatabaseHelper.ExecuteToEntity<mLogin>("PRC_GET_MLOGIN", parametros, "X_CURSOR", rowMapper, TipoPaquete.CONS);
         }
+        /// <summary>
+        /// insertar login
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
+        public mResultadoBd InsertarLogin(mLogin usuario)
+        {
+            try
+            {
+                mResultadoBd objResultBd = new mResultadoBd();
+                List<OracleParameter> parametros = new List<OracleParameter>();
+                parametros.Add(new OracleParameter("X_USUARIO", OracleDbType.Varchar2, usuario.User, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_PASS", OracleDbType.Varchar2, usuario.Pass, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_PAIS", OracleDbType.Varchar2, usuario.Country, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_ERROR", OracleDbType.RefCursor) { Direction = ParameterDirection.Output });
+                OracleDatabaseHelper.RowMapper<mResultadoBd> rowMapper = (delegate (OracleDataReader oracleDataReader)
+                {
+                    mResultadoBd objEnResultado = new mResultadoBd();
+
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_TIPO")))
+                        objEnResultado.ID_TIPO = Convert.ToInt32(oracleDataReader["ID_TIPO"]);
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_ERROR")))
+                        objEnResultado.ID_ERROR = oracleDataReader["ID_ERROR"].ToString();
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("DES_ERROR")))
+                        objEnResultado.DES_ERROR = oracleDataReader["DES_ERROR"].ToString();
+                    if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("VALOR")))
+                        objEnResultado.VALOR = oracleDataReader["VALOR"].ToString();
+
+                    return objEnResultado;
+                });
+
+                return objResultBd = OracleDatabaseHelper.ExecuteToEntityMant("PRC_INSERT_TAREA_LOGIN", parametros, "X_ERROR", rowMapper);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
 
 
     }

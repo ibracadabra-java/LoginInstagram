@@ -11,7 +11,7 @@ using System.Data;
 namespace LoginWithIAS.ApiBd
 {
     /// <summary>
-    /// 
+    /// Actividad de usuario
     /// </summary>
     public class ActComBd
     {

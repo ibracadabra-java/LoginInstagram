@@ -5,6 +5,10 @@ using System.Web;
 
 namespace LoginWithIAS.Models
 {
+ 
+    /// <summary>
+    /// 
+    /// </summary>
     public class mStopTarea
     {
         /// <summary>

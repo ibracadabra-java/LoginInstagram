@@ -14,6 +14,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace LoginWithIAS.Controllers
@@ -25,6 +26,12 @@ namespace LoginWithIAS.Controllers
     {
         Sesion session;
         Util util;
+        ProxyBD bdprox;
+        MloginBD bd;
+        ProxyBD prbd;
+        Log log;
+        string path = HttpContext.Current.Request.MapPath("~/Logs");
+
         /// <summary>
         /// 
         /// </summary>
@@ -32,10 +39,14 @@ namespace LoginWithIAS.Controllers
         {
             this.session = new Sesion();
             this.util = new Util();
+            prbd = new ProxyBD();
+            bd = new MloginBD();
+            bdprox = new ProxyBD();
+            log = new Log(path);
         }
 
         /// <summary>
-        /// Este metodo nos permitira definir si la cuenta de un usurio es falsa o poco inactiva
+        /// Este metodo nos permitira definir si la cuenta de un usurio es falsa o poco inactiva//Revisarrrrrrrr
         /// </summary>
         /// <returns></returns>
         public async Task<enResponseToken> Cuentas_Ainactivas(mcuentas cuentas)
@@ -80,7 +91,7 @@ namespace LoginWithIAS.Controllers
                         long cant_followers = userfull.Value.UserDetail.FollowerCount;
                         if (cant_followers >= 1000)
                         {
-                            var listafollowers = await insta.UserProcessor.GetUserFollowersAsync(cuentas.Other_User, PaginationParameters.MaxPagesToLoad(10));
+                            var listafollowers = await insta.UserProcessor.GetUserFollowersAsync(cuentas.Other_User, PaginationParameters.MaxPagesToLoad(11));
                             if (listafollowers.Succeeded)
                             {
 
@@ -90,14 +101,17 @@ namespace LoginWithIAS.Controllers
                                     var media = await insta.UserProcessor.GetUserMediaAsync(listafollowers.Value[i].UserName, PaginationParameters.MaxPagesToLoad(1));
                                     if (media.Succeeded)
                                     {
-                                        for (int j = 0; j < media.Value.Count; j++)
+                                        if (media.Value.Count>=30)
                                         {
-                                            int dias = Cantidad_Dias(media.Value[j].TakenAt);
-                                            if (media.Value.Count >= 30 && dias <= 60)
+                                            for (int j = 0; j < media.Value.Count; j++)
                                             {
-                                                if (Buscar(media.Value[j].Likers, user.Value.Pk))
+                                                double dias = Cantidad_Dias(media.Value[j].TakenAt);
+                                                if ( dias <= 60)
                                                 {
-                                                    cont++;
+                                                    if (Buscar(media.Value[j].Likers, user.Value.Pk))
+                                                    {
+                                                        cont++;
+                                                    }
                                                 }
                                             }
                                         }
@@ -127,7 +141,7 @@ namespace LoginWithIAS.Controllers
                                     {
                                         for (int j = 0; j < media.Value.Count; j++)
                                         {
-                                            int dias = Cantidad_Dias(media.Value[j].TakenAt);
+                                            double dias = Cantidad_Dias(media.Value[j].TakenAt);
                                             if (media.Value.Count >= 30 && dias <= 60)
                                             {
                                                 if (Buscar(media.Value[j].Likers, user.Value.Pk))
@@ -185,10 +199,10 @@ namespace LoginWithIAS.Controllers
             }
         }
 
-        private int Cantidad_Dias(DateTime dateTime)
+        private double Cantidad_Dias(DateTime dateTime)
         {
             TimeSpan timeSpan = DateTime.Now - dateTime;
-            return timeSpan.Days;
+            return timeSpan.TotalDays;
         }
 
         private bool Buscar(InstaUserShortList lista, long pk)
@@ -203,6 +217,7 @@ namespace LoginWithIAS.Controllers
             return false;
         }
 
+
         /// <summary>
         /// Determina si un usuario ha sido eliminado por Instagram o la cuenta ha sido deshabilidata o
         /// ha bloqueado a nuestro cliente
@@ -210,6 +225,7 @@ namespace LoginWithIAS.Controllers
         /// <param name="otrocliente">Por parametro se logean en el sistema con otro cliente y se pasa por parametro el identificador del usuario que 
         /// desean saber si fue elimiando por instagram p simplemente bloqueo o dejo de seguir a nuestro cliente principal</param>
         /// <returns></returns>
+        [HttpPost]
         public async Task<enResponseToken> Detector_Cuentas(mcuentas otrocliente)
         {
             try
@@ -261,12 +277,14 @@ namespace LoginWithIAS.Controllers
             }
         }
 
+
         /// <summary>
         /// Este método se encargará de eliminar seguidores, específicamente seguidores falsos
         /// </summary>
         /// <param name="purificador"></param>
         /// <returns></returns>
-        public async Task<enResponseToken> Purificador(mPurificador purificador)
+        [HttpPost]
+        public async Task<string> Purificador(mPurificador purificador)
         {
             try
             {
@@ -287,38 +305,28 @@ namespace LoginWithIAS.Controllers
                 }
                 else
                 {
-                    token.Message = "Deben introducir Usuario y Contraseña";
-                    return token;
+                    return "Deben introducir Usuario y Contraseña";                    
                 }
 
                 session.LoadSession(insta);
 
                 if (!insta.GetLoggedUser().Password.Equals(purificador.Pass))
                 {
-                    token.Message = "Contraseña incorrecta";
-                    return token;
+                    return "Contraseña incorrecta";                    
                 }
                 //Cargar lista de los seguidores del cliente
                 int count = 0;
-                var userlist = await insta.UserProcessor.GetUserFollowersAsync(purificador.User, PaginationParameters.MaxPagesToLoad(1));
-                if (userlist.Succeeded)
+                for (int i = 0; i < purificador.UserList.Count; i++)
                 {
-                    for (int i = 0; i < purificador.UserList.Count; i++)
+                    var remove = await insta.UserProcessor.RemoveFollowerAsync(purificador.UserList[i]);
+                    if (remove.Succeeded)
                     {
-                        var user = await insta.UserProcessor.GetUserAsync(purificador.UserList[i]);
-                        if (user.Succeeded)
-                        {
-                            var userInfo = await insta.UserProcessor.GetFullUserInfoAsync(user.Value.Pk);
-                            if (userInfo.Succeeded)
-                            {
-                                await insta.UserProcessor.RemoveFollowerAsync(userInfo.Value.UserDetail.Pk);
-                                count++;
-                            }
-                        }
+                        count++;
                     }
+
                 }
-                token.Message = "Fueron eliminados un total de:" + count.ToString() + ", de seguidores.";
-                return token;
+
+                return "Fueron eliminados un total de:" + count + ", de seguidores.";                
             }
             catch (Exception s)
             {
@@ -332,6 +340,7 @@ namespace LoginWithIAS.Controllers
         /// </summary>
         /// <param name="mLogin"></param>.
         /// <returns></returns>
+        [HttpPost]
         public async Task<enResponseToken> Reporte(mLogin mLogin)
         {
             try
@@ -396,7 +405,7 @@ namespace LoginWithIAS.Controllers
             {
                 throw new Exception(s.Message);
             }
-        }
+        }       
 
     }
 }

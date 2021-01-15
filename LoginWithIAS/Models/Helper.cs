@@ -15,6 +15,11 @@ namespace LoginWithIAS.Models
             if (!Directory.Exists(AccountPathDirectory))
                 Directory.CreateDirectory(AccountPathDirectory);
         }
+        public static void CreateAccountDirectoryBackup()
+        {
+            if (!Directory.Exists(AccountPathDirectory+"Backup"))
+                Directory.CreateDirectory(AccountPathDirectory + "Backup");
+        }
         public static string GetAccountPath(this string username) => $"{AccountPathDirectory}/{username}{SessionExtension}";
     }
 }

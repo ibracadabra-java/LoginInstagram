@@ -15,6 +15,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using LoginWithIAS.ApiBd;
+using LoginWithIAS.App_Start;
 
 namespace LoginWithIAS.Controllers
 {
@@ -25,6 +26,9 @@ namespace LoginWithIAS.Controllers
     {
         Sesion session;
         Util util;
+        ProxyBD bdprox;
+        ProxyBD prbd;
+        MloginBD bd;
 
         /// <summary>
         /// 
@@ -33,6 +37,9 @@ namespace LoginWithIAS.Controllers
         {
             session = new Sesion();
             util = new Util();
+            bd = new MloginBD();
+            bdprox = new ProxyBD();
+            prbd = new ProxyBD();
         }
 
         /// <summary>
@@ -41,14 +48,53 @@ namespace LoginWithIAS.Controllers
         /// <param name="chat"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<enResponseToken> SendDirectMessage(mchat chat)
+        public async Task<string> SendDirectMessage(mchat chat)
         {
 
             try
             {
                 enResponseToken token = new enResponseToken();
+                mProxy proxyconnect = new mProxy();
+                List<mProxy> proxys = new List<mProxy>();
 
-                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+                proxys = prbd.CargarProxy();
+                proxyconnect = util.ChoseProxy(proxys, chat.Country, 1);
+                if (proxyconnect.ErrorResult)
+                {
+                    //insertar en la pila de errores de tareas de login pendientes pendientes
+                    bd.InsertarLogin(chat);
+                    //devolver el tipo de error a la app para que notifique al cliente push notification al cliente
+                    //para esperar unos minutos.
+                    return "No hay Proxys disponibles";
+                }
+                else
+                {
+                    //update disponibilidad de los proxys. 
+                    bdprox.Update_Proxy(proxyconnect, 1);
+                }
+                if (string.IsNullOrEmpty(proxyconnect.AddressProxy) || string.IsNullOrEmpty(proxyconnect.UsernameProxy) || string.IsNullOrEmpty(proxyconnect.PassProxy))
+                {
+                    return "Deben introducir el Proxy completo";
+                }
+                var proxy = new WebProxy()
+                {
+                    Address = new Uri(proxyconnect.AddressProxy),
+                    BypassProxyOnLocal = false,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(
+                     userName: proxyconnect.UsernameProxy,
+                     password: proxyconnect.PassProxy
+                     )
+
+
+                };
+                var httpClientHandler = new HttpClientHandler()
+                {
+                    Proxy = proxy,
+                };
+
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).UseHttpClientHandler(httpClientHandler).Build();
 
                 if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
                 {
@@ -62,22 +108,23 @@ namespace LoginWithIAS.Controllers
                 else
                 {
                     token.Message = "Deben introducir Usuario y Contraseña";
-                    return token;
+                    return "Deben introducir Usuario y Contraseña";
                 }
 
                 session.LoadSession(insta);
 
-                if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
+                var pass = SecurityAPI.Decrypt(insta.GetLoggedUser().Password);
+
+                if (!pass["Pass"].Equals(chat.Pass))
                 {
-                    token.Message = "Contraseña incorrecta";
-                    return token;
+                    return "Contraseña incorrecta";
                 }
 
                 var user = await insta.UserProcessor.GetUserAsync(chat.otheruser);
                 if (user.Succeeded)
                 {
                     var inboxThreads = await insta.MessagingProcessor.GetDirectInboxAsync(InstagramApiSharp.PaginationParameters.MaxPagesToLoad(1));
-                    if (!inboxThreads.Succeeded)
+                    if (inboxThreads.Succeeded)
                     {
                         if (!string.IsNullOrEmpty(chat.text))
                         {
@@ -86,31 +133,31 @@ namespace LoginWithIAS.Controllers
                             {
                                 token.Message = resul.Info.Message;
                                 token.AuthToken = session.GenerarToken();
-                                return token;
+                                return resul.Info.Message; ;
                             }
                             else
                             {
                                 token.Message = resul.Info.Message;
-                                return token;
+                                return resul.Info.Message;
                             }
                         }
                         else
                         {
                            token.Message = "Introdusca el texto a enviar";
-                            return token;
+                            return "Introdusca el texto a enviar";
                         }
                        
                     }
                     else
                     {
                         token.Message = inboxThreads.Info.Message;
-                        return token;
+                        return inboxThreads.Info.Message;
                     }
                 }
                 else
                 {
                     token.Message = user.Info.Message;
-                    return token;
+                    return user.Info.Message;
                 }
                               
             }
@@ -730,8 +777,54 @@ namespace LoginWithIAS.Controllers
                 mResultadoBd objResultado = new mResultadoBd();
                 TareasBd objbd = new TareasBd();
                 enResponseToken token = new enResponseToken();
+                mProxy proxyconnect = new mProxy();
+                List<mProxy> proxys = new List<mProxy>();
 
-                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+
+                proxys = prbd.CargarProxy();
+                proxyconnect = util.ChoseProxy(proxys, sending.Country, 1);
+                if (proxyconnect.ErrorResult)
+                {
+                    //insertar en la pila de errores de tareas de login pendientes pendientes
+                    bd.InsertarLogin(sending);
+                    //devolver el tipo de error a la app para que notifique al cliente push notification al cliente
+                    //para esperar unos minutos.
+                    token.result = InstaLoginResult.LimitError;
+                    token.Message = "No hay Proxys disponibles";
+                    return token;
+                }
+                else
+                {
+                    //update disponibilidad de los proxys. 
+                    bdprox.Update_Proxy(proxyconnect, 1);
+                }
+                if (string.IsNullOrEmpty(proxyconnect.AddressProxy) || string.IsNullOrEmpty(proxyconnect.UsernameProxy) || string.IsNullOrEmpty(proxyconnect.PassProxy))
+                {
+
+
+                    token.Message = "Deben introducir el Proxy completo";
+                    return token;
+
+
+                }
+                var proxy = new WebProxy()
+                {
+                    Address = new Uri(proxyconnect.AddressProxy),
+                    BypassProxyOnLocal = false,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(
+                     userName: proxyconnect.UsernameProxy,
+                     password: proxyconnect.PassProxy
+                     )
+
+
+                };
+                var httpClientHandler = new HttpClientHandler()
+                {
+                    Proxy = proxy,
+                };
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).UseHttpClientHandler(httpClientHandler).Build();
 
                 if (!(string.IsNullOrEmpty(sending.User) || string.IsNullOrEmpty(sending.Pass)))
                 {
@@ -756,7 +849,7 @@ namespace LoginWithIAS.Controllers
                     return token;
                 }
 
-                if (!string.IsNullOrEmpty(sending.Texto))
+                if (string.IsNullOrEmpty(sending.Texto))
                 {
                     token.Message = "Debe Introducir el texto del mensaje a enviar";
                     return token;
@@ -767,32 +860,36 @@ namespace LoginWithIAS.Controllers
                 string recipients = "";
                 if (instauser.Succeeded)
                 {
-                    var online = await insta.MessagingProcessor.GetUsersPresenceAsync();
-                    if (online.Succeeded)
+                    //var online = await insta.MessagingProcessor.GetUsersPresenceAsync();
+
+                    int contador = 0;
+                    string[] linea = sending.Usuarios.Split(',');
+
+                    for (int i = 0; i < linea.Length; i++)
                     {
-                        int contador = 0;
-                        string[] linea = sending.Usuarios.Split(',');
-                        for (int i = 0; i < online.Value.Count; i++)
+
+                        var pk = await insta.UserProcessor.GetUserAsync(linea[i]);
+                        if (pk.Succeeded)
                         {
-                            if (online.Value[i].IsActive && Aparece(linea, online.Value[i].Pk.ToString()))
+                            if (recipients == "")
                             {
-                                recipients = recipients + ',' + online.Value[i].Pk.ToString();
-                                contador++;
+                                recipients = pk.Value.Pk.ToString();
                             }
-                        }
+                            else
+                            {
+                                recipients = recipients + ',' + pk.Value.Pk.ToString();
+                            }
 
-                        var resultado = await insta.MessagingProcessor.SendDirectTextAsync(recipients, String.Empty, sending.Texto);
-
-                        if (resultado.Succeeded)
-                        {
-                            mReports_Mess mReports_Mess = new mReports_Mess(resultado.Value.ThreadId, resultado.Value.ItemId, user.Value.Pk, linea.Length, contador, 0, 0, recipients);
-                            objResultado = objbd.Insertar_Reportes_Mensages(mReports_Mess);
-                            token.Message = "De un total de:" + linea.Length + ", mensajes se enviaron:" + contador + ".";
                         }
                     }
-                    else
+
+                    var resultado = await insta.MessagingProcessor.SendDirectTextAsync(recipients, String.Empty, sending.Texto);
+
+                    if (resultado.Succeeded)
                     {
-                        token.Message = online.Info.Message;
+                        mReports_Mess mReports_Mess = new mReports_Mess(resultado.Value.ThreadId, resultado.Value.ItemId, user.Value.Pk, linea.Length, contador, 0, 0, recipients);
+                        objResultado = objbd.Insertar_Reportes_Mensages(mReports_Mess);
+                        token.Message = "De un total de:" + linea.Length + ", mensajes se enviaron:" + contador + ".";
                     }
                 }
                 else
@@ -805,7 +902,7 @@ namespace LoginWithIAS.Controllers
             }
             catch (Exception s)
             {
-                throw new Exception(s.Message);
+                  throw new Exception(s.Message);
             }
         }
 
