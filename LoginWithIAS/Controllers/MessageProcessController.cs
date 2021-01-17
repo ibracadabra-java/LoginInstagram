@@ -175,12 +175,50 @@ namespace LoginWithIAS.Controllers
         [HttpPost]
         public async Task<enResponseToken> SendPhoto(mchat chat)
         {
-
             try
             {
                 enResponseToken token = new enResponseToken();
 
-                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
+                List<mProxy> proxys = new List<mProxy>();
+
+                proxys = prbd.CargarProxy();
+                proxyconnect = util.ChoseProxy(proxys, chat.Country, 1);
+                if (proxyconnect.ErrorResult)
+                {
+                    //insertar en la pila de errores de tareas de login pendientes pendientes
+                    bd.InsertarLogin(chat);
+                    //devolver el tipo de error a la app para que notifique al cliente push notification al cliente
+                    //para esperar unos minutos.
+                    return "No hay Proxys disponibles";
+                }
+                else
+                {
+                    //update disponibilidad de los proxys. 
+                    bdprox.Update_Proxy(proxyconnect, 1);
+                }
+                if (string.IsNullOrEmpty(proxyconnect.AddressProxy) || string.IsNullOrEmpty(proxyconnect.UsernameProxy) || string.IsNullOrEmpty(proxyconnect.PassProxy))
+                {
+                    return "Deben introducir el Proxy completo";
+                }
+                var proxy = new WebProxy()
+                {
+                    Address = new Uri(proxyconnect.AddressProxy),
+                    BypassProxyOnLocal = false,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(
+                     userName: proxyconnect.UsernameProxy,
+                     password: proxyconnect.PassProxy
+                     )
+
+
+                };
+                var httpClientHandler = new HttpClientHandler()
+                {
+                    Proxy = proxy,
+                };
+
+
+                var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).UseHttpClientHandler(httpClientHandler).Build();
 
                 if (!(string.IsNullOrEmpty(chat.User) || string.IsNullOrEmpty(chat.Pass)))
                 {
@@ -194,15 +232,16 @@ namespace LoginWithIAS.Controllers
                 else
                 {
                     token.Message = "Deben introducir Usuario y Contraseña";
-                    return token;
+                    return "Deben introducir Usuario y Contraseña";
                 }
 
                 session.LoadSession(insta);
 
-                if (!insta.GetLoggedUser().Password.Equals(chat.Pass))
+                var pass = SecurityAPI.Decrypt(insta.GetLoggedUser().Password);
+
+                if (!pass["Pass"].Equals(chat.Pass))
                 {
-                    token.Message = "Contraseña incorrecta";
-                    return token;
+                    return "Contraseña incorrecta";
                 }
 
                 var user = await insta.UserProcessor.GetUserAsync(chat.otheruser);
