@@ -201,13 +201,7 @@
             </summary>
             <returns></returns>
         </member>
-<<<<<<< HEAD
         <member name="T:LoginWithIAS.App_Start.AuthorizationRequiredAttribute">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LoginWithIAS.App_Start.AuthorizationRequiredAttribute.Token">
             <summary>
             
             </summary>
@@ -247,8 +241,28 @@
             <param name="role"></param>
             <returns></returns>
         </member>
-=======
->>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
+        <member name="T:LoginWithIAS.App_Start.UserLogged.IUserLogged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.App_Start.UserLogged.IUserLogged.User">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.App_Start.UserLogged.IUserLogged.Identity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LoginWithIAS.App_Start.UserLogged.IUserLogged.IsInRole(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="role"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.App_Start.SecurityAPI">
             <summary>
             clase que implementa seguridad en la api
@@ -1810,7 +1824,6 @@
             <param name="mlikemanypost"></param>
             <returns></returns>
         </member>
-<<<<<<< HEAD
         <member name="M:LoginWithIAS.Controllers.LoginProcessController.SearchUserPrueba(LoginWithIAS.Models.mMethodLike)">
             <summary>
             
@@ -1825,8 +1838,6 @@
             <param name="nombre"></param>
             <returns></returns>
         </member>
-=======
->>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
         <member name="T:LoginWithIAS.WebApiApplication">
             <summary>
             
@@ -1835,166 +1846,6 @@
         <member name="M:LoginWithIAS.WebApiApplication.Application_Start">
             <summary>
             
-            </summary>
-        </member>
-        <member name="T:LoginWithIAS.Models.mClientAccounType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mClientAccounType.clientaccountype">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mClientAccounType.clientaccounttypecategory">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:LoginWithIAS.Models.mClientDescription">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mClientDescription.clientdescription">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mClientDescription.clientdescriptionurl">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:LoginWithIAS.Models.mClientPost">
-            <summary>
-            Post del cliente
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mClientPost.postid">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mClientPost.likers">
-            <summary>
-            Likers
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mClientPost.cantlike">
-            <summary>
-            Cantidad de likes
-            </summary>
-        </member>
-        <member name="T:LoginWithIAS.Models.mClientAudience">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mClientAudience.seguidor">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mClientAudience.empatylevel">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:LoginWithIAS.Models.mInfoClient">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mInfoClient.clientid">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mInfoClient.clientusername">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mInfoClient.clientname">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mInfoClient.clientcantpost">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mInfoClient.clientcantfollowers">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mInfoClient.clientcantfollowing">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mInfoClient.clientdescription">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mInfoClient.clientemail">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mInfoClient.clientphone">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mInfoClient.clientcity">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mInfoClient.clientcountry">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mInfoClient.ClientAccounType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:LoginWithIAS.Models.mClients">
-            <summary>
-            Cliente
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mClients.Id">
-            <summary>
-            PK
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mClients.Info">
-            <summary>
-            Info
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mClients.ClientAudience">
-            <summary>
-            Audience
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mClients.posts">
-            <summary>
-            Post
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mClients.Tags">
-            <summary>
-            Tags
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.enResponseToken">
@@ -2017,7 +1868,6 @@
             id unico del usuario en instagram
             </summary>
         </member>
-<<<<<<< HEAD
         <member name="P:LoginWithIAS.Models.enResponseToken.UserEmail">
             <summary>
             Email del usuario
@@ -2038,8 +1888,6 @@
             Requiere que el usuario envie su numero de telefono a instagram
             </summary>
         </member>
-=======
->>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
         <member name="T:LoginWithIAS.Models.InstaApiList">
             <summary>
             
@@ -2158,6 +2006,101 @@
             Listado de usuarios a los que enviar mensajes
             </summary>
         </member>
+        <member name="T:LoginWithIAS.Models.mClientAccounType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientAccounType.clientaccountype">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientAccounType.clientaccounttypecategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mClientAudience">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientAudience.seguidor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientAudience.empatylevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mClientDescription">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientDescription.clientdescription">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientDescription.clientdescriptionurl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mClientPost">
+            <summary>
+            Post del cliente
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientPost.postid">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientPost.likers">
+            <summary>
+            Likers
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClientPost.cantlike">
+            <summary>
+            Cantidad de likes
+            </summary>
+        </member>
+        <member name="T:LoginWithIAS.Models.mClients">
+            <summary>
+            Cliente
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClients.Id">
+            <summary>
+            PK
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClients.Info">
+            <summary>
+            Info
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClients.ClientAudience">
+            <summary>
+            Audience
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClients.posts">
+            <summary>
+            Post
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mClients.Tags">
+            <summary>
+            Tags
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.mContacts">
             <summary>
             Clase Contactos
@@ -2238,6 +2181,71 @@
             
             </summary>
         </member>
+        <member name="T:LoginWithIAS.Models.mInfoClient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientusername">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientname">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientcantpost">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientcantfollowers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientcantfollowing">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientdescription">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientemail">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientphone">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientcity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.clientcountry">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mInfoClient.ClientAccounType">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.mLikeManyPost">
             <summary>
             
@@ -2296,11 +2304,6 @@
         <member name="P:LoginWithIAS.Models.mLogin.Country">
             <summary>
             Pais del cliente
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mLogin.FreeTrial">
-            <summary>
-            Face de Prueba activada
             </summary>
         </member>
         <member name="T:LoginWithIAS.Models.mMasSending">
@@ -2601,6 +2604,31 @@
             Cantidad de historias a compartir
             </summary>
         </member>
+        <member name="T:LoginWithIAS.Models.mTags">
+            <summary>
+            Tags
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTags.country">
+            <summary>
+            Country
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTags.countrytarget">
+            <summary>
+            country Target
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTags.industry">
+            <summary>
+            Industria
+            </summary>
+        </member>
+        <member name="P:LoginWithIAS.Models.mTags.industrysub">
+            <summary>
+            Sub Industria
+            </summary>
+        </member>
         <member name="T:LoginWithIAS.Models.mTarea">
             <summary>
             
@@ -2695,31 +2723,6 @@
             Metodo para generar Token de salida al loguarse
             </summary>   
             <returns>Retorna un objeto enResponseToken con el token y un mensaje descriptivo</returns>
-        </member>
-        <member name="T:LoginWithIAS.Models.mTags">
-            <summary>
-            Tags
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mTags.country">
-            <summary>
-            Country
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mTags.countrytarget">
-            <summary>
-            country Target
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mTags.industry">
-            <summary>
-            Industria
-            </summary>
-        </member>
-        <member name="P:LoginWithIAS.Models.mTags.industrysub">
-            <summary>
-            Sub Industria
-            </summary>
         </member>
         <member name="T:LoginWithIAS.Utiles.Log">
             <summary>

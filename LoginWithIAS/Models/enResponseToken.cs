@@ -23,7 +23,6 @@ namespace LoginWithIAS.Models
         /// id unico del usuario en instagram
         /// </summary>
         public string PkUsuario { get; set; }
-<<<<<<< HEAD
         /// <summary>
         /// Email del usuario
         /// </summary>
@@ -40,7 +39,5 @@ namespace LoginWithIAS.Models
         /// Requiere que el usuario envie su numero de telefono a instagram
         /// </summary>
         public bool requireSubmitPhoneNumber { get; set; }
-=======
->>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
     }
 }

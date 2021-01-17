@@ -17,10 +17,8 @@ namespace LoginWithIAS.Models
         private string pass_thow_factor;        
         private string pk;
         private bool freeTrial;
-<<<<<<< HEAD
         private string country;
-=======
->>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
+
         /// <summary>
         /// Usuario que desea loguearse
         /// </summary>
@@ -46,14 +44,6 @@ namespace LoginWithIAS.Models
         /// <summary>
         /// Pais del cliente
         /// </summary>
-<<<<<<< HEAD
         public string Country { get => country; set => country = value; }
-=======
-        public string PK { get => pk; set => pk = value; }
-        /// <summary>
-        /// Face de Prueba activada
-        /// </summary>
-        public bool FreeTrial { get => freeTrial; set => freeTrial = value; }
->>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
     }
 }

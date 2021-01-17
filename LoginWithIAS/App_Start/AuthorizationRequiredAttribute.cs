@@ -9,25 +9,16 @@ using System.Web.Http.Filters;
 
 namespace LoginWithIAS.App_Start
 {
-<<<<<<< HEAD
     /// <summary>
     /// 
     /// </summary>
     public class AuthorizationRequiredAttribute : ActionFilterAttribute
-    {
-        /// <summary>
-        /// 
-        /// </summary>
+    {         
         private const string Token = "Authorization";
         /// <summary>
         /// 
         /// </summary>
         /// <param name="filterContext"></param>
-=======
-    public class AuthorizationRequiredAttribute : ActionFilterAttribute
-    {
-        private const string Token = "Authorization";
->>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
         public override void OnActionExecuting(HttpActionContext filterContext)
         {
             if (filterContext.Request.Headers.Contains(Token))
@@ -40,11 +31,8 @@ namespace LoginWithIAS.App_Start
 
                     Dictionary<string, object> payload = SecurityAPI.Decrypt(tokenValue);
 
-<<<<<<< HEAD
-                    userLogged.User =payload["IdUsuario"].ToString();
-=======
+
                     userLogged.User =payload["User"].ToString();
->>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
 
                     HttpContext.Current.User = userLogged;
                 }
@@ -61,15 +49,12 @@ namespace LoginWithIAS.App_Start
             base.OnActionExecuting(filterContext);
         
         }
-
-<<<<<<< HEAD
         /// <summary>
         /// 
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-=======
->>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
+
         public bool ValidateToken(string token)
         {
             try
@@ -92,11 +77,7 @@ namespace LoginWithIAS.App_Start
                     return false;
                 }
             }
-<<<<<<< HEAD
-            catch (Exception)
-=======
             catch (Exception ex)
->>>>>>> 070ec1789425e24df7ed7bb62e34c9e7dde4516b
             {
                 return false;
             }
