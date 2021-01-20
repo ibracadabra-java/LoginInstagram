@@ -1452,6 +1452,7 @@ namespace LoginWithIAS.Controllers
                         var liked = await insta.MediaProcessor.LikeMediaAsync(milista[0].InstaIdentifier);
                         if (liked.Succeeded)
                         {
+                            bdprox.Update_Proxy(proxyconnect, -1);
                             log.Add(mlikemanypost.User + " Like_to " + mlikemanypost.userlike + " - " + liked.Info.Message);
                             return mlikemanypost.User + " Like_to " + mlikemanypost.userlike + " - " + liked.Info.Message;
                         }

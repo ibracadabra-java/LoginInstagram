@@ -32,6 +32,7 @@ namespace LoginWithIAS.Controllers
         Log log;
         string path = HttpContext.Current.Request.MapPath("~/Logs");
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -284,12 +285,12 @@ namespace LoginWithIAS.Controllers
         /// <param name="purificador"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> Purificador(mPurificador purificador)
+        public async Task<IResult<List<long>>> Purificador(mPurificador purificador)
         {
             try
             {
-                enResponseToken token = new enResponseToken();
-                List<string> devolver = new List<string>();
+                
+                List<long> devolver = new List<long>();
                 PaginationParameters pagination = PaginationParameters.MaxPagesToLoad(1);
 
                 var insta = InstaApiBuilder.CreateBuilder().UseLogger(new DebugLogger(LogLevel.All)).Build();
@@ -305,14 +306,14 @@ namespace LoginWithIAS.Controllers
                 }
                 else
                 {
-                    return "Deben introducir Usuario y Contraseña";                    
+                    return Result.Fail("Deben introducir Usuario y Contraseña",(List<long>)null);                    
                 }
 
                 session.LoadSession(insta);
 
                 if (!insta.GetLoggedUser().Password.Equals(purificador.Pass))
                 {
-                    return "Contraseña incorrecta";                    
+                    return Result.Fail("Contraseña incorrecta", (List<long>)null);                    
                 }
                 //Cargar lista de los seguidores del cliente
                 int count = 0;
@@ -321,16 +322,21 @@ namespace LoginWithIAS.Controllers
                     var remove = await insta.UserProcessor.RemoveFollowerAsync(purificador.UserList[i]);
                     if (remove.Succeeded)
                     {
+                        devolver.Add(purificador.UserList[i]);
                         count++;
                     }
 
                 }
 
-                return "Fueron eliminados un total de:" + count + ", de seguidores.";                
+                return Result.Success(devolver);                
+            }
+            catch(HttpRequestException httpexception) 
+            {
+                return Result.Fail(httpexception,(List<long>)null,ResponseType.NetworkProblem);
             }
             catch (Exception s)
             {
-                throw new Exception(s.Message);
+                return Result.Fail<List<long>>(s);
             }
         }
 
@@ -405,7 +411,93 @@ namespace LoginWithIAS.Controllers
             {
                 throw new Exception(s.Message);
             }
-        }       
+        }
 
+        /// <summary>
+        /// Metodo que devuelve la cantidad de usuarios recientes de un cliente
+        /// </summary>
+        /// <param name="credencial"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IResult<int>> GetRecentFollowers(mLogin credencial)
+        {
+            try
+            {
+                mProxy proxyconnect = new mProxy();
+                List<mProxy> proxys = new List<mProxy>();
+
+                if (string.IsNullOrEmpty(credencial.User) || string.IsNullOrEmpty(credencial.Pass))
+                {
+                    return Result.Fail("Deben introducir Usuario y Contraseña", -1);
+
+                }
+
+                var userSession = new UserSessionData
+                {
+                    UserName = credencial.User,
+                    Password = credencial.Pass
+                };
+
+                proxys = prbd.CargarProxy();
+                proxyconnect = util.ChoseProxy(proxys, credencial.Country, 1);
+                if (proxyconnect.ErrorResult)
+                {
+                    //insertar en la pila de errores de tareas de login pendientes pendientes
+                    bd.InsertarLogin(credencial);
+                    //devolver el tipo de error a la app para que notifique al cliente push notification al cliente
+                    //para esperar unos minutos.
+                    return Result.Fail("No hay Proxys disponibles", -1);
+                }
+                else
+                {
+                    //update disponibilidad de los proxys. 
+                    bdprox.Update_Proxy(proxyconnect, 1);
+                }
+                if (string.IsNullOrEmpty(proxyconnect.AddressProxy) || string.IsNullOrEmpty(proxyconnect.UsernameProxy) || string.IsNullOrEmpty(proxyconnect.PassProxy))
+                {
+                    return Result.Fail("Deben introducir el Proxy completo", -1);
+                }
+                var proxy = new WebProxy()
+                {
+                    Address = new Uri(proxyconnect.AddressProxy),
+                    BypassProxyOnLocal = false,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(
+                     userName: proxyconnect.UsernameProxy,
+                     password: proxyconnect.PassProxy
+                     )
+                };
+                var httpClientHandler = new HttpClientHandler()
+                {
+                    Proxy = proxy,
+                };
+
+                var InstaApi = InstaApiBuilder.CreateBuilder().SetUser(userSession).UseLogger(new DebugLogger(LogLevel.All)).UseHttpClientHandler(httpClientHandler).Build();
+
+                session.LoadSession(InstaApi);
+
+                if (!InstaApi.GetLoggedUser().Password.Equals(credencial.Pass))
+                {
+                    return Result.Fail("Contraseña incorrecta", -1);
+                }
+
+                var recent = await InstaApi.UserProcessor.GetRecentFollowersAsync();
+                if (recent.Succeeded)
+                {
+                    return Result.Success(recent.Value.Users.Count);
+                }
+
+                return Result.Success(0);
+
+            }
+            catch (HttpRequestException httpException)
+            {
+                return Result.Fail(httpException, default(int), ResponseType.NetworkProblem);
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail<int>(ex);
+            }
+        }
     }
 }
