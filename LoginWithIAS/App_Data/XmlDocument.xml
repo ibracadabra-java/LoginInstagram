@@ -148,13 +148,6 @@
             <param name="userlist"></param>
             <returns></returns>
         </member>
-        <member name="M:LoginWithIAS.ApiBd.PurificacionBd.GetTareaPurificacion(System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="ID"></param>
-            <returns></returns>
-        </member>
         <member name="T:LoginWithIAS.ApiBd.TareasBd">
             <summary>
             
@@ -1284,6 +1277,13 @@
             <param name="mLogin"></param>.
             <returns></returns>
         </member>
+        <member name="M:LoginWithIAS.Controllers.CuentasController.GetRecentFollowers(LoginWithIAS.Models.mLogin)">
+            <summary>
+            Metodo que devuelve la cantidad de usuarios recientes de un cliente
+            </summary>
+            <param name="credencial"></param>
+            <returns></returns>
+        </member>
         <member name="T:LoginWithIAS.Controllers.DeviceProcessController">
             <summary>
             Controlador de Dispositivos
@@ -1421,42 +1421,6 @@
             Obtener Reporte de los mensajes enviados a los usuarios de los clientes
             </summary>
             <returns></returns>
-        </member>
-        <member name="T:LoginWithIAS.Controllers.TareasController">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:LoginWithIAS.Controllers.TareasController.InsertarTareas(LoginWithIAS.Models.mTareasDiarias)">
-            <summary>
-            
-            </summary>
-            <param name="TareasDia"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LoginWithIAS.Controllers.TareasController.GetTareas">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:LoginWithIAS.Controllers.TareasController.GetTareaExpancion(System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LoginWithIAS.Controllers.TareasController.EjecutarTareas">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:LoginWithIAS.Controllers.TareasController.StopTareas(LoginWithIAS.Models.mStopTarea)">
-            <summary>
-            
-            </summary>
-            <param name="Values"></param>
         </member>
         <member name="T:LoginWithIAS.Controllers.UssersProcessController">
             <summary>
@@ -2483,11 +2447,6 @@
             
             </summary>
         </member>
-        <member name="P:LoginWithIAS.Models.mPurificador.id_tarea">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:LoginWithIAS.Models.mReports_Mess">
             <summary>
             Clase para el reporte de los mensajes
@@ -2775,74 +2734,6 @@
             <param name="proxis"></param>
             <param name="pais"></param>
             <param name="tarea"></param>
-            <returns></returns>
-        </member>
-        <member name="T:LoginWithIAS.Worker.BackGroundWork">
-            <summary>
-            Traajos En segundo Plano
-            </summary>
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.#ctor">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.EjecutarTareas">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.pararTarea(System.String,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="name"></param>
-            <param name="razon"></param>
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.ejecutarTareaExpancion(LoginWithIAS.Models.mMethodLike)">
-            <summary>
-            
-            </summary>
-            <param name="expancion"></param>
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.SimulationHumanLikeManyPost(System.Object)">
-            <summary>
-            
-            </summary>
-            <param name="data"></param>
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.BotClient_OnMessage(System.Object,Telegram.Bot.Args.MessageEventArgs)">
-            <summary>
-            
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.ejecutarTareaMass_Sending(LoginWithIAS.Models.mMasSending)">
-            <summary>
-            
-            </summary>
-            <param name="sending"></param>
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.Mass_Sending(System.Object)">
-            <summary>
-            Metodo para enviar un mensaje de texto a un usuario
-            </summary>
-            <param name="Data"></param>
-            <returns></returns>        
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.ejecutarTareaPurificacion(LoginWithIAS.Models.mPurificador)">
-            <summary>
-            
-            </summary>
-            <param name="purificador"></param>
-        </member>
-        <member name="M:LoginWithIAS.Worker.BackGroundWork.Purificador(System.Object)">
-            <summary>
-            Este método se encargará de eliminar seguidores, específicamente seguidores falsos
-            </summary>
-            <param name="Data"></param>
             <returns></returns>
         </member>
     </members>

@@ -50,41 +50,6 @@ namespace LoginWithIAS.ApiBd
 
             return objResultBd = OracleDatabaseHelper.ExecuteToEntityMant("PRC_PURIFICADOR_INSERTAR", parametros, "X_ERROR", rowMapper);
 
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ID"></param>
-        /// <returns></returns>
-        public mPurificador GetTareaPurificacion(int ID)
-        {           
-            List<OracleParameter> parametros = new List<OracleParameter>();
-            parametros.Add(new OracleParameter("X_ID_TAREA", OracleDbType.Int32, ID, ParameterDirection.Input));
-            parametros.Add(new OracleParameter("X_CURSOR", OracleDbType.RefCursor) { Direction = ParameterDirection.Output });
-
-            OracleDatabaseHelper.RowMapper<mPurificador> rowMapper = (delegate (OracleDataReader oracleDataReader)
-            {
-                mPurificador tarea = new mPurificador();
-                string usuarios = string.Empty;
-                tarea.UserList = new List<long>();
-                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("ID_TAREA")))
-                    tarea.id_tarea = Convert.ToInt32(oracleDataReader["ID_TAREA"]);
-                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("USUARIO")))
-                    tarea.User = oracleDataReader["USUARIO"].ToString();
-                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("PASS")))
-                    tarea.Pass = oracleDataReader["PASS"].ToString();               
-                if (!oracleDataReader.IsDBNull(oracleDataReader.GetOrdinal("USUARIOS")))
-                    usuarios = oracleDataReader["USUARIOS"].ToString();               
-                var user_list = usuarios.Split(',');
-                for (int i = 0; i < user_list.Length; i++)
-                {
-                    tarea.UserList.Add(Convert.ToInt64(user_list[i]));
-
-                }
-                return tarea;
-            });
-
-            return OracleDatabaseHelper.ExecuteToEntity<mPurificador>("PRC_GET_TAREA_PURIFICACION", parametros, "X_CURSOR", rowMapper, TipoPaquete.CONS);
-        }
+        }        
     }
 }

@@ -173,12 +173,13 @@ namespace LoginWithIAS.Controllers
         /// <param name="chat"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<enResponseToken> SendPhoto(mchat chat)
+        public async Task<IResult<string>> SendPhoto(mchat chat)
         {
             try
             {
+                
+                mProxy proxyconnect = new mProxy();                
                 enResponseToken token = new enResponseToken();
-
                 List<mProxy> proxys = new List<mProxy>();
 
                 proxys = prbd.CargarProxy();
@@ -189,7 +190,7 @@ namespace LoginWithIAS.Controllers
                     bd.InsertarLogin(chat);
                     //devolver el tipo de error a la app para que notifique al cliente push notification al cliente
                     //para esperar unos minutos.
-                    return "No hay Proxys disponibles";
+                    return Result.Fail("No hay Proxys disponibles",(string)null);
                 }
                 else
                 {
@@ -198,7 +199,7 @@ namespace LoginWithIAS.Controllers
                 }
                 if (string.IsNullOrEmpty(proxyconnect.AddressProxy) || string.IsNullOrEmpty(proxyconnect.UsernameProxy) || string.IsNullOrEmpty(proxyconnect.PassProxy))
                 {
-                    return "Deben introducir el Proxy completo";
+                    return Result.Fail("Deben introducir el Proxy completo",(string)null);
                 }
                 var proxy = new WebProxy()
                 {
@@ -231,8 +232,8 @@ namespace LoginWithIAS.Controllers
                 }
                 else
                 {
-                    token.Message = "Deben introducir Usuario y Contraseña";
-                    return "Deben introducir Usuario y Contraseña";
+                    
+                    return Result.Fail("Deben introducir Usuario y Contraseña",(string )null);
                 }
 
                 session.LoadSession(insta);
@@ -241,7 +242,7 @@ namespace LoginWithIAS.Controllers
 
                 if (!pass["Pass"].Equals(chat.Pass))
                 {
-                    return "Contraseña incorrecta";
+                    return Result.Fail("Contraseña incorrecta",(string)null);
                 }
 
                 var user = await insta.UserProcessor.GetUserAsync(chat.otheruser);
@@ -259,37 +260,34 @@ namespace LoginWithIAS.Controllers
                             if (resul.Succeeded)
                             {
                                 token.Message = resul.Info.Message;
-                                token.AuthToken = session.GenerarToken();
-                                return token;
+                                
+                                return Result.Success(resul.Info.Message);
                             }
                             else
                             {
-                                token.Message = resul.Info.Message;
-                                return token;
+                                
+                                return Result.Fail(resul.Info.Message,(string)null);
                             }
                         }
                         else
-                        {
-                            token.Message = "Debe introducir la foto a enviar";
-                            return token;
+                        {                            
+                            return Result.Fail("Debe introducir la foto a enviar", (string)null);
                         }                       
                     }
                     else
-                    {
-                        token.Message = inboxThreads.Info.Message;
-                        return token;
+                    {                        
+                        return Result.Fail(inboxThreads.Info.Message, (string)null); ;
                     }
                 }
                 else
-                {
-                    token.Message = user.Info.Message;
-                    return token;
+                {                    
+                    return Result.Fail(user.Info.Message, user.Info.Message);
                 }
 
             }
-            catch (Exception s)
+            catch (HttpResponseException s)
             {
-                throw new Exception(s.Message);
+              return Result.Fail(s.Message,s.Message );
             }
         }
 

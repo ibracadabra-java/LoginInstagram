@@ -29,7 +29,7 @@ namespace LoginWithIAS.ApiBd
             {
                 mResultadoBd objResultBd = new mResultadoBd();
                 List<OracleParameter> parametros = new List<OracleParameter>();
-                parametros.Add(new OracleParameter("X_CODENAME", OracleDbType.Varchar2, login.AndroidVer.Codename, ParameterDirection.Input));
+                parametros.Add(new OracleParameter("X_C ODENAME", OracleDbType.Varchar2, login.AndroidVer.Codename, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_VERSIONUMBER", OracleDbType.Varchar2, login.AndroidVer.VersionNumber, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_APILEVEL", OracleDbType.Varchar2, login.AndroidVer.APILevel, ParameterDirection.Input));
                 parametros.Add(new OracleParameter("X_ADID", OracleDbType.Varchar2, device.AdId.ToString(), ParameterDirection.Input));

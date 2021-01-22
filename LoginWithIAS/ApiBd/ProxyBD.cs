@@ -136,7 +136,7 @@ namespace LoginWithIAS.ApiBd
                     return objEnResultado;
                 });
 
-                return objResultBd = OracleDatabaseHelper.ExecuteToEntityMant("PRC_PROXY_INSERTAR", parametros, "X_ERROR", rowMapper);
+                return objResultBd = OracleDatabaseHelper.ExecuteToEntityMant("PRC_UPDATE_DISP_PROXY", parametros, "X_ERROR", rowMapper);
             }
             catch (Exception s)
             {
