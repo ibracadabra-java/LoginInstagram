@@ -48,9 +48,8 @@ namespace LoginWithIAS.Controllers
         /// <param name="chat"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> SendDirectMessage(mchat chat)
+        public async Task<IResult<string>> SendDirectMessage(mchat chat)
         {
-
             try
             {
                 enResponseToken token = new enResponseToken();
@@ -65,7 +64,7 @@ namespace LoginWithIAS.Controllers
                     bd.InsertarLogin(chat);
                     //devolver el tipo de error a la app para que notifique al cliente push notification al cliente
                     //para esperar unos minutos.
-                    return "No hay Proxys disponibles";
+                    return Result.Fail<string>("No hay Proxys disponibles");
                 }
                 else
                 {
@@ -74,7 +73,7 @@ namespace LoginWithIAS.Controllers
                 }
                 if (string.IsNullOrEmpty(proxyconnect.AddressProxy) || string.IsNullOrEmpty(proxyconnect.UsernameProxy) || string.IsNullOrEmpty(proxyconnect.PassProxy))
                 {
-                    return "Deben introducir el Proxy completo";
+                    return Result.Fail<string>("Deben introducir el Proxy completo");
                 }
                 var proxy = new WebProxy()
                 {
@@ -85,8 +84,6 @@ namespace LoginWithIAS.Controllers
                      userName: proxyconnect.UsernameProxy,
                      password: proxyconnect.PassProxy
                      )
-
-
                 };
                 var httpClientHandler = new HttpClientHandler()
                 {
@@ -107,8 +104,7 @@ namespace LoginWithIAS.Controllers
                 }
                 else
                 {
-                    token.Message = "Deben introducir Usuario y Contraseña";
-                    return "Deben introducir Usuario y Contraseña";
+                    return Result.Fail<string>("Deben introducir Usuario y Contraseña");
                 }
 
                 session.LoadSession(insta);
@@ -117,7 +113,7 @@ namespace LoginWithIAS.Controllers
 
                 if (!pass["Pass"].Equals(chat.Pass))
                 {
-                    return "Contraseña incorrecta";
+                    return Result.Fail<string>("Contraseña incorrecta");
                 }
 
                 var user = await insta.UserProcessor.GetUserAsync(chat.otheruser);
@@ -131,40 +127,38 @@ namespace LoginWithIAS.Controllers
                             var resul = await insta.MessagingProcessor.SendDirectTextAsync(user.Value.Pk.ToString(), String.Empty, chat.text);
                             if (resul.Succeeded)
                             {
-                                token.Message = resul.Info.Message;
-                                token.AuthToken = session.GenerarToken();
-                                return resul.Info.Message; ;
+                                return Result.Success<string>(resul.Info.Message);
                             }
                             else
                             {
-                                token.Message = resul.Info.Message;
-                                return resul.Info.Message;
+                                return Result.Fail<string>(resul.Info.Message);
                             }
                         }
                         else
                         {
-                           token.Message = "Introdusca el texto a enviar";
-                            return "Introdusca el texto a enviar";
+                            return Result.Fail<string>("Introdusca el texto a enviar");
                         }
                        
                     }
                     else
                     {
-                        token.Message = inboxThreads.Info.Message;
-                        return inboxThreads.Info.Message;
+                        return Result.Fail<string>(inboxThreads.Info.Message);
                     }
                 }
                 else
                 {
-                    token.Message = user.Info.Message;
-                    return user.Info.Message;
+                   return Result.Fail<string>(user.Info.Message);
                 }
                               
             }
-            catch (Exception s)
+            catch (HttpRequestException httpException)
             {
-                throw new Exception(s.Message);
-            }  
+                return Result.Fail(httpException, default(string), ResponseType.NetworkProblem);
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail<string>(ex);
+            }
         }
 
         /// <summary>
@@ -807,7 +801,7 @@ namespace LoginWithIAS.Controllers
         /// <param name="sending"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<enResponseToken> Mass_Sending(mMasSending sending)
+        public async Task<IResult<enResponseToken>> Mass_Sending(mMasSending sending)
         {
             try
             {
@@ -816,7 +810,6 @@ namespace LoginWithIAS.Controllers
                 enResponseToken token = new enResponseToken();
                 mProxy proxyconnect = new mProxy();
                 List<mProxy> proxys = new List<mProxy>();
-
 
                 proxys = prbd.CargarProxy();
                 proxyconnect = util.ChoseProxy(proxys, sending.Country, 1);
@@ -828,7 +821,7 @@ namespace LoginWithIAS.Controllers
                     //para esperar unos minutos.
                     token.result = InstaLoginResult.LimitError;
                     token.Message = "No hay Proxys disponibles";
-                    return token;
+                    return Result.Success(token);
                 }
                 else
                 {
@@ -837,12 +830,8 @@ namespace LoginWithIAS.Controllers
                 }
                 if (string.IsNullOrEmpty(proxyconnect.AddressProxy) || string.IsNullOrEmpty(proxyconnect.UsernameProxy) || string.IsNullOrEmpty(proxyconnect.PassProxy))
                 {
-
-
                     token.Message = "Deben introducir el Proxy completo";
-                    return token;
-
-
+                    return Result.Success(token);
                 }
                 var proxy = new WebProxy()
                 {
@@ -853,8 +842,6 @@ namespace LoginWithIAS.Controllers
                      userName: proxyconnect.UsernameProxy,
                      password: proxyconnect.PassProxy
                      )
-
-
                 };
                 var httpClientHandler = new HttpClientHandler()
                 {
@@ -875,7 +862,7 @@ namespace LoginWithIAS.Controllers
                 else
                 {
                     token.Message = "Deben introducir Usuario y Contraseña";
-                    return token;
+                    return Result.Success(token);
                 }
 
                 session.LoadSession(insta);
@@ -883,18 +870,18 @@ namespace LoginWithIAS.Controllers
                 if (!insta.GetLoggedUser().Password.Equals(sending.Pass))
                 {
                     token.Message = "Contraseña incorrecta";
-                    return token;
+                    return Result.Success(token);
                 }
 
                 if (string.IsNullOrEmpty(sending.Texto))
                 {
                     token.Message = "Debe Introducir el texto del mensaje a enviar";
-                    return token;
+                    return Result.Success(token);
                 }
                 var user = await insta.UserProcessor.GetUserAsync(sending.User);
                 var instauser = await insta.DiscoverProcessor.SearchPeopleAsync(string.Empty, PaginationParameters.MaxPagesToLoad(1));
                 #region Enviar Si el cliente esta Online
-                string recipients = "";
+
                 if (instauser.Succeeded)
                 {
                     //var online = await insta.MessagingProcessor.GetUsersPresenceAsync();
@@ -902,29 +889,11 @@ namespace LoginWithIAS.Controllers
                     int contador = 0;
                     string[] linea = sending.Usuarios.Split(',');
 
-                    for (int i = 0; i < linea.Length; i++)
-                    {
-
-                        var pk = await insta.UserProcessor.GetUserAsync(linea[i]);
-                        if (pk.Succeeded)
-                        {
-                            if (recipients == "")
-                            {
-                                recipients = pk.Value.Pk.ToString();
-                            }
-                            else
-                            {
-                                recipients = recipients + ',' + pk.Value.Pk.ToString();
-                            }
-
-                        }
-                    }
-
-                    var resultado = await insta.MessagingProcessor.SendDirectTextAsync(recipients, String.Empty, sending.Texto);
+                    var resultado = await insta.MessagingProcessor.SendDirectTextAsync(sending.Usuarios, String.Empty, sending.Texto);
 
                     if (resultado.Succeeded)
                     {
-                        mReports_Mess mReports_Mess = new mReports_Mess(resultado.Value.ThreadId, resultado.Value.ItemId, user.Value.Pk, linea.Length, contador, 0, 0, recipients);
+                        mReports_Mess mReports_Mess = new mReports_Mess(resultado.Value.ThreadId, resultado.Value.ItemId, user.Value.Pk, linea.Length, contador, 0, 0, sending.Usuarios);
                         objResultado = objbd.Insertar_Reportes_Mensages(mReports_Mess);
                         token.Message = "De un total de:" + linea.Length + ", mensajes se enviaron:" + contador + ".";
                     }
@@ -935,11 +904,15 @@ namespace LoginWithIAS.Controllers
                 }
                 #endregion
 
-                return token;
+                return Result.Success(token);
             }
-            catch (Exception s)
+            catch (HttpRequestException httpException)
             {
-                  throw new Exception(s.Message);
+                return Result.Fail(httpException, default(enResponseToken), ResponseType.NetworkProblem);
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail<enResponseToken>(ex);
             }
         }
 

@@ -104,3 +104,215 @@ C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProcess.c
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\LoginWithIAS.dll
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\LoginWithIAS.pdb
 C:\Users\Raul\source\repos\LoginWithIAS\LoginWithIAS\obj\Debug\ApiInstaProcess.csprojAssemblyReference.cache
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\LoginWithIAS.dll.config
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\LoginWithIAS.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\LoginWithIAS.pdb
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\XmlDocument.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\csc.exe
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\csc.exe.config
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\csc.rsp
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\csi.exe
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\csi.exe.config
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\csi.rsp
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.Managed.Core.targets
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.Win32.Primitives.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.AppContext.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Collections.Immutable.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Console.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Globalization.Calendars.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.IO.Compression.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.IO.Compression.ZipFile.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.IO.FileSystem.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Net.Http.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Net.Sockets.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Reflection.Metadata.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.ValueTuple.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Xml.XmlDocument.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Xml.XPath.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\vbc.exe
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\vbc.exe.config
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\vbc.rsp
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\VBCSCompiler.exe
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\VBCSCompiler.exe.config
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Antlr3.Runtime.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\BouncyCastle.Crypto.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\jose-jwt.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Microsoft.Web.Infrastructure.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\netstandard.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Newtonsoft.Json.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Oracle.DataAccess.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Net.Http.Formatting.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Helpers.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Http.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Http.WebHost.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Mvc.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Optimization.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Razor.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.WebPages.Deployment.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.WebPages.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.WebPages.Razor.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Telegram.Bot.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\TeleSharp.TL.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Thrift.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\TLSharp.Core.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\WebGrease.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\BouncyCastle.Crypto.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Newtonsoft.Json.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Net.Http.Formatting.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Helpers.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Http.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Http.WebHost.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Mvc.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Optimization.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Razor.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.WebPages.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.WebPages.Deployment.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.WebPages.Razor.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Telegram.Bot.xml
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Antlr3.Runtime.pdb
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Net.Http.Formatting.resources.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.Helpers.resources.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.Http.resources.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.Http.WebHost.resources.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.Mvc.resources.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.Optimization.resources.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.Razor.resources.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.WebPages.resources.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.WebPages.Deployment.resources.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.WebPages.Razor.resources.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\obj\Debug\ApiInstaProcess.csprojAssemblyReference.cache
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\obj\Debug\ApiInstaProcess.csproj.CoreCompileInputs.cache
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\obj\Debug\ApiInstaProcess.csproj.CopyComplete
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\obj\Debug\LoginWithIAS.dll
+D:\Study\Programacion\Mi Codigo\LoginInstagram\LoginInstagram\LoginWithIAS\obj\Debug\LoginWithIAS.pdb
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\LoginWithIAS.dll.config
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\LoginWithIAS.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\LoginWithIAS.pdb
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\XmlDocument.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\csc.exe
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\csc.exe.config
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\csc.rsp
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\csi.exe
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\csi.exe.config
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\csi.rsp
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.AppContext.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Console.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Globalization.Calendars.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.IO.Compression.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Net.Http.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Net.Sockets.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.ValueTuple.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Xml.XPath.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\vbc.exe
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\vbc.exe.config
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\vbc.rsp
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\VBCSCompiler.exe
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Antlr3.Runtime.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\BouncyCastle.Crypto.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\jose-jwt.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\netstandard.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Newtonsoft.Json.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Oracle.DataAccess.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Net.Http.Formatting.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Helpers.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Http.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Http.WebHost.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Mvc.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Optimization.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Razor.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.WebPages.Deployment.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.WebPages.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.WebPages.Razor.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Telegram.Bot.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\TeleSharp.TL.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Thrift.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\TLSharp.Core.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\WebGrease.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\BouncyCastle.Crypto.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Newtonsoft.Json.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Net.Http.Formatting.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Helpers.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Http.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Http.WebHost.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Mvc.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Optimization.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.Razor.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.WebPages.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.WebPages.Deployment.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\System.Web.WebPages.Razor.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Telegram.Bot.xml
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\Antlr3.Runtime.pdb
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Net.Http.Formatting.resources.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.Helpers.resources.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.Http.resources.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.Http.WebHost.resources.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.Mvc.resources.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.Optimization.resources.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.Razor.resources.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.WebPages.resources.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\obj\Debug\ApiInstaProcess.csprojAssemblyReference.cache
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\obj\Debug\ApiInstaProcess.csproj.CoreCompileInputs.cache
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\obj\Debug\ApiInstaProcess.csproj.CopyComplete
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\obj\Debug\LoginWithIAS.dll
+C:\Users\admseg\Desktop\LoginInstagram\LoginInstagram\LoginWithIAS\obj\Debug\LoginWithIAS.pdb

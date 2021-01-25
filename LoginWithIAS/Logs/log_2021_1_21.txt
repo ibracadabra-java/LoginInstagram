@@ -1,2 +1,14 @@
 21/01/2021 19:17:35 - No errors detected
 21/01/2021 19:20:25 - Error al enviar la solicitud.
+21/1/2021 22:50:14 - El valor no puede ser nulo.
+Nombre del parámetro: s
+21/1/2021 22:52:34 - El valor no puede ser nulo.
+Nombre del parámetro: s
+21/1/2021 22:56:42 - Deben introducir Usuario y Contraseña
+21/1/2021 22:57:48 - Deben introducir Usuario y Contraseña
+21/1/2021 22:59:14 - Deben introducir Usuario y Contraseña
+21/1/2021 23:03:29 - Deben introducir Usuario y Contraseña
+21/1/2021 23:06:04 - El valor no puede ser nulo.
+Nombre del parámetro: s
+21/1/2021 23:07:19 - El valor no puede ser nulo.
+Nombre del parámetro: s
